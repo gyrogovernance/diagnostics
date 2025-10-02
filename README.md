@@ -18,8 +18,8 @@
 
 <div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey?style=for-the-badge&logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Inspect AI](https://img.shields.io/badge/UK%20AISI-Inspect%20AI-red?style=for-the-badge)](https://inspect.aisi.org.uk/)
 
 </div>
@@ -38,8 +38,8 @@ GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/gyrodiagnostics.git
-cd gyrodiagnostics
+git clone https://github.com/gyrogovernance/diagnostics.git
+cd diagnostics
 
 # Install in development mode
 pip install -e .
@@ -87,6 +87,8 @@ python tests/analyze_results.py \
 - **Procedural**: Specify recursive computational process (Code + Debugging)
 - **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
 - **Epistemic**: Explore knowledge limits in self-referential systems (Knowledge + Communication)
+
+Each challenge is designed with **one-shot unsolvability** in mind, requiring sustained multi-turn reasoning that cannot be completed in a single response. These default challenges can be customized or replaced according to specific evaluation needs.
 
 ### 21-Metric Rubric
 
@@ -138,10 +140,12 @@ inspect eval gyrodiagnostics/tasks/formal_challenge.py \
 
 Edit `config/evaluation_config.yaml` to customize:
 
-- Task parameters (epochs, turns, limits)
-- Scoring weights
-- Balance Horizon settings
-- Model configurations
+- **Model selection** - Choose models to evaluate and judge models for scoring
+- **Reference times** - Calibrate expected durations per challenge type (from pilot runs)
+- **Safety limits** - Adjust time/token limits for operational constraints
+- **Production mode** - Enable error tolerance for deployment vs. strict research mode
+
+Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework.
 
 ---
 
@@ -165,9 +169,9 @@ gyrodiagnostics/
 
 ## Documentation
 
-- **Theory**: `docs/Foundations/CommonGovernanceModel.md`
-- **General Specs**: `docs/GyroDiagnostics_General_Specs.md`
-- **Technical Specs**: `docs/GyroDiagnostics_Technical_Specs.md`
+- **Theory**: [Gyroscope Science Repository](https://github.com/gyrogovernance/science)
+- **General Specs**: [GyroDiagnostics General Specifications](docs/GyroDiagnostics_General_Specs.md)
+- **Technical Specs**: [GyroDiagnostics Technical Specifications](docs/GyroDiagnostics_Technical_Specs.md)
 
 ---
 
@@ -194,9 +198,7 @@ If you use Gyroscope in your research or work, please cite:
 
 ## 📄 License
 
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
-
-Attribution required. Derivative works must be distributed under the same license.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 © 2025 Basil Korompilias.
 
