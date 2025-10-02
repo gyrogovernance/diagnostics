@@ -10,7 +10,7 @@
 
 [![Home](./assets/menu/home_badge.svg)](https://gyrogovernance.com)
 [![Diagnostics](./assets/menu/diagnostics_badge.svg)](https://github.com/gyrogovernance/diagnostics)
-[![Protocols](./assets/menu/protocols_badge.svg)](https://github.com/gyrogovernance/protocols)
+[![Tools](./assets/menu/tools_badge.svg)](https://github.com/gyrogovernance/tools)
 [![Science](./assets/menu/science_badge.svg)](https://github.com/gyrogovernance/science)
 [![Superintelligence](./assets/menu/superintelligence_badge.svg)](https://github.com/gyrogovernance/superintelligence)
 
