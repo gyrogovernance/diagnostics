@@ -1,14 +1,8 @@
-# AI Safety Diagnostics: Gyroscopic Alignment Evaluation Lab
+# AI Safety Diagnostics
+> Gyroscopic Alignment Evaluation Lab
 
-![Gyroscope: Human-Aligned Superintelligence](/assets/gyroscope_cover.png)
+![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
-<div align="center">
-
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey?style=for-the-badge&logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by-sa/4.0/)
-[![Inspect AI](https://img.shields.io/badge/UK%20AISI-Inspect%20AI-red?style=for-the-badge)](https://inspect.aisi.org.uk/)
-
-</div>
 
 <div align="center">
 
@@ -21,8 +15,14 @@
 [![Protocols](./assets/menu/protocols_badge.svg)](https://github.com/gyrogovernance/protocols)
 
 </div>
----
 
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey?style=for-the-badge&logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![Inspect AI](https://img.shields.io/badge/UK%20AISI-Inspect%20AI-red?style=for-the-badge)](https://inspect.aisi.org.uk/)
+
+</div>
 
 ---
 
