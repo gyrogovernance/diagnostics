@@ -1,0 +1,15 @@
+# Core Evaluation Framework
+inspect-ai>=0.3.135
+
+# Local Model Support
+transformers>=4.51.0
+torch>=2.0.0
+accelerate>=0.21.0
+tokenizers>=0.13.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+
+# Utilities
+numpy>=1.24.0
+psutil>=5.9.0
+
