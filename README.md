@@ -1,5 +1,5 @@
 # AI Safety Diagnostics
-> Gyroscopic Alignment Evaluation Lab
+> **Gyroscopic Alignment Evaluation Lab**
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
@@ -31,12 +31,12 @@
 If you use Gyroscope in your research or work, please cite:
 
 ```bibtex
-@misc{gyroscope2025,
+@misc{gyrogovernancediagnosticsrepo,
   title={AI Safety Diagnostics: Gyroscopic Alignment Evaluation Lab},
   author={Korompilias, Basil},
   year={2025},
   howpublished={GitHub Repository},
-  url={https://github.com/yourusername/gyroscope},
+  url={https://github.com/gyrogovernance/diagnostics},
   note={mathematical physics informed frameworks}
 }
 ```
