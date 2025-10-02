@@ -26,6 +26,155 @@
 
 ---
 
+# GyroDiagnostics: AI Alignment Evaluation Suite
+
+**Mathematical Physics-Informed Evaluation Framework for AI Model Quality and Alignment**
+
+## Overview
+
+GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates AI intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/gyrodiagnostics.git
+cd gyrodiagnostics
+
+# Install in development mode
+pip install -e .
+
+# Or install from requirements
+pip install -r requirements.txt
+```
+
+---
+
+## Quick Start
+
+### Run Single Challenge
+
+```bash
+python tests/run_single_challenge.py \
+  --challenge formal \
+  --model openai/gpt-4o
+```
+
+### Run Full Suite
+
+```bash
+python tests/run_full_suite.py \
+  --model openai/gpt-4o \
+  --log-dir ./logs
+```
+
+### Analyze Results
+
+```bash
+python tests/analyze_results.py \
+  --log-dir ./logs \
+  --output ./analysis_results.json
+```
+
+---
+
+## Architecture
+
+### Five Challenge Domains
+
+- **Formal**: Derive spatial structure from gyrogroup dynamics (Physics + Math)
+- **Normative**: Optimize resource allocation for global poverty (Policy + Ethics)
+- **Procedural**: Specify recursive computational process (Code + Debugging)
+- **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
+- **Epistemic**: Explore knowledge limits in self-referential systems (Knowledge + Communication)
+
+### 21-Metric Rubric
+
+#### Structure Metrics (50 points)
+- Traceability, Variety, Accountability, Integrity, Aperture
+
+#### Behavior Metrics (60 points)
+- Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference
+
+#### Specialization Metrics (20 points)
+- Domain-specific expertise (2 metrics per challenge)
+
+### Balance Horizon
+
+Temporal stability metric: `Balance Horizon = Median(Alignment) / Median(Duration)`
+
+Measures alignment efficiency over time with practical bounds for validation.
+
+---
+
+## Usage Examples
+
+### Python API
+
+```python
+from inspect_ai import eval
+from gyrodiagnostics import formal_challenge
+
+# Run evaluation
+results = eval(
+    formal_challenge(),
+    model="openai/gpt-4o",
+    log_dir="./logs"
+)
+```
+
+### CLI Usage
+
+```bash
+# Using Inspect AI CLI
+inspect eval gyrodiagnostics/tasks/formal_challenge.py \
+  --model openai/gpt-4o \
+  --log-dir ./logs
+```
+
+---
+
+## Configuration
+
+Edit `config/evaluation_config.yaml` to customize:
+
+- Task parameters (epochs, turns, limits)
+- Scoring weights
+- Balance Horizon settings
+- Model configurations
+
+---
+
+## Project Structure
+
+```
+gyrodiagnostics/
+├── src/gyrodiagnostics/
+│   ├── tasks/           # Five challenge implementations
+│   ├── solvers/         # Autonomous progression solver
+│   ├── scorers/         # 21-metric alignment scorer
+│   ├── metrics/         # Balance Horizon calculation
+│   ├── prompts/         # Challenge prompts & scoring templates
+│   └── utils/           # Constants and helpers
+├── tests/               # Evaluation runners and analysis
+├── config/              # Configuration files
+└── docs/                # Theory and specifications
+```
+
+---
+
+## Documentation
+
+- **Theory**: `docs/Foundations/CommonGovernanceModel.md`
+- **General Specs**: `docs/GyroDiagnostics_General_Specs.md`
+- **Technical Specs**: `docs/GyroDiagnostics_Technical_Specs.md`
+
+---
+
+## Contributing
+
+This is a research framework under active development. Contributions welcome via issues and pull requests.
+
 ## 📖 Citation
 
 If you use Gyroscope in your research or work, please cite:

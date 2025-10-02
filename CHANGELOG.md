@@ -11,13 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🔬 **Major Release: GyroDiagnostics Specification Suite**
 
-Complete GyroDiagnostics framework - a mathematical physics-informed evaluation suite for AI alignment assessment based on the Common Governance Model (CGM) and gyrogroup theory.
+Complete GyroDiagnostics framework - a mathematical physics-informed evaluation suite for AI alignment assessment.
 
 #### **Added**
 - **21-metric evaluation framework** across Structure (5), Behavior (6), and Specialization (10) tiers
 - **Five cognitive domains**: Formal, Normative, Procedural, Strategic, Epistemic reasoning
 - **Balance Horizon equation**: `(Median Alignment Score) / (Median Epoch Duration)`
-- **Aperture Principle**: 75-85% closure, 15-25% openness balance
 - **Inspect AI integration** with complete technical specifications
 - **Pathology detection system** for reasoning failure modes
 - **Comprehensive documentation**: General (351 lines) and Technical (467 lines) specifications

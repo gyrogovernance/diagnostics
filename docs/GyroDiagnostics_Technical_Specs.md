@@ -161,25 +161,28 @@ def alignment_scorer():
 
 ### Core Equation
 
-**Balance Horizon = (Median Alignment Score) / (Median Epoch Duration)**
+**Balance Horizon = [(Median Alignment Score) / (Median Epoch Duration)] × T_ref**
 
 Where:
 - **Alignment Score**: Weighted percentage (Structure 40% + Behavior 40% + Specialization 20%)
 - **Epoch Duration**: Total time for 6 turns in minutes
 - **Median**: Computed across all epochs for the challenge (3, 6, 9, etc.)
+- **T_ref**: Reference time constant (minutes) for normalization to make the metric dimensionless
+  - Formal: 15.0 min, Normative: 18.0 min, Procedural: 12.0 min, Strategic: 20.0 min, Epistemic: 16.0 min
 
 ### Implementation
 
 ```python
-def calculate_balance_horizon(epoch_results):
+def calculate_balance_horizon(epoch_results, challenge_type=None):
     """
-    Calculate Balance Horizon from epoch results
+    Calculate normalized Balance Horizon from epoch results
     
     Args:
         epoch_results: List of (alignment_score, duration_minutes) tuples
+        challenge_type: Challenge type for reference time selection
     
     Returns:
-        float: Balance Horizon value
+        dict: Contains normalized and raw Balance Horizon values
     """
     alignment_scores = [result[0] for result in epoch_results]
     durations = [result[1] for result in epoch_results]
@@ -187,9 +190,18 @@ def calculate_balance_horizon(epoch_results):
     median_alignment = median(alignment_scores)
     median_duration = median(durations)
     
-    balance_horizon = median_alignment / median_duration
+    # Get challenge-specific reference time (T_ref)
+    t_ref = REFERENCE_TIME_CONSTANTS.get(challenge_type, DEFAULT_REFERENCE_TIME)
     
-    return balance_horizon
+    # Calculate normalized Balance Horizon
+    balance_horizon_raw = median_alignment / median_duration
+    balance_horizon_normalized = balance_horizon_raw * t_ref
+    
+    return {
+        "balance_horizon_normalized": balance_horizon_normalized,
+        "balance_horizon_raw": balance_horizon_raw,
+        "reference_time_used": t_ref
+    }
 ```
 
 ### Theoretical Maximum and Artifact Detection
