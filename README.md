@@ -34,6 +34,104 @@
 
 GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates AI intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
 
+---
+
+## Architecture
+
+### Five Challenge Domains
+
+- **Formal**: Derive spatial structure from gyrogroup dynamics (Physics + Math)
+- **Normative**: Optimize resource allocation for global poverty (Policy + Ethics)
+- **Procedural**: Specify recursive computational process (Code + Debugging)
+- **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
+- **Epistemic**: Explore knowledge limits in self-referential systems (Knowledge + Communication)
+
+Each challenge is designed with **one-shot unsolvability** in mind, requiring sustained multi-turn reasoning that cannot be completed in a single response. These default challenges can be customized or replaced according to specific evaluation needs.
+
+### 21-Metric Rubric
+
+**Structure Metrics (50 points)**
+- Traceability, Variety, Accountability, Integrity, Aperture
+
+**Behavior Metrics (60 points)**
+- Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference
+
+**Specialization Metrics (20 points)**
+- Domain-specific expertise (2 metrics per challenge)
+
+**Balance Horizon**
+
+Temporal stability metric: `Balance Horizon = Median(Alignment) / Median(Duration)`
+
+Measures alignment efficiency over time with practical bounds for validation.
+
+---
+
+## Showcase
+
+Sample evaluation results demonstrating what GyroDiagnostics produces:
+
+### 📊 [Results Analysis](showcase/results.txt)
+Detailed per-epoch extraction report showing Meta-Llama 3.3 70B performance across 30 evaluation epochs (6 per challenge type). Includes alignment scores, duration metrics, structure analysis, behavior assessment, and domain-specific specialization scores.
+
+### 📋 [Performance Review](showcase/review.md)
+Comprehensive analysis report covering challenge-specific performance, cross-challenge patterns, pathological behavior detection (zero detected), and strategic insights across Formal, Normative, Procedural, Strategic, and Epistemic challenges.
+
+---
+
+## Documentation
+
+- **Theory**: [Gyroscope Science Repository](https://github.com/gyrogovernance/science)
+- **General Specs**: [GyroDiagnostics General Specifications](docs/GyroDiagnostics_General_Specs.md)
+- **Technical Specs**: [GyroDiagnostics Technical Specifications](docs/GyroDiagnostics_Technical_Specs.md)
+
+---
+
+## 📄 Based on Paper
+
+**AI Quality Governance**  
+*Human Data Evaluation and Responsible AI Behavior Alignment*
+
+[![View Publication](https://img.shields.io/badge/📖%20View%20Publication-4A90E2?style=for-the-badge&labelColor=2F2F2F)](http://doi.org/10.17613/43wc1-mvn58)
+
+---
+
+## Configuration
+
+Edit `config/evaluation_config.yaml` to customize:
+
+- **Model selection** - Choose models to evaluate and judge models for scoring
+- **Reference times** - Calibrate expected durations per challenge type (from pilot runs)
+- **Safety limits** - Adjust time/token limits for operational constraints
+- **Production mode** - Enable error tolerance for deployment vs. strict research mode
+
+Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework.
+
+---
+
+## Project Structure
+
+```
+gyrodiagnostics/
+├── src/gyrodiagnostics/
+│   ├── tasks/           # Five challenge implementations
+│   ├── solvers/         # Autonomous progression solver
+│   ├── scorers/         # 21-metric alignment scorer
+│   ├── metrics/         # Balance Horizon calculation
+│   ├── prompts/         # Challenge prompts & scoring templates
+│   └── utils/           # Constants and helpers
+├── tools/               # Utility scripts for log processing and analysis
+│   ├── run_full_suite.py      # Run complete evaluation suite
+│   ├── cleanup_results.py     # Manage results folder
+│   ├── validate_setup.py      # Validate configuration
+│   └── README.md              # Tools documentation
+├── showcase/            # Sample evaluation results for easy viewing
+├── config/              # Configuration files
+└── docs/                # Theory and specifications
+```
+
+---
+
 ## Installation
 
 ```bash
@@ -84,20 +182,6 @@ INSPECT_EVAL_MAX_RETRIES=1
 INSPECT_EVAL_MAX_CONNECTIONS=8
 ```
 
-For local models (e.g., Hugging Face):
-
-**Fast Development (2-3 min/sample):**
-```ini
-INSPECT_EVAL_MODEL=hf/Qwen/Qwen3-0.6B-Base
-INSPECT_EVAL_MODEL_GRADER=hf/Qwen/Qwen3-0.6B-Base
-```
-
-**Higher Quality (5-10 min/sample):**
-```ini
-INSPECT_EVAL_MODEL=hf/Qwen/Qwen3-1.7B-Base
-INSPECT_EVAL_MODEL_GRADER=hf/Qwen/Qwen3-1.7B-Base
-```
-
 ---
 
 ## Quick Start
@@ -130,114 +214,12 @@ python tools/validate_setup.py
 ### Analyze Results
 
 ```bash
-# Extract readable text from evaluation logs
-python tools/log_to_text.py path/to/evaluation.eval
-
-# Extract conversation history only
-python tools/log_to_conversation.py path/to/evaluation.eval
+# Analyze suite results from JSON logs (comprehensive analysis)
+python tools/analyze_suite.py logs/logs.json --output report.txt
 
 # Clean up results folder
 python tools/cleanup_results.py --list
 ```
-
----
-
-## Architecture
-
-### Five Challenge Domains
-
-- **Formal**: Derive spatial structure from gyrogroup dynamics (Physics + Math)
-- **Normative**: Optimize resource allocation for global poverty (Policy + Ethics)
-- **Procedural**: Specify recursive computational process (Code + Debugging)
-- **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
-- **Epistemic**: Explore knowledge limits in self-referential systems (Knowledge + Communication)
-
-Each challenge is designed with **one-shot unsolvability** in mind, requiring sustained multi-turn reasoning that cannot be completed in a single response. These default challenges can be customized or replaced according to specific evaluation needs.
-
-### 21-Metric Rubric
-
-#### Structure Metrics (50 points)
-- Traceability, Variety, Accountability, Integrity, Aperture
-
-#### Behavior Metrics (60 points)
-- Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference
-
-#### Specialization Metrics (20 points)
-- Domain-specific expertise (2 metrics per challenge)
-
-### Balance Horizon
-
-Temporal stability metric: `Balance Horizon = Median(Alignment) / Median(Duration)`
-
-Measures alignment efficiency over time with practical bounds for validation.
-
----
-
-## Usage Examples
-
-### Python API
-
-```python
-from inspect_ai import eval
-from gyrodiagnostics import formal_challenge
-
-# Run evaluation
-results = eval(
-    formal_challenge(),
-    model="openai/gpt-4o",
-    log_dir="./logs"
-)
-```
-
-### CLI Usage
-
-```bash
-# Using Inspect AI CLI
-inspect eval gyrodiagnostics/tasks/challenge_1_formal.py \
-  --model openai/gpt-4o \
-  --log-dir ./logs
-```
-
----
-
-## Configuration
-
-Edit `config/evaluation_config.yaml` to customize:
-
-- **Model selection** - Choose models to evaluate and judge models for scoring
-- **Reference times** - Calibrate expected durations per challenge type (from pilot runs)
-- **Safety limits** - Adjust time/token limits for operational constraints
-- **Production mode** - Enable error tolerance for deployment vs. strict research mode
-
-Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework.
-
----
-
-## Project Structure
-
-```
-gyrodiagnostics/
-├── src/gyrodiagnostics/
-│   ├── tasks/           # Five challenge implementations
-│   ├── solvers/         # Autonomous progression solver
-│   ├── scorers/         # 21-metric alignment scorer
-│   ├── metrics/         # Balance Horizon calculation
-│   ├── prompts/         # Challenge prompts & scoring templates
-│   └── utils/           # Constants and helpers
-├── tools/               # Utility scripts for log processing and analysis
-│   ├── run_full_suite.py      # Run complete evaluation suite
-│   ├── log_to_text.py         # Extract readable text from logs
-│   ├── log_to_conversation.py # Extract conversation history
-│   ├── cleanup_results.py     # Manage results folder
-│   ├── validate_setup.py      # Validate configuration
-│   ├── add_to_showcase.py     # Add results to showcase
-│   └── README.md              # Tools documentation
-├── showcase/            # Sample evaluation results for easy viewing
-│   └── README.md              # Showcase overview and navigation
-├── config/              # Configuration files
-└── docs/                # Theory and specifications
-```
-
 ---
 
 ## Tools
@@ -247,8 +229,8 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 ### Key Tools
 
 - **`run_full_suite.py`** - Run all 5 challenges using configured models from `.env`
-- **`log_to_text.py`** - Extract comprehensive readable reports from `.eval` log files
-- **`log_to_conversation.py`** - Extract clean conversation history from logs
+- **`extract_epochs.py`** - Extract per-epoch data from .eval logs (bypasses logs.json)
+- **`analyze_suite.py`** - Comprehensive analysis of suite results with judge metadata and Balance Horizon
 - **`cleanup_results.py`** - Manage and organize the results folder
 - **`validate_setup.py`** - Verify that your configuration is correct
 
@@ -258,40 +240,15 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 # Run complete evaluation suite
 python tools/run_full_suite.py
 
-# Extract readable results from a log file
-python tools/log_to_text.py logs/your_evaluation.eval
+# Extract per-epoch data from .eval logs (bypasses logs.json)
+python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
 
-# Get just the conversation
-python tools/log_to_conversation.py logs/your_evaluation.eval
+# Analyze suite results (comprehensive analysis with judge metadata)
+python tools/analyze_suite.py logs/logs.json --output report.txt
 
 # Clean up old results
 python tools/cleanup_results.py --older-than 7 --confirm
 ```
-
----
-
-## Showcase
-
-The `showcase/` folder contains sample evaluation results for easy viewing. No installation required - just browse the markdown files on GitHub!
-
-**[View Results](showcase/README.md)** | **[Add New Results](tools/add_to_showcase.py)**
-
----
-
-## Documentation
-
-- **Theory**: [Gyroscope Science Repository](https://github.com/gyrogovernance/science)
-- **General Specs**: [GyroDiagnostics General Specifications](docs/GyroDiagnostics_General_Specs.md)
-- **Technical Specs**: [GyroDiagnostics Technical Specifications](docs/GyroDiagnostics_Technical_Specs.md)
-
----
-
-## 📄 Based on Paper
-
-**AI Quality Governance**  
-*Human Data Evaluation and Responsible AI Behavior Alignment*
-
-[![View Publication](https://img.shields.io/badge/📖%20View%20Publication-4A90E2?style=for-the-badge&labelColor=2F2F2F)](http://doi.org/10.17613/43wc1-mvn58)
 
 ---
 

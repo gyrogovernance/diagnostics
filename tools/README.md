@@ -2,14 +2,6 @@
 
 This directory contains utility scripts for working with Inspect AI evaluation logs.
 
-## log_to_text.py
-
-Extract comprehensive readable text output from Inspect AI `.eval` log files, including scores, conversation history, and detailed analysis.
-
-## log_to_conversation.py
-
-Extract just the conversation history from `.eval` log files in a clean, readable format.
-
 ## cleanup_results.py
 
 Clean up and manage the results folder.
@@ -22,30 +14,18 @@ Run the complete GyroDiagnostics evaluation suite across all challenges using co
 
 Validate that the GyroDiagnostics setup is configured correctly.
 
-## add_to_showcase.py
+## analyze_suite.py
 
-Add evaluation results to the showcase folder for easy viewing by non-technical users.
+Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, judge evaluation metadata, and suite-level summaries.
+
+## extract_epochs.py
+
+Extract per-epoch results directly from Inspect AI `.eval` logs, bypassing the defective `logs.json` file. This tool provides complete epoch-by-epoch analysis with all 6 epochs per challenge, including detailed scores, judge reviews, and Balance Horizon calculations.
+
 
 ### Usage
 
 ```bash
-# Basic usage - automatically saves to results/ folder with organized naming
-python tools/log_to_text.py path/to/logfile.eval
-
-# Different formats - all auto-organized
-python tools/log_to_text.py path/to/logfile.eval --format markdown
-python tools/log_to_text.py path/to/logfile.eval --format html
-python tools/log_to_text.py path/to/logfile.eval --format json
-
-# Custom output location (overrides auto-organization)
-python tools/log_to_text.py path/to/logfile.eval --output custom/path/results.txt
-
-# Extract just conversation history - auto-organized
-python tools/log_to_conversation.py path/to/logfile.eval
-
-# Custom conversation output
-python tools/log_to_conversation.py path/to/logfile.eval --output custom/conversation.txt
-
 # Clean up results folder
 python tools/cleanup_results.py --list                    # List all results
 python tools/cleanup_results.py --cleanup --confirm       # Remove all results
@@ -58,9 +38,15 @@ python tools/run_full_suite.py                           # Run with configured m
 # Validate setup
 python tools/validate_setup.py                            # Check if everything is configured correctly
 
-# Add results to showcase
-python tools/add_to_showcase.py logs/evaluation.eval --model gpt-4o --challenge strategic
-python tools/add_to_showcase.py logs/evaluation.eval --model claude-3.5-sonnet --challenge formal --description "Custom description"
+# Analyze suite results (comprehensive analysis)
+python tools/analyze_suite.py logs/logs.json --output report.txt
+python tools/analyze_suite.py logs/logs.json --json analysis.json  # Save structured JSON
+
+# Extract per-epoch data from .eval logs (bypasses logs.json)
+python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
+python tools/extract_epochs.py logs/single_challenge.eval --output single_report.txt
+python tools/extract_epochs.py logs --challenge formal normative --output formal_normative.txt
+
 ```
 
 ### File Organization
@@ -83,16 +69,25 @@ The timestamp and task name are extracted from the original log filename for eas
 
 ### What It Extracts
 
-- **Alignment scores** and detailed breakdowns
+#### extract_epochs.py:
+- **All 6 epochs per challenge** (complete per-epoch breakdown)
+- **Alignment scores** and detailed breakdowns per epoch
 - **Structure scores** (traceability, variety, accountability, integrity, aperture)
 - **Behavior scores** (truthfulness, completeness, groundedness, literacy, comparison, preference)
-- **Specialization scores** (finance, strategy, etc.)
-- **Pathologies** (any issues detected)
-- **Timing data** (total time, working time, turn timestamps)
-- **Detailed reviews** (if available from scorer)
-- **Full conversation history** (all messages between user and model)
-- **Evaluation metadata** (status, version, sample counts, accuracy)
-- **Smart status interpretation** (explains why "error" status may occur despite successful completion)
+- **Specialization scores** (domain-specific metrics per challenge)
+- **Judge reviews** (scoring_rationale, strengths, weaknesses per epoch)
+- **Timing data** (duration, turn counts per epoch)
+- **Balance Horizon** (normalized and raw calculations)
+- **Pathology detection** (if any issues detected)
+- **Fallback detection** (when judge evaluation fails)
+
+#### analyze_suite.py:
+- **Comprehensive suite analysis** from JSON logs
+- **Judge evaluation metadata** (scoring rationale, strengths, weaknesses, fallback usage)
+- **Balance Horizon metrics** (retention-based temporal stability)
+- **Weighted score verification** (matches scorer calculations)
+- **Suite-level summaries** (overall performance, rankings, pathology analysis)
+- **Judge reliability analysis** (fallback usage across epochs)
 
 ### Requirements
 

@@ -20,19 +20,65 @@ def autonomous_solver() -> Solver:
     """
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         import time
+        import asyncio
+        try:
+            # Prefer specific error classes if available
+            from json import JSONDecodeError  # type: ignore
+        except Exception:  # pragma: no cover
+            JSONDecodeError = Exception  # fallback if not present
+
+        async def generate_with_retries(current_state: TaskState) -> TaskState:
+            """
+            Call generate() with defensive retries for intermittent provider
+            response parsing/network issues that surface as JSON decode errors
+            or transient HTTP client errors.
+            """
+            max_attempts = max(1, int(TASK_CONFIG.get("retry_on_error", 3)))
+            base_delay = 0.75
+
+            last_exc = None
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return await generate(current_state)
+                except JSONDecodeError as ex:  # type: ignore
+                    last_exc = ex
+                except Exception as ex:
+                    # Retry only clearly transient categories; otherwise re-raise
+                    transient = (
+                        "JSONDecodeError" in str(type(ex))
+                        or "ReadTimeout" in str(type(ex))
+                        or "WriteError" in str(type(ex))
+                        or "RemoteProtocolError" in str(type(ex))
+                        or "ConnectionResetError" in str(type(ex))
+                        or "ServerDisconnectedError" in str(type(ex))
+                    )
+                    if not transient:
+                        raise
+                    last_exc = ex
+
+                if attempt < max_attempts:
+                    # Exponential backoff with jitter
+                    delay = base_delay * (2 ** (attempt - 1))
+                    delay += 0.15 * attempt
+                    await asyncio.sleep(delay)
+
+            # Exhausted retries — re-raise last exception
+            if last_exc:
+                raise last_exc
+            return current_state
         start = time.time()
         
         # Get configured number of turns
         num_turns = TASK_CONFIG.get("turns", 3)
 
         # Turn 1
-        state = await generate(state)
+        state = await generate_with_retries(state)
         _record_turn_time(state, 1)
 
         # Turns 2-N
         for turn_number in range(2, num_turns + 1):
             state.messages.append(ChatMessageUser(content=CONTINUATION_PROMPT))
-            state = await generate(state)
+            state = await generate_with_retries(state)
             _record_turn_time(state, turn_number)
 
             # Guard: if assistant replied with empty text, stop early

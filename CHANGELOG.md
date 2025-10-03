@@ -15,7 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tools/` directory with utility scripts for log processing and evaluation
 - `showcase/` folder for easy viewing of evaluation results by non-technical users
 - `.gitignore` and `.cursorignore` files for proper project hygiene
-- `tools/add_to_showcase.py` script to automatically format and add results to showcase
 
 #### **Changed**
 - Moved utility scripts from `tests/` to `tools/` directory
@@ -41,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed challenge counting in run_full_suite.py to correctly report all 5 challenges instead of 2
 - Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (judge provides these but they weren't being saved)
 - Created tools/extract_judge_text.py to extract judge text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
+- Enhanced tools/analyze_suite.py to display judge metadata (scoring_rationale, strengths, weaknesses, judge_fallback_used) in analysis reports
+- Fixed Unicode encoding issues in analysis script for Windows compatibility
 
 ---
 
