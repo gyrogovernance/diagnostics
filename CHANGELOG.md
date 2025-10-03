@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.2] - 2025-10-03
+
+### 🛠️ **Tooling & Documentation Improvements**
+
+#### **Added**
+- `tools/` directory with utility scripts for log processing and evaluation
+- `showcase/` folder for easy viewing of evaluation results by non-technical users
+- `.gitignore` and `.cursorignore` files for proper project hygiene
+- `tools/add_to_showcase.py` script to automatically format and add results to showcase
+
+#### **Changed**
+- Moved utility scripts from `tests/` to `tools/` directory
+- Updated `run_full_suite.py` to use configured models from `.env` (no command-line flags needed)
+- Simplified project structure and documentation
+
+#### **Fixed**
+- Configuration consistency across all challenge tasks
+- Error tolerance settings (fail_on_error: 0.1, retry_on_error: 1)
+- VS Code settings for proper virtual environment usage
+- Multi-turn conversation handling and scoring issues in task implementations
+
+---
+
 ## [0.9.1] - 2025-10-02
 
 ### 🔬 **Major Release: GyroDiagnostics Specification Suite**
