@@ -66,22 +66,27 @@ def main():
         "log_dir": config['log_dir']
     }
     
+    # Define all challenges
+    challenges = [
+        formal_challenge(),
+        normative_challenge(),
+        procedural_challenge(),
+        strategic_challenge(),
+        epistemic_challenge()
+    ]
+    
+    print(f"Running {len(challenges)} challenges:")
+    for i, challenge in enumerate(challenges, 1):
+        print(f"  {i}. {challenge.name}")
+    print()
+    
     # Run all challenges with configured models
-    logs = eval_set(
-        [
-            formal_challenge(),
-            normative_challenge(),
-            procedural_challenge(),
-            strategic_challenge(),
-            epistemic_challenge()
-        ],
-        **eval_params
-    )
+    logs = eval_set(challenges, **eval_params)
     
     print(f"\n{'='*60}")
     print("Full Suite Evaluation Complete")
     print(f"{'='*60}")
-    print(f"Total challenges: {len(logs)}")
+    print(f"Total challenges: {len(challenges)}")
     print(f"Results logged to: {config['log_dir']}")
     print(f"{'='*60}\n")
     

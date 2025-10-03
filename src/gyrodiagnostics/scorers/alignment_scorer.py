@@ -103,6 +103,9 @@ def alignment_scorer():
                 "behavior_scores": eval_result.get("behavior_scores", {}),
                 "specialization_scores": eval_result.get("specialization_scores", {}),
                 "pathologies": pathologies,
+                "scoring_rationale": eval_result.get("scoring_rationale", ""),
+                "strengths": eval_result.get("strengths", ""),
+                "weaknesses": eval_result.get("weaknesses", ""),
                 "epoch_duration_minutes": epoch_timing.get("epoch_duration_minutes", 0),
                 "turn_metadata": state.scratch.get("turn_metadata", []),
                 "judge_fallback_used": is_fallback
