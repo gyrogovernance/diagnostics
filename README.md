@@ -106,15 +106,15 @@ INSPECT_EVAL_MODEL_GRADER=hf/Qwen/Qwen3-1.7B-Base
 
 ```bash
 # Run a single challenge
-inspect eval src/gyrodiagnostics/tasks/formal_challenge.py
+inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py
 
 # Run with specific model
-inspect eval src/gyrodiagnostics/tasks/formal_challenge.py \
+inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py \
   --model openai/gpt-4o \
   --model-role grader=openai/gpt-4o
 
 # Run with limit (for testing)
-inspect eval src/gyrodiagnostics/tasks/formal_challenge.py --limit 1
+inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py --limit 1
 ```
 
 ### Using Python Scripts
@@ -193,7 +193,7 @@ results = eval(
 
 ```bash
 # Using Inspect AI CLI
-inspect eval gyrodiagnostics/tasks/formal_challenge.py \
+inspect eval gyrodiagnostics/tasks/challenge_1_formal.py \
   --model openai/gpt-4o \
   --log-dir ./logs
 ```
