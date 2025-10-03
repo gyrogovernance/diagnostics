@@ -55,7 +55,13 @@ python tools/validate_setup.py
 
 ### Configure Environment
 
-Create a `.env` file in the project root:
+Create a `.env` file in the project root by copying the example:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` with your actual API keys:
 
 ```ini
 # Primary Model (the one being evaluated)
@@ -63,6 +69,11 @@ INSPECT_EVAL_MODEL=openai/gpt-4o
 
 # Judge Model (for scoring - can be same or different)
 INSPECT_EVAL_MODEL_GRADER=openai/gpt-4o
+
+# API Keys (replace with your actual keys)
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
 
 # Log Configuration
 INSPECT_LOG_DIR=./logs
