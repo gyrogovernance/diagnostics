@@ -2,7 +2,7 @@
 
 # Task Configuration
 task:
-  epochs: 1  # standard 1, best 6x
+  epochs: 2  # test run 1, standard 6x
   turns: 6   # at least 3, best 6x
   message_limit: 20  
   time_limit: 3600  # 1 hour safety limit (seconds)
@@ -16,11 +16,11 @@ task:
   
   # Error tolerance configuration
   fail_on_error: 0.1  # Allow up to 10% of samples to have errors
-  retry_on_error: 1   # Retry failed samples once
+  retry_on_error: 3   # Retry failed samples up to 3 times (for cloud API issues)
   
   # Production configuration (more conservative)
   # fail_on_error: 0.05  # Allow 5% failure rate for transient issues
-  # retry_on_error: 2     # Retry failed samples twice
+  # retry_on_error: 5     # Retry failed samples up to 5 times for production
 
 # Scoring Configuration
 scoring:

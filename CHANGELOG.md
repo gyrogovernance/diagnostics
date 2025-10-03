@@ -37,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed all hardcoded configuration values - constants now read exclusively from YAML config
 - Removed obsolete TASK_CONFIG_PRODUCTION hardcoded dictionary
 - Fixed cross-platform path resolution for config file loading (Windows/Unix compatibility)
+- Increased retry_on_error from 1 to 3 for better handling of cloud API rate limits and network issues
+- Fixed challenge counting in run_full_suite.py to correctly report all 5 challenges instead of 2
+- Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (judge provides these but they weren't being saved)
+- Created tools/extract_judge_text.py to extract judge text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
 
 ---
 
