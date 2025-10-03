@@ -25,3 +25,4 @@ src/gyrodiagnostics/tasks/procedural_challenge.py
 src/gyrodiagnostics/tasks/strategic_challenge.py
 src/gyrodiagnostics/utils/__init__.py
 src/gyrodiagnostics/utils/constants.py
+tests/test_basic_structure.py

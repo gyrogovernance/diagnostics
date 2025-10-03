@@ -39,19 +39,27 @@ LEVEL_MAXIMUMS = {
 
 # Task configuration
 TASK_CONFIG = {
-    "epochs": 6,  # Must be multiple of 3
-    "message_limit": 14,  # 1 system + 6 user + 6 assistant + 1 overhead
+    "epochs": 3,  # 3 epochs for debugging (each with 3 turns)
+    "message_limit": 20,  # Increased for safety with system messages
     "time_limit": 3600,  # 1 hour safety limit
     "token_limit": 50000,  # Prevent runaway generation
-    "fail_on_error": 0.0  # Zero tolerance for research (strict mode)
+    "temperature": 0.7,  # Balanced creativity vs consistency
+    "top_p": 0.8,  # Optimized for Qwen3 (from official docs)
+    "top_k": 20,  # Optimized for Qwen3 (from official docs)
+    "max_tokens": 1024,  # Reduced for faster generation
+    "fail_on_error": 0.1  # Allow up to 10% of samples to have errors
 }
 
 # Production task configuration (more tolerant)
 TASK_CONFIG_PRODUCTION = {
     "epochs": 6,
-    "message_limit": 14,
+    "message_limit": 20,  # Increased for safety with system messages
     "time_limit": 3600,
     "token_limit": 50000,
+    "temperature": 0.7,  # Balanced creativity vs consistency
+    "top_p": 0.8,  # Optimized for Qwen3 (from official docs)
+    "top_k": 20,  # Optimized for Qwen3 (from official docs)
+    "max_tokens": 1024,  # Reduced for faster generation
     "fail_on_error": 0.05,  # Allow 5% failure rate for transient issues
     "retry_on_error": 1     # Retry failed samples once
 }

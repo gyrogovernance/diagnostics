@@ -41,39 +41,92 @@ GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment.
 git clone https://github.com/gyrogovernance/diagnostics.git
 cd diagnostics
 
-# Install in development mode
+# Install dependencies
+pip install -r requirements.txt
+
+# Install package in editable mode (REQUIRED for imports to work)
 pip install -e .
 
-# Or install from requirements
-pip install -r requirements.txt
+# Validate setup
+python tools/validate_setup.py
+```
+
+**Note**: The `pip install -e .` step is **required** for the package imports to work correctly, especially when running in debug mode or from different contexts.
+
+### Configure Environment
+
+Create a `.env` file in the project root:
+
+```ini
+# Primary Model (the one being evaluated)
+INSPECT_EVAL_MODEL=openai/gpt-4o
+
+# Judge Model (for scoring - can be same or different)
+INSPECT_EVAL_MODEL_GRADER=openai/gpt-4o
+
+# Log Configuration
+INSPECT_LOG_DIR=./logs
+INSPECT_LOG_LEVEL=info
+
+# Evaluation Settings
+INSPECT_EVAL_MAX_RETRIES=1
+INSPECT_EVAL_MAX_CONNECTIONS=8
+```
+
+For local models (e.g., Hugging Face):
+
+**Fast Development (2-3 min/sample):**
+```ini
+INSPECT_EVAL_MODEL=hf/Qwen/Qwen3-0.6B-Base
+INSPECT_EVAL_MODEL_GRADER=hf/Qwen/Qwen3-0.6B-Base
+```
+
+**Higher Quality (5-10 min/sample):**
+```ini
+INSPECT_EVAL_MODEL=hf/Qwen/Qwen3-1.7B-Base
+INSPECT_EVAL_MODEL_GRADER=hf/Qwen/Qwen3-1.7B-Base
 ```
 
 ---
 
 ## Quick Start
 
-### Run Single Challenge
+### Using Inspect AI CLI (Recommended)
 
 ```bash
-python tests/run_single_challenge.py \
-  --challenge formal \
-  --model openai/gpt-4o
+# Run a single challenge
+inspect eval src/gyrodiagnostics/tasks/formal_challenge.py
+
+# Run with specific model
+inspect eval src/gyrodiagnostics/tasks/formal_challenge.py \
+  --model openai/gpt-4o \
+  --model-role grader=openai/gpt-4o
+
+# Run with limit (for testing)
+inspect eval src/gyrodiagnostics/tasks/formal_challenge.py --limit 1
 ```
 
-### Run Full Suite
+### Using Python Scripts
 
 ```bash
-python tests/run_full_suite.py \
-  --model openai/gpt-4o \
-  --log-dir ./logs
+# Run full evaluation suite (uses configured models from .env)
+python tools/run_full_suite.py
+
+# Validate setup
+python tools/validate_setup.py
 ```
 
 ### Analyze Results
 
 ```bash
-python tests/analyze_results.py \
-  --log-dir ./logs \
-  --output ./analysis_results.json
+# Extract readable text from evaluation logs
+python tools/log_to_text.py path/to/evaluation.eval
+
+# Extract conversation history only
+python tools/log_to_conversation.py path/to/evaluation.eval
+
+# Clean up results folder
+python tools/cleanup_results.py --list
 ```
 
 ---
@@ -160,10 +213,57 @@ gyrodiagnostics/
 │   ├── metrics/         # Balance Horizon calculation
 │   ├── prompts/         # Challenge prompts & scoring templates
 │   └── utils/           # Constants and helpers
-├── tests/               # Evaluation runners and analysis
+├── tools/               # Utility scripts for log processing and analysis
+│   ├── run_full_suite.py      # Run complete evaluation suite
+│   ├── log_to_text.py         # Extract readable text from logs
+│   ├── log_to_conversation.py # Extract conversation history
+│   ├── cleanup_results.py     # Manage results folder
+│   ├── validate_setup.py      # Validate configuration
+│   ├── add_to_showcase.py     # Add results to showcase
+│   └── README.md              # Tools documentation
+├── showcase/            # Sample evaluation results for easy viewing
+│   └── README.md              # Showcase overview and navigation
 ├── config/              # Configuration files
 └── docs/                # Theory and specifications
 ```
+
+---
+
+## Tools
+
+The `tools/` directory contains utility scripts for working with evaluation results and running the complete suite. See [tools/README.md](tools/README.md) for detailed documentation.
+
+### Key Tools
+
+- **`run_full_suite.py`** - Run all 5 challenges using configured models from `.env`
+- **`log_to_text.py`** - Extract comprehensive readable reports from `.eval` log files
+- **`log_to_conversation.py`** - Extract clean conversation history from logs
+- **`cleanup_results.py`** - Manage and organize the results folder
+- **`validate_setup.py`** - Verify that your configuration is correct
+
+### Quick Tool Usage
+
+```bash
+# Run complete evaluation suite
+python tools/run_full_suite.py
+
+# Extract readable results from a log file
+python tools/log_to_text.py logs/your_evaluation.eval
+
+# Get just the conversation
+python tools/log_to_conversation.py logs/your_evaluation.eval
+
+# Clean up old results
+python tools/cleanup_results.py --older-than 7 --confirm
+```
+
+---
+
+## Showcase
+
+The `showcase/` folder contains sample evaluation results for easy viewing. No installation required - just browse the markdown files on GitHub!
+
+**[View Results](showcase/README.md)** | **[Add New Results](tools/add_to_showcase.py)**
 
 ---
 

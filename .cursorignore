@@ -1,0 +1,119 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Large model files and caches
+models/
+.cache/
+huggingface_cache/
+transformers_cache/
+*.bin
+*.safetensors
+*.h5
+*.pkl
+*.pickle
+
+# Evaluation results (binary files)
+*.eval
+results/
+evaluation_results/
+output/
+analysis_results.json
+
+# Environment files (may contain secrets)
+.env
+.env.local
+.env.production
+.env.staging
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Test coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Large data files
+*.csv
+*.json
+*.parquet
+*.feather
+*.hdf5
+
+# Media files (unless specifically needed)
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.bak
+*.backup
+*~

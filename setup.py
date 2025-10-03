@@ -8,7 +8,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
-        "inspect-ai>=0.3.0",
+        "inspect-ai>=0.3.135",
         "pydantic>=2.0.0",
         "pyyaml>=6.0",
         "numpy>=1.24.0",
