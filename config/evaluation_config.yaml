@@ -2,8 +2,9 @@
 
 # Task Configuration
 task:
-  epochs: 3  # 3 epochs for debugging (each with 3 turns)
-  message_limit: 14  # 6 turns per epoch with safety margin (1 system + 6 user + 6 assistant + overhead)
+  epochs: 1  # standard 1, best 6x
+  turns: 6   # at least 3, best 6x
+  message_limit: 20  
   time_limit: 3600  # 1 hour safety limit (seconds)
   token_limit: 50000  # Prevent runaway generation
   

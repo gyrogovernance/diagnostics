@@ -302,9 +302,9 @@ from inspect_ai import eval_set
 
 # Run multiple evaluation configurations
 logs = eval_set([
-    formal_challenge_task(),
-    normative_challenge_task(),
-    procedural_challenge_task()
+    formal_challenge(),
+    normative_challenge(),
+    procedural_challenge()
 ], model="openai/gpt-4o")
 ```
 

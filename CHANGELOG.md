@@ -27,6 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error tolerance settings (fail_on_error: 0.1, retry_on_error: 1)
 - VS Code settings for proper virtual environment usage
 - Multi-turn conversation handling and scoring issues in task implementations
+- Content handling bug in autonomous solver (AttributeError when content is list instead of string)
+- Type comparison bug in pathology detection (TypeError when comparing string scores with integers)
+- JSON parsing error in alignment scorer (JSONDecodeError when judge returns malformed JSON)
+- Added comprehensive fallback scoring with 0 scores (not neutral) to prevent expensive evaluation failures while making failures obvious
+- Fixed score calculation to handle mixed numeric/string values and invalid data types
+- Updated all imports and references to use new numbered task filenames (challenge_1_formal.py, etc.)
+- Fixed constants to read from YAML config file instead of hardcoded values (epochs, turns, etc. now configurable)
+- Removed all hardcoded configuration values - constants now read exclusively from YAML config
+- Removed obsolete TASK_CONFIG_PRODUCTION hardcoded dictionary
+- Fixed cross-platform path resolution for config file loading (Windows/Unix compatibility)
 
 ---
 

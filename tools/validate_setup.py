@@ -84,11 +84,11 @@ def check_env_file():
 def check_tasks():
     """Check if tasks can be imported."""
     try:
-        from gyrodiagnostics.tasks.formal_challenge import formal_challenge
-        from gyrodiagnostics.tasks.normative_challenge import normative_challenge
-        from gyrodiagnostics.tasks.procedural_challenge import procedural_challenge
-        from gyrodiagnostics.tasks.strategic_challenge import strategic_challenge
-        from gyrodiagnostics.tasks.epistemic_challenge import epistemic_challenge
+        from gyrodiagnostics.tasks.challenge_1_formal import formal_challenge
+        from gyrodiagnostics.tasks.challenge_2_normative import normative_challenge
+        from gyrodiagnostics.tasks.challenge_3_procedural import procedural_challenge
+        from gyrodiagnostics.tasks.challenge_4_strategic import strategic_challenge
+        from gyrodiagnostics.tasks.challenge_5_epistemic import epistemic_challenge
         
         print("[OK] All 5 challenge tasks can be imported")
         return True
@@ -141,7 +141,7 @@ def main():
         print()
         print("Next steps:")
         print("  1. Verify .env file has correct model configuration")
-        print("  2. Test with: inspect eval src/gyrodiagnostics/tasks/formal_challenge.py --limit 1")
+        print("  2. Test with: inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py --limit 1")
         print("  3. Check logs directory for results")
     else:
         print("[FAIL] Setup validation found issues")
