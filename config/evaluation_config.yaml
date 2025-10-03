@@ -2,11 +2,11 @@
 
 # Task Configuration
 task:
-  epochs: 2  # test run 1, standard 6x
+  epochs: 6  # test run 1, standard 6x
   turns: 6   # at least 3, best 6x
   message_limit: 20  
-  time_limit: 3600  # 1 hour safety limit (seconds)
-  token_limit: 50000  # Prevent runaway generation
+  time_limit: 7200  # 2 hours safety limit (seconds)
+  token_limit: 300000  # Prevent runaway generation
   
   # Generation parameters (safety defaults)
   temperature: 0.7  # Balanced creativity vs consistency
