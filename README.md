@@ -61,9 +61,11 @@ Each challenge is designed with **one-shot unsolvability** in mind, requiring su
 
 **Balance Horizon**
 
-Temporal stability metric: `Balance Horizon = Median(Alignment) / Median(Duration)`
+Time-normalized alignment metric per challenge:
 
-Measures alignment efficiency over time with practical bounds for validation.
+`Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration in minutes)`
+
+Suite-level Balance Horizon is the median across the five challenges.
 
 ---
 
@@ -215,7 +217,7 @@ python tools/validate_setup.py
 
 ```bash
 # Analyze suite results from JSON logs (comprehensive analysis)
-python tools/analyze_suite.py logs/logs.json --output report.txt
+python tools/final_analysis.py logs/logs.json --output report.txt
 
 # Clean up results folder
 python tools/cleanup_results.py --list
@@ -230,7 +232,7 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 - **`run_full_suite.py`** - Run all 5 challenges using configured models from `.env`
 - **`extract_epochs.py`** - Extract per-epoch data from .eval logs (bypasses logs.json)
-- **`analyze_suite.py`** - Comprehensive analysis of suite results with judge metadata and Balance Horizon
+- **`final_analysis.py`** - Comprehensive analysis of suite results with judge metadata and Balance Horizon
 - **`cleanup_results.py`** - Manage and organize the results folder
 - **`validate_setup.py`** - Verify that your configuration is correct
 
@@ -244,7 +246,7 @@ python tools/run_full_suite.py
 python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
 
 # Analyze suite results (comprehensive analysis with judge metadata)
-python tools/analyze_suite.py logs/logs.json --output report.txt
+python tools/final_analysis.py logs/logs.json --output report.txt
 
 # Clean up old results
 python tools/cleanup_results.py --older-than 7 --confirm

@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.3] - 2025-10-04
+
+### 🔧 **Balance Horizon Unification**
+
+#### **Changed**
+- Unified Balance Horizon to single time-normalized metric: `BH = T_ref × median(alignment) / median(duration)`
+- Removed retention-based definition and all "cycle" terminology from documentation
+- Updated suite-level BH to median across all 5 challenges
+- Fixed key name consistency: `reference_time_used` → `reference_time`
+
+- autonomous_solver.py: Immediate retries on transient failures (JSON decode, network issues)
+Comprehensive error logging to state.scratch (never kills the epoch)
+Optional per-turn timeout warnings (env var, doesn't fail)
+Clear distinction between transient/non-transient errors
+alignment_scorer.py:
+
+- alignment_scorer.py: Primary + backup judge support via model_roles["grader_backup"]
+Stores transcript + raw judge output for offline rescoring
+Retry logic with exponential backoff
+Graceful degradation (fallback scores, clear error messages)
+analyze_suite.py:
+
+- final_analysis.py: Supports both logs.json and .eval files (--eval-dir)
+Offline rescoring with --rescore flag
+Comprehensive statistics (medians, means, std dev, ranges)
+Better error handling and validation
+Clean separation of concerns (extract/build/print functions)
+
+#### **Added**
+- `calculate_suite_balance_horizon()` function in metrics module
+- Clear interpretation guidelines with numerical thresholds (>0.15 high, 0.05-0.15 moderate, <0.05 low)
+
+#### **Removed**
+- Retention-based Balance Horizon calculation from analysis tools
+- Unused `HORIZON_VALID_MAX` import from balance_horizon.py
+
+---
+
 ## [0.9.2] - 2025-10-03
 
 ### 🛠️ **Tooling & Documentation Improvements**
@@ -40,7 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed challenge counting in run_full_suite.py to correctly report all 5 challenges instead of 2
 - Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (judge provides these but they weren't being saved)
 - Created tools/extract_judge_text.py to extract judge text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
-- Enhanced tools/analyze_suite.py to display judge metadata (scoring_rationale, strengths, weaknesses, judge_fallback_used) in analysis reports
+- Enhanced tools/final_analysis.py to display judge metadata (scoring_rationale, strengths, weaknesses, judge_fallback_used) in analysis reports
 - Fixed Unicode encoding issues in analysis script for Windows compatibility
 
 ---
