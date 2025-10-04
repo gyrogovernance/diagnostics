@@ -46,6 +46,8 @@ def autonomous_solver() -> Solver:
         per_turn_timeout = int(os.getenv("INSPECT_PER_TURN_TIMEOUT_S", "0"))  # 0 = disabled
         
         # Initialize error tracking
+        if not hasattr(state, "scratch"):
+            state.scratch = {}
         state.scratch.setdefault("errors", [])
         state.scratch.setdefault("turn_metadata", [])
         state.scratch.setdefault("epoch_timing", {})

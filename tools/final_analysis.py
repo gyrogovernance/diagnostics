@@ -204,7 +204,15 @@ def analyze_challenge_from_eval_file(eval_path: Path) -> Optional[Dict]:
     # Build summary
     model = getattr(eval_info, "model", "unknown")
     model_roles = getattr(eval_info, "model_roles", {})
-    grader_model = model_roles.get("grader", {}).get("model", "unknown") if isinstance(model_roles, dict) else "unknown"
+    
+    # Handle EvalModelConfig objects in model_roles
+    grader_model = "unknown"
+    if model_roles and "grader" in model_roles:
+        grader_config = model_roles["grader"]
+        if hasattr(grader_config, "model"):
+            grader_model = grader_config.model
+        elif isinstance(grader_config, dict):
+            grader_model = grader_config.get("model", "unknown")
     
     stats = getattr(log, "stats", {})
     started_at = getattr(stats, "started_at", "")
@@ -311,7 +319,16 @@ def build_challenge_summary(
     
     # Get model info
     model = eval_data.get("eval", {}).get("model", "unknown")
-    grader_model = eval_data.get("eval", {}).get("model_roles", {}).get("grader", {}).get("model", "unknown")
+    
+    # Handle EvalModelConfig objects in model_roles
+    grader_model = "unknown"
+    model_roles = eval_data.get("eval", {}).get("model_roles", {})
+    if model_roles and "grader" in model_roles:
+        grader_config = model_roles["grader"]
+        if hasattr(grader_config, "model"):
+            grader_model = grader_config.model
+        elif isinstance(grader_config, dict):
+            grader_model = grader_config.get("model", "unknown")
     
     # Get timing info
     stats = eval_data.get("stats", {})
@@ -584,21 +601,30 @@ def print_challenge_summary(result: Dict, output_file=None):
         
         import textwrap
         
-        rationale = epoch.get('scoring_rationale', '').strip()
+        rationale = epoch.get('scoring_rationale', '')
+        if isinstance(rationale, list):
+            rationale = ' '.join(str(item) for item in rationale)
+        rationale = str(rationale).strip()
         if rationale and rationale != "JUDGE FAILED - All scores set to 0":
             p(f"   Rationale:")
             wrapped = textwrap.fill(rationale, width=65, initial_indent="      ", subsequent_indent="      ")
             p(wrapped)
             p()
         
-        strengths = epoch.get('strengths', '').strip()
+        strengths = epoch.get('strengths', '')
+        if isinstance(strengths, list):
+            strengths = ' '.join(str(item) for item in strengths)
+        strengths = str(strengths).strip()
         if strengths and not strengths.startswith("N/A"):
             p(f"   Strengths:")
             wrapped = textwrap.fill(strengths, width=65, initial_indent="      ", subsequent_indent="      ")
             p(wrapped)
             p()
         
-        weaknesses = epoch.get('weaknesses', '').strip()
+        weaknesses = epoch.get('weaknesses', '')
+        if isinstance(weaknesses, list):
+            weaknesses = ' '.join(str(item) for item in weaknesses)
+        weaknesses = str(weaknesses).strip()
         if weaknesses and not weaknesses.startswith("CRITICAL"):
             p(f"   Weaknesses:")
             wrapped = textwrap.fill(weaknesses, width=65, initial_indent="      ", subsequent_indent="      ")
@@ -743,8 +769,16 @@ def print_suite_summary(results: List[Dict], output_file=None):
     total_output = 0
     for r in successful:
         for model_name, usage in r.get('model_usage', {}).items():
-            total_input += usage.get('input_tokens', 0)
-            total_output += usage.get('output_tokens', 0)
+            # Handle ModelUsage objects
+            if hasattr(usage, 'input_tokens'):
+                total_input += usage.input_tokens
+            elif isinstance(usage, dict):
+                total_input += usage.get('input_tokens', 0)
+            
+            if hasattr(usage, 'output_tokens'):
+                total_output += usage.output_tokens
+            elif isinstance(usage, dict):
+                total_output += usage.get('output_tokens', 0)
     
     if total_input or total_output:
         p(f"TOKEN USAGE (All Challenges)")
