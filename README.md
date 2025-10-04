@@ -32,7 +32,7 @@
 
 ## Overview
 
-GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates AI intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
+GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates Machine Learning intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
 
 ---
 
