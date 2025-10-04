@@ -12,7 +12,6 @@ from typing import List, Tuple, Dict, Optional
 from ..utils.constants import (
     THEORETICAL_MAX_HORIZON,
     HORIZON_VALID_MIN,
-    HORIZON_VALID_MAX,
     REFERENCE_TIME_CONSTANTS,
     DEFAULT_REFERENCE_TIME
 )
@@ -74,7 +73,7 @@ def calculate_balance_horizon(
         "balance_horizon_raw": balance_horizon_raw,
         "median_alignment": median_alignment,
         "median_duration": median_duration,
-        "reference_time_used": t_ref,
+        "reference_time": t_ref,
         "theoretical_max": THEORETICAL_MAX_HORIZON
     }
 
@@ -116,3 +115,12 @@ def validate_balance_horizon(
             f"[{HORIZON_VALID_MIN:.4f}, {theoretical_max:.4f}]."
         )
 
+
+def calculate_suite_balance_horizon(challenge_bhs: List[float]) -> float:
+    """
+    Calculate suite-level Balance Horizon as median across challenge BH values.
+    """
+    valid = [bh for bh in challenge_bhs if isinstance(bh, (int, float))]
+    if not valid:
+        return 0.0
+    return statistics.median(valid)

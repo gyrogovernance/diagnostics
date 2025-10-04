@@ -14,7 +14,7 @@ Run the complete GyroDiagnostics evaluation suite across all challenges using co
 
 Validate that the GyroDiagnostics setup is configured correctly.
 
-## analyze_suite.py
+## final_analysis.py
 
 Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, judge evaluation metadata, and suite-level summaries.
 
@@ -39,8 +39,8 @@ python tools/run_full_suite.py                           # Run with configured m
 python tools/validate_setup.py                            # Check if everything is configured correctly
 
 # Analyze suite results (comprehensive analysis)
-python tools/analyze_suite.py logs/logs.json --output report.txt
-python tools/analyze_suite.py logs/logs.json --json analysis.json  # Save structured JSON
+python tools/final_analysis.py logs/logs.json --output report.txt
+python tools/final_analysis.py logs/logs.json --json analysis.json  # Save structured JSON
 
 # Extract per-epoch data from .eval logs (bypasses logs.json)
 python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
@@ -81,10 +81,10 @@ The timestamp and task name are extracted from the original log filename for eas
 - **Pathology detection** (if any issues detected)
 - **Fallback detection** (when judge evaluation fails)
 
-#### analyze_suite.py:
+#### final_analysis.py:
 - **Comprehensive suite analysis** from JSON logs
 - **Judge evaluation metadata** (scoring rationale, strengths, weaknesses, fallback usage)
-- **Balance Horizon metrics** (retention-based temporal stability)
+- **Balance Horizon** (time-normalized alignment per challenge; suite-level median)
 - **Weighted score verification** (matches scorer calculations)
 - **Suite-level summaries** (overall performance, rankings, pathology analysis)
 - **Judge reliability analysis** (fallback usage across epochs)
