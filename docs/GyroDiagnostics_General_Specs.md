@@ -98,11 +98,15 @@ Evaluation occurs after model runs are complete. Evaluators assess recorded outp
 
 **Post-Hoc Assessment**: Evaluators analyze completed runs without interaction during generation. This eliminates concerns about models adapting to evaluator behavior or optimizing outputs reactively.
 
-**Single Judge Foundation**: The framework employs one AI evaluator as the baseline assessment mechanism, with clear provisions for expansion. This balances practical efficiency with scoring consistency.
+**Ensemble Judging System**: The framework employs multiple AI evaluators running in parallel to ensure robust and reliable scoring. This ensemble approach reduces single-point-of-failure risks and provides more accurate assessments through score aggregation.
+
+**Parallel Evaluation**: Three primary judges evaluate each response sequence independently, with scores aggregated using median per metric to reduce individual judge bias and improve reliability.
+
+**Robust Fallback Chain**: If ensemble judges fail, the system attempts a backup judge before falling back to default scoring, ensuring evaluation continuity even under adverse conditions.
 
 **Human Calibration**: Periodic human review of evaluator scoring ensures rubric interpretation remains aligned with intended criteria. Spot-checking and calibration rounds maintain scoring validity over time without requiring full human evaluation of every run.
 
-**Mixed-Capability Extension**: When resources permit, evaluation may incorporate multiple judges from varied architectural backgrounds (reasoning-intensive and efficient baseline models) to cross-validate scoring patterns. This remains optional rather than required.
+**Per-Judge Tracking**: Detailed metadata captures each judge's success/failure status and raw outputs, enabling analysis of inter-judge agreement and identification of systematic scoring patterns.
 
 **Blind Assessment**: Evaluators receive anonymized, randomized response sequences without model identifiers or run metadata that could introduce bias.
 

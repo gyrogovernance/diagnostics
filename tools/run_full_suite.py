@@ -45,6 +45,9 @@ def load_config():
     # Get model configuration from environment (no defaults - must be explicitly set)
     model = os.getenv("INSPECT_EVAL_MODEL")
     judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER")
+    judge_a = os.getenv("INSPECT_EVAL_MODEL_GRADER_A")
+    judge_b = os.getenv("INSPECT_EVAL_MODEL_GRADER_B")
+    judge_c = os.getenv("INSPECT_EVAL_MODEL_GRADER_C")
     backup_judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
     log_dir = os.getenv("INSPECT_LOG_DIR", "./logs")
     
@@ -71,6 +74,9 @@ def load_config():
     return {
         "model": model,
         "judge_model": judge_model,
+        "judge_a": judge_a,
+        "judge_b": judge_b,
+        "judge_c": judge_c,
         "backup_judge_model": backup_judge_model,
         "log_dir": log_dir
     }
@@ -85,9 +91,23 @@ def main():
     print(f"GyroDiagnostics Full Suite Evaluation")
     print(f"{'='*60}")
     print(f"Model: {config['model']}")
-    print(f"Judge Model: {config['judge_model']}")
+    print(f"Primary Judge: {config['judge_model']}")
+    
+    # Show ensemble judges
+    ensemble_judges = []
+    if config['judge_a']:
+        ensemble_judges.append(f"A: {config['judge_a']}")
+    if config['judge_b']:
+        ensemble_judges.append(f"B: {config['judge_b']}")
+    if config['judge_c']:
+        ensemble_judges.append(f"C: {config['judge_c']}")
+    
+    if ensemble_judges:
+        print(f"Ensemble Judges: {', '.join(ensemble_judges)}")
+    
     if config['backup_judge_model']:
-        print(f"Backup Judge Model: {config['backup_judge_model']}")
+        print(f"Backup Judge: {config['backup_judge_model']}")
+    
     print(f"Challenges: 5 (formal, normative, procedural, strategic, epistemic)")
     print(f"Epochs per challenge: {TASK_CONFIG.get('epochs', 3)} (configured in TASK_CONFIG)")
     print(f"Turns per epoch: {TASK_CONFIG.get('turns', 3)} (configured in autonomous_solver)")
@@ -97,6 +117,16 @@ def main():
     
     # Configure evaluation parameters
     model_roles = {"grader": config['judge_model']}
+    
+    # Add ensemble judges
+    if config['judge_a']:
+        model_roles["grader_a"] = config['judge_a']
+    if config['judge_b']:
+        model_roles["grader_b"] = config['judge_b']
+    if config['judge_c']:
+        model_roles["grader_c"] = config['judge_c']
+    
+    # Add backup judge
     if config['backup_judge_model']:
         model_roles["grader_backup"] = config['backup_judge_model']
     

@@ -18,7 +18,7 @@ This document provides the complete technical specifications for implementing th
 
 **Solvers**: Minimal orchestration using generate() as the primary model-calling component, with basic message management for autonomous progression.
 
-**Scorers**: Single AI judge implementing the 21-metric rubric, applied post-hoc after each complete epoch to avoid token overflow and result contamination.
+**Scorers**: Ensemble AI judging system implementing the 21-metric rubric, applied post-hoc after each complete epoch to avoid token overflow and result contamination. Three parallel judges provide robust scoring with median aggregation, plus backup judge for fallback reliability.
 
 ## Configuration Management
 
@@ -134,6 +134,18 @@ def autonomous_solver():
 - **Early Termination**: Stops if model produces empty responses
 
 ## Scoring Framework
+
+### Ensemble Judging System
+
+The evaluation employs a robust ensemble judging system to ensure reliable and accurate scoring:
+
+**Parallel Evaluation**: Three primary judges (A, B, C) evaluate each response sequence independently, running in parallel to minimize latency while maximizing reliability.
+
+**Score Aggregation**: Individual judge scores are aggregated using median per metric, reducing bias from individual judges and providing more stable scoring patterns.
+
+**Fallback Chain**: If ensemble judges fail, the system attempts a backup judge before falling back to default scoring, ensuring evaluation continuity.
+
+**Per-Judge Metadata**: Detailed tracking of each judge's success/failure status, raw outputs, and error messages enables analysis of inter-judge agreement and systematic scoring patterns.
 
 ### 21-Metric Rubric Implementation
 

@@ -27,6 +27,13 @@ alignment_scorer.py:
 Stores transcript + raw judge output for offline rescoring
 Retry logic with exponential backoff
 Graceful degradation (fallback scores, clear error messages)
+
+#### **Added**
+- **Ensemble Judging System**: 3 parallel judges (A, B, C) with median score aggregation
+- **Robust Fallback Chain**: Ensemble → backup judge → fallback scores
+- **Per-Judge Metadata**: Detailed success/failure tracking for each judge
+- **Enhanced Error Handling**: Individual retry logic per judge with comprehensive logging
+
 analyze_suite.py:
 
 - final_analysis.py: Supports both logs.json and .eval files (--eval-dir)

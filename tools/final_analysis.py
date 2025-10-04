@@ -280,6 +280,7 @@ def extract_epoch_data(metadata: Dict) -> Dict:
         "strengths": strengths,
         "weaknesses": weaknesses,
         "judge_fallback_used": judge_fallback_used,
+        "per_judge": metadata.get("per_judge", []),
         "transcript": transcript
     }
 
@@ -596,7 +597,15 @@ def print_challenge_summary(result: Dict, output_file=None):
         elif judge_fallback:
             p(f"   Fallback judge used (primary judge failed)")
         else:
-            p(f"   Primary judge succeeded")
+            per_judge = epoch.get('per_judge', [])
+            if per_judge:
+                successful_judges = [j for j in per_judge if j.get('success', False)]
+                p(f"   Ensemble: {len(successful_judges)}/{len(per_judge)} judges succeeded")
+                for judge in per_judge:
+                    status = "✓" if judge.get('success', False) else "✗"
+                    p(f"     {status} {judge.get('role', 'unknown')}: {judge.get('error', 'success')[:100]}")
+            else:
+                p(f"   Primary judge succeeded")
         p()
         
         import textwrap
