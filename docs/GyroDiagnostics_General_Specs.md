@@ -349,6 +349,9 @@ The framework particularly supports evaluation for high-stakes decision-support 
 
 **Temporal Coverage**: Current turn counts (5-10) provide initial temporal signal but may not capture degradation patterns emerging over longer operation. Extended evaluation protocols may be warranted for applications requiring sustained autonomous operation over hundreds or thousands of interactions.
 
+**Evaluator Bias and Model Disposition:**
+The behavior of evaluator models reflects their architectural and alignment priors. Highly aligned instruction-tuned models (such as Llama 3 or GLM-Air) exhibit cooperative bias: they optimise for helpfulness and social acceptability rather than epistemic discrimination, tending to rate most outputs as high quality. This bias improves tonal stability but weakens diagnostic acuity by normalising differences between correct and incorrect reasoning. Conversely, uncensored or lightly aligned models express stronger evaluative contrast, identifying substantive errors more freely but often at the cost of volatility and value-drift. Their judgement is less bounded by politeness priors but more sensitive to rhetorical confidence and sampling noise. Reliable evaluation therefore benefits from mixed-disposition ensembles: alignment-heavy judges contribute stability and calibration, while less-constrained judges supply epistemic sharpness. The framework’s design accommodates both modes, ensuring balance between interpretive safety and discriminative precision.
+
 ## Conclusion
 
 The Gyroscopic Alignment Diagnostics provides mathematically informed evaluation of AI system structural quality and alignment characteristics. By assessing foundational coherence, behavioral reliability, specialized competence, and temporal stability, the framework enables systematic understanding of system capabilities and limitations. 

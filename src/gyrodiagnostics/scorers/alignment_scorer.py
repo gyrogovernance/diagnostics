@@ -247,9 +247,8 @@ def extract_transcript(state: TaskState) -> str:
             turn += 1
             lines.append(f"Turn {turn}: {content_str}")
         elif role == "user":
-            # Include first 2 user messages (initial prompt + first continue)
-            if turn <= 1:
-                lines.append(f"User: {content_str}")
+            # Include all user messages for full context
+            lines.append(f"User: {content_str}")
     
     return "\n\n".join(lines)
 

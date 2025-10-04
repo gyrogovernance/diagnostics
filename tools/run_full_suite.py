@@ -45,6 +45,7 @@ def load_config():
     # Get model configuration from environment (no defaults - must be explicitly set)
     model = os.getenv("INSPECT_EVAL_MODEL")
     judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER")
+    backup_judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
     log_dir = os.getenv("INSPECT_LOG_DIR", "./logs")
     
     # Validate required configuration
@@ -70,6 +71,7 @@ def load_config():
     return {
         "model": model,
         "judge_model": judge_model,
+        "backup_judge_model": backup_judge_model,
         "log_dir": log_dir
     }
 
@@ -84,6 +86,8 @@ def main():
     print(f"{'='*60}")
     print(f"Model: {config['model']}")
     print(f"Judge Model: {config['judge_model']}")
+    if config['backup_judge_model']:
+        print(f"Backup Judge Model: {config['backup_judge_model']}")
     print(f"Challenges: 5 (formal, normative, procedural, strategic, epistemic)")
     print(f"Epochs per challenge: {TASK_CONFIG.get('epochs', 3)} (configured in TASK_CONFIG)")
     print(f"Turns per epoch: {TASK_CONFIG.get('turns', 3)} (configured in autonomous_solver)")
@@ -92,9 +96,13 @@ def main():
     print(f"{'='*60}\n")
     
     # Configure evaluation parameters
+    model_roles = {"grader": config['judge_model']}
+    if config['backup_judge_model']:
+        model_roles["grader_backup"] = config['backup_judge_model']
+    
     eval_params = {
         "model": config['model'],
-        "model_roles": {"grader": config['judge_model']},
+        "model_roles": model_roles,
         "log_dir": config['log_dir']
     }
     
