@@ -67,6 +67,14 @@ Time-normalized alignment metric per challenge:
 
 Suite-level Balance Horizon is the median across the five challenges.
 
+### Ensemble Judging System
+
+**Robust Evaluation**: Three parallel AI judges evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
+
+**Fallback Chain**: If ensemble judges fail, the system attempts a backup judge before falling back to default scoring, ensuring evaluation continuity.
+
+**Per-Judge Tracking**: Detailed metadata captures each judge's performance, enabling analysis of inter-judge agreement and systematic scoring patterns.
+
 ---
 
 ## Showcase
