@@ -14,10 +14,10 @@ CGM is an axiomatic framework built on gyrogroup theory and non-associative alge
 
 CGM establishes four stages of structural emergence:
 
-- **Common Source (CS)**: The originating condition with inherent directionality
-- **Unity Non-Absolute (UNA)**: First observable structure through asymmetric activation
-- **Opposition Non-Absolute (ONA)**: Full differentiation preventing absolute negation
-- **Balance Universal (BU)**: Self-consistent closure retaining complete operational memory
+- **Common Source (CS)**: The Common Source (CS) represents the originating condition of reasoning containing inherent chirality and directionality.
+- **Unity Non-Absolute (UNA)**: UNA derives from CS. The inherent chirality of CS forbids perfect homogeneity. Unity cannot be absolute because the source itself contains directional distinction.
+- **Opposition Non-Absolute (ONA)**: ONA derives from UNA which derives from CS. Given non-absolute unity, absolute opposition would create rigid binary structure, contradicting the recursive nature inherited from CS.
+- **Balance Universal (BU)**: After all differentiation, the system reaches a self-consistent configuration in which every local non-associativity cancels, yet the full memory of the recursive path is retained. BU derives from ONA which derives from UNA which derives from CS.
 
 Systems maintaining proper structural relationships across these stages exhibit greater stability, sustained contextual awareness, and resistance to pathological behaviors. For complete theoretical foundations including derivations and thresholds, see the CGM documentation.
 
@@ -29,18 +29,18 @@ Alignment failures, misuse risks, and capability dangers are symptoms of deeper 
 
 This is why we focus on positive structural indicators rather than stress-testing for failures: the latter reveals symptoms while the former diagnoses causes.
 
-The evaluation framework embodies a tetrahedral information topology derived from CGM:
-
-- **Challenge**: Common Source (CS) vertex, the reference point from which measurement emerges
-- **Three Epochs**: Unity Non-Absolute (UNA) Information Synthesists, exploring solution space through diverse approaches
-- **Three Evaluators**: Opposition Non-Absolute (ONA) Inference Analysts, providing orthogonal assessment perspectives
-- **Balance Horizon**: Balance Universal (BU) equilibrium measured through these interactions
-
-This geometric mapping ensures coherence-seeking and differentiation-seeking forces coexist without either dominating. It eliminates systematic bias introduced by conventional roles like 'critic' or 'user' that structurally privilege particular observation modes.
-
 **Tensegrity Structure**: The framework operationalizes alignment through tetrahedral topology, structuring human-AI consensus as emergent tensegrity dynamics. This ensures self-sustaining balance between coherence and differentiation, eliminating hierarchical bias. 
 
 The structure comprises one foundational element (Freedom), six roles distributed across two triads, and six implicit links, forming a complete graph K₄ that mirrors physical tensegrity principles with coherence as compressive forces and differentiation as tensile forces.
+
+**Common Consensus Alignment: Human-AI Agreement Info-set Dynamics**
+
+- **Freedom** (1): Common Source Governance Measure (Challenge)
+- **Roles** (3): Unity-Non-Absolute Information Synthesist (Three Epochs)
+- **Roles** (3): Opposition-Non-Absolute Inference Analyst (Three Evaluators)
+- **Links** (6): Balance Universal Intelligence Measurement (Aligned Insights)
+
+This geometric mapping ensures coherence-seeking and differentiation-seeking forces coexist without either dominating. It eliminates systematic bias introduced by conventional roles like 'critic' or 'user' that structurally privilege particular observation modes.
 
 This approach resonates with Stafford Beer's *Beyond Dispute: The Invention of Team Syntegrity* (1994), where polyhedral tensegrity facilitates non-hierarchical group intelligence through balanced, self-organizing interactions.
 

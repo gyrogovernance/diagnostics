@@ -34,6 +34,16 @@
 
 GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates Machine Learning intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
 
+The framework serves a dual purpose in advancing AI safety and capability development. First, it provides rigorous diagnostics of AI system structural health through mathematical assessment of alignment characteristics, enabling organizations to understand model reliability and identify architectural improvements needed for high-stakes deployment. Second, the evaluation process generates substantive research contributions by extracting novel solution pathways, critical trade-offs, and innovative approaches from model responses to real-world challenges across domains including poverty alleviation, regulatory frameworks, and knowledge synthesis. These insights, contextualized by structural health metrics, offer valuable resources for model fine-tuning and contribute meaningful analysis to the broader research community addressing these complex societal challenges.
+---
+
+## Key Insights
+
+- **Structural Balance**: Alignment emerges from mathematical balance between coherence (closure) and differentiation (openness), grounded in the Common Governance Model (CGM)
+- **Tetrahedral Topology**: Eliminates role-based bias through geometric neutrality - no designated 'critics' or 'supporters'
+- **Pathology Detection**: Identifies 5 specific failure modes (sycophantic agreement, deceptive coherence, goal misgeneralization, superficial optimization, semantic drift)
+- **Temporal Stability**: Balance Horizon reveals whether capabilities are brittle or stable over extended operation
+
 ---
 
 ## Architecture
@@ -44,13 +54,13 @@ GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment.
 - **Normative**: Optimize resource allocation for global poverty (Policy + Ethics)
 - **Procedural**: Specify recursive computational process (Code + Debugging)
 - **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
-- **Epistemic**: Explore knowledge limits in self-referential systems (Knowledge + Communication)
+- **Epistemic**: Examine reasoning and communication under constraints (Knowledge + Communication)
 
 Each challenge is designed with **one-shot unsolvability** in mind, requiring sustained multi-turn reasoning that cannot be completed in a single response. These default challenges can be customized or replaced according to specific evaluation needs.
 
 ### 20-Metric Rubric
 
-**Structure Metrics (50 points)**
+**Structure Metrics (40 points)**
 - Traceability, Variety, Accountability, Integrity
 
 **Behavior Metrics (60 points)**
@@ -67,7 +77,7 @@ Time-normalized alignment metric per challenge:
 
 Suite-level Balance Horizon is the median across the five challenges.
 
-### Ensemble Judging System
+### Ensemble Analysis System
 
 **Robust Evaluation**: Three parallel AI analysts evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
 
@@ -77,21 +87,37 @@ Suite-level Balance Horizon is the median across the five challenges.
 
 ---
 
+## Evaluation Outputs
+
+Each complete evaluation generates:
+- **Per-Epoch Results**: Detailed scores across all 20 metrics with analyst metadata
+- **Challenge Summaries**: Aggregated performance with pathology detection
+- **Suite-Level Report**: Overall Balance Horizon and cross-challenge patterns
+- **Research Insights**: Extracted solution pathways and novel approaches from model responses
+
+---
+
 ## Showcase
 
 Sample evaluation results demonstrating what GyroDiagnostics produces:
 
-### 📊 [Results Analysis](showcase/results.txt)
+- 📊 [Results Analysis](showcase/results.txt)
 Detailed per-epoch extraction report showing Meta-Llama 3.3 70B performance across 30 evaluation epochs (6 per challenge type). Includes alignment scores, duration metrics, structure analysis, behavior assessment, and domain-specific specialization scores.
 
-### 📋 [Performance Review](showcase/review.md)
+- 📋 [Performance Review](showcase/review.md)
 Comprehensive analysis report covering challenge-specific performance, cross-challenge patterns, pathological behavior detection (zero detected), and strategic insights across Formal, Normative, Procedural, Strategic, and Epistemic challenges.
 
 ---
 
-## Documentation
+## Theoretical Foundation
 
-- **Theory**: [Gyroscope Science Repository](https://github.com/gyrogovernance/science)
+- **Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory
+- **Recursive Systems Theory**: Evaluates structural dynamics rather than surface behaviors
+- **Topological Analysis**: Measures foundational properties determining reliable intelligence
+
+### Documentation
+
+- **Theory**: [CGM: Gyroscopic Science Repository](https://github.com/gyrogovernance/science)
 - **General Specs**: [GyroDiagnostics General Specifications](docs/GyroDiagnostics_General_Specs.md)
 - **Technical Specs**: [GyroDiagnostics Technical Specifications](docs/GyroDiagnostics_Technical_Specs.md)
 
@@ -121,10 +147,10 @@ Notes:
 
 Edit `config/evaluation_config.yaml` to customize:
 
-- **Model selection** - Choose models to evaluate and analyst models for scoring
-- **Reference times** - Calibrate expected durations per challenge type (from pilot runs)
-- **Safety limits** - Adjust time/token limits for operational constraints
-- **Production mode** - Enable error tolerance for deployment vs. strict research mode
+- **Model selection**: Choose models to evaluate and analyst models for scoring
+- **Reference times**: Calibrate expected durations per challenge type (from pilot runs)
+- **Safety limits**: Adjust time/token limits for operational constraints
+- **Production mode**: Enable error tolerance for deployment vs. strict research mode
 
 Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework.
 
@@ -249,11 +275,11 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 ### Key Tools
 
-- **`run_full_suite.py`** - Run all 5 challenges using configured models from `.env`
-- **`extract_epochs.py`** - Extract per-epoch data from .eval logs (bypasses logs.json)
-- **`final_analysis.py`** - Comprehensive analysis of suite results with analyst metadata and Balance Horizon
-- **`cleanup_results.py`** - Manage and organize the results folder
-- **`validate_setup.py`** - Verify that your configuration is correct
+- **`run_full_suite.py`**: Run all 5 challenges using configured models from `.env`
+- **`extract_epochs.py`**: Extract per-epoch data from .eval logs (bypasses logs.json)
+- **`final_analysis.py`**: Comprehensive analysis of suite results with analyst metadata and Balance Horizon
+- **`cleanup_results.py`**: Manage and organize the results folder
+- **`validate_setup.py`**: Verify that your configuration is correct
 
 ### Quick Tool Usage
 
