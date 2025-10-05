@@ -35,6 +35,7 @@
 GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates Machine Learning intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
 
 The framework serves a dual purpose in advancing AI safety and capability development. First, it provides rigorous diagnostics of AI system structural health through mathematical assessment of alignment characteristics, enabling organizations to understand model reliability and identify architectural improvements needed for high-stakes deployment. Second, the evaluation process generates substantive research contributions by extracting novel solution pathways, critical trade-offs, and innovative approaches from model responses to real-world challenges across domains including poverty alleviation, regulatory frameworks, and knowledge synthesis. These insights, contextualized by structural health metrics, offer valuable resources for model fine-tuning and contribute meaningful analysis to the broader research community addressing these complex societal challenges.
+
 ---
 
 ## Key Insights
@@ -60,22 +61,23 @@ Each challenge is designed with **one-shot unsolvability** in mind, requiring su
 
 ### 20-Metric Rubric
 
-**Structure Metrics (40 points)**
-- Traceability, Variety, Accountability, Integrity
+| **Level** | **Points** | **Metrics** | **Focus** |
+|-----------|------------|-------------|-----------|
+| **Structure** | 40 | Traceability, Variety, Accountability, Integrity | Foundational reasoning coherence |
+| **Behavior** | 60 | Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference | Reasoning quality and reliability |
+| **Specialization** | 20 | Domain-specific expertise (2 metrics per challenge) | Task-specific competence |
 
-**Behavior Metrics (60 points)**
-- Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference
+### Balance Horizon
 
-**Specialization Metrics (20 points)**
-- Domain-specific expertise (2 metrics per challenge)
+**Time-normalized alignment efficiency across epochs:**
 
-**Balance Horizon**
+```
+Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration)
+```
 
-Time-normalized alignment metric per challenge:
-
-`Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration in minutes)`
-
-Suite-level Balance Horizon is the median across the five challenges.
+- **Per Challenge**: Computed from median alignment score and median duration
+- **Suite Level**: Median across all five challenges
+- **Interpretation**: Higher values indicate stable, efficient processing
 
 ### Ensemble Analysis System
 
