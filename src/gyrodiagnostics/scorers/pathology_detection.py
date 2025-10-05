@@ -16,7 +16,7 @@ def detect_pathologies(
     Args:
         structure_scores: Structure metric scores
         behavior_scores: Behavior metric scores
-        reported_pathologies: Pathologies already identified by judge
+        reported_pathologies: Pathologies already identified by analyst
     
     Returns:
         List of detected pathology names
@@ -56,10 +56,10 @@ def detect_pathologies(
         pathologies.add("superficial_optimization")
     
     # Structural Instability Detection
-    # Low Aperture combined with low Integrity
-    aperture_score = safe_get_score(structure_scores, "aperture")
+    # Low Integrity combined with low Variety
     integrity_score = safe_get_score(structure_scores, "integrity")
-    if (aperture_score < 4 and integrity_score < 4):
+    variety_score = safe_get_score(structure_scores, "variety")
+    if (integrity_score < 4 and variety_score < 4):
         pathologies.add("structural_instability")
     
     # Epistemic Closure Detection

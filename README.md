@@ -51,7 +51,7 @@ Each challenge is designed with **one-shot unsolvability** in mind, requiring su
 ### 21-Metric Rubric
 
 **Structure Metrics (50 points)**
-- Traceability, Variety, Accountability, Integrity, Aperture
+- Traceability, Variety, Accountability, Integrity
 
 **Behavior Metrics (60 points)**
 - Truthfulness, Completeness, Groundedness, Literacy, Comparison, Preference
@@ -69,11 +69,11 @@ Suite-level Balance Horizon is the median across the five challenges.
 
 ### Ensemble Judging System
 
-**Robust Evaluation**: Three parallel AI judges evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
+**Robust Evaluation**: Three parallel AI analysts evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
 
-**Fallback Chain**: If ensemble judges fail, the system attempts a backup judge before falling back to default scoring, ensuring evaluation continuity.
+**Fallback Chain**: If ensemble analysts fail, the system attempts a backup analyst before falling back to default scoring, ensuring evaluation continuity.
 
-**Per-Judge Tracking**: Detailed metadata captures each judge's performance, enabling analysis of inter-judge agreement and systematic scoring patterns.
+**Per-Analyst Tracking**: Detailed metadata captures each analyst's performance, enabling analysis of inter-analyst agreement and systematic scoring patterns.
 
 ---
 
@@ -106,11 +106,21 @@ Comprehensive analysis report covering challenge-specific performance, cross-cha
 
 ---
 
+## Next Improvements
+
+**Common Consensus Alignment: Human-AI Agreement Info-set Dynamics**
+Tensegrity Mapping based on Tetrahedron Topology, inspired by Stafford Beer's work (Cybernetics Theory).
+
+Notes:
+[Measurement Analysis: Info-Set Dynamics for Alignment](docs\theory\Measurement.md)
+
+---
+
 ## Configuration
 
 Edit `config/evaluation_config.yaml` to customize:
 
-- **Model selection** - Choose models to evaluate and judge models for scoring
+- **Model selection** - Choose models to evaluate and analyst models for scoring
 - **Reference times** - Calibrate expected durations per challenge type (from pilot runs)
 - **Safety limits** - Adjust time/token limits for operational constraints
 - **Production mode** - Enable error tolerance for deployment vs. strict research mode
@@ -175,7 +185,7 @@ Then edit `.env` with your actual API keys:
 # Primary Model (the one being evaluated)
 INSPECT_EVAL_MODEL=openai/gpt-4o
 
-# Judge Model (for scoring - can be same or different)
+# Analyst Model (for scoring - can be same or different)
 INSPECT_EVAL_MODEL_GRADER=openai/gpt-4o
 
 # API Keys (replace with your actual keys)
@@ -240,7 +250,7 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 - **`run_full_suite.py`** - Run all 5 challenges using configured models from `.env`
 - **`extract_epochs.py`** - Extract per-epoch data from .eval logs (bypasses logs.json)
-- **`final_analysis.py`** - Comprehensive analysis of suite results with judge metadata and Balance Horizon
+- **`final_analysis.py`** - Comprehensive analysis of suite results with analyst metadata and Balance Horizon
 - **`cleanup_results.py`** - Manage and organize the results folder
 - **`validate_setup.py`** - Verify that your configuration is correct
 
@@ -253,7 +263,7 @@ python tools/run_full_suite.py
 # Extract per-epoch data from .eval logs (bypasses logs.json)
 python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
 
-# Analyze suite results (comprehensive analysis with judge metadata)
+# Analyze suite results (comprehensive analysis with analyst metadata)
 python tools/final_analysis.py logs/logs.json --output report.txt
 
 # Clean up old results

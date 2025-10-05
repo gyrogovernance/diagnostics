@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.4] - 2025-10-05
+
+#### **Changed**
+- Renamed all "Judges" to "Analysts" to avoid biases to conflict and contradiction in evaluations.
+- Removed 1 metric (Aperture), which is a theoretical measure and will be calculated in a non-empirical way.
+
+#### **Added**
+- docs\theory\Measurement.md: Documentation about mitigation from Measurement Biases, and improvement of our overall methodology through a more theoretically grounded and mathematically sound approach.
+
+---
+
 ## [0.9.3] - 2025-10-04
 
 ### 🔧 **Balance Horizon Unification**
@@ -23,16 +34,17 @@ Optional per-turn timeout warnings (env var, doesn't fail)
 Clear distinction between transient/non-transient errors
 alignment_scorer.py:
 
-- alignment_scorer.py: Primary + backup judge support via model_roles["grader_backup"]
-Stores transcript + raw judge output for offline rescoring
+- alignment_scorer.py: Primary + backup analyst support via model_roles["grader_backup"]
+Stores transcript + raw analyst output for offline rescoring
 Retry logic with exponential backoff
 Graceful degradation (fallback scores, clear error messages)
 
 #### **Added**
-- **Ensemble Judging System**: 3 parallel judges (A, B, C) with median score aggregation
-- **Robust Fallback Chain**: Ensemble → backup judge → fallback scores
-- **Per-Judge Metadata**: Detailed success/failure tracking for each judge
-- **Enhanced Error Handling**: Individual retry logic per judge with comprehensive logging
+- **Ensemble Judging System**: 3 parallel analysts (A, B, C) with median score aggregation
+- **Robust Fallback Chain**: Ensemble → backup analyst → fallback scores
+- **Per-Analyst Metadata**: Detailed success/failure tracking for each analyst
+- **Enhanced Error Handling**: Individual retry logic per analyst with comprehensive logging
+- **Concrete Pathology Definitions**: Detailed detection criteria with examples and thresholds for all 5 pathologies
 
 analyze_suite.py:
 
@@ -73,7 +85,7 @@ Clean separation of concerns (extract/build/print functions)
 - Multi-turn conversation handling and scoring issues in task implementations
 - Content handling bug in autonomous solver (AttributeError when content is list instead of string)
 - Type comparison bug in pathology detection (TypeError when comparing string scores with integers)
-- JSON parsing error in alignment scorer (JSONDecodeError when judge returns malformed JSON)
+- JSON parsing error in alignment scorer (JSONDecodeError when analyst returns malformed JSON)
 - Added comprehensive fallback scoring with 0 scores (not neutral) to prevent expensive evaluation failures while making failures obvious
 - Fixed score calculation to handle mixed numeric/string values and invalid data types
 - Updated all imports and references to use new numbered task filenames (challenge_1_formal.py, etc.)
@@ -83,9 +95,9 @@ Clean separation of concerns (extract/build/print functions)
 - Fixed cross-platform path resolution for config file loading (Windows/Unix compatibility)
 - Increased retry_on_error from 1 to 3 for better handling of cloud API rate limits and network issues
 - Fixed challenge counting in run_full_suite.py to correctly report all 5 challenges instead of 2
-- Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (judge provides these but they weren't being saved)
-- Created tools/extract_judge_text.py to extract judge text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
-- Enhanced tools/final_analysis.py to display judge metadata (scoring_rationale, strengths, weaknesses, judge_fallback_used) in analysis reports
+- Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (analyst provides these but they weren't being saved)
+- Created tools/extract_analyst_text.py to extract analyst text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
+- Enhanced tools/final_analysis.py to display analyst metadata (scoring_rationale, strengths, weaknesses, analyst_fallback_used) in analysis reports
 - Fixed Unicode encoding issues in analysis script for Windows compatibility
 
 ---

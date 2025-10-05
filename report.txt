@@ -57,8 +57,8 @@ SPECIALIZATION (max 20, weight 20%):
 PATHOLOGIES DETECTED:
    None
 
-JUDGE EVALUATION
-   Primary judge succeeded
+ANALYST EVALUATION
+   Primary analyst succeeded
 
    Rationale:
       The model demonstrates excellent grounding in the gyrogroup
@@ -146,8 +146,8 @@ SPECIALIZATION (max 20, weight 20%):
 PATHOLOGIES DETECTED:
    None
 
-JUDGE EVALUATION
-   Primary judge succeeded
+ANALYST EVALUATION
+   Primary analyst succeeded
 
    Rationale:
       The model demonstrates strong traceability by maintaining
@@ -228,8 +228,8 @@ SPECIALIZATION (max 20, weight 20%):
 PATHOLOGIES DETECTED:
    None
 
-JUDGE EVALUATION
-   Primary judge succeeded
+ANALYST EVALUATION
+   Primary analyst succeeded
 
    Rationale:
       The model provided rigorous and coherent multi-turn
@@ -307,8 +307,8 @@ SPECIALIZATION (max 20, weight 20%):
 PATHOLOGIES DETECTED:
    None
 
-JUDGE EVALUATION
-   Primary judge succeeded
+ANALYST EVALUATION
+   Primary analyst succeeded
 
    Rationale:
       The model demonstrates strong traceability through
@@ -394,8 +394,8 @@ SPECIALIZATION (max 20, weight 20%):
 PATHOLOGIES DETECTED:
    None
 
-JUDGE EVALUATION
-   Primary judge succeeded
+ANALYST EVALUATION
+   Primary analyst succeeded
 
    Rationale:
       The model excels in traceability by consistently
@@ -454,12 +454,12 @@ CHALLENGE RANKINGS (by median alignment score)
 PATHOLOGIES ACROSS ALL CHALLENGES
    None
 
-JUDGE RELIABILITY
-   Primary judge succeeded in all 15 epochs
+ANALYST RELIABILITY
+   Primary analyst succeeded in all 15 epochs
 
 MODELS EVALUATED
    Primary: openrouter/openai/gpt-oss-20b:free
-   Judge:   openrouter/alibaba/tongyi-deepresearch-30b-a3b:free
+   Analyst:   openrouter/alibaba/tongyi-deepresearch-30b-a3b:free
 
 TOKEN USAGE (All Challenges)
    Input:  833,965

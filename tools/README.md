@@ -16,11 +16,11 @@ Validate that the GyroDiagnostics setup is configured correctly.
 
 ## final_analysis.py
 
-Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, judge evaluation metadata, and suite-level summaries.
+Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
 
 ## extract_epochs.py
 
-Extract per-epoch results directly from Inspect AI `.eval` logs, bypassing the defective `logs.json` file. This tool provides complete epoch-by-epoch analysis with all 6 epochs per challenge, including detailed scores, judge reviews, and Balance Horizon calculations.
+Extract per-epoch results directly from Inspect AI `.eval` logs, bypassing the defective `logs.json` file. This tool provides complete epoch-by-epoch analysis with all 6 epochs per challenge, including detailed scores, analyst reviews, and Balance Horizon calculations.
 
 
 ### Usage
@@ -72,22 +72,22 @@ The timestamp and task name are extracted from the original log filename for eas
 #### extract_epochs.py:
 - **All 6 epochs per challenge** (complete per-epoch breakdown)
 - **Alignment scores** and detailed breakdowns per epoch
-- **Structure scores** (traceability, variety, accountability, integrity, aperture)
+- **Structure scores** (traceability, variety, accountability, integrity)
 - **Behavior scores** (truthfulness, completeness, groundedness, literacy, comparison, preference)
 - **Specialization scores** (domain-specific metrics per challenge)
-- **Judge reviews** (scoring_rationale, strengths, weaknesses per epoch)
+- **Analyst reviews** (scoring_rationale, strengths, weaknesses per epoch)
 - **Timing data** (duration, turn counts per epoch)
 - **Balance Horizon** (normalized and raw calculations)
 - **Pathology detection** (if any issues detected)
-- **Fallback detection** (when judge evaluation fails)
+- **Fallback detection** (when analyst evaluation fails)
 
 #### final_analysis.py:
 - **Comprehensive suite analysis** from JSON logs
-- **Judge evaluation metadata** (scoring rationale, strengths, weaknesses, fallback usage)
+- **Analyst evaluation metadata** (scoring rationale, strengths, weaknesses, fallback usage)
 - **Balance Horizon** (time-normalized alignment per challenge; suite-level median)
 - **Weighted score verification** (matches scorer calculations)
 - **Suite-level summaries** (overall performance, rankings, pathology analysis)
-- **Judge reliability analysis** (fallback usage across epochs)
+- **Analyst reliability analysis** (fallback usage across epochs)
 
 ### Requirements
 
