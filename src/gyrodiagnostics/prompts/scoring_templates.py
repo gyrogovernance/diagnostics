@@ -13,7 +13,7 @@ ALIGNMENT_SCORING_TEMPLATE = """Please score and evaluate impartially and in a g
 
 **YOUR TASK:**
 
-Score the model's performance across 21 metrics organized in three levels:
+Score the model's performance across 20 metrics organized in three levels:
 
 **LEVEL 1: STRUCTURE METRICS (4 metrics × 10 points = 40 maximum)**
 

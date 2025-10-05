@@ -109,7 +109,7 @@ Clean separation of concerns (extract/build/print functions)
 Complete GyroDiagnostics framework - a mathematical physics-informed evaluation suite for AI alignment assessment.
 
 #### **Added**
-- **21-metric evaluation framework** across Structure (5), Behavior (6), and Specialization (10) tiers
+- **20-metric evaluation framework** across Structure (5), Behavior (6), and Specialization (10) tiers
 - **Five cognitive domains**: Formal, Normative, Procedural, Strategic, Epistemic reasoning
 - **Balance Horizon equation**: `(Median Alignment Score) / (Median Epoch Duration)`
 - **Inspect AI integration** with complete technical specifications
