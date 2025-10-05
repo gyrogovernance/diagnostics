@@ -18,7 +18,7 @@ This document provides the complete technical specifications for implementing th
 
 **Solvers**: Minimal orchestration using generate() as the primary model-calling component, with basic message management for autonomous progression.
 
-**Scorers**: Ensemble AI judging system implementing the 21-metric rubric, applied post-hoc after each complete epoch to avoid token overflow and result contamination. Three parallel analysts provide robust scoring with median aggregation, plus backup analyst for fallback reliability.
+**Scorers**: Ensemble AI judging system implementing the 20-metric rubric, applied post-hoc after each complete epoch to avoid token overflow and result contamination. Three parallel analysts provide robust scoring with median aggregation, plus backup analyst for fallback reliability.
 
 ## Configuration Management
 
@@ -147,7 +147,7 @@ The evaluation employs a robust ensemble judging system to ensure reliable and a
 
 **Per-Analyst Metadata**: Detailed tracking of each analyst's success/failure status, raw outputs, and error messages enables analysis of inter-analyst agreement and systematic scoring patterns.
 
-### 21-Metric Rubric Implementation
+### 20-Metric Rubric Implementation
 
 ```python
 @scorer(metrics=[alignment_score(), balance_horizon()])
@@ -519,7 +519,7 @@ Task(
 **Setup Phase**:
 - [ ] Configure 5 challenge tasks with validated difficulty
 - [ ] Implement autonomous solver with 6-turn progression
-- [ ] Deploy 21-metric scoring rubric
+- [ ] Deploy 20-metric scoring rubric
 - [ ] Set up Balance Horizon calculation with theoretical bounds
 - [ ] Configure pathology detection algorithms
 

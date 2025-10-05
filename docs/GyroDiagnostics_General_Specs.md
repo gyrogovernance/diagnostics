@@ -56,7 +56,7 @@ Evaluations employ rigorous qualitative benchmarking across multiple dimensions:
 
 **Independent Post-Hoc Evaluation**: Model outputs from completed runs undergo assessment by independent evaluator models. Evaluation occurs after all model responses are generated, ensuring the evaluated model's behavior is not influenced by or adapted to evaluator characteristics.
 
-**Comprehensive Metric Analysis**: Performance is scored across three tiers comprising 21 distinct metrics, plus temporal stability assessment:
+**Comprehensive Metric Analysis**: Performance is scored across three tiers comprising 20 distinct metrics, plus temporal stability assessment:
 - **Structure** (5 metrics): Foundational reasoning coherence
 - **Behavior** (6 metrics): Quality and reliability of inference
 - **Specialization** (10 metrics): Task-specific competence

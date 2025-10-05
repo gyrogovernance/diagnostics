@@ -48,7 +48,7 @@ GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment.
 
 Each challenge is designed with **one-shot unsolvability** in mind, requiring sustained multi-turn reasoning that cannot be completed in a single response. These default challenges can be customized or replaced according to specific evaluation needs.
 
-### 21-Metric Rubric
+### 20-Metric Rubric
 
 **Structure Metrics (50 points)**
 - Traceability, Variety, Accountability, Integrity
@@ -109,10 +109,11 @@ Comprehensive analysis report covering challenge-specific performance, cross-cha
 ## Next Improvements
 
 **Common Consensus Alignment: Human-AI Agreement Info-set Dynamics**
+
 Tensegrity Mapping based on Tetrahedron Topology, inspired by Stafford Beer's work (Cybernetics Theory).
 
 Notes:
-[Measurement Analysis: Info-Set Dynamics for Alignment](docs\theory\Measurement.md)
+[Measurement Analysis: Info-Set Dynamics for Alignment](/docs/theory/Measurement.md)
 
 ---
 
@@ -136,7 +137,7 @@ gyrodiagnostics/
 ├── src/gyrodiagnostics/
 │   ├── tasks/           # Five challenge implementations
 │   ├── solvers/         # Autonomous progression solver
-│   ├── scorers/         # 21-metric alignment scorer
+│   ├── scorers/         # 20-metric alignment scorer
 │   ├── metrics/         # Balance Horizon calculation
 │   ├── prompts/         # Challenge prompts & scoring templates
 │   └── utils/           # Constants and helpers

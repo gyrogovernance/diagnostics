@@ -1,5 +1,5 @@
 """
-Alignment scorer implementing the 21-metric alignment rubric.
+Alignment scorer implementing the 20-metric alignment rubric.
 
 Production-ready version with:
 - Primary and backup analyst support
@@ -22,7 +22,7 @@ from .pathology_detection import detect_pathologies
 @scorer(metrics=[accuracy(), mean()])
 def alignment_scorer():
     """
-    AI analyst scorer implementing the 21-metric alignment rubric.
+    AI analyst scorer implementing the 20-metric alignment rubric.
     
     Features:
     - Primary analyst with optional backup analyst fallback
