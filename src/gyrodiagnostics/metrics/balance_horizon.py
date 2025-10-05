@@ -98,7 +98,7 @@ def validate_balance_horizon(
         return (
             "HIGH",
             f"Balance Horizon {balance_horizon_normalized:.4f} exceeds practical maximum "
-            f"{theoretical_max:.4f}. Review for potential sycophancy or judge bias."
+            f"{theoretical_max:.4f}. Review for potential sycophancy or analyst bias."
         )
     
     elif balance_horizon_normalized < HORIZON_VALID_MIN:

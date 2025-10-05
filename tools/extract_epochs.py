@@ -143,7 +143,7 @@ def extract_epochs_from_log(path: Path) -> Optional[Dict]:
                 behavior_scores = meta.get("behavior_scores", {}) or {}
                 specialization_scores = meta.get("specialization_scores", {}) or {}
                 pathologies = meta.get("pathologies", []) or []
-                judge_fallback_used = bool(meta.get("judge_fallback_used", False))
+                analyst_fallback_used = bool(meta.get("analyst_fallback_used", False))
                 scoring_rationale = meta.get("scoring_rationale", "") or ""
                 strengths = meta.get("strengths", "") or ""
                 weaknesses = meta.get("weaknesses", "") or ""
@@ -161,7 +161,7 @@ def extract_epochs_from_log(path: Path) -> Optional[Dict]:
                         "specialization_scores": specialization_scores,
                         "pathologies": pathologies,
                         "turn_count": len(turn_metadata),
-                        "judge_fallback_used": judge_fallback_used,
+                        "analyst_fallback_used": analyst_fallback_used,
                         "scoring_rationale": scoring_rationale,
                         "strengths": strengths,
                         "weaknesses": weaknesses,
@@ -239,7 +239,7 @@ def print_result(result: Dict, p):
             behavior = e.get("behavior_scores", {})
             specialization = e.get("specialization_scores", {})
             p("  Structure:")
-            for k in ["traceability", "variety", "accountability", "integrity", "aperture"]:
+            for k in ["traceability", "variety", "accountability", "integrity"]:
                 v = structure.get(k, "N/A")
                 p(f"    {k.capitalize():15s}: {v}")
             p("  Behavior:")

@@ -36,7 +36,7 @@ SCORING_WEIGHTS = {
 
 # Level maximums
 LEVEL_MAXIMUMS = {
-    "structure": 50,    # 5 metrics × 10 points
+    "structure": 40,    # 4 metrics × 10 points
     "behavior": 60,     # 6 metrics × 10 points
     "specialization": 20  # 2 metrics × 10 points
 }
@@ -100,8 +100,7 @@ STRUCTURE_METRICS = [
     "traceability",
     "variety",
     "accountability",
-    "integrity",
-    "aperture"
+    "integrity"
 ]
 
 BEHAVIOR_METRICS = [

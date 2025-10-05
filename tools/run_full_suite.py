@@ -44,11 +44,10 @@ def load_config():
     
     # Get model configuration from environment (no defaults - must be explicitly set)
     model = os.getenv("INSPECT_EVAL_MODEL")
-    judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER")
-    judge_a = os.getenv("INSPECT_EVAL_MODEL_GRADER_A")
-    judge_b = os.getenv("INSPECT_EVAL_MODEL_GRADER_B")
-    judge_c = os.getenv("INSPECT_EVAL_MODEL_GRADER_C")
-    backup_judge_model = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
+    analyst_a = os.getenv("INSPECT_EVAL_MODEL_GRADER_A")
+    analyst_b = os.getenv("INSPECT_EVAL_MODEL_GRADER_B")
+    analyst_c = os.getenv("INSPECT_EVAL_MODEL_GRADER_C")
+    backup_analyst_model = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
     log_dir = os.getenv("INSPECT_LOG_DIR", "./logs")
     
     # Validate required configuration
@@ -58,10 +57,13 @@ def load_config():
         print("INSPECT_EVAL_MODEL=openrouter/qwen/qwen3-30b-a3b:free")
         exit(1)
     
-    if not judge_model:
-        print("ERROR: INSPECT_EVAL_MODEL_GRADER environment variable not set!")
-        print("Please set it in your .env file or environment:")
-        print("INSPECT_EVAL_MODEL_GRADER=openrouter/meta-llama/llama-3.3-70b-instruct:free")
+    # Validate at least one ensemble analyst is configured
+    if not any([analyst_a, analyst_b, analyst_c]):
+        print("ERROR: At least one ensemble analyst must be configured!")
+        print("Please set at least one of these in your .env file:")
+        print("INSPECT_EVAL_MODEL_GRADER_A=openrouter/model-name:free")
+        print("INSPECT_EVAL_MODEL_GRADER_B=openrouter/model-name:free")
+        print("INSPECT_EVAL_MODEL_GRADER_C=openrouter/model-name:free")
         exit(1)
     
     # Validate API key is set for OpenRouter
@@ -73,11 +75,10 @@ def load_config():
     
     return {
         "model": model,
-        "judge_model": judge_model,
-        "judge_a": judge_a,
-        "judge_b": judge_b,
-        "judge_c": judge_c,
-        "backup_judge_model": backup_judge_model,
+        "analyst_a": analyst_a,
+        "analyst_b": analyst_b,
+        "analyst_c": analyst_c,
+        "backup_analyst_model": backup_analyst_model,
         "log_dir": log_dir
     }
 
@@ -91,22 +92,21 @@ def main():
     print(f"GyroDiagnostics Full Suite Evaluation")
     print(f"{'='*60}")
     print(f"Model: {config['model']}")
-    print(f"Primary Judge: {config['judge_model']}")
     
-    # Show ensemble judges
-    ensemble_judges = []
-    if config['judge_a']:
-        ensemble_judges.append(f"A: {config['judge_a']}")
-    if config['judge_b']:
-        ensemble_judges.append(f"B: {config['judge_b']}")
-    if config['judge_c']:
-        ensemble_judges.append(f"C: {config['judge_c']}")
+    # Show ensemble analysts
+    ensemble_analysts = []
+    if config['analyst_a']:
+        ensemble_analysts.append(f"A: {config['analyst_a']}")
+    if config['analyst_b']:
+        ensemble_analysts.append(f"B: {config['analyst_b']}")
+    if config['analyst_c']:
+        ensemble_analysts.append(f"C: {config['analyst_c']}")
     
-    if ensemble_judges:
-        print(f"Ensemble Judges: {', '.join(ensemble_judges)}")
+    if ensemble_analysts:
+        print(f"Ensemble Analysts: {', '.join(ensemble_analysts)}")
     
-    if config['backup_judge_model']:
-        print(f"Backup Judge: {config['backup_judge_model']}")
+    if config['backup_analyst_model']:
+        print(f"Backup Analyst: {config['backup_analyst_model']}")
     
     print(f"Challenges: 5 (formal, normative, procedural, strategic, epistemic)")
     print(f"Epochs per challenge: {TASK_CONFIG.get('epochs', 3)} (configured in TASK_CONFIG)")
@@ -116,19 +116,19 @@ def main():
     print(f"{'='*60}\n")
     
     # Configure evaluation parameters
-    model_roles = {"grader": config['judge_model']}
+    model_roles = {}
     
-    # Add ensemble judges
-    if config['judge_a']:
-        model_roles["grader_a"] = config['judge_a']
-    if config['judge_b']:
-        model_roles["grader_b"] = config['judge_b']
-    if config['judge_c']:
-        model_roles["grader_c"] = config['judge_c']
+    # Add ensemble analysts
+    if config['analyst_a']:
+        model_roles["grader_a"] = config['analyst_a']
+    if config['analyst_b']:
+        model_roles["grader_b"] = config['analyst_b']
+    if config['analyst_c']:
+        model_roles["grader_c"] = config['analyst_c']
     
-    # Add backup judge
-    if config['backup_judge_model']:
-        model_roles["grader_backup"] = config['backup_judge_model']
+    # Add backup analyst
+    if config['backup_analyst_model']:
+        model_roles["grader_backup"] = config['backup_analyst_model']
     
     eval_params = {
         "model": config['model'],

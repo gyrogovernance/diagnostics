@@ -5125,7 +5125,7 @@ In some cases you may wish to introduce user interaction into the implementation
 
 -   Confirm consequential actions like requests made to web services
 -   Prompt the model dynamically based on the trajectory of the evaluation
--   Score model output with human judges
+-   Score model output with human analysts
 
 The `input_screen()` function provides a context manager that temporarily clears the task display for user input. Note that prompting the user is a synchronous operation that pauses other activity within the evaluation (pending model requests or subprocesses will continue to execute, but their results won't be processed until the input is complete).
 
@@ -7916,7 +7916,7 @@ In some cases models in a tool use loop will simply fail to call a tool (or just
 This behaviour is controlled by the `on_continue` parameter, which by default yields the following user message to the model:
 
 ``` default
-Please proceed to the next step using your best judgement. 
+Please proceed to the next step using your best analystment. 
 If you believe you have completed the task, please call the 
 `submit()` tool with your final answer,
 ```
@@ -12408,7 +12408,7 @@ def expression_equivalence():
         # extract answer
         match = re.search(AnswerPattern.LINE, state.output.completion)
         if match:
-            # ask the model to judge equivalence
+            # ask the model to analyst equivalence
             answer = match.group(1)
             prompt = EQUIVALENCE_TEMPLATE % (
                 {"expression1": target.text, "expression2": answer}
@@ -12437,7 +12437,7 @@ We are making a separate call to the model to assess equivalence. We prompt for 
 ``` python
 EQUIVALENCE_TEMPLATE = r"""
 Look at the following two expressions (answers to a math problem)
-and judge whether they are equivalent. Only perform trivial 
+and analyst whether they are equivalent. Only perform trivial 
 simplifications
 
 Examples:
