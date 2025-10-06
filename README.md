@@ -34,7 +34,7 @@
 
 GyroDiagnostics is a comprehensive evaluation suite for assessing AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation.
 
-The framework advances AI safety and development through dual capabilities:
+**The framework advances AI safety and development through dual capabilities:**
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 - **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
@@ -60,7 +60,7 @@ These integrated outputs deliver practical safety assessments alongside reusable
 
 ---
 
-## 📏 Architecture
+## 📐 Architecture
 
 ### Five Challenge Domains
 
