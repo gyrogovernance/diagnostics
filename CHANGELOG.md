@@ -17,21 +17,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Insights Dataset Export**: `insights_data.json` file containing per-epoch analyst insights, suitable for training data donation.
 
 #### **Changed**
-- **Output Paths**: `final_analysis.py` now defaults output files to `results/<timestamp>/analysis_report.txt` and `results/<timestamp>/analysis_data.json`.
-- **Insight Aggregation**: `final_analysis.py` aggregates epoch-level insight briefs into a single JSON dataset instead of separate Markdown files.
+- **Output Paths**: `analyzer.py` now defaults output files to `results/<timestamp>/analysis_report.txt` and `results/<timestamp>/analysis_data.json`.
+- **Insight Aggregation**: `analyzer.py` aggregates epoch-level insight briefs into a single JSON dataset instead of separate Markdown files.
 - **Analyst Call Count**: Corrected resource calculation for analyst calls (45 for standard, 90 for research evaluation).
 - **Cleanup Tool**: `cleaner.py` now defaults to cleaning logs directory, with `--results` flag for results cleanup.
 
 #### **Removed**
 - **Transcript Persistence**: Eliminated the need to persist raw epoch transcripts to disk.
 - **Insight Synthesis Script**: Removed the separate `tools/synthesize_insights.py` script.
-- **Extract Epochs Script**: Removed `tools/extract_epochs.py` as `final_analysis.py` handles .eval files directly.
+- **Extract Epochs Script**: Removed `tools/extract_epochs.py` as `analyzer.py` handles .eval files directly.
 - **Redundant Configuration**: Removed `logging.insights.output_dir` from `evaluation_config.yaml`.
 
 #### **Fixed**
 - **Analyst Error Handling**: Robustly handles `None` values in analyst error messages during reporting.
 - **JSON Serialization**: Correctly serializes `ModelUsage` objects in JSON output.
-- **Default Behavior**: `final_analysis.py` now runs without flags, defaulting to logs directory.
+- **Default Behavior**: `analyzer.py` now runs without flags, defaulting to logs directory.
 
 ---
 
@@ -76,7 +76,7 @@ Graceful degradation (fallback scores, clear error messages)
 
 analyze_suite.py:
 
-- final_analysis.py: Supports both logs.json and .eval files (--eval-dir)
+- analyzer.py: Supports both logs.json and .eval files (--eval-dir)
 Offline rescoring with --rescore flag
 Comprehensive statistics (medians, means, std dev, ranges)
 Better error handling and validation
@@ -103,7 +103,7 @@ Clean separation of concerns (extract/build/print functions)
 
 #### **Changed**
 - Moved utility scripts from `tests/` to `tools/` directory
-- Updated `run_full_suite.py` to use configured models from `.env` (no command-line flags needed)
+- Updated `gyrodiagnostics.py` to use configured models from `.env` (no command-line flags needed)
 - Simplified project structure and documentation
 
 #### **Fixed**
@@ -122,10 +122,10 @@ Clean separation of concerns (extract/build/print functions)
 - Removed obsolete TASK_CONFIG_PRODUCTION hardcoded dictionary
 - Fixed cross-platform path resolution for config file loading (Windows/Unix compatibility)
 - Increased retry_on_error from 1 to 3 for better handling of cloud API rate limits and network issues
-- Fixed challenge counting in run_full_suite.py to correctly report all 5 challenges instead of 2
+- Fixed challenge counting in gyrodiagnostics.py to correctly report all 5 challenges instead of 2
 - Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (analyst provides these but they weren't being saved)
 - Created tools/extract_analyst_text.py to extract analyst text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
-- Enhanced tools/final_analysis.py to display analyst metadata (scoring_rationale, strengths, weaknesses, analyst_fallback_used) in analysis reports
+- Enhanced tools/analyzer.py to display analyst metadata (scoring_rationale, strengths, weaknesses, analyst_fallback_used) in analysis reports
 - Fixed Unicode encoding issues in analysis script for Windows compatibility
 
 ---

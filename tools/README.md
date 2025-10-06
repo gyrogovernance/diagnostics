@@ -6,7 +6,7 @@ This directory contains utility scripts for working with Inspect AI evaluation l
 
 Clean up and manage the results folder.
 
-## run_full_suite.py
+## gyrodiagnostics.py
 
 Run the complete GyroDiagnostics evaluation suite across all challenges using configured models from `.env` file.
 
@@ -14,13 +14,13 @@ Run the complete GyroDiagnostics evaluation suite across all challenges using co
 
 Validate that the GyroDiagnostics setup is configured correctly.
 
-## final_analysis.py
+## analyzer.py
 
 Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
 
 Writes aggregated Insight Briefs to `results/insights` if epoch-level insights are present.
 
-## final_analysis.py
+## analyzer.py
 
 Comprehensive analysis of suite results from .eval logs. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
 
@@ -40,15 +40,15 @@ python tools/cleaner.py --older-than 7 --confirm  # Remove files older than 7 da
 python tools/cleaner.py --pattern strategic --confirm  # Remove files matching pattern
 
 # Run complete evaluation suite
-python tools/run_full_suite.py                           # Run with configured models from .env
+python tools/gyrodiagnostics.py                           # Run with configured models from .env
 
 # Validate setup
 python tools/validate_setup.py                            # Check if everything is configured correctly
 
 # Analyze .eval logs (comprehensive analysis)
-python tools/final_analysis.py                           # Auto-generates timestamped outputs
-python tools/final_analysis.py --eval-dir logs           # Specify logs directory
-python tools/final_analysis.py logs/logs.json --output custom/report.txt  # Custom output paths
+python tools/analyzer.py                           # Auto-generates timestamped outputs
+python tools/analyzer.py --eval-dir logs           # Specify logs directory
+python tools/analyzer.py logs/logs.json --output custom/report.txt  # Custom output paths
 
 ```
 
@@ -65,7 +65,7 @@ The timestamp is extracted from the first .eval file for easy organization and p
 
 ### What It Extracts
 
-#### final_analysis.py:
+#### analyzer.py:
 - **Comprehensive suite analysis** from .eval logs
 - **All epochs per challenge** (complete per-epoch breakdown)
 - **Alignment scores** and detailed breakdowns per epoch

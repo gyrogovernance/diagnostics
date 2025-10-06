@@ -25,20 +25,33 @@
 </div>
 
 ---
+<span style="font-size: 6em;">🌟</span> 
+# GyroDiagnostics
 
-# GyroDiagnostics: AI Alignment Evaluation Suite
-
-**Mathematical Physics-Informed Evaluation Framework for AI Model Quality and Alignment**
+**Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
 
 ## Overview
 
-GyroDiagnostics is a comprehensive evaluation suite for AI alignment assessment. The suite evaluates Machine Learning intelligence quality through structural coherence analysis while detecting reasoning pathologies including hallucination, sycophancy, goal drift, and contextual memory degradation.
+GyroDiagnostics is a comprehensive evaluation suite for assessing AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation.
 
-The framework serves a dual purpose in advancing AI safety and capability development. First, it provides rigorous diagnostics of AI system structural health through mathematical assessment of alignment characteristics, enabling organizations to understand model reliability and identify architectural improvements needed for high-stakes deployment. Second, the evaluation process generates substantive research contributions by extracting novel solution pathways, critical trade-offs, and innovative approaches from model responses to real-world challenges across domains including poverty alleviation, regulatory frameworks, and knowledge synthesis. These insights, contextualized by structural health metrics, offer valuable resources for model fine-tuning and contribute meaningful analysis to the broader research community addressing these complex societal challenges.
+The framework advances AI safety and development through dual capabilities:
+
+<span style="font-size: 6em;">🩺</span> **AI Safety Diagnostics**
+- **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
+- **Behavioral Reliability Testing**: Detect model limitations and optimization opportunities
+- **Deployment Readiness Evaluation**: Support high-stakes applications with rigorous safety metrics
+
+<span style="font-size: 6em;">🔬</span> **Annotated Insights Generation**
+- **AI-Driven Solution Extraction**: Automated annotation of novel pathways from model outputs
+- **Trade-off and Tension Analysis**: Systematic capture of decision factors and constraints
+- **Domain-Specific Knowledge Synthesis**: Insights from challenges in policy, strategy, and epistemology
+- **Fine-Tuning Dataset Creation**: Curated annotations for model training and research advancement
+
+These integrated outputs deliver practical safety assessments alongside reusable datasets, bridging evaluation rigor with productive contributions to AI development.
 
 ---
 
-## Key Insights
+## ✅ Key Features
 
 - **Structural Balance**: Alignment emerges from mathematical balance between coherence (closure) and differentiation (openness), grounded in the Common Governance Model (CGM)
 - **Tetrahedral Topology**: Eliminates role-based bias through geometric neutrality - no designated 'critics' or 'supporters'
@@ -47,7 +60,7 @@ The framework serves a dual purpose in advancing AI safety and capability develo
 
 ---
 
-## Architecture
+## 📏 Architecture
 
 ### Five Challenge Domains
 
@@ -89,17 +102,16 @@ Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration)
 
 ---
 
-## Evaluation Outputs
+## 📝 Output Diagnosis
 
 Each complete evaluation generates:
 - **Per-Epoch Results**: Detailed scores across all 20 metrics with analyst metadata
 - **Challenge Summaries**: Aggregated performance with pathology detection
 - **Suite-Level Report**: Overall Balance Horizon and cross-challenge patterns
-- **Research Insights**: Extracted solution pathways and novel approaches from model responses (exported as `insights_data.json`)
+- **Research Insights**: Extracted solution pathways and novel approaches from model responses
 
----
 
-## Showcase
+### Showcase
 
 Sample evaluation results demonstrating what GyroDiagnostics produces:
 
@@ -111,7 +123,7 @@ Comprehensive analysis report covering challenge-specific performance, cross-cha
 
 ---
 
-## Theoretical Foundation
+## 🧬 Theoretical Foundation
 
 - **Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory
 - **Recursive Systems Theory**: Evaluates structural dynamics rather than surface behaviors
@@ -134,7 +146,7 @@ Comprehensive analysis report covering challenge-specific performance, cross-cha
 
 ---
 
-## Next Improvements
+## Latest Improvements
 
 **Common Consensus Alignment: Human-AI Agreement Info-set Dynamics**
 
@@ -170,7 +182,7 @@ gyrodiagnostics/
 │   ├── prompts/         # Challenge prompts & scoring templates
 │   └── utils/           # Constants and helpers
 ├── tools/               # Utility scripts for log processing and analysis
-│   ├── run_full_suite.py      # Run complete evaluation suite
+│   ├── gyrodiagnostics.py      # Run complete evaluation suite
 │   ├── cleaner.py     # Manage results folder
 │   ├── validate_setup.py      # Validate configuration
 │   └── README.md              # Tools documentation
@@ -254,7 +266,7 @@ inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py --limit 1
 
 ```bash
 # Run full evaluation suite (uses configured models from .env)
-python tools/run_full_suite.py
+python tools/gyrodiagnostics.py
 
 # Validate setup
 python tools/validate_setup.py
@@ -264,10 +276,10 @@ python tools/validate_setup.py
 
 ```bash
 # Analyze .eval logs (no flags). Outputs saved under results/<timestamp>/
-python tools/final_analysis.py
+python tools/analyzer.py
 
-# Clean up results folder
-python tools/cleaner.py --list
+# Clean up logs
+python tools/cleaner.py
 ```
 ---
 
@@ -277,8 +289,8 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 ### Key Tools
 
-- **`run_full_suite.py`**: Run all 5 challenges using configured models from `.env`
-- **`final_analysis.py`**: Comprehensive analysis of suite results with analyst metadata and Balance Horizon
+- **`gyrodiagnostics.py`**: Run all 5 challenges using configured models from `.env`
+- **`analyzer.py`**: Comprehensive analysis of suite results with analyst metadata and Balance Horizon
 - **`cleaner.py`**: Manage and organize the logs and results folders
 - **`validate_setup.py`**: Verify that your configuration is correct
 
@@ -286,10 +298,10 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 ```bash
 # Run complete evaluation suite
-python tools/run_full_suite.py
+python tools/gyrodiagnostics.py
 
 # Analyze .eval logs (comprehensive analysis with analyst metadata)
-python tools/final_analysis.py
+python tools/analyzer.py
 
 # Clean up old logs and results
 python tools/cleaner.py --older-than 7

@@ -9,9 +9,9 @@ Production-ready version with:
 - Robust error handling
 
 Usage:
-    python tools/final_analysis.py logs/logs.json --output report.txt
-    python tools/final_analysis.py --eval-dir logs/ --output report.txt
-    python tools/final_analysis.py logs/logs.json --rescore --output report.txt
+    python tools/analyzer.py logs/logs.json --output report.txt
+    python tools/analyzer.py --eval-dir logs/ --output report.txt
+    python tools/analyzer.py logs/logs.json --rescore --output report.txt
 """
 
 import json

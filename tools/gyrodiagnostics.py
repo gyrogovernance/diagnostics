@@ -3,7 +3,7 @@
 Run complete GyroDiagnostics evaluation suite using configured models.
 
 Usage:
-    python tools/run_full_suite.py
+    python tools/gyrodiagnostics.py
 """
 
 import os
@@ -159,7 +159,7 @@ def main():
     print(f"Total challenges: {len(challenges)}")
     print(f"Results logged to: {config['log_dir']}")
     print("Run final analysis to generate timestamped reports and insight briefs:")
-    print("  python tools/final_analysis.py --eval-dir logs")
+    print("  python tools/analyzer.py --eval-dir logs")
     # Note: Insight briefs are generated during final analysis step, not here.
     print(f"{'='*60}\n")
     
