@@ -206,13 +206,13 @@ def analyze_challenge_from_eval_file(eval_path: Path) -> Optional[Dict]:
     model_roles = getattr(eval_info, "model_roles", {})
     
     # Handle EvalModelConfig objects in model_roles
-    grader_model = "unknown"
-    if model_roles and "grader" in model_roles:
-        grader_config = model_roles["grader"]
-        if hasattr(grader_config, "model"):
-            grader_model = grader_config.model
-        elif isinstance(grader_config, dict):
-            grader_model = grader_config.get("model", "unknown")
+    analyst_model = "unknown"
+    if model_roles and "analyst" in model_roles:
+        analyst_config = model_roles["analyst"]
+        if hasattr(analyst_config, "model"):
+            analyst_model = analyst_config.model
+        elif isinstance(analyst_config, dict):
+            analyst_model = analyst_config.get("model", "unknown")
     
     stats = getattr(log, "stats", {})
     started_at = getattr(stats, "started_at", "")
@@ -234,7 +234,7 @@ def analyze_challenge_from_eval_file(eval_path: Path) -> Optional[Dict]:
     )
     
     result["model"] = model
-    result["grader_model"] = grader_model
+    result["analyst_model"] = analyst_model
     
     return result
 
@@ -262,6 +262,7 @@ def extract_epoch_data(metadata: Dict) -> Dict:
     weaknesses = metadata.get("weaknesses", "")
     analyst_fallback_used = metadata.get("analyst_fallback_used", False)
     transcript = metadata.get("transcript", "")
+    insight_brief = metadata.get("insight_brief", "")
     
     # Calculate duration from turn timestamps
     epoch_duration = metadata.get("epoch_duration_minutes", 0)
@@ -281,7 +282,8 @@ def extract_epoch_data(metadata: Dict) -> Dict:
         "weaknesses": weaknesses,
         "analyst_fallback_used": analyst_fallback_used,
         "per_analyst": metadata.get("per_analyst", []),
-        "transcript": transcript
+        "transcript": transcript,
+        "insight_brief": insight_brief
     }
 
 
@@ -322,14 +324,14 @@ def build_challenge_summary(
     model = eval_data.get("eval", {}).get("model", "unknown")
     
     # Handle EvalModelConfig objects in model_roles
-    grader_model = "unknown"
+    analyst_model = "unknown"
     model_roles = eval_data.get("eval", {}).get("model_roles", {})
-    if model_roles and "grader" in model_roles:
-        grader_config = model_roles["grader"]
-        if hasattr(grader_config, "model"):
-            grader_model = grader_config.model
-        elif isinstance(grader_config, dict):
-            grader_model = grader_config.get("model", "unknown")
+    if model_roles and "analyst" in model_roles:
+        analyst_config = model_roles["analyst"]
+        if hasattr(analyst_config, "model"):
+            analyst_model = analyst_config.model
+        elif isinstance(analyst_config, dict):
+            analyst_model = analyst_config.get("model", "unknown")
     
     # Get timing info
     stats = eval_data.get("stats", {})
@@ -343,7 +345,7 @@ def build_challenge_summary(
         "challenge_type": challenge_type,
         "task_name": task_name,
         "model": model,
-        "grader_model": grader_model,
+        "analyst_model": analyst_model,
         "epochs_analyzed": len(epoch_results),
         
         # Alignment statistics
@@ -411,7 +413,7 @@ async def rescore_failed_epochs(results: List[Dict]) -> List[Dict]:
             
             try:
                 # Get analyst and build prompt
-                analyst = get_model(role="grader")
+                analyst = get_model(role="analyst")
                 prompt = get_scoring_template(challenge_type, transcript)
                 
                 msgs = [
@@ -482,7 +484,7 @@ def print_challenge_summary(result: Dict, output_file=None):
     
     p(f"Task:   {result['task_name']}")
     p(f"Model:  {result.get('model', 'unknown')}")
-    p(f"Grader: {result.get('grader_model', 'unknown')}")
+    p(f"Grader: {result.get('analyst_model', 'unknown')}")
     p(f"Epochs: {result['epochs_analyzed']}")
     p()
     
@@ -603,7 +605,14 @@ def print_challenge_summary(result: Dict, output_file=None):
                 p(f"   Ensemble: {len(successful_analysts)}/{len(per_analyst)} analysts succeeded")
                 for analyst in per_analyst:
                     status = "✓" if analyst.get('success', False) else "✗"
-                    p(f"     {status} {analyst.get('role', 'unknown')}: {analyst.get('error', 'success')[:100]}")
+                    err_msg = analyst.get('error', 'success')
+                    if err_msg is None:
+                        err_msg = 'success'
+                    try:
+                        err_preview = str(err_msg)[:100]
+                    except Exception:
+                        err_preview = 'success'
+                    p(f"     {status} {analyst.get('role', 'unknown')}: {err_preview}")
             else:
                 p(f"   Primary analyst succeeded")
         p()
@@ -643,7 +652,7 @@ def print_challenge_summary(result: Dict, output_file=None):
         p(f"Turns: {epoch.get('turn_count', 0)}")
 
 
-def print_suite_summary(results: List[Dict], output_file=None):
+def print_suite_summary(results: List[Dict], output_file=None, output_path=None):
     """Print suite-level summary."""
     def p(text=""):
         if output_file:
@@ -770,7 +779,7 @@ def print_suite_summary(results: List[Dict], output_file=None):
         first = successful[0]
         p(f"MODELS EVALUATED")
         p(f"   Primary: {first.get('model', 'unknown')}")
-        p(f"   Analyst:   {first.get('grader_model', 'unknown')}")
+        p(f"   Analyst:   {first.get('analyst_model', 'unknown')}")
         p()
     
     # Token usage summary
@@ -795,30 +804,26 @@ def print_suite_summary(results: List[Dict], output_file=None):
         p(f"   Output: {total_output:,}")
         p(f"   Total:  {total_input + total_output:,}")
 
-    # Write aggregated insight briefs per challenge if present
-    insights_dir = Path("results/insights")
-    insights_dir.mkdir(parents=True, exist_ok=True)
+    # Aggregate all insights into a single JSON file beside other outputs
+    insights_json_path = Path(output_path).parent / "insights_data.json"
+    insights_payload = {
+        "timestamp": Path(output_path).parent.name,
+        "challenges": {}
+    }
     for r in successful:
-        ch = r.get('challenge_type')
-        if not ch:
-            continue
-        # Combine epoch-level insight_brief if present
+        ch = r.get('challenge_type') or "unknown"
         epoch_insights = []
-        for ep in r.get('epoch_results', []):
+        for idx, ep in enumerate(r.get('epoch_results', []), 1):
             ib = ep.get('insight_brief') or ""
             if isinstance(ib, str) and ib.strip():
-                epoch_insights.append(ib.strip())
-        # If none at epoch level, use challenge-level combined if present
-        if not epoch_insights and r.get('epoch_results'):
-            # Not available; skip silently
-            continue
+                epoch_insights.append({"epoch": idx, "insight_brief": ib.strip()})
         if epoch_insights:
-            content = f"# {ch.capitalize()} Insight Brief\n\n" + "\n\n---\n\n".join(epoch_insights)
-            out_path = insights_dir / f"{ch}_brief.md"
-            try:
-                out_path.write_text(content, encoding='utf-8')
-            except Exception:
-                pass
+            insights_payload["challenges"][ch] = epoch_insights
+    try:
+        with open(insights_json_path, 'w', encoding='utf-8') as f:
+            json.dump(insights_payload, f, indent=2, ensure_ascii=False)
+    except Exception:
+        pass
 
 
 def main():
@@ -839,13 +844,12 @@ def main():
     parser.add_argument(
         "--output",
         type=str,
-        default="results/analysis/report.txt",
-        help="Save report to file (default: results/analysis/report.txt)"
+        help="Save report to file (auto-generated if not specified)"
     )
     parser.add_argument(
         "--json",
         type=str,
-        help="Save structured JSON analysis to file"
+        help="Save structured JSON analysis to file (auto-generated if not specified)"
     )
     parser.add_argument(
         "--rescore",
@@ -854,6 +858,36 @@ def main():
     )
     
     args = parser.parse_args()
+    
+    # Default to evaluating .eval files under ./logs when no input flags are provided
+    if not args.eval_dir and not args.log_file:
+        args.eval_dir = "logs"
+    
+    # Auto-generate output paths if not specified
+    if not args.output or not args.json:
+        # Extract timestamp from first .eval file or use current time
+        timestamp = None
+        if args.eval_dir:
+            eval_dir = Path(args.eval_dir)
+            eval_files = list(eval_dir.rglob("*.eval"))
+            if eval_files:
+                # Extract timestamp from first .eval filename
+                first_eval = eval_files[0].name
+                # Format: 2025-10-06T18-24-24+03-00_challenge_model_hash.eval
+                if '_' in first_eval:
+                    timestamp = first_eval.split('_')[0]
+        
+        if not timestamp:
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+        
+        results_dir = Path(f"results/{timestamp}")
+        results_dir.mkdir(parents=True, exist_ok=True)
+        
+        if not args.output:
+            args.output = str(results_dir / "analysis_report.txt")
+        if not args.json:
+            args.json = str(results_dir / "analysis_data.json")
     
     # Determine input source
     results = []
@@ -939,7 +973,7 @@ def main():
             print_challenge_summary(result, output_file)
         
         # Suite-level summary
-        print_suite_summary(results, output_file)
+        print_suite_summary(results, output_file, args.output)
         
         # Footer
         p("="*70)
@@ -955,13 +989,40 @@ def main():
     if args.json:
         json_path = Path(args.json)
         json_path.parent.mkdir(parents=True, exist_ok=True)
-        # Remove transcript from JSON to keep file size reasonable
+        # Build a JSON-serializable copy
+        serializable = []
         for r in results:
-            for epoch in r.get('epoch_results', []):
-                if 'transcript' in epoch:
-                    epoch['transcript'] = f"<{len(epoch['transcript'])} chars>"
+            r_copy = dict(r)
+            # Sanitize epoch transcripts
+            epochs = []
+            for ep in r_copy.get('epoch_results', []):
+                ep_copy = dict(ep)
+                if 'transcript' in ep_copy:
+                    ep_copy['transcript'] = f"<{len(ep_copy['transcript'])} chars>"
+                epochs.append(ep_copy)
+            r_copy['epoch_results'] = epochs
+            # Sanitize model_usage (objects -> dict)
+            mu = r_copy.get('model_usage', {}) or {}
+            mu_serial = {}
+            if isinstance(mu, dict):
+                for k, v in mu.items():
+                    if hasattr(v, 'input_tokens') or hasattr(v, 'output_tokens'):
+                        mu_serial[k] = {
+                            'input_tokens': getattr(v, 'input_tokens', 0),
+                            'output_tokens': getattr(v, 'output_tokens', 0)
+                        }
+                    elif isinstance(v, dict):
+                        mu_serial[k] = {
+                            'input_tokens': v.get('input_tokens', 0),
+                            'output_tokens': v.get('output_tokens', 0)
+                        }
+                    else:
+                        # Fallback string representation
+                        mu_serial[k] = str(v)
+            r_copy['model_usage'] = mu_serial
+            serializable.append(r_copy)
         with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(results, f, indent=2)
+            json.dump(serializable, f, indent=2)
         print(f"[OK] JSON analysis saved to: {json_path}")
     
     return 0

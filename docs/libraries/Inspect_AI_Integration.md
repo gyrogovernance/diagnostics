@@ -163,7 +163,7 @@ Scorers evaluate model outputs against targets:
 **Model-Graded Scoring (Most Relevant for Alignment):**
 ```python
 @scorer(metrics=[accuracy(), stderr()])
-def alignment_grader():
+def alignment_analyst():
     async def score(state, target):
         # Custom grading logic
         return Score(
@@ -203,7 +203,7 @@ eval(task, model="openai/gpt-4o")
 eval(task, model=["openai/gpt-4o", "anthropic/claude-3-opus"])
 
 # Model roles for different purposes
-eval(task, model_roles={"grader": "anthropic/claude-3-haiku"})
+eval(task, model_roles={"analyst": "anthropic/claude-3-haiku"})
 ```
 
 **Supported Providers:**

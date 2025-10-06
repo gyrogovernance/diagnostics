@@ -120,15 +120,15 @@ def main():
     
     # Add ensemble analysts
     if config['analyst_a']:
-        model_roles["grader_a"] = config['analyst_a']
+        model_roles["analyst_a"] = config['analyst_a']
     if config['analyst_b']:
-        model_roles["grader_b"] = config['analyst_b']
+        model_roles["analyst_b"] = config['analyst_b']
     if config['analyst_c']:
-        model_roles["grader_c"] = config['analyst_c']
+        model_roles["analyst_c"] = config['analyst_c']
     
     # Add backup analyst
     if config['backup_analyst_model']:
-        model_roles["grader_backup"] = config['backup_analyst_model']
+        model_roles["analyst_backup"] = config['backup_analyst_model']
     
     eval_params = {
         "model": config['model'],
@@ -158,6 +158,8 @@ def main():
     print(f"{'='*60}")
     print(f"Total challenges: {len(challenges)}")
     print(f"Results logged to: {config['log_dir']}")
+    print("Run final analysis to generate timestamped reports and insight briefs:")
+    print("  python tools/final_analysis.py --eval-dir logs")
     # Note: Insight briefs are generated during final analysis step, not here.
     print(f"{'='*60}\n")
     

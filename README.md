@@ -95,7 +95,7 @@ Each complete evaluation generates:
 - **Per-Epoch Results**: Detailed scores across all 20 metrics with analyst metadata
 - **Challenge Summaries**: Aggregated performance with pathology detection
 - **Suite-Level Report**: Overall Balance Horizon and cross-challenge patterns
-- **Research Insights**: Extracted solution pathways and novel approaches from model responses
+- **Research Insights**: Extracted solution pathways and novel approaches from model responses (exported as `insights_data.json`)
 
 ---
 
@@ -171,7 +171,7 @@ gyrodiagnostics/
 │   └── utils/           # Constants and helpers
 ├── tools/               # Utility scripts for log processing and analysis
 │   ├── run_full_suite.py      # Run complete evaluation suite
-│   ├── cleanup_results.py     # Manage results folder
+│   ├── cleaner.py     # Manage results folder
 │   ├── validate_setup.py      # Validate configuration
 │   └── README.md              # Tools documentation
 ├── showcase/            # Sample evaluation results for easy viewing
@@ -244,7 +244,7 @@ inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py
 # Run with specific model
 inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py \
   --model openai/gpt-4o \
-  --model-role grader=openai/gpt-4o
+  --model-role analyst=openai/gpt-4o
 
 # Run with limit (for testing)
 inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py --limit 1
@@ -263,11 +263,11 @@ python tools/validate_setup.py
 ### Analyze Results
 
 ```bash
-# Analyze suite results from JSON logs (comprehensive analysis)
-python tools/final_analysis.py logs/logs.json --output report.txt
+# Analyze .eval logs (no flags). Outputs saved under results/<timestamp>/
+python tools/final_analysis.py
 
 # Clean up results folder
-python tools/cleanup_results.py --list
+python tools/cleaner.py --list
 ```
 ---
 
@@ -278,9 +278,8 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 ### Key Tools
 
 - **`run_full_suite.py`**: Run all 5 challenges using configured models from `.env`
-- **`extract_epochs.py`**: Extract per-epoch data from .eval logs (bypasses logs.json)
 - **`final_analysis.py`**: Comprehensive analysis of suite results with analyst metadata and Balance Horizon
-- **`cleanup_results.py`**: Manage and organize the results folder
+- **`cleaner.py`**: Manage and organize the logs and results folders
 - **`validate_setup.py`**: Verify that your configuration is correct
 
 ### Quick Tool Usage
@@ -289,14 +288,11 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 # Run complete evaluation suite
 python tools/run_full_suite.py
 
-# Extract per-epoch data from .eval logs (bypasses logs.json)
-python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
+# Analyze .eval logs (comprehensive analysis with analyst metadata)
+python tools/final_analysis.py
 
-# Analyze suite results (comprehensive analysis with analyst metadata)
-python tools/final_analysis.py logs/logs.json --output report.txt
-
-# Clean up old results
-python tools/cleanup_results.py --older-than 7 --confirm
+# Clean up old logs and results
+python tools/cleaner.py --older-than 7
 ```
 
 ---

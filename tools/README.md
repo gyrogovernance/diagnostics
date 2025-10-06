@@ -2,7 +2,7 @@
 
 This directory contains utility scripts for working with Inspect AI evaluation logs.
 
-## cleanup_results.py
+## cleaner.py
 
 Clean up and manage the results folder.
 
@@ -20,23 +20,24 @@ Comprehensive analysis of suite results from JSON log files. Provides detailed b
 
 Writes aggregated Insight Briefs to `results/insights` if epoch-level insights are present.
 
-## extract_epochs.py
-Output locations (defaults):
-- Report: `results/analysis/report.txt`
-- JSON: configurable via `--json` (creates parent dirs automatically)
-- Insight Briefs: `results/insights/<challenge>_brief.md`
+## final_analysis.py
 
-Extract per-epoch results directly from Inspect AI `.eval` logs, bypassing the defective `logs.json` file. This tool provides complete epoch-by-epoch analysis with all 6 epochs per challenge, including detailed scores, analyst reviews, and Balance Horizon calculations.
+Comprehensive analysis of suite results from .eval logs. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
+
+Output locations (auto-generated):
+- Report: `results/<timestamp>/analysis_report.txt`
+- JSON: `results/<timestamp>/analysis_data.json`
+- Insights: `results/<timestamp>/insights_data.json`
 
 
 ### Usage
 
 ```bash
 # Clean up results folder
-python tools/cleanup_results.py --list                    # List all results
-python tools/cleanup_results.py --cleanup --confirm       # Remove all results
-python tools/cleanup_results.py --older-than 7 --confirm  # Remove files older than 7 days
-python tools/cleanup_results.py --pattern strategic --confirm  # Remove files matching pattern
+python tools/cleaner.py --list                    # List all results
+python tools/cleaner.py --cleanup --confirm       # Remove all results
+python tools/cleaner.py --older-than 7 --confirm  # Remove files older than 7 days
+python tools/cleaner.py --pattern strategic --confirm  # Remove files matching pattern
 
 # Run complete evaluation suite
 python tools/run_full_suite.py                           # Run with configured models from .env
@@ -44,54 +45,39 @@ python tools/run_full_suite.py                           # Run with configured m
 # Validate setup
 python tools/validate_setup.py                            # Check if everything is configured correctly
 
-# Analyze suite results (comprehensive analysis)
-python tools/final_analysis.py logs/logs.json --output report.txt
-python tools/final_analysis.py logs/logs.json --json analysis.json  # Save structured JSON
-
-# Extract per-epoch data from .eval logs (bypasses logs.json)
-python tools/extract_epochs.py logs --output report_epochs.txt --json epochs.json
-python tools/extract_epochs.py logs/single_challenge.eval --output single_report.txt
-python tools/extract_epochs.py logs --challenge formal normative --output formal_normative.txt
+# Analyze .eval logs (comprehensive analysis)
+python tools/final_analysis.py                           # Auto-generates timestamped outputs
+python tools/final_analysis.py --eval-dir logs           # Specify logs directory
+python tools/final_analysis.py logs/logs.json --output custom/report.txt  # Custom output paths
 
 ```
 
 ### File Organization
 
-All outputs are automatically saved to the `results/` folder with organized naming:
+All outputs are automatically saved to timestamped directories under `results/`:
 
-- **Format**: `YYYYMMDD_HHMMSS_taskname_format.ext`
-- **Example**: `20251003_105624_00_strategic_text.txt`
-- **Example**: `20251003_105624_00_strategic_conversation.txt`
-- **Example**: `20251003_105624_00_strategic_markdown.md`
+- **Format**: `results/YYYY-MM-DDTHH-MM-SS+03-00/`
+- **Example**: `results/2025-10-06T18-24-24+03-00/analysis_report.txt`
+- **Example**: `results/2025-10-06T18-24-24+03-00/analysis_data.json`
+- **Example**: `results/2025-10-06T18-24-24+03-00/insights_data.json`
 
-The timestamp and task name are extracted from the original log filename for easy organization and sorting.
-
-### Supported Formats
-
-- **text** (default): Plain text with detailed scoring breakdown
-- **markdown**: Markdown formatted tables and sections
-- **html**: HTML page with styling and tables
-- **json**: Structured JSON data for programmatic use
+The timestamp is extracted from the first .eval file for easy organization and prevents overwriting.
 
 ### What It Extracts
 
-#### extract_epochs.py:
-- **All 6 epochs per challenge** (complete per-epoch breakdown)
+#### final_analysis.py:
+- **Comprehensive suite analysis** from .eval logs
+- **All epochs per challenge** (complete per-epoch breakdown)
 - **Alignment scores** and detailed breakdowns per epoch
 - **Structure scores** (traceability, variety, accountability, integrity)
 - **Behavior scores** (truthfulness, completeness, groundedness, literacy, comparison, preference)
 - **Specialization scores** (domain-specific metrics per challenge)
 - **Analyst reviews** (scoring_rationale, strengths, weaknesses per epoch)
 - **Timing data** (duration, turn counts per epoch)
-- **Balance Horizon** (normalized and raw calculations)
+- **Balance Horizon** (time-normalized alignment per challenge; suite-level median)
 - **Pathology detection** (if any issues detected)
 - **Fallback detection** (when analyst evaluation fails)
-
-#### final_analysis.py:
-- **Comprehensive suite analysis** from JSON logs
-- **Analyst evaluation metadata** (scoring rationale, strengths, weaknesses, fallback usage)
-- **Balance Horizon** (time-normalized alignment per challenge; suite-level median)
-- **Weighted score verification** (matches scorer calculations)
+- **Insight briefs** (aggregated analyst insights per challenge)
 - **Suite-level summaries** (overall performance, rankings, pathology analysis)
 - **Analyst reliability analysis** (fallback usage across epochs)
 

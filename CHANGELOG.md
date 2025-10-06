@@ -9,22 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.5] - 2025-10-06
 
-#### **Changed**
-- Integrated insights into analyst scoring: analysts now return `insight_brief` per epoch.
-- Updated Technical Specs to use "Ensemble Analysis System" terminology and integrated insight workflow.
-- Default analysis outputs now saved under `results/analysis/` and per-challenge Insight Briefs under `results/insights/`.
+### ✨ **Integrated Insight Generation & Streamlined Outputs**
 
 #### **Added**
-- `insight_brief` field to scoring template and scorer metadata.
-- Final analysis aggregates and writes `results/insights/<challenge>_brief.md` when insight briefs are present.
+- **In-line Insight Briefs**: Analysts now generate concise Markdown insight briefs per epoch during scoring.
+- **Timestamped Output Directories**: Analysis reports, JSON data, and aggregated insight briefs are saved to a unique, timestamped directory (e.g., `results/2025-10-06T18-24-24/`) to prevent overwriting.
+- **Insights Dataset Export**: `insights_data.json` file containing per-epoch analyst insights, suitable for training data donation.
+
+#### **Changed**
+- **Output Paths**: `final_analysis.py` now defaults output files to `results/<timestamp>/analysis_report.txt` and `results/<timestamp>/analysis_data.json`.
+- **Insight Aggregation**: `final_analysis.py` aggregates epoch-level insight briefs into a single JSON dataset instead of separate Markdown files.
+- **Analyst Call Count**: Corrected resource calculation for analyst calls (45 for standard, 90 for research evaluation).
+- **Cleanup Tool**: `cleaner.py` now defaults to cleaning logs directory, with `--results` flag for results cleanup.
 
 #### **Removed**
-- Transcript and raw analyst output persistence from scorer.
-- `tools/synthesize_insights.py` (no longer needed).
+- **Transcript Persistence**: Eliminated the need to persist raw epoch transcripts to disk.
+- **Insight Synthesis Script**: Removed the separate `tools/synthesize_insights.py` script.
+- **Extract Epochs Script**: Removed `tools/extract_epochs.py` as `final_analysis.py` handles .eval files directly.
+- **Redundant Configuration**: Removed `logging.insights.output_dir` from `evaluation_config.yaml`.
 
 #### **Fixed**
-- `final_analysis.py` ensures parent directories exist for `--output` and `--json` paths.
-- Config default `logging.save_transcripts` set to `false`.
+- **Analyst Error Handling**: Robustly handles `None` values in analyst error messages during reporting.
+- **JSON Serialization**: Correctly serializes `ModelUsage` objects in JSON output.
+- **Default Behavior**: `final_analysis.py` now runs without flags, defaulting to logs directory.
 
 ---
 
@@ -55,7 +62,7 @@ Optional per-turn timeout warnings (env var, doesn't fail)
 Clear distinction between transient/non-transient errors
 alignment_scorer.py:
 
-- alignment_scorer.py: Primary + backup analyst support via model_roles["grader_backup"]
+- alignment_scorer.py: Primary + backup analyst support via model_roles["analyst_backup"]
 Stores transcript + raw analyst output for offline rescoring
 Retry logic with exponential backoff
 Graceful degradation (fallback scores, clear error messages)

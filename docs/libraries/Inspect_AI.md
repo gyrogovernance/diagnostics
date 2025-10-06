@@ -2676,7 +2676,7 @@ The core data type underlying the use of datasets with Inspect is the `Sample`, 
 |-------------------|---------------------|--------------------------------|
 | `input` | `str | list[ChatMessage]` | The input to be submitted to the model. |
 | `choices` | `list[str] | None` | Optional. Multiple choice answer list. |
-| `target` | `str | list[str] | None` | Optional. Ideal target output. May be a literal value or narrative text to be used by a model grader. |
+| `target` | `str | list[str] | None` | Optional. Ideal target output. May be a literal value or narrative text to be used by a model analyst. |
 | `id` | `str | None` | Optional. Unique identifier for sample. |
 | `metadata` | `dict[str | Any] | None` | Optional. Arbitrary metadata associated with the sample. |
 | `sandbox` | `str | tuple[str,str]` | Optional. Sandbox environment type (or optionally a tuple with type and config file) | 
@@ -5864,29 +5864,29 @@ Note though that this *won't work* with model providers that require an async cl
 
 Model roles enable you to create aliases for the various models used in your tasks, and then dynamically vary those roles when running an evaluation. For example, you might have a "critic" or "monitor" role, or perhaps "red_team" and "blue_team" roles. Roles are included in the log and displayed in model events within the transcript.
 
-Here is a scorer that utilises a "grader" role when binding to a model:
+Here is a scorer that utilises a "analyst" role when binding to a model:
 
 ``` python
 @scorer(metrics=[accuracy(), stderr()])
-def model_grader() -> Scorer:
+def model_analyst() -> Scorer:
     async def score(state: TaskState, target: Target):
-        model = get_model(role="grader")
+        model = get_model(role="analyst")
         ...
 ```
 
-By default if there is no "grader" role specified, the default model for the evaluation will be returned. Model roles can be specified when using `inspect eval` or calling the `eval()` function:
+By default if there is no "analyst" role specified, the default model for the evaluation will be returned. Model roles can be specified when using `inspect eval` or calling the `eval()` function:
 
 ``` bash
-inspect eval math.py --model-role grader=google/gemini-2.0-flash
+inspect eval math.py --model-role analyst=google/gemini-2.0-flash
 ```
 
 Or with `eval()`:
 
 ``` python
-eval("math.py", model_roles = { "grader": "google/gemini-2.0-flash" })
+eval("math.py", model_roles = { "analyst": "google/gemini-2.0-flash" })
 ```
 
-Note that the built-in [model-graded scorers](scorers.qmd#model-graded) (e.g. `model_graded_qa()`, `model_graded_fact()`) look for the `grader` role by default.
+Note that the built-in [model-graded scorers](scorers.qmd#model-graded) (e.g. `model_graded_qa()`, `model_graded_fact()`) look for the `analyst` role by default.
 
 ### Role Resolution
 
@@ -5898,8 +5898,8 @@ Given this, you should always call `get_model()` _inside_ the implementation of 
 
 ``` python
 @scorer(metrics=[accuracy(), stderr()])
-def model_grader() -> Scorer:
-    model = get_model(role="grader") # <1> 
+def model_analyst() -> Scorer:
+    model = get_model(role="analyst") # <1> 
     async def score(state: TaskState, target: Target):   
         ...
 ```
@@ -5910,9 +5910,9 @@ def model_grader() -> Scorer:
 
 ``` python
 @scorer(metrics=[accuracy(), stderr()])
-def model_grader() -> Scorer:
+def model_analyst() -> Scorer:
     async def score(state: TaskState, target: Target):  
-        model = get_model(role="grader") # <1>  
+        model = get_model(role="analyst") # <1>  
         ...
 ```
 
@@ -5923,7 +5923,7 @@ def model_grader() -> Scorer:
 By default if there is a no role explicitly defined then `get_model(role="...")` will return the default model for the evaluation. You can specify an alternate default model as follows:
 
 ``` python
-model = get_model(role="grader", default="openai/gpt-4o")
+model = get_model(role="analyst", default="openai/gpt-4o")
 ```
 
 This means that you can use model roles as a means of external configurability even if you aren't yet explicitly taking advantage of them.
@@ -6604,7 +6604,7 @@ $ inspect eval --model openai/gpt-4 --max-connections 20
 The default value for max connections is 10. By increasing it we might get better performance due to higher parallelism, however we might get *worse* performance if this causes us to frequently hit rate limits (which are retried with exponential backoff). The "correct" max connections for your evaluations will vary based on your actual rate limit and the size and complexity of your evaluations.
 
 ::: {.callout-note appearance="simple"}
-Note that max connections is applied per-model. This means that if you use a grader model from a provider distinct from the one you are evaluating you will get extra concurrency (as each model will enforce its own max connections).
+Note that max connections is applied per-model. This means that if you use a analyst model from a provider distinct from the one you are evaluating you will get extra concurrency (as each model will enforce its own max connections).
 :::
 
 ### Rate Limits
@@ -6768,12 +6768,12 @@ models = [
 output = "Output to be scored"
 prompt = f"Could you please score the following output?\n\n{output}"
 
-graders = [model.generate(prompt) for model in models]
+analysts = [model.generate(prompt) for model in models]
 
-grader_outputs = await asyncio.gather(*graders)
+analyst_outputs = await asyncio.gather(*analysts)
 ```
 
-Note that we don't await the call to `model.generate()` when building our list of graders. Rather the call to `asyncio.gather()` will await each of these requests and return when they have all completed. Inspect's internal handling of `max_connections` for model APIs will throttle these requests, so there is no need to worry about how many you put in flight.
+Note that we don't await the call to `model.generate()` when building our list of analysts. Rather the call to `asyncio.gather()` will await each of these requests and return when they have all completed. Inspect's internal handling of `max_connections` for model APIs will throttle these requests, so there is no need to worry about how many you put in flight.
 
 #### Web Requests
 
@@ -8612,7 +8612,7 @@ def model_graded_qa(
     include_history: bool | Callable[[TaskState], str] = False,
     partial_credit: bool = False,
     model: list[str | Model] | str | Model | None = None,
-    model_role: str | None = "grader",
+    model_role: str | None = "analyst",
 ) -> Scorer:
     ...
 ```
@@ -8622,7 +8622,7 @@ The default model graded QA scorer is tuned to grade answers to open ended quest
 Model selection follows this precedence:
 
 1. If `model` is provided, it is used (if a list is provided, each model grades independently and the final grade is by majority vote).
-2. Else if `model_role` is provided (default: `"grader"`), the model bound to that role (via `eval(..., model_roles={...})` or `--model-role grader=...`) is used.
+2. Else if `model_role` is provided (default: `"analyst"`), the model bound to that role (via `eval(..., model_roles={...})` or `--model-role analyst=...`) is used.
 3. Else the model currently being evaluated is used.
 
 There are a few ways you can customise the default behaviour:
@@ -8631,7 +8631,7 @@ There are a few ways you can customise the default behaviour:
 2.  Specify `include_history = True` to include the full chat history in the presented question (by default only the original sample input is presented). You may optionally instead pass a function that enables customising the presentation of the chat history.
 3.  Specify `partial_credit = True` to prompt the model to assign partial credit to answers that are not entirely right but come close (metrics by default convert this to a value of 0.5). Note that this parameter is only valid when using the default `instructions`.
 4.  Specify an alternate `model` to perform the grading (e.g. a more powerful model or a model fine tuned for grading). If you provide a list of models, each grades independently and the final grade is chosen by majority vote.
-5.  Bind a `model_role` (default: `"grader"`) at eval time. See [Model Roles](models.qmd#model-roles) for details.
+5.  Bind a `model_role` (default: `"analyst"`) at eval time. See [Model Roles](models.qmd#model-roles) for details.
 6.  Specify a different `template`—note that templates are passed these variables: `question`, `criterion`, `answer`, and `instructions.`
 
 The `model_graded_fact()` scorer works identically to `model_graded_qa()` (including model selection precedence and multi-model voting), and simply provides an alternate `template` oriented around judging whether a fact is included in the model output.
@@ -8640,7 +8640,7 @@ If you want to understand how the default templates for `model_graded_qa()` and 
 
 ### Multiple Models
 
-The built-in model graded scorers also support using multiple grader models (whereby the final grade is chosen by majority vote). For example, here we specify that 3 models should be used for grading:
+The built-in model graded scorers also support using multiple analyst models (whereby the final grade is chosen by majority vote). For example, here we specify that 3 models should be used for grading:
 
 ``` python
 model_graded_qa(
@@ -8652,7 +8652,7 @@ model_graded_qa(
 )
 ```
 
-The implementation of multiple grader models takes advantage of the `multi_scorer()` and `majority_vote()` functions, both of which can be used in your own scorers (as described in the [Multiple Scorers](#sec-multiple-scorers) section below).
+The implementation of multiple analyst models takes advantage of the `multi_scorer()` and `majority_vote()` functions, both of which can be used in your own scorers (as described in the [Multiple Scorers](#sec-multiple-scorers) section below).
 
 ## Custom Scorers
 
@@ -8679,7 +8679,7 @@ The components of `Score` include:
 |-------------------|-------------------|----------------------------------|
 | `value` | `Value` | Value assigned to the sample (e.g. "C" or "I", or a raw numeric value). |
 | `answer` | `str` | Text extracted from model output for comparison (optional). |
-| `explanation` | `str` | Explanation of score, e.g. full model output or grader model output (optional). |
+| `explanation` | `str` | Explanation of score, e.g. full model output or analyst model output (optional). |
 | `metadata` | `dict[str,Any]` | Additional metadata about the score to record in the log file (optional). |
 
 : {tbl-colwidths=\[20,20,60\]}
@@ -8721,16 +8721,16 @@ You'll often want to use models in the implementation of scorers. Use the `get_m
 
 ``` python
 # use the model being evaluated for grading
-grader_model = get_model() 
+analyst_model = get_model() 
 
 # use another model for grading
-grader_model = get_model("google/gemini-2.5-pro")
+analyst_model = get_model("google/gemini-2.5-pro")
 ```
 
 Use the `config` parameter of `get_model()` to override default generation options:
 
 ``` python
-grader_model = get_model(
+analyst_model = get_model(
     "google/gemini-2.5-pro", 
     config = GenerateConfig(temperature = 0.9, max_connections = 10)
 )
@@ -8789,7 +8789,7 @@ def model_graded_qa(
     instructions = resource(instructions)
 
     # resolve model
-    grader_model = get_model(model)
+    analyst_model = get_model(model)
 
     async def score(state: TaskState, target: Target) -> Score:
         # format the model grading template
@@ -8801,7 +8801,7 @@ def model_graded_qa(
         )
 
         # query the model for the score
-        result = await grader_model.generate(score_prompt)
+        result = await analyst_model.generate(score_prompt)
 
         # extract the grade
         match = re.search(grade_pattern, result.completion)
@@ -8821,7 +8821,7 @@ def model_graded_qa(
     return score
 ```
 
-Note that the call to `model_grader.generate()` is done with `await`—this is critical to ensure that the scorer participates correctly in the scheduling of generation work.
+Note that the call to `model_analyst.generate()` is done with `await`—this is critical to ensure that the scorer participates correctly in the scheduling of generation work.
 
 Note also we use the `input_text` property of the `TaskState` to access a string version of the original user input to substitute it into the grading template. Using the `input_text` has two benefits: (1) It is guaranteed to cover the original input from the dataset (rather than a transformed prompt in `messages`); and (2) It normalises the input to a string (as it could have been a message list).
 
@@ -8953,7 +8953,7 @@ task = Task(
 
 ### Reducing Multiple Scores
 
-It's possible to use multiple scorers in parallel, then reduce their output into a final overall score. This is done using the `multi_scorer()` function. For example, this is roughly how the built in model graders use multiple models for grading:
+It's possible to use multiple scorers in parallel, then reduce their output into a final overall score. This is done using the `multi_scorer()` function. For example, this is roughly how the built in model analysts use multiple models for grading:
 
 ``` python
 multi_scorer(
@@ -9293,7 +9293,7 @@ You can also use the `score()` function in your Python code to score evaluation 
 ``` python
 log = eval(popularity, model="openai/gpt-4")[0]
 
-grader_models = [
+analyst_models = [
     "openai/gpt-4",
     "anthropic/claude-3-opus-20240229",
     "google/gemini-2.5-pro",
@@ -9301,7 +9301,7 @@ grader_models = [
 ]
 
 scoring_logs = [score(log, model_graded_qa(model=model)) 
-                for model in grader_models]
+                for model in analyst_models]
 
 plot_results(scoring_logs)
 ```
@@ -9313,7 +9313,7 @@ You can also use this function to score an existing log file (appending or overw
 input_log_path = "./logs/2025-02-11T15-17-00-05-00_popularity_dPiJifoWeEQBrfWsAopzWr.eval"
 log = read_eval_log(input_log_path)
 
-grader_models = [
+analyst_models = [
     "openai/gpt-4",
     "anthropic/claude-3-opus-20240229",
     "google/gemini-2.5-pro",
@@ -9322,10 +9322,10 @@ grader_models = [
 
 # perform the scoring using various models
 scoring_logs = [score(log, model_graded_qa(model=model), action="append") 
-                for model in grader_models]
+                for model in analyst_models]
 
 # write log files with the model name as a suffix
-for model, scored_log in zip(grader_models, scoring_logs):
+for model, scored_log in zip(analyst_models, scoring_logs):
     base, ext = os.path.splitext(input_log_path)
     output_file = f"{base}_{model.replace('/', '_')}{ext}"
     write_eval_log(scored_log, output_file)
@@ -10122,7 +10122,7 @@ You by and large don't need to worry about these options until you want to use t
 
 ## Parameters {#parameters}
 
-Task parameters make it easy to run variants of your task without changing its source code. Task parameters are simply the arguments to your `@task` decorated function. For example, here we provide parameters (and default values) for system and grader prompts, as well as the grader model:
+Task parameters make it easy to run variants of your task without changing its source code. Task parameters are simply the arguments to your `@task` decorated function. For example, here we provide parameters (and default values) for system and analyst prompts, as well as the analyst model:
 
 ``` {.python filename="security.py"}
 from inspect_ai import Task, task
@@ -10133,14 +10133,14 @@ from inspect_ai.solver import generate, system_message
 @task
 def security_guide(
     system="devops.txt", 
-    grader="expert.txt",
-    grader_model="openai/gpt-4o"
+    analyst="expert.txt",
+    analyst_model="openai/gpt-4o"
 ):
    return Task(
       dataset=example_dataset("security_guide"),
       solver=[system_message(system), generate()],
       scorer=model_graded_fact(
-          template=grader, model=grader_model
+          template=analyst, model=analyst_model
       )
    )
 ```
@@ -10155,14 +10155,14 @@ The `-T` CLI flag is used to specify parameter values. You can include multiple 
 
 ``` bash
 inspect eval security.py \
-   -T system="researcher.txt" -T grader="hacker.txt"
+   -T system="researcher.txt" -T analyst="hacker.txt"
 ```
 
 If you have several task parameters you want to specify together, you can put them in a YAML or JSON file and use the `--task-config` CLI option. For example:
 
 ``` {.yaml filename="config.yaml"}
 system: "researcher.txt"
-grader: "hacker.txt"
+analyst: "hacker.txt"
 ```
 
 Reference this file from the CLI with:
@@ -10427,7 +10427,7 @@ inspect eval evals/mytask
 
 When developing tasks and solvers, you often want to explore how changing prompts, generation options, solvers, and models affect performance on a task. You can do this by creating multiple tasks with varying parameters and passing them all to the `eval_set()` function.
 
-Returning to the example from above, the `system` and `grader` parameters point to files we are using as system message and grader model templates. At the outset we might want to explore every possible combination of these parameters, along with different models. We can use the `itertools.product` function to do this:
+Returning to the example from above, the `system` and `analyst` parameters point to files we are using as system message and analyst model templates. At the outset we might want to explore every possible combination of these parameters, along with different models. We can use the `itertools.product` function to do this:
 
 ``` python
 from itertools import product
@@ -10435,16 +10435,16 @@ from itertools import product
 # 'grid' will be a permutation of all parameters
 params = {
     "system": ["devops.txt", "researcher.txt"],
-    "grader": ["hacker.txt", "expert.txt"],
-    "grader_model": ["openai/gpt-4o", "google/gemini-2.5-pro"],
+    "analyst": ["hacker.txt", "expert.txt"],
+    "analyst_model": ["openai/gpt-4o", "google/gemini-2.5-pro"],
 }
 grid = list(product(*(params[name] for name in params)))
 
 # run the evals and capture the logs
 logs = eval_set(
     [
-        security_guide(system, grader, grader_model)
-        for system, grader, grader_model in grid
+        security_guide(system, analyst, analyst_model)
+        for system, analyst, analyst_model in grid
     ],
     model=["google/gemini-2.5-flash", "mistral/mistral-large-latest"],
     log_dir="security-tasks"
@@ -12123,7 +12123,7 @@ def security_guide():
     )
 ```
 
-Note that we are using a `model_graded_fact()` scorer. By default, the model being evaluated is used but you can use any other model as a grader.
+Note that we are using a `model_graded_fact()` scorer. By default, the model being evaluated is used but you can use any other model as a analyst.
 
 Now we run the evaluation:
 

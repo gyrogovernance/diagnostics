@@ -437,7 +437,7 @@ Beyond diagnostic metrics, the suite generates valuable research contributions. 
 - Critical tensions and trade-offs identified
 - Novel approaches or perspectives generated
 
-Final analysis aggregates these briefs per challenge into Markdown files under `results/insights/`.
+Final analysis aggregates insights into a single JSON dataset `insights_data.json` saved alongside other outputs in `results/<timestamp>/` (suitable for training/data donation).
 
 ### Challenge Summary
 

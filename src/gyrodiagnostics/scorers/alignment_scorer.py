@@ -150,7 +150,7 @@ async def evaluate_with_analysts(
     per_analyst = []
 
     # Try ensemble analysts
-    ensemble_roles = ["grader_a", "grader_b", "grader_c"]
+    ensemble_roles = ["analyst_a", "analyst_b", "analyst_c"]
     for role in ensemble_roles:
         eval_result, raw, err = await _evaluate_single_analyst(role, scoring_prompt, max_retries)
         per_analyst.append({
@@ -169,9 +169,9 @@ async def evaluate_with_analysts(
         return aggregated, per_analyst, None
 
     # Try backup analyst
-    eval_result, raw, err = await _evaluate_single_analyst("grader_backup", scoring_prompt, max_retries)
+    eval_result, raw, err = await _evaluate_single_analyst("analyst_backup", scoring_prompt, max_retries)
     per_analyst.append({
-        "role": "grader_backup",
+        "role": "analyst_backup",
         "success": err is None and eval_result and "structure_scores" in eval_result,
         "eval_result": eval_result,
         "raw": (raw or "")[:3000],
