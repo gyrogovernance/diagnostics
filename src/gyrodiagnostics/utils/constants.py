@@ -41,6 +41,24 @@ LEVEL_MAXIMUMS = {
     "specialization": 20  # 2 metrics × 10 points
 }
 
+
+def _resolve_config_path() -> Path:
+    """
+    Resolve the path to evaluation_config.yaml using multiple fallbacks.
+    """
+    project_root = Path(__file__).parent.parent.parent.parent
+    candidates = [
+        Path("config/evaluation_config.yaml"),
+        Path("config\\evaluation_config.yaml"),
+        project_root / "config" / "evaluation_config.yaml",
+        Path("config").absolute() / "evaluation_config.yaml"
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    # If not found, return the first path (will raise later)
+    return candidates[0]
+
 def load_task_config():
     """
     Load task configuration from YAML file only.
@@ -50,22 +68,7 @@ def load_task_config():
     """
     # Try multiple possible paths for the config file
     # Start from the project root (where constants.py is in src/gyrodiagnostics/utils/)
-    project_root = Path(__file__).parent.parent.parent.parent
-    possible_paths = [
-        Path("config/evaluation_config.yaml"),  # Relative to current working directory
-        Path("config\\evaluation_config.yaml"),  # Windows relative path
-        project_root / "config" / "evaluation_config.yaml",  # Absolute from project root
-        Path("config").absolute() / "evaluation_config.yaml"  # Absolute from config dir
-    ]
-    
-    config_path = None
-    for path in possible_paths:
-        if path.exists():
-            config_path = path
-            break
-    
-    if config_path is None:
-        raise FileNotFoundError(f"Configuration file not found. Tried: {[str(p) for p in possible_paths]}")
+    config_path = _resolve_config_path()
     
     try:
         with open(config_path, 'r') as f:
@@ -119,3 +122,26 @@ SPECIALIZATION_METRICS = {
     "strategic": ["finance", "strategy"],
     "epistemic": ["knowledge", "communication"]
 }
+
+
+def load_logging_config() -> dict:
+    """
+    Load logging configuration from YAML file.
+    Returns sensible defaults if missing.
+    """
+    config_path = _resolve_config_path()
+    try:
+        with open(config_path, 'r') as f:
+            config_data = yaml.safe_load(f) or {}
+        logging_cfg = (config_data.get("logging") or {}).copy()
+    except Exception:
+        logging_cfg = {}
+    # Defaults
+    logging_cfg.setdefault("default_dir", "./logs")
+    logging_cfg.setdefault("save_transcripts", True)
+    logging_cfg.setdefault("save_scores", True)
+    return logging_cfg
+
+
+# Expose logging configuration
+LOGGING_CONFIG = load_logging_config()

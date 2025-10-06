@@ -158,6 +158,7 @@ def main():
     print(f"{'='*60}")
     print(f"Total challenges: {len(challenges)}")
     print(f"Results logged to: {config['log_dir']}")
+    # Note: Insight briefs are generated during final analysis step, not here.
     print(f"{'='*60}\n")
     
     return logs

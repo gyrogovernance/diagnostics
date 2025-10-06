@@ -522,7 +522,7 @@ def print_challenge_summary(result: Dict, output_file=None):
         p()
         
         # Structure metrics
-        p(f"STRUCTURE (max 50, weight 40%):")
+        p(f"STRUCTURE (max 40, weight 40%):")
         structure = epoch['structure_scores']
         for metric in ["traceability", "variety", "accountability", "integrity"]:
             score = structure.get(metric, 0)
@@ -795,6 +795,31 @@ def print_suite_summary(results: List[Dict], output_file=None):
         p(f"   Output: {total_output:,}")
         p(f"   Total:  {total_input + total_output:,}")
 
+    # Write aggregated insight briefs per challenge if present
+    insights_dir = Path("results/insights")
+    insights_dir.mkdir(parents=True, exist_ok=True)
+    for r in successful:
+        ch = r.get('challenge_type')
+        if not ch:
+            continue
+        # Combine epoch-level insight_brief if present
+        epoch_insights = []
+        for ep in r.get('epoch_results', []):
+            ib = ep.get('insight_brief') or ""
+            if isinstance(ib, str) and ib.strip():
+                epoch_insights.append(ib.strip())
+        # If none at epoch level, use challenge-level combined if present
+        if not epoch_insights and r.get('epoch_results'):
+            # Not available; skip silently
+            continue
+        if epoch_insights:
+            content = f"# {ch.capitalize()} Insight Brief\n\n" + "\n\n---\n\n".join(epoch_insights)
+            out_path = insights_dir / f"{ch}_brief.md"
+            try:
+                out_path.write_text(content, encoding='utf-8')
+            except Exception:
+                pass
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -814,7 +839,8 @@ def main():
     parser.add_argument(
         "--output",
         type=str,
-        help="Save report to file (default: print to stdout)"
+        default="results/analysis/report.txt",
+        help="Save report to file (default: results/analysis/report.txt)"
     )
     parser.add_argument(
         "--json",
@@ -885,7 +911,9 @@ def main():
     # Print output
     output_file = None
     if args.output:
-        output_file = open(args.output, 'w', encoding='utf-8')
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        output_file = open(out_path, 'w', encoding='utf-8')
     
     try:
         def p(text=""):
@@ -925,15 +953,16 @@ def main():
     
     # JSON output if requested
     if args.json:
+        json_path = Path(args.json)
+        json_path.parent.mkdir(parents=True, exist_ok=True)
         # Remove transcript from JSON to keep file size reasonable
         for r in results:
             for epoch in r.get('epoch_results', []):
                 if 'transcript' in epoch:
                     epoch['transcript'] = f"<{len(epoch['transcript'])} chars>"
-        
-        with open(args.json, 'w', encoding='utf-8') as f:
+        with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2)
-        print(f"[OK] JSON analysis saved to: {args.json}")
+        print(f"[OK] JSON analysis saved to: {json_path}")
     
     return 0
 

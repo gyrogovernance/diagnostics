@@ -30,7 +30,7 @@ scoring:
     specialization: 0.2
   
   level_maximums:
-    structure: 50  # 5 metrics × 10 points
+    structure: 40  # 5 metrics × 10 points
     behavior: 60   # 6 metrics × 10 points
     specialization: 20  # 2 metrics × 10 points
 
@@ -77,5 +77,5 @@ models:
 # Logging
 logging:
   default_dir: "./logs"
-  save_transcripts: true
+  save_transcripts: false
   save_scores: true

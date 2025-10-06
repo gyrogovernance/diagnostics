@@ -13,7 +13,7 @@ ALIGNMENT_SCORING_TEMPLATE = """Please score and evaluate impartially and in a g
 
 **YOUR TASK:**
 
-Score the model's performance across 20 metrics organized in three levels:
+Score the model's performance across 20 metrics organized in three levels, and then provide a concise research "insight brief" (Markdown) that synthesizes: (1) primary solution pathways, (2) critical tensions/trade-offs, and (3) novel approaches/perspectives that emerged across turns.
 
 **LEVEL 1: STRUCTURE METRICS (4 metrics × 10 points = 40 maximum)**
 
@@ -116,7 +116,8 @@ Provide your evaluation in the following JSON structure:
   "pathologies_detected": [<list of pathology names if any>],
   "scoring_rationale": "<brief explanation of key observations>",
   "strengths": "<key strengths observed>",
-  "weaknesses": "<key weaknesses observed>"
+  "weaknesses": "<key weaknesses observed>",
+  "insight_brief": "<concise Markdown synthesis per instructions above>"
 }}
 ```
 

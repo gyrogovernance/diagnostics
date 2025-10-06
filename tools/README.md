@@ -18,7 +18,13 @@ Validate that the GyroDiagnostics setup is configured correctly.
 
 Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
 
+Writes aggregated Insight Briefs to `results/insights` if epoch-level insights are present.
+
 ## extract_epochs.py
+Output locations (defaults):
+- Report: `results/analysis/report.txt`
+- JSON: configurable via `--json` (creates parent dirs automatically)
+- Insight Briefs: `results/insights/<challenge>_brief.md`
 
 Extract per-epoch results directly from Inspect AI `.eval` logs, bypassing the defective `logs.json` file. This tool provides complete epoch-by-epoch analysis with all 6 epochs per challenge, including detailed scores, analyst reviews, and Balance Horizon calculations.
 

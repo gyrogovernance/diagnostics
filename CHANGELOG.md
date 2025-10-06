@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.5] - 2025-10-06
+
+#### **Changed**
+- Integrated insights into analyst scoring: analysts now return `insight_brief` per epoch.
+- Updated Technical Specs to use "Ensemble Analysis System" terminology and integrated insight workflow.
+- Default analysis outputs now saved under `results/analysis/` and per-challenge Insight Briefs under `results/insights/`.
+
+#### **Added**
+- `insight_brief` field to scoring template and scorer metadata.
+- Final analysis aggregates and writes `results/insights/<challenge>_brief.md` when insight briefs are present.
+
+#### **Removed**
+- Transcript and raw analyst output persistence from scorer.
+- `tools/synthesize_insights.py` (no longer needed).
+
+#### **Fixed**
+- `final_analysis.py` ensures parent directories exist for `--output` and `--json` paths.
+- Config default `logging.save_transcripts` set to `false`.
+
+---
+
 ## [0.9.4] - 2025-10-05
 
 #### **Changed**
