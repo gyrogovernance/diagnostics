@@ -25,8 +25,8 @@
 </div>
 
 ---
-<span style="font-size: 6em;">🌟</span> 
-# GyroDiagnostics
+
+# <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
 **Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
 
@@ -36,12 +36,12 @@ GyroDiagnostics is a comprehensive evaluation suite for assessing AI model align
 
 The framework advances AI safety and development through dual capabilities:
 
-<span style="font-size: 6em;">🩺</span> **AI Safety Diagnostics**
+### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 - **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
 - **Behavioral Reliability Testing**: Detect model limitations and optimization opportunities
 - **Deployment Readiness Evaluation**: Support high-stakes applications with rigorous safety metrics
 
-<span style="font-size: 6em;">🔬</span> **Annotated Insights Generation**
+### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Annotated Insights Generation**
 - **AI-Driven Solution Extraction**: Automated annotation of novel pathways from model outputs
 - **Trade-off and Tension Analysis**: Systematic capture of decision factors and constraints
 - **Domain-Specific Knowledge Synthesis**: Insights from challenges in policy, strategy, and epistemology
