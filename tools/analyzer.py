@@ -283,7 +283,8 @@ def extract_epoch_data(metadata: Dict) -> Dict:
         "analyst_fallback_used": analyst_fallback_used,
         "per_analyst": metadata.get("per_analyst", []),
         "transcript": transcript,
-        "insight_brief": insight_brief
+        "insight_brief": insight_brief,
+        "sample_id": metadata.get("sample_id")
     }
 
 
@@ -892,8 +893,9 @@ def main():
     # Determine input source
     results = []
     
+    source_eval_count = None
     if args.eval_dir:
-        # Parse .eval files from directory
+        # Parse .eval files from directory and aggregate by task/challenge
         eval_dir = Path(args.eval_dir)
         if not eval_dir.exists():
             print(f"[ERROR] Eval directory not found: {eval_dir}")
@@ -905,11 +907,116 @@ def main():
             return 1
         
         print(f"Found {len(eval_files)} .eval files")
+        source_eval_count = len(eval_files)
+        temp_results = []
         for eval_file in eval_files:
             print(f"  Processing: {eval_file.name}")
             result = analyze_challenge_from_eval_file(eval_file)
             if result:
-                results.append(result)
+                temp_results.append(result)
+        
+        # Aggregate across multiple .eval files for the same task/challenge
+        def normalize_task_name(name: str) -> str:
+            name = (name or "").lower().strip()
+            # Map "gyrodiagnostics/formal_challenge" and "formal_challenge" to the same key
+            if "/" in name:
+                name = name.split("/")[-1]
+            return name
+        
+        grouped: dict[str, dict] = {}
+        for r in temp_results:
+            if "error" in r:
+                continue
+            key = (r.get("challenge_type") or "unknown") + "::" + normalize_task_name(r.get("task_name") or "")
+            g = grouped.setdefault(key, {
+                "challenge_type": r.get("challenge_type"),
+                "task_name": r.get("task_name"),
+                "model": r.get("model"),
+                "analyst_model": r.get("analyst_model"),
+                "epoch_results": [],
+                "model_usage": {},
+                "started_at": r.get("started_at"),
+                "completed_at": r.get("completed_at")
+            })
+            # Merge epoch results (dedupe by sample_id or transcript hash if available)
+            existing_hashes = set()
+            existing_ids = set()
+            for ep in g["epoch_results"]:
+                sid = ep.get("sample_id")
+                if sid:
+                    existing_ids.add(str(sid))
+                tx = str(ep.get("transcript", ""))
+                if tx:
+                    existing_hashes.add(hash(tx))
+            for ep in r.get("epoch_results", []):
+                sid = ep.get("sample_id")
+                if sid and str(sid) in existing_ids:
+                    continue
+                tx = str(ep.get("transcript", ""))
+                h = hash(tx) if tx else None
+                # Drop empty or all-zero fallback epochs if we also have non-fallback ones
+                is_fallback = ep.get("analyst_fallback_used", False)
+                if h is not None and h in existing_hashes:
+                    continue
+                # Exclude epochs with zero scores if there exists at least one non-zero epoch
+                if is_fallback:
+                    # We'll add fallbacks tentatively; they may be removed after we detect non-fallbacks
+                    g["epoch_results"].append(ep)
+                else:
+                    g["epoch_results"].append(ep)
+                if sid:
+                    existing_ids.add(str(sid))
+                if h is not None:
+                    existing_hashes.add(h)
+            
+            # Merge token usage (sum input/output when keys match)
+            mu = r.get("model_usage", {}) or {}
+            if isinstance(mu, dict):
+                for k, v in mu.items():
+                    current = g["model_usage"].get(k, {"input_tokens": 0, "output_tokens": 0})
+                    # Handle ModelUsage objects (Pydantic models) vs dicts
+                    if hasattr(v, 'input_tokens'):
+                        inp = getattr(v, 'input_tokens', 0)
+                        outp = getattr(v, 'output_tokens', 0)
+                    elif isinstance(v, dict):
+                        inp = v.get('input_tokens', 0)
+                        outp = v.get('output_tokens', 0)
+                    else:
+                        inp = 0
+                        outp = 0
+                    current["input_tokens"] = current.get("input_tokens", 0) + (inp or 0)
+                    current["output_tokens"] = current.get("output_tokens", 0) + (outp or 0)
+                    g["model_usage"][k] = current
+        
+        # Post-process groups: cap epochs to configured value, prefer non-fallback
+        try:
+            from gyrodiagnostics.utils.constants import TASK_CONFIG
+            max_epochs = int(TASK_CONFIG.get("epochs", 3))
+        except Exception:
+            max_epochs = 3
+        
+        for key, g in grouped.items():
+            eps = g["epoch_results"]
+            # Prefer non-fallback epochs
+            non_fb = [e for e in eps if not e.get("analyst_fallback_used", False)]
+            fb = [e for e in eps if e.get("analyst_fallback_used", False)]
+            ordered = non_fb + fb
+            # Drop zero-score epochs if there are enough non-zero ones
+            def is_zero_epoch(e):
+                return float(e.get("alignment_score", 0.0)) == 0.0
+            non_zero = [e for e in ordered if not is_zero_epoch(e)] or ordered
+            g["epoch_results"] = non_zero[:max_epochs]
+            # Recompute stats via build_challenge_summary
+            summary = build_challenge_summary(
+                g.get("challenge_type", "unknown"),
+                g.get("task_name", "unknown"),
+                g["epoch_results"],
+                {
+                    "eval": {"model": g.get("model", "unknown")},
+                    "stats": {"model_usage": g.get("model_usage", {})}
+                }
+            )
+            results.append(summary)
     
     elif args.log_file:
         # Parse logs.json
@@ -964,7 +1071,10 @@ def main():
         if args.log_file:
             p(f"Source: {args.log_file}")
         elif args.eval_dir:
-            p(f"Source: {args.eval_dir} ({len(results)} .eval files)")
+            if source_eval_count is not None:
+                p(f"Source: {args.eval_dir} ({source_eval_count} .eval files)")
+            else:
+                p(f"Source: {args.eval_dir}")
         p(f"Challenges analyzed: {len(results)}")
         p()
         

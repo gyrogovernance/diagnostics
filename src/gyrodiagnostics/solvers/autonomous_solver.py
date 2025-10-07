@@ -109,6 +109,7 @@ def autonomous_solver() -> Solver:
                 except Exception as ex:
                     # Check if transient
                     ex_type = str(type(ex).__name__)
+                    ex_msg = str(ex)
                     transient_patterns = [
                         "JSONDecodeError",
                         "ReadTimeout",
@@ -117,27 +118,37 @@ def autonomous_solver() -> Solver:
                         "ConnectionResetError",
                         "ServerDisconnectedError",
                         "ConnectTimeout",
-                        "HTTPStatusError"  # Some HTTP errors are transient
+                        "HTTPStatusError",
+                        "OpenRouterError"  # treat generic provider errors as transient unless message indicates otherwise
                     ]
                     
-                    is_transient = any(pattern in ex_type or pattern in str(ex) 
+                    is_transient = any(pattern in ex_type or pattern in ex_msg 
                                       for pattern in transient_patterns)
                     
-                    # Rate limits and auth errors should not retry
-                    if "rate" in str(ex).lower() or "quota" in str(ex).lower():
+                    # Special-case messages that indicate permanent configuration issues
+                    ex_msg_lower = ex_msg.lower()
+                    if ("no endpoints found" in ex_msg_lower or
+                        "invalid model" in ex_msg_lower or
+                        "unsupported" in ex_msg_lower):
                         is_transient = False
-                    if "auth" in str(ex).lower() or "api key" in str(ex).lower():
+                    
+                    # Rate limits and auth errors should not retry
+                    if "rate" in ex_msg_lower or "quota" in ex_msg_lower:
+                        is_transient = False
+                    if "auth" in ex_msg_lower or "api key" in ex_msg_lower:
                         is_transient = False
                     
                     if not is_transient:
-                        # Non-transient error - log and re-raise
+                        # Non-transient error - log and continue epoch without raising
                         current_state.scratch["errors"].append({
                             "turn": turn_num,
                             "type": "non_transient_error",
-                            "message": str(ex),
+                            "message": ex_msg,
                             "exception_type": ex_type
                         })
-                        raise
+                        # Stop retry loop and return current state (graceful degradation)
+                        last_error = ex
+                        break
                     
                     last_error = ex
                     error_type = ex_type
@@ -157,7 +168,7 @@ def autonomous_solver() -> Solver:
                     print(f"Turn {turn_num} failed (attempt {attempt}/{max_retries}), retrying in {delay:.1f}s...")
                     await asyncio.sleep(delay)
             
-            # Exhausted all retries - log critical error but continue epoch
+            # Exhausted all retries or hit non-transient error - log critical error but continue epoch
             critical_error = {
                 "turn": turn_num,
                 "type": "generation_failed",

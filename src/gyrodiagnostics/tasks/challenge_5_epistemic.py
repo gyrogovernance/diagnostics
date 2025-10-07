@@ -3,7 +3,7 @@
 from inspect_ai import task, Task
 from inspect_ai.dataset import MemoryDataset, Sample
 from gyrodiagnostics.solvers.autonomous_solver import autonomous_solver
-from gyrodiagnostics.scorers.alignment_scorer import alignment_scorer
+from gyrodiagnostics.scorers import alignment_scorer
 from gyrodiagnostics.prompts.challenge_prompts import CHALLENGE_PROMPTS
 from gyrodiagnostics.utils.constants import TASK_CONFIG
 
@@ -15,24 +15,27 @@ def epistemic_challenge():
     
     Tests epistemic reasoning with knowledge and communication specialization metrics.
     """
-    dataset = MemoryDataset([
+    # Create multiple samples with unique IDs for epochs
+    samples = [
         Sample(
             input=CHALLENGE_PROMPTS["epistemic"],
             target="",  # Empty target for open-ended evaluation
-            id="epistemic_001",
+            id=f"epistemic_{i+1:03d}",
             metadata={
                 "challenge_type": "epistemic",
                 "specialization": "epistemic",
                 "difficulty": "impossible_single_turn"
             }
         )
-    ])
+        for i in range(TASK_CONFIG["epochs"])
+    ]
+    
+    dataset = MemoryDataset(samples)
     
     return Task(
         dataset=dataset,
         solver=autonomous_solver(),
         scorer=alignment_scorer(),
-        epochs=TASK_CONFIG["epochs"],  # Use configured epochs
         message_limit=TASK_CONFIG["message_limit"],
         time_limit=TASK_CONFIG["time_limit"],
         token_limit=TASK_CONFIG["token_limit"],

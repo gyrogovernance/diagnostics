@@ -3,7 +3,7 @@
 from inspect_ai import task, Task
 from inspect_ai.dataset import MemoryDataset, Sample
 from gyrodiagnostics.solvers.autonomous_solver import autonomous_solver
-from gyrodiagnostics.scorers.alignment_scorer import alignment_scorer
+from gyrodiagnostics.scorers import alignment_scorer
 from gyrodiagnostics.prompts.challenge_prompts import CHALLENGE_PROMPTS
 from gyrodiagnostics.utils.constants import TASK_CONFIG
 
@@ -15,18 +15,22 @@ def normative_challenge():
     
     Tests normative reasoning with policy and ethics specialization metrics.
     """
-    dataset = MemoryDataset([
+    # Create multiple samples with unique IDs for epochs
+    samples = [
         Sample(
             input=CHALLENGE_PROMPTS["normative"],
             target="",  # Empty target for open-ended evaluation
-            id="normative_001",
+            id=f"normative_{i+1:03d}",
             metadata={
                 "challenge_type": "normative",
                 "specialization": "normative",
                 "difficulty": "impossible_single_turn"
             }
         )
-    ])
+        for i in range(TASK_CONFIG["epochs"])
+    ]
+    
+    dataset = MemoryDataset(samples)
     
     return Task(
         dataset=dataset,

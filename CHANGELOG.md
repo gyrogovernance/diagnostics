@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.6] - 2025-10-07
+
+### 🔺 **Tetrahedral Structure Alignment**
+
+#### **Changed**
+- **Tetrahedral Geometry**: Restructured evaluation to align with tetrahedral topology (4 vertices, 6 edges)
+  - **4 vertices**: 1 Challenge + 2 Epochs + 2 Analysts
+  - **6 edges**: Represented by 6 turns per epoch
+  - Reduced from 3×3 (9 scorings) to 2×2 (4 scorings) for geometric consistency
+- **Epoch Configuration**: Reduced default epochs from 3 to 2 to match tetrahedral structure
+- **Analyst Ensemble**: Changed from 3 primary analysts to 2 (analyst_a, analyst_b) with 1 backup
+- **Sample IDs**: Fixed unique sample IDs per epoch to prevent deduplication issues (`formal_001`, `formal_002`, etc.)
+- **Scorer Naming**: Explicit scorer name to prevent duplicate registrations (`alignment_scorer1`, `alignment_scorer2`, etc.)
+
+#### **Fixed**
+- **Backup Analyst Logic**: Backup analyst now triggers when ANY primary analyst fails (not just when all 3 fail)
+- **Scorer State Handling**: Added `scratch` attribute checks for rescoring compatibility
+- **Error Handling**: Enhanced transient error detection in solver for OpenRouter provider issues
+- **Pathology Detection**: Hardened 404 error handling to stop retries on permanent endpoint failures
+
+#### **Added**
+- **Model Test Tool**: `tools/test_models.py` for validating all configured models before evaluation
+- **Eval Dump Tool**: `tools/dump_eval.py` for inspecting `.eval` file contents as human-readable JSON
+- **Selective Rescoring**: `tools/rescore_logs.py` now only rescores epochs with incomplete analyst coverage
+
+#### **Documentation**
+- Updated all references to reflect 2-epoch, 2-analyst tetrahedral structure
+- Clarified distinction between vertices (4), edges (6), and total scorings (4)
+- Revised resource estimates: 20 scoring calls (5 challenges × 2 epochs × 2 analysts)
+
+---
+
+## [0.9.5] - 2025-10-07
+
+---
+
 ## [0.9.5] - 2025-10-06
 
 ### ✨ **Integrated Insight Generation & Streamlined Outputs**

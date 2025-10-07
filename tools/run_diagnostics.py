@@ -3,10 +3,14 @@
 Run complete GyroDiagnostics evaluation suite using configured models.
 
 Usage:
-    python tools/run_diagnostics.py
+    python tools/run_diagnostics.py [--resume]
+    
+Options:
+    --resume    Resume from existing logs (allows dirty log directory)
 """
 
 import os
+import sys
 from pathlib import Path
 from inspect_ai import eval_set
 from gyrodiagnostics import (
@@ -57,10 +61,11 @@ def load_config():
         print("INSPECT_EVAL_MODEL=openrouter/qwen/qwen3-30b-a3b:free")
         exit(1)
     
-    # Validate at least one ensemble analyst is configured
-    if not any([analyst_a, analyst_b, analyst_c]):
-        print("ERROR: At least one ensemble analyst must be configured!")
-        print("Please set at least one of these in your .env file:")
+    # Validate at least 2 ensemble analysts are configured (tetrahedral structure)
+    configured_analysts = sum([bool(analyst_a), bool(analyst_b), bool(analyst_c)])
+    if configured_analysts < 2:
+        print("ERROR: At least 2 ensemble analysts must be configured for tetrahedral structure!")
+        print("Please set at least 2 of these in your .env file:")
         print("INSPECT_EVAL_MODEL_GRADER_A=openrouter/model-name:free")
         print("INSPECT_EVAL_MODEL_GRADER_B=openrouter/model-name:free")
         print("INSPECT_EVAL_MODEL_GRADER_C=openrouter/model-name:free")
@@ -85,11 +90,16 @@ def load_config():
 
 def main():
     """Run the complete GyroDiagnostics evaluation suite using configured models."""
+    # Check for --resume flag
+    resume_mode = "--resume" in sys.argv or "--log-dir-allow-dirty" in sys.argv
+    
     # Load configuration
     config = load_config()
     
     print(f"\n{'='*60}")
     print(f"GyroDiagnostics Full Suite Evaluation")
+    if resume_mode:
+        print("(Resume mode: will reuse existing logs)")
     print(f"{'='*60}")
     print(f"Model: {config['model']}")
     
@@ -136,6 +146,10 @@ def main():
         "log_dir": config['log_dir']
     }
     
+    # Add log_dir_allow_dirty if in resume mode
+    if resume_mode:
+        eval_params["log_dir_allow_dirty"] = True
+    
     # Define all challenges
     challenges = [
         formal_challenge(),
@@ -151,13 +165,25 @@ def main():
     print()
     
     # Run all challenges with configured models
-    logs = eval_set(challenges, max_tasks=1, **eval_params)
+    # Make eval_set retry behavior explicit to better recover from transient outages
+    success, logs = eval_set(
+        challenges,
+        max_tasks=1,
+        retry_attempts=10,
+        retry_wait=45,
+        retry_connections=0.5,
+        **eval_params
+    )
     
     print(f"\n{'='*60}")
     print("Full Suite Evaluation Complete")
     print(f"{'='*60}")
     print(f"Total challenges: {len(challenges)}")
     print(f"Results logged to: {config['log_dir']}")
+    if not success:
+        print("Some tasks did not complete even after retries.")
+        print("Run again with --resume to continue:")
+        print("  python run.py --resume")
     print("Run final analysis to generate timestamped reports and insight briefs:")
     print("  python tools/analyzer.py --eval-dir logs")
     # Note: Insight briefs are generated during final analysis step, not here.

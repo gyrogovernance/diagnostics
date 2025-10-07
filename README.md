@@ -94,7 +94,7 @@ Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration)
 
 ### Ensemble Analysis System
 
-**Robust Evaluation**: Three parallel AI analysts evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
+**Robust Evaluation**: Two parallel AI analysts evaluate each response sequence independently, with scores aggregated using median per metric to reduce bias and improve reliability.
 
 **Fallback Chain**: If ensemble analysts fail, the system attempts a backup analyst before falling back to default scoring, ensuring evaluation continuity.
 

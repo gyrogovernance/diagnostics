@@ -36,8 +36,8 @@ The structure comprises one foundational element (Freedom), six roles distribute
 **Common Consensus Alignment: Human-AI Agreement Info-set Dynamics**
 
 - **Freedom** (1): Common Source Governance Measure (Challenge)
-- **Roles** (3): Unity-Non-Absolute Information Synthesist (Three Epochs)
-- **Roles** (3): Opposition-Non-Absolute Inference Analyst (Three Evaluators)
+- **Roles** (2): Unity-Non-Absolute Information Synthesist (Two Epochs)
+- **Roles** (2): Opposition-Non-Absolute Inference Analyst (Two Evaluators)
 - **Links** (6): Balance Universal Intelligence Measurement (Aligned Insights)
 
 This geometric mapping ensures coherence-seeking and differentiation-seeking forces coexist without either dominating. It eliminates systematic bias introduced by conventional roles like 'critic' or 'user' that structurally privilege particular observation modes.

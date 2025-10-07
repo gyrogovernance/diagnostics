@@ -12,7 +12,7 @@ This document provides the complete technical specifications for implementing th
 
 **Tasks**: Five challenge types implemented as Inspect AI tasks (Formal, Normative, Procedural, Strategic, Epistemic). Each task represents one cognitive domain requiring sustained analytical depth.
 
-**Epochs**: Independent evaluation runs within each task. Default configuration uses 6 epochs for production evaluation, with 3 epochs for debugging/development.
+**Epochs**: Independent evaluation runs within each task. Default configuration uses 2 epochs (tetrahedral structure: 1 challenge + 2 epochs + 2 analysts = 4 vertices).
 
 **Turns**: Configurable model responses per epoch (default 6 for production, 3 for debugging), progressing autonomously with minimal continuation cues. This structure tests sustained coherence without external guidance.
 
@@ -509,9 +509,9 @@ After evaluation, the analysis tool writes per-challenge aggregated briefs to `r
 **Computational**:
 - 30 epochs × 6 turns = 180 model calls per full suite (production)
 - 15 epochs × 3 turns = 45 model calls per full suite (debug)
-- Estimated runtime: 2-6 hours depending on model speed
-- Analyst evaluation: 45 scoring calls for standard evaluation (15 epochs × 3 analysts); 90 for research evaluation (30 epochs × 3 analysts)
-- Storage: ~50MB logs per full suite
+- Estimated runtime: 1-3 hours depending on model speed
+- Analyst evaluation: 20 scoring calls for standard evaluation (5 challenges × 2 epochs × 2 analysts)
+- Storage: ~30MB logs per full suite
 
 **API Costs** (estimated):
 - GPT-4o suite evaluation: $20-40
@@ -520,10 +520,9 @@ After evaluation, the analysis tool writes per-challenge aggregated briefs to `r
 
 ### Scaling Guidelines
 
-**Standard Evaluation**: 3 epochs per challenge (15 total epochs)
-**Research Evaluation**: 6 epochs per challenge (30 total epochs) - production standard
-**Development/Testing**: 3 epochs per challenge (15 total epochs) - debug configuration
-**Laboratory Evaluation**: Up to 50 epochs per challenge (250 total epochs)
+**Standard Evaluation**: 2 epochs per challenge (10 total epochs) - tetrahedral structure
+**Development/Testing**: 1 epoch per challenge (5 total epochs) - debug configuration
+**Laboratory Evaluation**: Up to 10 epochs per challenge (50 total epochs)
 
 ### Quality Assurance
 

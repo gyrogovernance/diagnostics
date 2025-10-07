@@ -19,7 +19,7 @@ from ..utils.constants import SCORING_WEIGHTS
 from .pathology_detection import detect_pathologies
 
 
-@scorer(metrics=[accuracy(), mean()])
+@scorer(name="alignment_scorer", metrics=[accuracy(), mean()])
 def alignment_scorer():
     """
     AI analyst scorer implementing the 20-metric alignment rubric.
@@ -78,8 +78,10 @@ def alignment_scorer():
         # Determine fallback usage (no successful analyst)
         is_fallback = (not per_analyst_details) or all(not j["success"] for j in per_analyst_details)
         
-        # Store timing metadata for Balance Horizon calculation
-        epoch_timing = state.scratch.get("epoch_timing", {})
+        # Store timing metadata for Balance Horizon calculation (if available)
+        epoch_timing = {}
+        if hasattr(state, 'scratch') and state.scratch:
+            epoch_timing = state.scratch.get("epoch_timing", {})
         
         # Build explanation
         if is_fallback:
@@ -89,6 +91,12 @@ def alignment_scorer():
             explanation = f"Alignment score: {alignment_score:.3f} (from {len(successful_analysts)} analysts)"
         
         # Comprehensive metadata for rescoring and debugging
+        # Attempt to capture a stable sample identifier for deduplication
+        sample_id = None
+        try:
+            sample_id = getattr(getattr(state, "sample", None), "id", None)
+        except Exception:
+            sample_id = None
         return Score(
             value=CORRECT if is_correct else INCORRECT,
             explanation=explanation,
@@ -107,12 +115,13 @@ def alignment_scorer():
                 
                 # Timing
                 "epoch_duration_minutes": epoch_timing.get("duration_minutes", 0),
-                "turn_metadata": state.scratch.get("turn_metadata", []),
+                "turn_metadata": state.scratch.get("turn_metadata", []) if hasattr(state, 'scratch') and state.scratch else [],
                 
                 # Rescoring support
                 "transcript": transcript,  # Full transcript for offline rescoring
                 "analyst_error": (analyst_error or "")[:1000],
                 "analyst_fallback_used": is_fallback,
+                "sample_id": sample_id,
                 
                 # Per-analyst details
                 "per_analyst": [
@@ -149,8 +158,8 @@ async def evaluate_with_analysts(
     """
     per_analyst = []
 
-    # Try ensemble analysts
-    ensemble_roles = ["analyst_a", "analyst_b", "analyst_c"]
+    # Try ensemble analysts (2 analysts for tetrahedral structure: 1 + 2 epochs + 2 analysts = 4 vertices)
+    ensemble_roles = ["analyst_a", "analyst_b"]
     for role in ensemble_roles:
         eval_result, raw, err = await _evaluate_single_analyst(role, scoring_prompt, max_retries)
         per_analyst.append({
@@ -161,30 +170,43 @@ async def evaluate_with_analysts(
             "error": err
         })
 
-    # Filter successful analysts
+    # Check if any analyst failed and we should use backup
     successful = [j for j in per_analyst if j["success"]]
+    failed_count = len(per_analyst) - len(successful)
+    
+    if failed_count > 0:
+        # At least one analyst failed - try backup
+        print(f"Using backup analyst (primary: {len(successful)}/3 succeeded)")
+        eval_result, raw, err = await _evaluate_single_analyst("analyst_backup", scoring_prompt, max_retries)
+        per_analyst.append({
+            "role": "analyst_backup",
+            "success": err is None and eval_result and "structure_scores" in eval_result,
+            "eval_result": eval_result,
+            "raw": (raw or "")[:3000],
+            "error": err
+        })
+        
+        # Refresh successful list including backup
+        successful = [j for j in per_analyst if j["success"]]
+    
     if successful:
         aggregated = aggregate_analyst_results([j["eval_result"] for j in successful])
-        print(f"Ensemble: {len(successful)}/{len(per_analyst)} analysts succeeded")
+        # Count primary vs backup
+        primary_count = sum(1 for j in per_analyst if j["role"] in ["analyst_a", "analyst_b"])
+        backup_used = any(j["role"] == "analyst_backup" for j in per_analyst)
+        
+        if backup_used:
+            backup_success = any(j["role"] == "analyst_backup" and j["success"] for j in per_analyst)
+            status = "succeeded" if backup_success else "failed"
+            print(f"Ensemble: {len(successful)}/{primary_count} primary analysts + backup {status}")
+        else:
+            print(f"Ensemble: {len(successful)}/{primary_count} analysts succeeded")
+        
         return aggregated, per_analyst, None
 
-    # Try backup analyst
-    eval_result, raw, err = await _evaluate_single_analyst("analyst_backup", scoring_prompt, max_retries)
-    per_analyst.append({
-        "role": "analyst_backup",
-        "success": err is None and eval_result and "structure_scores" in eval_result,
-        "eval_result": eval_result,
-        "raw": (raw or "")[:3000],
-        "error": err
-    })
-    
-    if per_analyst[-1]["success"]:
-        print("Backup analyst succeeded")
-        return eval_result, per_analyst, None
-
-    # All failed → fallback
-    last_error = err or "All analysts failed"
-    print(f"ERROR: All analysts failed. Last error: {last_error}")
+    # All failed including backup → fallback
+    last_error = per_analyst[-1]["error"] if per_analyst else "All analysts failed"
+    print(f"ERROR: All analysts failed including backup. Last error: {last_error}")
     fb = create_fallback_evaluation()
     return fb, per_analyst, last_error
 
@@ -221,7 +243,17 @@ async def _evaluate_single_analyst(role: str, scoring_prompt: str, max_retries: 
             eval_result = parse_evaluation_response(raw_output)
             return eval_result, raw_output, None
         except Exception as e:
-            last_error = f"{role} attempt {attempt}: {e}"
+            err_msg = str(e)
+            # Immediately abort retries for permanent provider/model routing errors
+            permanent_signals = [
+                "no endpoints found",
+                "invalid model",
+                "unsupported",
+                "model not found"
+            ]
+            if any(sig in err_msg.lower() for sig in permanent_signals):
+                return None, raw_output, f"{role} attempt {attempt}: {err_msg}"
+            last_error = f"{role} attempt {attempt}: {err_msg}"
             if attempt < max_retries:
                 delay = base_delay * (2 ** (attempt - 1))
                 await asyncio.sleep(delay)
