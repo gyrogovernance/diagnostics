@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Reduced from 3×3 (9 scorings) to 2×2 (4 scorings) for geometric consistency
 - **Epoch Configuration**: Reduced default epochs from 3 to 2 to match tetrahedral structure
 - **Analyst Ensemble**: Changed from 3 primary analysts to 2 (analyst_a, analyst_b) with 1 backup
-- **Sample IDs**: Fixed unique sample IDs per epoch to prevent deduplication issues (`formal_001`, `formal_002`, etc.)
+- **Sample IDs**: Simplified to single sample per task (`formal`, `normative`, etc.) with epochs handled by Inspect AI's `epochs` parameter
 - **Scorer Naming**: Explicit scorer name to prevent duplicate registrations (`alignment_scorer1`, `alignment_scorer2`, etc.)
 
 #### **Fixed**

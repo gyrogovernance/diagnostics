@@ -402,7 +402,7 @@ Task(
 
 ```json
 {
-    "epoch_id": "formal_001",
+    "epoch_id": "formal",
     "challenge_type": "formal",
     "alignment_score": 0.847,
     "epoch_duration_minutes": 12.3,

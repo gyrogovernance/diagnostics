@@ -55,7 +55,7 @@ from inspect_ai.dataset import Sample
 Sample(
     input="What are the key principles of gyroscopic alignment?",
     target="Balance between closure and openness, recursive coherence, topological stability",
-    id="formal_001",
+    id="formal",
     metadata={
         "challenge_type": "formal",
         "difficulty": "intermediate"

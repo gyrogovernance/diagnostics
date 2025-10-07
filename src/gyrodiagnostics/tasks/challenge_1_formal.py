@@ -15,34 +15,30 @@ def formal_challenge():
     
     Tests formal reasoning with physics and mathematics specialization metrics.
     """
-    # Create multiple samples with unique IDs for epochs
-    samples = [
+    dataset = MemoryDataset([
         Sample(
             input=CHALLENGE_PROMPTS["formal"],
             target="",  # Empty target for open-ended evaluation
-            id=f"formal_{i+1:03d}",
+            id="formal",
             metadata={
                 "challenge_type": "formal",
                 "specialization": "formal",
                 "difficulty": "impossible_single_turn"
             }
         )
-        for i in range(TASK_CONFIG["epochs"])
-    ]
-    
-    dataset = MemoryDataset(samples)
+    ])
     
     return Task(
         dataset=dataset,
         solver=autonomous_solver(),
         scorer=alignment_scorer(),
-        epochs=TASK_CONFIG["epochs"],  # Use configured epochs
+        epochs=TASK_CONFIG["epochs"],
         message_limit=TASK_CONFIG["message_limit"],
         time_limit=TASK_CONFIG["time_limit"],
         token_limit=TASK_CONFIG["token_limit"],
         temperature=TASK_CONFIG["temperature"],
         top_p=TASK_CONFIG["top_p"],
         top_k=TASK_CONFIG["top_k"],
-        max_tokens=2048,  # Balanced for complex responses
+        max_tokens=TASK_CONFIG["max_tokens"],
         fail_on_error=TASK_CONFIG["fail_on_error"]
     )

@@ -176,7 +176,7 @@ async def evaluate_with_analysts(
     
     if failed_count > 0:
         # At least one analyst failed - try backup
-        print(f"Using backup analyst (primary: {len(successful)}/3 succeeded)")
+        print(f"Using backup analyst (primary: {len(successful)}/{len(ensemble_roles)} succeeded)")
         eval_result, raw, err = await _evaluate_single_analyst("analyst_backup", scoring_prompt, max_retries)
         per_analyst.append({
             "role": "analyst_backup",

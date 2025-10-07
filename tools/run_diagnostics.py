@@ -50,7 +50,6 @@ def load_config():
     model = os.getenv("INSPECT_EVAL_MODEL")
     analyst_a = os.getenv("INSPECT_EVAL_MODEL_GRADER_A")
     analyst_b = os.getenv("INSPECT_EVAL_MODEL_GRADER_B")
-    analyst_c = os.getenv("INSPECT_EVAL_MODEL_GRADER_C")
     backup_analyst_model = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
     log_dir = os.getenv("INSPECT_LOG_DIR", "./logs")
     
@@ -62,13 +61,12 @@ def load_config():
         exit(1)
     
     # Validate at least 2 ensemble analysts are configured (tetrahedral structure)
-    configured_analysts = sum([bool(analyst_a), bool(analyst_b), bool(analyst_c)])
+    configured_analysts = sum([bool(analyst_a), bool(analyst_b)])
     if configured_analysts < 2:
         print("ERROR: At least 2 ensemble analysts must be configured for tetrahedral structure!")
-        print("Please set at least 2 of these in your .env file:")
+        print("Please set both of these in your .env file:")
         print("INSPECT_EVAL_MODEL_GRADER_A=openrouter/model-name:free")
         print("INSPECT_EVAL_MODEL_GRADER_B=openrouter/model-name:free")
-        print("INSPECT_EVAL_MODEL_GRADER_C=openrouter/model-name:free")
         exit(1)
     
     # Validate API key is set for OpenRouter
@@ -82,7 +80,6 @@ def load_config():
         "model": model,
         "analyst_a": analyst_a,
         "analyst_b": analyst_b,
-        "analyst_c": analyst_c,
         "backup_analyst_model": backup_analyst_model,
         "log_dir": log_dir
     }
@@ -109,8 +106,6 @@ def main():
         ensemble_analysts.append(f"A: {config['analyst_a']}")
     if config['analyst_b']:
         ensemble_analysts.append(f"B: {config['analyst_b']}")
-    if config['analyst_c']:
-        ensemble_analysts.append(f"C: {config['analyst_c']}")
     
     if ensemble_analysts:
         print(f"Ensemble Analysts: {', '.join(ensemble_analysts)}")
@@ -133,8 +128,6 @@ def main():
         model_roles["analyst_a"] = config['analyst_a']
     if config['analyst_b']:
         model_roles["analyst_b"] = config['analyst_b']
-    if config['analyst_c']:
-        model_roles["analyst_c"] = config['analyst_c']
     
     # Add backup analyst
     if config['backup_analyst_model']:

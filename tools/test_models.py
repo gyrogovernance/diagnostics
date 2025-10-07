@@ -50,7 +50,7 @@ async def test_model(model_name: str, role: str = None):
         
         response = await asyncio.wait_for(
             model.generate(messages),
-            timeout=30
+            timeout=120  # Longer for thinking models like gemini-2.5-pro
         )
         
         output = response.completion if hasattr(response, 'completion') else str(response)
@@ -95,7 +95,6 @@ async def main():
     primary_model = os.getenv("INSPECT_EVAL_MODEL")
     analyst_a = os.getenv("INSPECT_EVAL_MODEL_GRADER_A")
     analyst_b = os.getenv("INSPECT_EVAL_MODEL_GRADER_B")
-    analyst_c = os.getenv("INSPECT_EVAL_MODEL_GRADER_C")
     backup_analyst = os.getenv("INSPECT_EVAL_MODEL_GRADER_BACKUP")
     
     results = {}
@@ -126,12 +125,6 @@ async def main():
     else:
         print("\nanalyst_b: not configured")
         results['analyst_b'] = None
-    
-    if analyst_c:
-        results['analyst_c'] = await test_model(analyst_c, role="analyst_c")
-    else:
-        print("\nanalyst_c: not configured")
-        results['analyst_c'] = None
     
     # Test backup analyst
     if backup_analyst:
@@ -167,7 +160,7 @@ async def main():
             print(f"  - {m}")
     
     # Check if we have enough working analysts (need 2 for tetrahedral structure)
-    analyst_count = sum(1 for k in ['analyst_a', 'analyst_b', 'analyst_c'] if results.get(k) is True)
+    analyst_count = sum(1 for k in ['analyst_a', 'analyst_b'] if results.get(k) is True)
     required_analysts = 2
     print(f"\nWorking analysts: {analyst_count} (need {required_analysts} for tetrahedral structure)")
     

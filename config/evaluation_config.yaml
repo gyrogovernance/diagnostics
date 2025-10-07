@@ -2,7 +2,7 @@
 
 # Task Configuration
 task:
-  epochs: 2  # Tetrahedral: 1 challenge + 2 epochs + 2 analysts = 4 vertices
+  epochs: 2  # Tetrahedral: 2 epochs x 2 analysts = 4 vertices
   turns: 6   # 6 turns = 6 edges of the tetrahedron
   message_limit: 20  
   time_limit: 7200  # 2 hours safety limit (seconds)
@@ -12,7 +12,7 @@ task:
   temperature: 0.7  # Balanced creativity vs consistency
   top_p: 0.9  # Nucleus sampling threshold
   top_k: 50  # Top-k sampling limit
-  max_tokens: 2048  # Per-response token limit
+  max_tokens: 1024  # Per-response token limit (balanced for quality reasoning without overwhelming analysts)
   
   # Error tolerance configuration
   fail_on_error: 0.1  # Allow up to 10% of samples to have errors
