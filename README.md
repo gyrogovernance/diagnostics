@@ -182,7 +182,7 @@ gyrodiagnostics/
 │   ├── prompts/         # Challenge prompts & scoring templates
 │   └── utils/           # Constants and helpers
 ├── tools/               # Utility scripts for log processing and analysis
-│   ├── gyrodiagnostics.py      # Run complete evaluation suite
+│   ├── run_diagnostics.py      # Run complete evaluation suite
 │   ├── cleaner.py     # Manage results folder
 │   ├── validate_setup.py      # Validate configuration
 │   └── README.md              # Tools documentation
@@ -265,8 +265,11 @@ inspect eval src/gyrodiagnostics/tasks/challenge_1_formal.py --limit 1
 ### Using Python Scripts
 
 ```bash
-# Run full evaluation suite (uses configured models from .env)
-python tools/gyrodiagnostics.py
+# Quick run from root directory (convenience wrapper)
+python run.py
+
+# Or run from tools directory
+python tools/run_diagnostics.py
 
 # Validate setup
 python tools/validate_setup.py
@@ -289,7 +292,7 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 
 ### Key Tools
 
-- **`gyrodiagnostics.py`**: Run all 5 challenges using configured models from `.env`
+- **`run_diagnostics.py`**: Run all 5 challenges using configured models from `.env`
 - **`analyzer.py`**: Comprehensive analysis of suite results with analyst metadata and Balance Horizon
 - **`cleaner.py`**: Manage and organize the logs and results folders
 - **`validate_setup.py`**: Verify that your configuration is correct
@@ -297,8 +300,9 @@ The `tools/` directory contains utility scripts for working with evaluation resu
 ### Quick Tool Usage
 
 ```bash
-# Run complete evaluation suite
-python tools/gyrodiagnostics.py
+# Run complete evaluation suite (from root directory)
+python run.py
+# Or: python tools/run_diagnostics.py
 
 # Analyze .eval logs (comprehensive analysis with analyst metadata)
 python tools/analyzer.py

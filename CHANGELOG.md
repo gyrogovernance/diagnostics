@@ -103,7 +103,7 @@ Clean separation of concerns (extract/build/print functions)
 
 #### **Changed**
 - Moved utility scripts from `tests/` to `tools/` directory
-- Updated `gyrodiagnostics.py` to use configured models from `.env` (no command-line flags needed)
+- Updated `run_diagnostics.py` to use configured models from `.env` (no command-line flags needed)
 - Simplified project structure and documentation
 
 #### **Fixed**
@@ -122,7 +122,7 @@ Clean separation of concerns (extract/build/print functions)
 - Removed obsolete TASK_CONFIG_PRODUCTION hardcoded dictionary
 - Fixed cross-platform path resolution for config file loading (Windows/Unix compatibility)
 - Increased retry_on_error from 1 to 3 for better handling of cloud API rate limits and network issues
-- Fixed challenge counting in gyrodiagnostics.py to correctly report all 5 challenges instead of 2
+- Fixed challenge counting in run_diagnostics.py to correctly report all 5 challenges instead of 2
 - Added missing scoring_rationale, strengths, and weaknesses fields to score metadata (analyst provides these but they weren't being saved)
 - Created tools/extract_analyst_text.py to extract analyst text from existing .eval files (note: existing files don't contain these fields as they were added after those evaluations)
 - Enhanced tools/analyzer.py to display analyst metadata (scoring_rationale, strengths, weaknesses, analyst_fallback_used) in analysis reports

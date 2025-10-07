@@ -3,7 +3,7 @@
 Run complete GyroDiagnostics evaluation suite using configured models.
 
 Usage:
-    python tools/gyrodiagnostics.py
+    python tools/run_diagnostics.py
 """
 
 import os

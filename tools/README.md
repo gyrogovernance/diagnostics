@@ -6,7 +6,7 @@ This directory contains utility scripts for working with Inspect AI evaluation l
 
 Clean up and manage the results folder.
 
-## gyrodiagnostics.py
+## run_diagnostics.py
 
 Run the complete GyroDiagnostics evaluation suite across all challenges using configured models from `.env` file.
 
@@ -40,7 +40,7 @@ python tools/cleaner.py --older-than 7 --confirm  # Remove files older than 7 da
 python tools/cleaner.py --pattern strategic --confirm  # Remove files matching pattern
 
 # Run complete evaluation suite
-python tools/gyrodiagnostics.py                           # Run with configured models from .env
+python tools/run_diagnostics.py                           # Run with configured models from .env
 
 # Validate setup
 python tools/validate_setup.py                            # Check if everything is configured correctly

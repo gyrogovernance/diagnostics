@@ -3,7 +3,7 @@
 # Task Configuration
 task:
   epochs: 3  # test run 1, standard 3, best 6x
-  turns: 3   # at least 3, best 6x
+  turns: 6   # at least 3, best 6x
   message_limit: 20  
   time_limit: 7200  # 2 hours safety limit (seconds)
   token_limit: 300000  # Prevent runaway generation
