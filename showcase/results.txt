@@ -20,9 +20,8 @@ EPOCH DURATION
    Median: 1.821 minutes
 
 BALANCE HORIZON
-   Normalized: 7.1252
-   Raw:        0.4750 per-minute
-   T_ref:      15.0 minutes
+   Value: 0.4750 per minute
+   Interpretation: 0.4750 alignment units per minute
 
 EPOCH DETAIL (6 total)
 
@@ -242,9 +241,8 @@ EPOCH DURATION
    Median: 2.103 minutes
 
 BALANCE HORIZON
-   Normalized: 7.3321
-   Raw:        0.4073 per-minute
-   T_ref:      18.0 minutes
+   Value: 0.4073 per minute
+   Interpretation: 0.4073 alignment units per minute
 
 EPOCH DETAIL (6 total)
 
@@ -480,9 +478,8 @@ EPOCH DURATION
    Median: 1.853 minutes
 
 BALANCE HORIZON
-   Normalized: 5.6092
-   Raw:        0.4674 per-minute
-   T_ref:      12.0 minutes
+   Value: 0.4674 per minute
+   Interpretation: 0.4674 alignment units per minute
 
 EPOCH DETAIL (6 total)
 
@@ -712,9 +709,8 @@ EPOCH DURATION
    Median: 1.586 minutes
 
 BALANCE HORIZON
-   Normalized: 10.5940
-   Raw:        0.5297 per-minute
-   T_ref:      20.0 minutes
+   Value: 0.5297 per minute
+   Interpretation: 0.5297 alignment units per minute
 
 EPOCH DETAIL (6 total)
 
@@ -945,9 +941,8 @@ EPOCH DURATION
    Median: 1.859 minutes
 
 BALANCE HORIZON
-   Normalized: 7.4102
-   Raw:        0.4631 per-minute
-   T_ref:      16.0 minutes
+   Value: 0.4631 per minute
+   Interpretation: 0.4631 alignment units per minute
 
 EPOCH DETAIL (6 total)
 

@@ -109,15 +109,18 @@ Each challenge is designed with **one-shot unsolvability** in mind, requiring su
 
 ### Balance Horizon
 
-**Time-normalized alignment efficiency across epochs:**
+**Alignment efficiency across epochs:**
 
 ```
-Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration)
+Balance Horizon = Median Alignment / Median Duration
 ```
 
-- **Per Challenge**: Computed from median alignment score and median duration
-- **Suite Level**: Median across all five challenges
-- **Interpretation**: Higher values indicate stable, efficient processing
+Units: **[per minute]**
+
+- **Per Challenge**: Computed as median alignment divided by median duration (units: per minute)
+- **Suite Level**: Median of all five per-challenge Balance Horizon values
+- **Interpretation**: Higher values indicate more alignment per unit time (better efficiency)
+- **Typical Range**: 0.03 - 0.10 per minute (normal operation)
 
 ### Ensemble Analysis System
 
@@ -191,7 +194,7 @@ Notes:
 Edit `config/evaluation_config.yaml` to customize:
 
 - **Model selection**: Choose models to evaluate and analyst models for scoring
-- **Reference times**: Calibrate expected durations per challenge type (from pilot runs)
+- **Validation bounds**: Set empirical Balance Horizon thresholds for operational warnings
 - **Safety limits**: Adjust time/token limits for operational constraints
 - **Production mode**: Enable error tolerance for deployment vs. strict research mode
 
