@@ -1,5 +1,6 @@
 # AI Safety Diagnostics
 > **Gyroscopic Alignment Evaluation Lab**
+[![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
@@ -36,8 +37,6 @@
 GyroDiagnostics is a **production-ready** evaluation suite designed for AI safety labs and frontier model developers to assess AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation. By focusing on foundational balance rather than exhaustive task batteries, it efficiently diagnoses root causes with just 5 targeted challenges, complementing large-scale evals like BIG-bench or HELM.
 
 **The framework advances AI safety and development through dual capabilities, delivering both diagnostic precision and productive research outputs:**
-
-[![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 - **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
