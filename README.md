@@ -337,28 +337,6 @@ python tools/cleaner.py --older-than 7
 
 ---
 
-## 💼 Career & Collaboration
-
-**Seeking AI Safety Research Positions**
-
-I'm actively seeking opportunities to contribute to AI safety research at frontier labs (Anthropic, OpenAI, DeepMind, etc.) or organizations focused on AI alignment and governance.
-
-**What I Bring**:
-- **Novel Measurement Framework**: Developed production-ready evaluation system addressing blind spots in current safety protocols
-- **Theory-to-Practice Bridge**: Translated mathematical physics (tensegrity, gyrogroup theory) into working alignment diagnostics
-- **Production Experience**: Successfully deployed evaluations on frontier models with comprehensive metadata pipelines
-- **Cross-Domain Expertise**: Policy, ethics, formal methods, strategic forecasting, and epistemic analysis
-
-**Research Interests**:
-- Foundational alignment measurement and structural coherence assessment
-- Temporal stability and capability robustness evaluation
-- Bias-resistant evaluation frameworks through geometric constraints
-- Integration of mathematical physics principles into AI safety protocols
-
-**Contact**: For collaboration, research positions, or technical discussions, please reach out via [GitHub Issues](https://github.com/gyrogovernance/diagnostics/issues) or connect through the repository.
-
----
-
 ## Contributing
 
 This is a research framework under active development. Contributions welcome via issues and pull requests.
