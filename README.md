@@ -29,12 +29,13 @@
 # <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
 **Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
+*Measuring the structural coherence that determines whether AI capabilities are genuine or brittle—without adversarial testing.*
 
 ## Overview
 
-GyroDiagnostics is a **production-ready** evaluation suite designed for AI safety labs and frontier model developers to assess AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation.
+GyroDiagnostics is a **production-ready** evaluation suite designed for AI safety labs and frontier model developers to assess AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation. By focusing on foundational balance rather than exhaustive task batteries, it efficiently diagnoses root causes with just 5 targeted challenges, complementing large-scale evals like BIG-bench or HELM.
 
-**The framework advances AI safety and development through dual capabilities:**
+**The framework advances AI safety and development through dual capabilities, delivering both diagnostic precision and productive research outputs:**
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 - **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
@@ -59,10 +60,11 @@ These integrated outputs deliver practical safety assessments alongside reusable
 - **Structural Balance**: Quantifies the ratio between systematic organization (closure) and adaptive flexibility (aperture)
 - **Temporal Stability**: Reveals whether high scores represent genuine capability or brittle optimization
 - **Geometric Measurement**: Eliminates evaluator bias through topological necessity rather than role assignment
+- **Efficient Depth**: 5 challenges probe core domains deeply, revealing structural issues that 1000s of shallow tasks might miss—validated on frontier models with zero pathologies across 30 epochs.
 
-**Key Insight**: A system scoring 85% with low Balance Horizon is less deployment-ready than one scoring 75% with high Balance Horizon. We measure what conventional frameworks assume.
+**Key Insight**: A system scoring 85% with low Balance Horizon is less deployment-ready than one scoring 75% with high Balance Horizon. We measure what conventional frameworks assume, with empirical validation showing aperture ratio correlates to real failures (e.g., semantic drift in long-horizon tasks—see showcase results on Llama 3.3 70B).
 
-**Complements Standard Safety Frameworks**: Anthropic, OpenAI, and DeepMind protocols address operational risks (adversarial robustness, capability thresholds, misuse potential). We address foundational coherence—the structural properties underlying those operational concerns.
+**Complements Standard Safety Frameworks**: Anthropic, OpenAI, and DeepMind protocols address operational risks (adversarial robustness, capability thresholds, misuse potential). We address foundational coherence—the structural properties underlying those operational concerns—with metrics that correlate to real-world risks like capability brittleness or ethical drift.
 
 ---
 
@@ -78,7 +80,7 @@ These integrated outputs deliver practical safety assessments alongside reusable
 - **First framework** to apply tensegrity geometry (from structural engineering) to AI alignment measurement
 - **Eliminates role-based bias** through K₄ tetrahedral topology—no "critic" vs "supporter" structural privilege
 - **Temporal efficiency metric** (Balance Horizon) quantifies alignment stability per unit time
-- **Grounded in mathematical physics**: Common Governance Model derives optimal aperture ratio (2.07%) from first principles, not empirical fitting
+- **Grounded in mathematical physics**: Common Governance Model derives optimal aperture ratio (2.07%) from first principles, enabling predictive diagnostics (e.g., aperture deviations forecast semantic drift), not just empirical fitting
 
 ---
 
@@ -137,7 +139,7 @@ Each complete evaluation generates:
 
 ### Showcase
 
-Sample evaluation results demonstrating what GyroDiagnostics produces:
+Sample evaluation results demonstrating what GyroDiagnostics produces, with empirical validation on frontier models:
 
 - 📊 [Results Analysis](showcase/results.txt)
 Detailed per-epoch extraction report showing Meta-Llama 3.3 70B performance across 30 evaluation epochs (6 per challenge type). Includes alignment scores, duration metrics, structure analysis, behavior assessment, and domain-specific specialization scores.
@@ -149,9 +151,9 @@ Comprehensive analysis report covering challenge-specific performance, cross-cha
 
 ## 🧬 Theoretical Foundation
 
-- **Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory
-- **Recursive Systems Theory**: Evaluates structural dynamics rather than surface behaviors
-- **Topological Analysis**: Measures foundational properties determining reliable intelligence
+- **Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory—yields predictive metrics like 2.07% aperture for stability assessment
+- **Recursive Systems Theory**: Evaluates structural dynamics rather than surface behaviors, enabling detection of root causes like goal drift
+- **Topological Analysis**: Measures foundational properties determining reliable intelligence, with empirical correlation to operational risks
 
 ### Documentation
 
@@ -190,7 +192,7 @@ Edit `config/evaluation_config.yaml` to customize:
 - **Safety limits**: Adjust time/token limits for operational constraints
 - **Production mode**: Enable error tolerance for deployment vs. strict research mode
 
-Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework.
+Most parameters (scoring weights, epochs, rubric structure) are fixed by the theoretical framework for consistency, but challenges can be extended or replaced to validate against custom benchmarks.
 
 ---
 
