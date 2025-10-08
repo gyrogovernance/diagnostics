@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.6] - 2025-10-09
+
+---
+
 ## [0.9.6] - 2025-10-08
 
 ### 🔺 **Tetrahedral Measurement Structure (K₄ Graph)**
