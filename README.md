@@ -1,6 +1,5 @@
 # AI Safety Diagnostics
 > **Gyroscopic Alignment Evaluation Lab**
-[![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
@@ -31,6 +30,8 @@
 
 **Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
 *Measuring the structural coherence that determines whether AI capabilities are genuine or brittle—without adversarial testing.*
+
+[![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
 ## Overview
 
