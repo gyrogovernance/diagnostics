@@ -15,7 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **README.md**: Corrected Balance Horizon formula to remove T_ref normalization (was showing old formula `BH = T_ref × (alignment/duration)`, now correctly shows `BH = alignment/duration` with units [per minute])
 - **README.md**: Updated Balance Horizon description with empirical typical range [0.03, 0.10] per minute and clearer interpretation
 - **README.md**: Changed configuration section from "Reference times" to "Validation bounds" to reflect empirical rather than theoretical calibration
-- **showcase/results.txt**: Updated all 5 Balance Horizon entries to show single value with units [per minute] instead of old normalized/raw/T_ref format
 
 ---
 
