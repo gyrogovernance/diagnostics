@@ -37,6 +37,8 @@ GyroDiagnostics is a **production-ready** evaluation suite designed for AI safet
 
 **The framework advances AI safety and development through dual capabilities, delivering both diagnostic precision and productive research outputs:**
 
+[![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
+
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 - **Structural Integrity Benchmarks**: Quantitative analysis of alignment properties and robustness
 - **Behavioral Reliability Testing**: Detect model limitations and optimization opportunities
