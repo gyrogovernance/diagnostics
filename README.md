@@ -29,6 +29,7 @@
 # <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
 **Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
+
 *Measuring the structural coherence that determines whether AI capabilities are genuine or brittle, without adversarial testing.*
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
