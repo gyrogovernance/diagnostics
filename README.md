@@ -34,7 +34,7 @@
 
 ## Overview
 
-GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark batteries like BIG-bench or HELM that test breadth, we probe depth: 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that thousands of shallow tasks cannot: hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. Metrics like aperture ratio correlate to real-world risks, validated on Meta-Llama 3.3 70B.
+GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites like BIG-bench or HELM that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that thousands of shallow tasks cannot detect, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. Metrics like aperture ratio correlate to real-world risks, validated on Meta-Llama 3.3 70B.
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. Validated on Meta-Llama 3.3 70B across 30 epochs with zero pathologies detected.
 
