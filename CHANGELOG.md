@@ -26,12 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Scorer Naming**: Explicit scorer name to prevent duplicate registrations
 - **Score Reporting**: Changed from categorical (CORRECT/INCORRECT) to numeric (alignment_score) for proper mean() reporting
 - **Configuration**: All task parameters now use `TASK_CONFIG` from YAML; removed hardcoded values
+- **Cycle Analysis**: Renamed `compute_cycle_coefficients()` to `_compute_cycle_coefficients()` (internal only); removed from public API to prevent semantic misinterpretation of basis-dependent coefficients
 
 #### **Fixed**
 - **Backup Analyst Logic**: Backup analyst now triggers when ANY primary analyst fails (not just when all 3 fail)
 - **Scorer State Handling**: Added `scratch` attribute checks for rescoring compatibility
 - **Error Handling**: Enhanced transient error detection in solver for OpenRouter provider issues
-- **Balance Horizon Validation**: Reordered condition checks to fix unreachable WARNING_HIGH status; added non-finite value handling
+- **Balance Horizon Simplification**: Removed arbitrary T_ref normalization (15, 18, 12, 20, 16 min constants); restored clean formula BH = alignment/duration with units [per minute] across all modules (balance_horizon.py, analyzer.py, constants.py)
+- **Balance Horizon Validation**: Updated bounds to empirical ranges [0.03, 0.10] per minute; removed unsupported "theoretical maximum" claims
+- **Cycle Matrix C**: Corrected cycle basis to satisfy mathematical constraint B @ C.T = 0 for proper kernel space spanning
 - **Timing Data Persistence**: Store epoch timing and turn metadata in `state.metadata` (persisted) instead of `state.scratch` (temporary)
 - **YAML Configuration**: `message_limit` now respects YAML value; Balance Horizon constants now load from YAML
 - **Analyst Aggregation**: Prefer 2 primary analysts when available; use backup only when needed to reach minimum
@@ -48,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Model Test Tool**: `tools/test_models.py` for validating all configured models before evaluation
 - **Eval Dump Tool**: `tools/dump_eval.py` for inspecting `.eval` file contents as human-readable JSON
 - **Selective Rescoring**: `tools/rescore_logs.py` now only rescores epochs with incomplete analyst coverage
+- **Canonical Structure Documentation**: Added explicit canonical order (foundation triad → expression triad) and vertex 0 as Common Source reference to specs
+- **Non-Associative Residual Theory**: Documented that residual represents gyroscopic precession; only magnitude (aperture) is reported, not basis-dependent cycle directions
 
 #### **Documentation**
 - Updated all references to reflect 2-epoch, 2-analyst ensemble structure (4 participants: 2 UNA + 2 ONA)

@@ -22,15 +22,6 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from collections import Counter
 
-# Reference time constants from Technical Specs
-REFERENCE_TIME_CONSTANTS = {
-    "formal": 15.0,
-    "normative": 18.0,
-    "procedural": 12.0,
-    "strategic": 20.0,
-    "epistemic": 16.0
-}
-
 # Scoring weights from General Specs
 SCORING_WEIGHTS = {
     "structure": 0.4,
@@ -41,7 +32,8 @@ SCORING_WEIGHTS = {
 
 def extract_challenge_type(task_name: str) -> str:
     """Extract challenge type from task name."""
-    for challenge in REFERENCE_TIME_CONSTANTS.keys():
+    challenges = ["formal", "normative", "procedural", "strategic", "epistemic"]
+    for challenge in challenges:
         if challenge in task_name.lower():
             return challenge
     return "unknown"
@@ -63,30 +55,30 @@ def calculate_duration_from_turns(turn_metadata: List[Dict]) -> float:
 def calculate_balance_horizon_epoch(
     median_alignment: float,
     median_duration: float,
-    challenge_type: str
+    challenge_type: str  # Kept for signature compatibility, but not used
 ) -> Dict:
     """
-    Calculate Balance Horizon per Technical Specs using per-epoch medians:
-        BH_raw = median_alignment / median_duration
-        BH_normalized = BH_raw × T_ref(challenge_type)
+    Calculate Balance Horizon from epoch medians.
     
-    Returns dict with normalized, raw, and reference time.
+    BH = median_alignment / median_duration
+    
+    Units: [per minute]
+    Interpretation: Alignment quality achieved per unit time.
+    
+    Returns dict with balance_horizon and median values.
     """
     if not median_duration or median_duration <= 0:
         return {
-            "balance_horizon_normalized": None,
-            "balance_horizon_raw": None,
+            "balance_horizon": None,
             "error": "Zero or missing median duration - cannot calculate Balance Horizon"
         }
     
-    t_ref = REFERENCE_TIME_CONSTANTS.get(challenge_type, 15.0)
-    bh_raw = median_alignment / median_duration
-    bh_norm = bh_raw * t_ref
+    balance_horizon = median_alignment / median_duration
     
     return {
-        "balance_horizon_normalized": bh_norm,
-        "balance_horizon_raw": bh_raw,
-        "reference_time": t_ref
+        "balance_horizon": balance_horizon,  # [per minute]
+        "median_alignment": median_alignment,
+        "median_duration": median_duration
     }
 
 
@@ -541,9 +533,8 @@ def print_challenge_summary(result: Dict, output_file=None):
     if bh.get("error"):
         p(f"   Not available: {bh['error']}")
     else:
-        p(f"   Normalized: {bh['balance_horizon_normalized']:.4f} (dimensionless)")
-        p(f"   Raw:        {bh['balance_horizon_raw']:.4f} per-minute")
-        p(f"   T_ref:      {bh['reference_time']:.1f} minutes")
+        p(f"   Value: {bh['balance_horizon']:.4f} per minute")
+        p(f"   Interpretation: {bh['balance_horizon']:.4f} alignment units per minute")
     p()
     
     # Aperture Ratio (Tensegrity Balance per CGM)
@@ -754,9 +745,9 @@ def print_suite_summary(results: List[Dict], output_file=None, output_path=None)
     
     # Overall Balance Horizon (suite-level median across challenges)
     valid_bh = [
-        r['balance_horizon']['balance_horizon_normalized']
+        r['balance_horizon']['balance_horizon']
         for r in successful
-        if r['balance_horizon'].get('balance_horizon_normalized') is not None
+        if r['balance_horizon'].get('balance_horizon') is not None
     ]
     
     p(f"OVERALL BALANCE HORIZON (Suite-Level)")
@@ -765,11 +756,11 @@ def print_suite_summary(results: List[Dict], output_file=None, output_path=None)
         suite_bh_mean = statistics.mean(valid_bh)
         suite_bh_std = statistics.stdev(valid_bh) if len(valid_bh) > 1 else 0.0
         
-        p(f"   Median (normalized): {suite_bh_median:.4f}")
-        p(f"   Mean (normalized):   {suite_bh_mean:.4f}")
+        p(f"   Median: {suite_bh_median:.4f} per minute")
+        p(f"   Mean:   {suite_bh_mean:.4f} per minute")
         if suite_bh_std > 0:
-            p(f"   Std Dev (normalized): {suite_bh_std:.4f}")
-        p(f"   Range (normalized):  {min(valid_bh):.4f} - {max(valid_bh):.4f}")
+            p(f"   Std Dev: {suite_bh_std:.4f} per minute")
+        p(f"   Range:  {min(valid_bh):.4f} - {max(valid_bh):.4f} per minute")
     else:
         p("   Not available: missing median alignment/duration data")
     p()
@@ -779,9 +770,9 @@ def print_suite_summary(results: List[Dict], output_file=None, output_path=None)
     sorted_results = sorted(successful, key=lambda r: r['median_alignment_score'], reverse=True)
     for i, r in enumerate(sorted_results, 1):
         score = r['median_alignment_score']
-        bh = r['balance_horizon'].get('balance_horizon_normalized', 0)
+        bh = r['balance_horizon'].get('balance_horizon', 0)
         if bh:
-            p(f"   {i}. {r['challenge_type']:12s}: {score:.4f} ({score*100:.1f}%)  [BH: {bh:.3f}]")
+            p(f"   {i}. {r['challenge_type']:12s}: {score:.4f} ({score*100:.1f}%)  [BH: {bh:.4f}/min]")
         else:
             p(f"   {i}. {r['challenge_type']:12s}: {score:.4f} ({score*100:.1f}%)")
     p()

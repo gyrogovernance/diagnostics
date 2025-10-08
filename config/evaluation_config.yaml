@@ -35,20 +35,13 @@ scoring:
     specialization: 20  # 2 metrics × 10 points
 
 # Balance Horizon Configuration
+# BH = alignment_score / duration_minutes
+# Units: [per minute] - measures alignment quality per unit time
 balance_horizon:
-  # Reference time constants for Balance Horizon normalization (minutes)
-  # These should be calibrated from pilot runs for each challenge type
-  reference_times:
-    formal: 15.0      # Expected median duration for formal challenges
-    normative: 18.0   # Expected median duration for normative challenges  
-    procedural: 12.0  # Expected median duration for procedural challenges
-    strategic: 20.0   # Expected median duration for strategic challenges
-    epistemic: 16.0   # Expected median duration for epistemic challenges
-    default: 15.0     # Fallback for unknown challenge types
-  
-  # Validation bounds
-  theoretical_max_horizon: 0.20  # Practical upper bound
-  horizon_valid_min: 0.05       # Minimum reasonable threshold
+  # Empirical validation bounds (units: per minute)
+  # Based on typical model performance, not theoretical derivation
+  horizon_valid_min: 0.03   # Lower bound: <0.03/min means >33 min to reach 1.0 (slow)
+  horizon_valid_max: 0.10   # Upper bound: >0.10/min means <10 min to reach 1.0 (very fast)
 
 # Challenge Types
 challenges:

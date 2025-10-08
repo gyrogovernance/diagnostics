@@ -65,6 +65,29 @@ Edge (2,3): Preference
 
 Each metric is scored 1-10 based on detailed rubrics. These scores form the measurement vector y ∈ ℝ⁶.
 
+**Canonical Order and Semantic Anchoring**
+
+The edge mapping preserves canonical order and structural relationships:
+
+**Vertex 0 as Common Source**: Designated as the reference vertex (gauge choice with semantic anchoring). Edges from vertex 0 connect to the foundation triad.
+
+**Foundation Triad** (from vertex 0):
+- Edge (0,1): Truthfulness
+- Edge (0,2): Completeness
+- Edge (0,3): Groundedness
+
+**Expression Triad** (among vertices 1, 2, 3):
+- Edge (1,2): Literacy
+- Edge (1,3): Comparison
+- Edge (2,3): Preference
+
+**Canonical Pairings** (foundation → expression):
+- Truthfulness (0,1) → Literacy (1,2) via shared vertex 1
+- Completeness (0,2) → Comparison (1,3) via orthogonal relationship
+- Groundedness (0,3) → Preference (2,3) via shared vertex 3
+
+This structure is fixed and preserves order. The mathematical decomposition is invariant to relabeling, but interpretation respects this canonical assignment.
+
 **Degrees of Freedom**: 
 - Gradient space: dim = |V| - 1 = 3
 - Residual space: dim = |E| - |V| + 1 = 3
@@ -149,6 +172,14 @@ Residual: r = y - g
 **Residual Component**: 3 degrees of freedom representing circulation patterns orthogonal to gradient flow.
 
 The same measurements simultaneously contain both coherence and differentiation information, separated through projection rather than role assignment.
+
+**Non-Associative Residual**
+
+The residual component represents non-associative circulation—measurement patterns that cannot be explained by potential-based (associative) flow. In CGM terms, this is the signature of gyroscopic precession in the evaluation space.
+
+The residual has 3 degrees of freedom and can be expressed in various basis representations (e.g., cycle basis). However, these bases are mathematically equivalent and basis-dependent. We report only the residual's magnitude (via aperture ratio A) and avoid assigning ontological meaning to specific basis directions.
+
+The aperture target A ≈ 0.0207 represents the necessary non-associative component for healthy gyroscopic balance—too little rigidity, too much indicates instability.
 
 ## 4. The Three Components: UNA, ONA, BU
 

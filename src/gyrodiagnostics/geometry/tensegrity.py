@@ -14,6 +14,15 @@ BU stage (see docs/theory/CommonGovernanceModel.md). This represents optimal
 tensegrity balance: 97.93% closure (structural stability) + 2.07% aperture
 (adaptive capacity).
 
+CANONICAL MAPPING:
+The edge-to-metric assignment is fixed to preserve canonical order:
+- Vertex 0: Designated as Common Source (CS) reference
+- Edges from vertex 0: Foundation triad (Truthfulness, Completeness, Groundedness)
+- Edges among vertices 1-3: Expression triad (Literacy, Comparison, Preference)
+- Canonical pairings: Truthfulness→Literacy, Completeness→Comparison, Groundedness→Preference
+
+This mapping is semantically meaningful and should not be altered.
+
 Mathematical foundation from docs/theory/Measurement.md and CommonGovernanceModel.md.
 """
 
@@ -32,11 +41,26 @@ B = np.array([
 
 # Cycle basis C for K4 (3 independent loops)
 # Each row represents one cycle in edge space
-# Cycles: 0-1-2-0, 0-1-3-0, 0-2-3-0
+#
+# STATUS: Defined for mathematical completeness and debugging/validation.
+# NOT used in production decomposition (residual computed as r = y - B^T x).
+# 
+# NOTE: Cycle interpretation is basis-dependent. The three cycles shown here
+# are ONE valid basis for the 3D residual space. Other bases exist and are
+# equally valid mathematically. We do not assign semantic meaning to specific
+# cycle directions; only the total residual magnitude (aperture) is reported.
+#
+# USAGE: Optional validation via _compute_cycle_coefficients() (internal only).
+#
+# CYCLE DEFINITIONS (with edge orientation low->high vertex):
+# Each cycle must satisfy B @ c = 0 (the fundamental cycle constraint)
+# Row 0: Cycle 0-1-2-0 traverses edges 01 (+1), 02 (-1 reversed), 12 (+1)
+# Row 1: Cycle 0-1-3-0 traverses edges 01 (+1), 03 (-1 reversed), 13 (+1)
+# Row 2: Cycle 0-2-3-0 traverses edges 02 (+1), 03 (-1 reversed), 23 (+1)
 C = np.array([
-    [ 1,  1,  0, -1,  0,  0],  # Cycle 0-1-2-0 (edges 01, 02, -12)
-    [ 1,  0,  1,  0, -1,  0],  # Cycle 0-1-3-0 (edges 01, 03, -13)
-    [ 0,  1,  1,  0,  0, -1]   # Cycle 0-2-3-0 (edges 02, 03, -23)
+    [ 1, -1,  0,  1,  0,  0],  # Cycle 0-1-2-0 (edges 01, -02, 12)
+    [ 1,  0, -1,  0,  1,  0],  # Cycle 0-1-3-0 (edges 01, -03, 13)
+    [ 0,  1, -1,  0,  0,  1]   # Cycle 0-2-3-0 (edges 02, -03, 23)
 ], dtype=float)
 
 # Canonical edge order for K4 graph
@@ -152,6 +176,63 @@ def compute_decomposition(y, W=None):
     }
 
 
+def _compute_cycle_coefficients(r):
+    """
+    [INTERNAL/DEBUGGING ONLY]
+    
+    Compute cycle basis coefficients for residual projection.
+    
+    Projects the residual r onto the cycle basis C to extract circulation
+    coefficients: r ≈ C^T * alpha. This decomposes the residual into
+    contributions from each of the 3 fundamental cycles.
+    
+    NOTE: Cycle bases are mathematically valid but basis-dependent. Different
+    basis choices yield different coefficient values while representing the
+    same residual. This function is provided for debugging and validation
+    purposes only. Production code should report only aperture/closure.
+    
+    USAGE: Internal validation and debugging. NOT for semantic interpretation.
+    
+    Args:
+        r: Residual projection vector (6,) from compute_decomposition()
+    
+    Returns:
+        dict with cycle analysis:
+            - coefficients: alpha (3,) showing circulation strength per cycle
+            - cycle_names: ["0-1-2-0", "0-1-3-0", "0-2-3-0"]
+            - dominant_cycle: Name of cycle with largest |alpha_i|
+            - asymmetry_ratio: max(|alpha|) / mean(|alpha|)
+    
+    Example:
+        >>> result = compute_decomposition(y)
+        >>> cycles = _compute_cycle_coefficients(result["residual_projection"])
+        >>> print(f"Cycle validation: {cycles['coefficients']}")
+    """
+    r = np.asarray(r, dtype=float)
+    if r.shape != (6,):
+        raise ValueError(f"Residual r must have shape (6,), got {r.shape}")
+    
+    # Least squares projection: alpha = (C * C^T)^-1 * C * r
+    # Since C rows are independent, this is well-conditioned
+    CC_T = C @ C.T  # (3, 3)
+    Cr = C @ r      # (3,)
+    alpha = np.linalg.solve(CC_T, Cr)
+    
+    cycle_names = ["0-1-2-0", "0-1-3-0", "0-2-3-0"]
+    abs_alpha = np.abs(alpha)
+    dominant_idx = np.argmax(abs_alpha)
+    
+    # Asymmetry ratio: values >2.0 suggest one cycle dominates
+    asymmetry = abs_alpha[dominant_idx] / np.mean(abs_alpha) if np.mean(abs_alpha) > 1e-12 else 1.0
+    
+    return {
+        "coefficients": alpha.tolist(),
+        "cycle_names": cycle_names,
+        "dominant_cycle": cycle_names[dominant_idx],
+        "asymmetry_ratio": float(asymmetry)
+    }
+
+
 def validate_decomposition(decomp, y, W=None):
     """
     Validate that decomposition satisfies orthogonality and reconstruction.
@@ -202,4 +283,48 @@ def validate_decomposition(decomp, y, W=None):
             "reconstruction": float(reconstruction_error),
             "energy": float(energy_error)
         }
+    }
+
+
+def validate_cycle_basis():
+    """
+    Validate that cycle basis matrix C satisfies B @ C.T = 0.
+    
+    This is a fundamental mathematical constraint: each cycle (column of C.T)
+    must be in the kernel of the incidence matrix B.
+    
+    Returns:
+        dict with validation results:
+            - valid: True if all cycles satisfy B @ c ≈ 0
+            - max_error: Maximum absolute error across all cycles
+            - cycle_errors: List of errors for each cycle
+    
+    Raises:
+        AssertionError: If cycle basis is invalid (should never happen in production)
+    
+    Example:
+        >>> result = validate_cycle_basis()
+        >>> assert result["valid"], f"Cycle basis invalid: {result}"
+    """
+    # Check that B @ C.T = 0 (each column of C.T is a cycle in kernel of B)
+    BC = B @ C.T  # Should be (4, 3) matrix of zeros
+    
+    cycle_errors = []
+    for i in range(3):
+        error = np.linalg.norm(BC[:, i])
+        cycle_errors.append(float(error))
+    
+    max_error = max(cycle_errors)
+    is_valid = max_error < 1e-10
+    
+    if not is_valid:
+        raise AssertionError(
+            f"Cycle basis C is invalid! B @ C.T should be zero but has max error {max_error:.2e}. "
+            f"This indicates a bug in the cycle matrix definition."
+        )
+    
+    return {
+        "valid": is_valid,
+        "max_error": max_error,
+        "cycle_errors": cycle_errors
     }

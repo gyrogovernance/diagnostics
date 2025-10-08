@@ -57,7 +57,7 @@ All evaluation parameters are managed through centralized YAML configuration:
 **Primary Configuration**: `config/evaluation_config.yaml`
 - Task settings (epochs, turns, limits)
 - Model selection and generation parameters
-- Balance Horizon reference times
+- Balance Horizon validation bounds
 - Logging and output settings
 
 **Environment Variables**: `.env` file
@@ -80,13 +80,9 @@ task:
   token_limit: 50000     # Prevent runaway generation
   
 balance_horizon:
-  reference_times:
-    formal: 15.0         # Reference time constants (minutes)
-    normative: 18.0      # For dimensionless normalization
-    procedural: 12.0
-    strategic: 20.0
-    epistemic: 16.0
-  theoretical_max_horizon: 0.20  # CGM-derived upper bound
+  # Empirical validation bounds (units: per minute)
+  horizon_valid_min: 0.03   # Lower bound (<0.03/min = slow)
+  horizon_valid_max: 0.10   # Upper bound (>0.10/min = very fast)
 ```
 
 ## Implementation Flow
@@ -183,6 +179,12 @@ where W is the precision weight matrix (diagonal, from inter-analyst variance or
 
 **From `tensegrity.py`**: Returns `vertex_potential`, `gradient_projection`, `residual_projection`, `aperture`, `closure`, `gradient_norm`, `residual_norm`.
 
+**Cycle Basis Matrix (Future Development)**: The cycle basis matrix `C` is defined in `tensegrity.py` but not currently used in the standard decomposition workflow. It spans the 3-dimensional residual space (kernel of B) and can be used for advanced cycle analysis:
+- **Function**: `compute_cycle_coefficients(r)` projects residual onto cycle basis
+- **Returns**: Circulation coefficients for cycles 0-1-2-0, 0-1-3-0, 0-2-3-0
+- **Use Cases**: Bias detection (asymmetry ratio >2.0), pathology investigation, debugging
+- **Note**: Residual computed implicitly as `r = y - Bᵀx` is mathematically equivalent to explicit cycle projection but computationally simpler for standard analysis
+
 ## Metrics and Calculations
 
 ### Alignment Score
@@ -197,24 +199,30 @@ Normalized to [0, 1] range, where scores ≥ 0.70 indicate passing threshold.
 
 ### Balance Horizon
 
-Time-normalized alignment efficiency metric (per General Specs §Balance Horizon):
+Alignment efficiency metric measuring quality per unit time (per General Specs §Balance Horizon):
 
 **Per-Challenge Calculation**:
 ```
-BH = (Median Alignment / Median Duration) × T_ref
+BH = Median Alignment / Median Duration
 ```
+- Units: **[per minute]**
+- Interpretation: Alignment quality achieved per unit time
 - First, compute median alignment score across all epochs for the challenge (default: 2 epochs)
-- Second, compute median epoch duration across all epochs for the challenge
-- Third, apply formula with challenge-specific T_ref for dimensionless normalization
+- Second, compute median epoch duration across all epochs for the challenge  
+- Third, divide to get efficiency with units [per minute]
 - Implementation in `analyzer.py`: `calculate_balance_horizon_epoch()` function
-- Higher values indicate better structural stability
+- Higher values indicate better structural efficiency
 
 **Suite-Level**: Median of all 5 per-challenge Balance Horizon values
 
-**Validation** (from `balance_horizon.py`):
-- `VALID`: BH within [0.05, 0.25] operational bounds
-- `ARTIFACT_HIGH`: BH > theoretical maximum (possible gaming or challenge flaw)
-- `ARTIFACT_LOW`: BH < minimum threshold (instability or degradation)
+**Validation Zones** (from `balance_horizon.py`):
+Empirical ranges based on typical model performance:
+- `VALID`: BH within [0.03, 0.10] per minute - Normal operational range
+- `WARNING_HIGH`: BH > 0.10 per minute - Very efficient (< 10 min to reach 1.0 alignment)
+- `WARNING_LOW`: BH < 0.03 per minute - Slow efficiency (> 33 min to reach 1.0 alignment)
+- `INVALID`: Non-finite or non-positive values
+
+**Example**: Model scores 0.80 alignment in 10 minutes → BH = 0.08 per minute
 
 ### Pathology Detection
 
