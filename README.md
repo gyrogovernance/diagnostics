@@ -32,7 +32,7 @@
 
 ## Overview
 
-GyroDiagnostics is a comprehensive evaluation suite for assessing AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation.
+GyroDiagnostics is a **production-ready** evaluation suite designed for AI safety labs and frontier model developers to assess AI model alignment and behavioral integrity. It measures intelligence quality through structural coherence benchmarks while identifying reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual degradation.
 
 **The framework advances AI safety and development through dual capabilities:**
 
@@ -51,12 +51,34 @@ These integrated outputs deliver practical safety assessments alongside reusable
 
 ---
 
+## Why This Matters for AI Safety
+
+**Current Challenge**: Most AI evaluation frameworks focus on adversarial robustness and capability thresholds, treating alignment as binary pass/fail. This misses the deeper question: *does the system maintain structural coherence under autonomous operation?*
+
+**Our Approach**: GyroDiagnostics measures the foundational properties from which reliable behavior emerges:
+- **Structural Balance**: Quantifies the ratio between systematic organization (closure) and adaptive flexibility (aperture)
+- **Temporal Stability**: Reveals whether high scores represent genuine capability or brittle optimization
+- **Geometric Measurement**: Eliminates evaluator bias through topological necessity rather than role assignment
+
+**Key Insight**: A system scoring 85% with low Balance Horizon is less deployment-ready than one scoring 75% with high Balance Horizon. We measure what conventional frameworks assume.
+
+**Complements Standard Safety Frameworks**: Anthropic, OpenAI, and DeepMind protocols address operational risks (adversarial robustness, capability thresholds, misuse potential). We address foundational coherence—the structural properties underlying those operational concerns.
+
+---
+
 ## ✅ Key Features
 
 - **Structural Balance**: Alignment emerges from mathematical balance between coherence (closure) and differentiation (openness), grounded in the Common Governance Model (CGM)
-- **Tetrahedral Topology**: Eliminates role-based bias through geometric neutrality - no designated 'critics' or 'supporters'
+- **Tetrahedral Topology**: K₄ graph structure with 4 vertices, 6 edges (measurement channels), and 4 participants (2 UNA Synthesists + 2 ONA Analysts) eliminates role-based bias through geometric measurement
 - **Pathology Detection**: Identifies 5 specific failure modes (sycophantic agreement, deceptive coherence, goal misgeneralization, superficial optimization, semantic drift)
 - **Temporal Stability**: Balance Horizon reveals whether capabilities are brittle or stable over extended operation
+
+### Novel Technical Contributions
+
+- **First framework** to apply tensegrity geometry (from structural engineering) to AI alignment measurement
+- **Eliminates role-based bias** through K₄ tetrahedral topology—no "critic" vs "supporter" structural privilege
+- **Temporal efficiency metric** (Balance Horizon) quantifies alignment stability per unit time
+- **Grounded in mathematical physics**: Common Governance Model derives optimal aperture ratio (2.07%) from first principles, not empirical fitting
 
 ---
 
@@ -99,6 +121,8 @@ Balance Horizon = T_ref(challenge) × (Median Alignment / Median Duration)
 **Fallback Chain**: If ensemble analysts fail, the system attempts a backup analyst before falling back to default scoring, ensuring evaluation continuity.
 
 **Per-Analyst Tracking**: Detailed metadata captures each analyst's performance, enabling analysis of inter-analyst agreement and systematic scoring patterns.
+
+**Production Deployment**: Successfully evaluated Meta-Llama 3.3 70B across 30 epochs with zero pathologies detected (see `showcase/`). Additional frontier models currently under evaluation.
 
 ---
 
@@ -310,6 +334,28 @@ python tools/analyzer.py
 # Clean up old logs and results
 python tools/cleaner.py --older-than 7
 ```
+
+---
+
+## 💼 Career & Collaboration
+
+**Seeking AI Safety Research Positions**
+
+I'm actively seeking opportunities to contribute to AI safety research at frontier labs (Anthropic, OpenAI, DeepMind, etc.) or organizations focused on AI alignment and governance.
+
+**What I Bring**:
+- **Novel Measurement Framework**: Developed production-ready evaluation system addressing blind spots in current safety protocols
+- **Theory-to-Practice Bridge**: Translated mathematical physics (tensegrity, gyrogroup theory) into working alignment diagnostics
+- **Production Experience**: Successfully deployed evaluations on frontier models with comprehensive metadata pipelines
+- **Cross-Domain Expertise**: Policy, ethics, formal methods, strategic forecasting, and epistemic analysis
+
+**Research Interests**:
+- Foundational alignment measurement and structural coherence assessment
+- Temporal stability and capability robustness evaluation
+- Bias-resistant evaluation frameworks through geometric constraints
+- Integration of mathematical physics principles into AI safety protocols
+
+**Contact**: For collaboration, research positions, or technical discussions, please reach out via [GitHub Issues](https://github.com/gyrogovernance/diagnostics/issues) or connect through the repository.
 
 ---
 

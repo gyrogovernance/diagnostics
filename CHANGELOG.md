@@ -7,25 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.9.6] - 2025-10-07
+## [0.9.6] - 2025-10-08
 
-### 🔺 **Tetrahedral Structure Alignment**
+### 🔺 **Tetrahedral Measurement Structure (K₄ Graph)**
 
 #### **Changed**
-- **Tetrahedral Geometry**: Restructured evaluation to align with tetrahedral topology (4 vertices, 6 edges)
-  - **4 vertices**: 1 Challenge + 2 Epochs + 2 Analysts
-  - **6 edges**: Represented by 6 turns per epoch
-  - Reduced from 3×3 (9 scorings) to 2×2 (4 scorings) for geometric consistency
-- **Epoch Configuration**: Reduced default epochs from 3 to 2 to match tetrahedral structure
-- **Analyst Ensemble**: Changed from 3 primary analysts to 2 (analyst_a, analyst_b) with 1 backup
+- **Tetrahedral Topology**: Implemented complete mapping to K₄ graph structure
+  - **4 vertices** = Abstract mathematical structure (fixed by K₄ topology)
+  - **6 edges** = 6 turns (measurement channels mapping one-to-one to K₄ edges)
+  - **4 participants** = 2 UNA Synthesists (epochs) + 2 ONA Analysts (scoring models)
+  - **Total analyses** = 4 per task (2 epochs × 2 analysts), each covering all 6 channels
+  - **Degrees of freedom** = 3 gradient (UNA coherence) + 3 residual (ONA differentiation), determined by topology not participant count
+- **Epoch Configuration**: Reduced from 3 to 2 (2 UNA participants)
+- **Analyst Configuration**: Reduced from 3 to 2 primary (2 ONA participants) + 1 backup
+- **Role Definitions**: Epochs represent UNA Synthesist participants; Analysts represent ONA Inference participants
+- **Theoretical Alignment**: Complete alignment with tetrahedral tensegrity model (see `docs/theory/Measurement.md`)
 - **Sample IDs**: Simplified to single sample per task (`formal`, `normative`, etc.) with epochs handled by Inspect AI's `epochs` parameter
-- **Scorer Naming**: Explicit scorer name to prevent duplicate registrations (`alignment_scorer1`, `alignment_scorer2`, etc.)
+- **Scorer Naming**: Explicit scorer name to prevent duplicate registrations
+- **Score Reporting**: Changed from categorical (CORRECT/INCORRECT) to numeric (alignment_score) for proper mean() reporting
+- **Configuration**: All task parameters now use `TASK_CONFIG` from YAML; removed hardcoded values
 
 #### **Fixed**
 - **Backup Analyst Logic**: Backup analyst now triggers when ANY primary analyst fails (not just when all 3 fail)
 - **Scorer State Handling**: Added `scratch` attribute checks for rescoring compatibility
 - **Error Handling**: Enhanced transient error detection in solver for OpenRouter provider issues
+- **Balance Horizon Validation**: Reordered condition checks to fix unreachable WARNING_HIGH status; added non-finite value handling
+- **Timing Data Persistence**: Store epoch timing and turn metadata in `state.metadata` (persisted) instead of `state.scratch` (temporary)
+- **YAML Configuration**: `message_limit` now respects YAML value; Balance Horizon constants now load from YAML
+- **Analyst Aggregation**: Prefer 2 primary analysts when available; use backup only when needed to reach minimum
 - **Pathology Detection**: Hardened 404 error handling to stop retries on permanent endpoint failures
+
+#### **Removed**
+- **Mechanical Pathology Detection**: Removed `pathology_detection.py` and its threshold-based detection logic
+  - Eliminates architectural contradiction: scoring template instructs analysts "DO NOT flag pathologies based solely on metric patterns"
+  - Removes arbitrary threshold checks (e.g., `preference > 8 AND accountability < 4`)
+  - Pathologies now detected exclusively by analysts through transcript evidence analysis
+  - Reduces heuristic noise in evaluation metadata while preserving all analyst-generated pathology data
 
 #### **Added**
 - **Model Test Tool**: `tools/test_models.py` for validating all configured models before evaluation
@@ -33,9 +50,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Selective Rescoring**: `tools/rescore_logs.py` now only rescores epochs with incomplete analyst coverage
 
 #### **Documentation**
-- Updated all references to reflect 2-epoch, 2-analyst tetrahedral structure
-- Clarified distinction between vertices (4), edges (6), and total scorings (4)
-- Revised resource estimates: 20 scoring calls (5 challenges × 2 epochs × 2 analysts)
+- Updated all references to reflect 2-epoch, 2-analyst ensemble structure (4 participants: 2 UNA + 2 ONA)
+- Removed incorrect vertex mapping (1+2+2=5≠4) and replaced with correct K₄ structure explanation
+- Clarified: 6 turns = 6 edges (measurement channels); topology determines DOF, not participant count
+- Added explicit "Participant-to-Component Mapping" in Technical_Specs.md
+- Updated Measurement.md from 6 participants (3+3) to 4 participants (2+2)
+- Removed "empirical" references; clarified Balance Horizon bounds are CGM-derived (theoretical)
+- Revised resource estimates: 60 model calls, 20 analyst calls for standard suite
+- Created `.env.example` with sanitized configuration template
 
 ---
 

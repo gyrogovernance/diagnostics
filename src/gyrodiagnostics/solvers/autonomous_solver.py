@@ -213,14 +213,19 @@ def autonomous_solver() -> Solver:
                     print(f"Turn {turn_number}: Empty response, stopping early.")
                     break
         
-        # Record epoch timing
+        # Record epoch timing (store in metadata for persistence to logs)
         epoch_end = time.time()
-        state.scratch["epoch_timing"].update({
+        epoch_timing = {
             "start_time": epoch_start,
             "end_time": epoch_end,
             "duration_minutes": (epoch_end - epoch_start) / 60.0,
             "turns_completed": len(state.scratch.get("turn_metadata", []))
-        })
+        }
+        state.scratch["epoch_timing"].update(epoch_timing)
+        
+        # Store timing in metadata for scorer access (scratch is not persisted)
+        state.metadata["epoch_timing"] = epoch_timing
+        state.metadata["turn_metadata"] = state.scratch.get("turn_metadata", [])
         
         return state
     

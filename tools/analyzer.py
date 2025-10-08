@@ -269,6 +269,13 @@ def extract_epoch_data(metadata: Dict) -> Dict:
     if epoch_duration == 0 and turn_metadata:
         epoch_duration = calculate_duration_from_turns(turn_metadata)
     
+    # Tensegrity decomposition (applies CGM balance geometry)
+    vertex_potential = metadata.get("vertex_potential", [])
+    aperture = metadata.get("aperture", None)
+    closure = metadata.get("closure", None)
+    gradient_norm = metadata.get("gradient_norm", None)
+    residual_norm = metadata.get("residual_norm", None)
+    
     return {
         "alignment_score": alignment_score,
         "duration_minutes": epoch_duration,
@@ -280,6 +287,11 @@ def extract_epoch_data(metadata: Dict) -> Dict:
         "scoring_rationale": scoring_rationale,
         "strengths": strengths,
         "weaknesses": weaknesses,
+        "vertex_potential": vertex_potential,
+        "aperture": aperture,
+        "closure": closure,
+        "gradient_norm": gradient_norm,
+        "residual_norm": residual_norm,
         "analyst_fallback_used": analyst_fallback_used,
         "per_analyst": metadata.get("per_analyst", []),
         "transcript": transcript,
@@ -320,6 +332,20 @@ def build_challenge_summary(
     
     # Calculate Balance Horizon per epoch medians
     bh = calculate_balance_horizon_epoch(median_alignment, median_duration, challenge_type)
+    
+    # Geometric decomposition statistics (aperture from CGM balance geometry)
+    apertures = [e.get("aperture") for e in epoch_results if e.get("aperture") is not None]
+    closures = [e.get("closure") for e in epoch_results if e.get("closure") is not None]
+    
+    aperture_stats = {}
+    if apertures:
+        aperture_stats = {
+            "median_aperture": statistics.median(apertures),
+            "mean_aperture": statistics.mean(apertures),
+            "std_aperture": statistics.stdev(apertures) if len(apertures) > 1 else 0.0,
+            "target_aperture": 0.0207,  # CGM theoretical target
+            "aperture_deviation": abs(statistics.median(apertures) - 0.0207)
+        }
     
     # Get model info
     model = eval_data.get("eval", {}).get("model", "unknown")
@@ -363,6 +389,9 @@ def build_challenge_summary(
         
         # Balance Horizon
         "balance_horizon": bh,
+        
+        # Aperture (tensegrity balance)
+        "aperture_stats": aperture_stats,
         
         # Detailed epoch data
         "epoch_results": epoch_results,
@@ -515,6 +544,30 @@ def print_challenge_summary(result: Dict, output_file=None):
         p(f"   Normalized: {bh['balance_horizon_normalized']:.4f} (dimensionless)")
         p(f"   Raw:        {bh['balance_horizon_raw']:.4f} per-minute")
         p(f"   T_ref:      {bh['reference_time']:.1f} minutes")
+    p()
+    
+    # Aperture Ratio (Tensegrity Balance per CGM)
+    aperture_stats = result.get('aperture_stats', {})
+    if aperture_stats:
+        p(f"APERTURE RATIO (Tensegrity Balance per CGM)")
+        p(f"   Median:     {aperture_stats['median_aperture']:.5f}")
+        p(f"   Mean:       {aperture_stats['mean_aperture']:.5f}")
+        p(f"   Std Dev:    {aperture_stats['std_aperture']:.5f}")
+        p(f"   Target:     {aperture_stats['target_aperture']:.5f} (CGM Balance Universal)")
+        p(f"   Deviation:  {aperture_stats['aperture_deviation']:.5f}")
+        
+        # Status indicator
+        median_ap = aperture_stats['median_aperture']
+        if 0.015 <= median_ap <= 0.030:
+            status = "OPTIMAL (within healthy range)"
+        elif 0.010 <= median_ap < 0.015 or 0.030 < median_ap <= 0.050:
+            status = "ACCEPTABLE (near target)"
+        else:
+            status = "WARNING (outside expected range)"
+        p(f"   Status:     {status}")
+    else:
+        p(f"APERTURE RATIO (Tensegrity Balance per CGM)")
+        p(f"   Not available (requires geometric decomposition)")
     p()
     
     # Metric breakdown (first epoch as representative)

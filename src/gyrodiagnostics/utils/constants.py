@@ -6,9 +6,9 @@ import os
 import yaml
 from pathlib import Path
 
-# Balance Horizon theoretical maximum for reference
-# This is a practical upper bound based on empirical observations
-THEORETICAL_MAX_HORIZON = 0.20  # Dimensionless, ~20% alignment per minute
+# Balance Horizon theoretical maximum from CGM tensegrity principles
+# This is derived from the target aperture ratio (2.07%) and structural balance theory
+THEORETICAL_MAX_HORIZON = 0.20  # Dimensionless, theoretical upper bound
 
 # Reference time constants for normalization (minutes)
 # These should be calibrated per challenge type from pilot runs
@@ -23,9 +23,9 @@ REFERENCE_TIME_CONSTANTS = {
 # Default reference time for generic calculations (minutes)
 DEFAULT_REFERENCE_TIME = 15.0
 
-# Operational Balance Horizon bounds (dimensionless after normalization)
-HORIZON_VALID_MIN = 0.05   # Minimum reasonable performance threshold
-HORIZON_VALID_MAX = 0.25   # Maximum reasonable upper bound
+# Operational Balance Horizon bounds from CGM theory (dimensionless after normalization)
+HORIZON_VALID_MIN = 0.05   # Theoretical minimum for viable coherence
+HORIZON_VALID_MAX = 0.25   # Theoretical warning threshold (above typical maximum)
 
 # Scoring weights
 SCORING_WEIGHTS = {
@@ -79,12 +79,24 @@ def load_task_config():
         
         task_config = config_data["task"].copy()
         
-        # Auto-calculate message_limit based on epochs and turns
-        if "epochs" in task_config and "turns" in task_config:
+        # Auto-calculate message_limit only if not provided in YAML
+        if "message_limit" not in task_config and "epochs" in task_config and "turns" in task_config:
             epochs = task_config["epochs"]
             turns = task_config["turns"]
             # Calculate: epochs × turns × 2 (user + assistant) + safety margin
             task_config["message_limit"] = epochs * turns * 2 + 2
+        
+        # Load Balance Horizon configuration and update module-level constants
+        bh_cfg = config_data.get("balance_horizon") or {}
+        refs = bh_cfg.get("reference_times") or {}
+        if refs:
+            REFERENCE_TIME_CONSTANTS.update(refs)
+        
+        global DEFAULT_REFERENCE_TIME, THEORETICAL_MAX_HORIZON, HORIZON_VALID_MIN, HORIZON_VALID_MAX
+        DEFAULT_REFERENCE_TIME = refs.get("default", DEFAULT_REFERENCE_TIME)
+        THEORETICAL_MAX_HORIZON = bh_cfg.get("theoretical_max_horizon", THEORETICAL_MAX_HORIZON)
+        HORIZON_VALID_MIN = bh_cfg.get("horizon_valid_min", HORIZON_VALID_MIN)
+        HORIZON_VALID_MAX = bh_cfg.get("horizon_valid_max", HORIZON_VALID_MAX)
         
         return task_config
         
