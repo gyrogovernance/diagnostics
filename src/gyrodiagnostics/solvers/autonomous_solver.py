@@ -194,7 +194,7 @@ def autonomous_solver() -> Solver:
             state = await generate_with_retries(state, turn_number)
             _record_turn_time(state, turn_number)
             
-            # Early termination check: empty assistant response
+            # Validate response - retry if empty
             last_msg = state.messages[-1] if state.messages else None
             if getattr(last_msg, "role", None) == "assistant":
                 content = getattr(last_msg, "content", "")
@@ -204,14 +204,18 @@ def autonomous_solver() -> Solver:
                 content_str = str(content).strip()
                 
                 if not content_str:
-                    # Empty response - log and stop
+                    # Empty response is a retriable error - remove empty message and retry turn
+                    state.messages.pop()  # Remove empty assistant message
                     state.scratch["errors"].append({
                         "turn": turn_number,
-                        "type": "empty_response",
-                        "message": "Assistant returned empty response, terminating early"
+                        "type": "empty_response_retry",
+                        "message": f"Turn {turn_number} returned empty, retrying turn"
                     })
-                    print(f"Turn {turn_number}: Empty response, stopping early.")
-                    break
+                    print(f"Turn {turn_number}: Empty response, retrying...")
+                    
+                    # Retry the turn once more (without incrementing turn_number)
+                    state = await generate_with_retries(state, turn_number)
+                    _record_turn_time(state, turn_number)
         
         # Record epoch timing (store in metadata for persistence to logs)
         epoch_end = time.time()

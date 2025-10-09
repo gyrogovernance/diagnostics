@@ -67,17 +67,23 @@ def check_env_file():
     content = env_path.read_text()
     
     has_model = "INSPECT_EVAL_MODEL" in content
-    has_analyst = "INSPECT_EVAL_MODEL_GRADER" in content
+    has_analyst_a = "INSPECT_EVAL_MODEL_GRADER_A" in content
+    has_analyst_b = "INSPECT_EVAL_MODEL_GRADER_B" in content
     
     if has_model:
         print("[OK] .env file exists with INSPECT_EVAL_MODEL")
     else:
         print("[WARN] .env file missing INSPECT_EVAL_MODEL")
     
-    if has_analyst:
-        print("[OK] .env file has INSPECT_EVAL_MODEL_GRADER")
+    if has_analyst_a:
+        print("[OK] .env file has INSPECT_EVAL_MODEL_GRADER_A (primary analyst)")
     else:
-        print("[WARN] .env file missing INSPECT_EVAL_MODEL_GRADER (will use default)")
+        print("[WARN] .env file missing INSPECT_EVAL_MODEL_GRADER_A (will use default)")
+    
+    if has_analyst_b:
+        print("[OK] .env file has INSPECT_EVAL_MODEL_GRADER_B (secondary analyst)")
+    else:
+        print("[WARN] .env file missing INSPECT_EVAL_MODEL_GRADER_B (will use default)")
     
     return has_model
 

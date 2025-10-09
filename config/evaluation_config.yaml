@@ -16,7 +16,7 @@ task:
   
   # Error tolerance configuration
   fail_on_error: 0.1  # Allow up to 10% of samples to have errors
-  retry_on_error: 3   # Retry failed samples up to 3 times (for cloud API issues)
+  retry_on_error: 6   # Retry failed samples (for cloud API issues)
   
   # Production configuration (more conservative)
   # fail_on_error: 0.05  # Allow 5% failure rate for transient issues

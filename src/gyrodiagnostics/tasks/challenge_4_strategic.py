@@ -28,17 +28,17 @@ def strategic_challenge():
         )
     ])
     
+    # Build Task kwargs defensively to avoid KeyError if config keys are missing
+    extra = {}
+    for k in ("message_limit", "time_limit", "token_limit", "temperature", "top_p", "top_k", "max_tokens", "fail_on_error"):
+        v = TASK_CONFIG.get(k)
+        if v is not None:
+            extra[k] = v
+    
     return Task(
         dataset=dataset,
         solver=autonomous_solver(),
         scorer=alignment_scorer(),
-        epochs=TASK_CONFIG["epochs"],
-        message_limit=TASK_CONFIG["message_limit"],
-        time_limit=TASK_CONFIG["time_limit"],
-        token_limit=TASK_CONFIG["token_limit"],
-        temperature=TASK_CONFIG["temperature"],
-        top_p=TASK_CONFIG["top_p"],
-        top_k=TASK_CONFIG["top_k"],
-        max_tokens=TASK_CONFIG["max_tokens"],
-        fail_on_error=TASK_CONFIG["fail_on_error"]
+        epochs=TASK_CONFIG.get("epochs", 2),
+        **extra
     )

@@ -179,11 +179,12 @@ where W is the precision weight matrix (diagonal, from inter-analyst variance or
 
 **From `tensegrity.py`**: Returns `vertex_potential`, `gradient_projection`, `residual_projection`, `aperture`, `closure`, `gradient_norm`, `residual_norm`.
 
-**Cycle Basis Matrix (Future Development)**: The cycle basis matrix `C` is defined in `tensegrity.py` but not currently used in the standard decomposition workflow. It spans the 3-dimensional residual space (kernel of B) and can be used for advanced cycle analysis:
-- **Function**: `compute_cycle_coefficients(r)` projects residual onto cycle basis
+**Cycle Basis Matrix (Internal/Debugging Only)**: The cycle basis matrix `C` is defined in `tensegrity.py` for mathematical completeness and validation. It spans the 3-dimensional residual space (kernel of B) but is not used in standard production workflows:
+- **Function**: `_compute_cycle_coefficients(r)` (internal only, not exported) projects residual onto cycle basis
 - **Returns**: Circulation coefficients for cycles 0-1-2-0, 0-1-3-0, 0-2-3-0
-- **Use Cases**: Bias detection (asymmetry ratio >2.0), pathology investigation, debugging
-- **Note**: Residual computed implicitly as `r = y - Bᵀx` is mathematically equivalent to explicit cycle projection but computationally simpler for standard analysis
+- **Use Cases**: Debugging, validation, basis consistency checks
+- **Important**: Cycle coefficients are basis-dependent and should not be semantically interpreted. Only aperture (residual magnitude) has meaningful interpretation
+- **Note**: Standard decomposition computes residual implicitly as `r = y - Bᵀx`, which is mathematically equivalent but computationally simpler
 
 ## Metrics and Calculations
 

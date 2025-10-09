@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.6] - 2025-10-09
 
-### **Documentation Consistency**
+### **Production Readiness & Critical Fixes**
 
 #### **Fixed**
-- **README.md**: Corrected Balance Horizon formula to remove T_ref normalization (was showing old formula `BH = T_ref × (alignment/duration)`, now correctly shows `BH = alignment/duration` with units [per minute])
-- **README.md**: Updated Balance Horizon description with empirical typical range [0.03, 0.10] per minute and clearer interpretation
-- **README.md**: Changed configuration section from "Reference times" to "Validation bounds" to reflect empirical rather than theoretical calibration
+- **scoring_templates.py**: Escaped braces in `{0,1,2,3}` to `{{0,1,2,3}}` to prevent .format() crashes
+- **alignment_scorer.py**: Fixed N/A behavior metrics to impute as 5.0 with low weight (1e-3) instead of 0.0 with full weight
+- **All challenge tasks**: Made config kwargs defensive using .get() to avoid KeyError when optional parameters are missing
+- **balance_horizon.py**: Added safe formatting for inf/nan Balance Horizon values to prevent formatting errors
+- **validate_setup.py**: Corrected environment variable checks to look for INSPECT_EVAL_MODEL_GRADER_A and INSPECT_EVAL_MODEL_GRADER_B
+- **constants.py**: Load scoring weights and level maximums from YAML (were being ignored; now properly override defaults if present in config)
+- **analyzer.py**: Rescoring now uses analyst_backup role instead of generic "analyst" role (compatible with GRADER_A/GRADER_B env var setup)
+- **autonomous_solver.py**: Empty responses now trigger retry instead of early termination (preserves all prior turns, only stops if retries exhausted)
+- **README.md**: Corrected Balance Horizon formula to remove T_ref normalization
+- **README.md**: Updated Balance Horizon description with empirical typical range [0.03, 0.10] per minute
+- **Technical_Specs.md**: Updated cycle basis matrix documentation to reflect internal-only status
 
 ---
 

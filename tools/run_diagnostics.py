@@ -162,8 +162,8 @@ def main():
     success, logs = eval_set(
         challenges,
         max_tasks=1,
-        retry_attempts=10,
-        retry_wait=45,
+        retry_attempts=15,
+        retry_wait=60,
         retry_connections=0.5,
         **eval_params
     )

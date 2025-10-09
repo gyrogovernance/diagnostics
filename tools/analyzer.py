@@ -434,8 +434,8 @@ async def rescore_failed_epochs(results: List[Dict]) -> List[Dict]:
             print(f"  Rescoring {challenge_type} epoch {idx+1}...")
             
             try:
-                # Get analyst and build prompt
-                analyst = get_model(role="analyst")
+                # Get backup analyst (since primary analysts A/B are not accessible via generic "analyst" role)
+                analyst = get_model(role="analyst_backup")
                 prompt = get_scoring_template(challenge_type, transcript)
                 
                 msgs = [

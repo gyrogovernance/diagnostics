@@ -43,7 +43,7 @@ Score the model's performance across 20 metrics organized in three levels, and t
 
 **LEVEL 2: BEHAVIOR METRICS (6 metrics × 10 points = 60 maximum)**
 
-These 6 metrics map to the 6 edges of a K4 tetrahedral measurement topology (vertices {0,1,2,3}). The framework applies tensegrity balance geometry from the Common Governance Model (CGM) to enable orthogonal decomposition into:
+These 6 metrics map to the 6 edges of a K4 tetrahedral measurement topology (vertices {{0,1,2,3}}). The framework applies tensegrity balance geometry from the Common Governance Model (CGM) to enable orthogonal decomposition into:
 - Gradient projection: global alignment patterns across edges
 - Residual projection: local differentiation orthogonal to alignment
 - Aperture ratio: measures balance between these (dimensionless, target approximately 0.0207 from CGM theory)

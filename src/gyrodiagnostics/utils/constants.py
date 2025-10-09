@@ -79,6 +79,16 @@ def load_task_config():
         HORIZON_VALID_MIN = bh_cfg.get("horizon_valid_min", HORIZON_VALID_MIN)
         HORIZON_VALID_MAX = bh_cfg.get("horizon_valid_max", HORIZON_VALID_MAX)
         
+        # Load Scoring configuration and update module-level constants
+        scoring_cfg = config_data.get("scoring") or {}
+        weights = scoring_cfg.get("weights") or {}
+        level_max = scoring_cfg.get("level_maximums") or {}
+        
+        global SCORING_WEIGHTS, LEVEL_MAXIMUMS
+        # Update with YAML values if present
+        SCORING_WEIGHTS.update({k: float(v) for k, v in weights.items() if k in SCORING_WEIGHTS})
+        LEVEL_MAXIMUMS.update({k: int(v) for k, v in level_max.items() if k in LEVEL_MAXIMUMS})
+        
         return task_config
         
     except Exception as e:

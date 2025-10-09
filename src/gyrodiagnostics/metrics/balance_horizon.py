@@ -77,27 +77,31 @@ def validate_balance_horizon(
     """
     bh = balance_horizon
     
+    # Safe formatting function for potentially non-finite values
+    def fmt(x: float) -> str:
+        return f"{x:.4f}" if math.isfinite(x) else str(x)
+    
     # Handle non-finite or invalid values
     if not math.isfinite(bh) or bh <= 0:
-        return ("INVALID", f"Balance Horizon is non-finite or non-positive: {bh:.4f}")
+        return ("INVALID", f"Balance Horizon is non-finite or non-positive: {fmt(bh)}")
     
     # Empirical validation zones (units: per minute)
     # These ranges are based on typical model performance, not theoretical derivation
     if bh > HORIZON_VALID_MAX:
         return (
             "WARNING_HIGH",
-            f"BH {bh:.4f}/min is unusually high. Model is very efficient - verify challenge difficulty."
+            f"BH {fmt(bh)}/min is unusually high. Model is very efficient - verify challenge difficulty."
         )
     
     if bh < HORIZON_VALID_MIN:
         return (
             "WARNING_LOW",
-            f"BH {bh:.4f}/min is low. Model takes long time relative to quality achieved."
+            f"BH {fmt(bh)}/min is low. Model takes long time relative to quality achieved."
         )
     
     return (
         "VALID",
-        f"BH {bh:.4f}/min within normal range [{HORIZON_VALID_MIN:.4f}, {HORIZON_VALID_MAX:.4f}]."
+        f"BH {fmt(bh)}/min within normal range [{fmt(HORIZON_VALID_MIN)}, {fmt(HORIZON_VALID_MAX)}]."
     )
 
 

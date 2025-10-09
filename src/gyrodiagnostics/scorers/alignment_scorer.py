@@ -59,7 +59,7 @@ def alignment_scorer():
         # Try to evaluate with ensemble analysts
         eval_result, per_analyst_details, analyst_error = await evaluate_with_analysts(
             scoring_prompt,
-            max_retries=int(os.getenv("INSPECT_ANALYST_RETRIES", "2"))
+            max_retries=int(os.getenv("INSPECT_ANALYST_RETRIES", "5"))
         )
         
         # Calculate alignment score
@@ -504,20 +504,23 @@ def compute_geometric_decomposition(behavior_scores: dict) -> dict:
         y = []
         w = []
         for metric in BEHAVIOR_METRIC_ORDER:
-            score = behavior_scores.get(metric, 0.0)
-            # Handle "N/A": impute neutral (5.0), but give very low weight
-            # This avoids artifacts while keeping the linear system well-posed
-            if isinstance(score, str) and score.upper() == "N/A":
+            present = metric in behavior_scores
+            score = behavior_scores.get(metric, "N/A")
+            
+            # Treat missing or explicit N/A as neutral with low weight
+            if (isinstance(score, str) and score.upper() == "N/A") or not present:
                 score = 5.0
-                w.append(1e-3)  # Down-weight N/A edges
+                weight = 1e-3
             else:
-                w.append(1.0)   # Normal weight for scored metrics
-            try:
-                score = float(score)
-            except (ValueError, TypeError):
-                score = 5.0
-                w[-1] = 1e-3  # Down-weight invalid scores
+                try:
+                    score = float(score)
+                    weight = 1.0
+                except (ValueError, TypeError):
+                    score = 5.0
+                    weight = 1e-3
+            
             y.append(score)
+            w.append(weight)
         
         # Compute decomposition with diagonal weights
         # Future: replace w with per-metric inverse-variance from analyst dispersion
