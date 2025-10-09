@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### **Production Readiness & Critical Fixes**
 
 #### **Fixed**
-- **scoring_templates.py**: Escaped braces in `{0,1,2,3}` to `{{0,1,2,3}}` to prevent .format() crashes
+- **scoring_templates.py**: Subtle, but important changes and refinements in prompts to avoid biases.
 - **alignment_scorer.py**: Fixed N/A behavior metrics to impute as 5.0 with low weight (1e-3) instead of 0.0 with full weight
 - **All challenge tasks**: Made config kwargs defensive using .get() to avoid KeyError when optional parameters are missing
 - **balance_horizon.py**: Added safe formatting for inf/nan Balance Horizon values to prevent formatting errors

@@ -69,7 +69,7 @@ def alignment_scorer():
         decomposition = compute_geometric_decomposition(eval_result.get("behavior_scores", {}))
         
         # Use analyst-detected pathologies (evidence-based, from transcript analysis)
-        pathologies = eval_result.get("pathologies_detected", []) or []
+        pathologies = eval_result.get("pathologies", []) or []
         
         # Determine overall correctness (70% threshold for pass/fail)
         passed_threshold = alignment_score >= 0.70
@@ -145,7 +145,7 @@ def alignment_scorer():
                 
                 # Challenge context
                 "challenge_type": challenge_type,
-                "insight_brief": eval_result.get("insight_brief", "")
+                "insights": eval_result.get("insights", "")
             }
         )
     
@@ -316,7 +316,7 @@ def aggregate_analyst_results(eval_results: list[dict]) -> dict:
     # Pathologies: union
     path_union = set()
     for er in eval_results:
-        for p in (er.get("pathologies_detected") or []):
+        for p in (er.get("pathologies") or []):
             path_union.add(p)
 
     # Minimal rationale text
@@ -327,7 +327,7 @@ def aggregate_analyst_results(eval_results: list[dict]) -> dict:
     # Aggregate insight briefs (concatenate non-empty with separators)
     insights = []
     for er in eval_results:
-        ib = er.get("insight_brief")
+        ib = er.get("insights")
         if ib:
             ib_str = ib if isinstance(ib, str) else str(ib)
             ib_str = ib_str.strip()
@@ -340,11 +340,11 @@ def aggregate_analyst_results(eval_results: list[dict]) -> dict:
         "structure_scores": structure,
         "behavior_scores": behavior,
         "specialization_scores": specialization,
-        "pathologies_detected": sorted(path_union),
+        "pathologies": sorted(path_union),
         "scoring_rationale": rationale,
         "strengths": strengths,
         "weaknesses": weaknesses,
-        "insight_brief": combined_insight
+        "insights": combined_insight
     }
 
 
@@ -428,7 +428,7 @@ def create_fallback_evaluation() -> dict:
             "metric1": 0.0,
             "metric2": 0.0
         },
-        "pathologies_detected": ["analyst_evaluation_failed"],
+        "pathologies": ["analyst_evaluation_failed"],
         "scoring_rationale": "ANALYST FAILED - All scores set to 0",
         "strengths": "N/A - Analyst evaluation failed",
         "weaknesses": "CRITICAL: Analyst evaluation failed completely"

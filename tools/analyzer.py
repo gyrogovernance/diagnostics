@@ -254,7 +254,7 @@ def extract_epoch_data(metadata: Dict) -> Dict:
     weaknesses = metadata.get("weaknesses", "")
     analyst_fallback_used = metadata.get("analyst_fallback_used", False)
     transcript = metadata.get("transcript", "")
-    insight_brief = metadata.get("insight_brief", "")
+    insights = metadata.get("insights", "")
     
     # Calculate duration from turn timestamps
     epoch_duration = metadata.get("epoch_duration_minutes", 0)
@@ -287,7 +287,7 @@ def extract_epoch_data(metadata: Dict) -> Dict:
         "analyst_fallback_used": analyst_fallback_used,
         "per_analyst": metadata.get("per_analyst", []),
         "transcript": transcript,
-        "insight_brief": insight_brief,
+        "insights": insights,
         "sample_id": metadata.get("sample_id")
     }
 
@@ -459,7 +459,7 @@ async def rescore_failed_epochs(results: List[Dict]) -> List[Dict]:
                 epoch["scoring_rationale"] = eval_result.get("scoring_rationale", "")
                 epoch["strengths"] = eval_result.get("strengths", "")
                 epoch["weaknesses"] = eval_result.get("weaknesses", "")
-                epoch["pathologies"] = eval_result.get("pathologies_detected", [])
+                epoch["pathologies"] = eval_result.get("pathologies", [])
                 epoch["analyst_fallback_used"] = False
                 epoch["rescored"] = True
                 
@@ -859,9 +859,9 @@ def print_suite_summary(results: List[Dict], output_file=None, output_path=None)
         ch = r.get('challenge_type') or "unknown"
         epoch_insights = []
         for idx, ep in enumerate(r.get('epoch_results', []), 1):
-            ib = ep.get('insight_brief') or ""
+            ib = ep.get('insights') or ""
             if isinstance(ib, str) and ib.strip():
-                epoch_insights.append({"epoch": idx, "insight_brief": ib.strip()})
+                epoch_insights.append({"epoch": idx, "insights": ib.strip()})
         if epoch_insights:
             insights_payload["challenges"][ch] = epoch_insights
     try:
