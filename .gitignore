@@ -179,6 +179,4 @@ output/
 # Analog evaluation data (user-specific runs)
 analog/data/notes/notes_*.md
 !analog/data/notes/notes_template.md
-analog/data/transcripts/
 analog/data/results/*
-!analog/data/results/gpt5_chat/
