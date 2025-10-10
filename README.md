@@ -38,7 +38,7 @@
 
 GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites like BIG-bench or HELM that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that thousands of shallow tasks cannot detect, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability.
 
-Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
+Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (democratizing AI Safety evaluations, for individuals who want to contribute to the domain without API access), producing qualitatively identical structural assessments.
 
 **Validated Results**: ChatGPT 5 Chat evaluation (Oct 2025) demonstrates the framework's diagnostic capability, detecting deceptive coherence in 90% of epochs and systematic imbalances in aperture ratio across all challenges.
 
@@ -149,7 +149,7 @@ Each evaluation produces:
 
 **Sample evaluation results:**
 
-- 📊 [ChatGPT 5 Chat Report](showcase/gpt5_chat_report.txt) - Complete manual evaluation (Oct 2025)
+- 📊 [ChatGPT 5 Chat Report](showcase/gpt5_chat_report.txt) - Complete evaluation (Oct 2025)
 - 📋 [ChatGPT 5 Chat Data](showcase/gpt5_chat_data.json) - Structured analysis data
 
 ### 🏆 ChatGPT 5 Chat Evaluation Results (demonstrating root-cause detection):
@@ -170,7 +170,7 @@ Each evaluation produces:
 - **Strengths**: Exceptional literacy (8-9/10), strong normative reasoning (Policy/Ethics 9-10/10)
 - **Weaknesses**: Poor groundedness (2-6/10) and truthfulness (2-8/10) in technical domains
 
-**Evaluation Details**: Manual mode via LMArena interface | Analysts: Grok 4 + Claude Sonnet 4.5
+**Evaluation Details**: Analysts: Grok 4 + Claude Sonnet 4.5
 
 These results empirically show aperture deviations predicting risks: high deceptive coherence (90%) correlates with IMBALANCED structure, validating the framework's ability to forecast failures like semantic drift before deployment.
 
