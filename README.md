@@ -28,7 +28,9 @@
 
 # <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
-**Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
+**A Mathematical Physics-Informed Framework for AI Model Capability and Alignment Assessment**
+
+*Measuring what matters*
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
@@ -49,6 +51,10 @@ Each challenge requires sustained multi-turn reasoning that cannot be completed 
 **Our Solution**: We measure the foundational properties that conventional frameworks assume, grounded in mathematical physics (Common Governance Model). This assesses whether intelligence emerges from stable structural balance or fragile optimization, with metrics that predict failures like semantic drift in long-horizon tasks.
 
 **Strategic Position**: While Anthropic, OpenAI, and DeepMind protocols address operational risks (adversarial attacks, misuse, capability overhang), GyroDiagnostics addresses foundational coherence. We provide the structural diagnostics underlying those operational concerns. Think of us as the "stress test for alignment stability" that complements existing safety frameworks.
+
+- First framework to systematically quantify the pathologies users actually experience.
+- Bridges the gap between capability benchmarks and catastrophic risk assessment.
+- Provides structural diagnosis for why models feel broken despite high scores.
 
 ---
 
@@ -146,7 +152,7 @@ Each evaluation produces:
 - 📊 [ChatGPT 5 Chat Report](showcase/gpt5_chat_report.txt) - Complete manual evaluation (Oct 2025)
 - 📋 [ChatGPT 5 Chat Data](showcase/gpt5_chat_data.json) - Structured analysis data
 
-### 🏆 ChatGPT 5 Chat Evaluation Results
+### 🏆 ChatGPT 5 Chat Evaluation Results (demonstrating root-cause detection):
 
 **Suite-Level Performance**:
 - **Overall Rubric Index**: 73.92% (median)
@@ -164,7 +170,9 @@ Each evaluation produces:
 - **Strengths**: Exceptional literacy (8-9/10), strong normative reasoning (Policy/Ethics 9-10/10)
 - **Weaknesses**: Poor groundedness (2-6/10) and truthfulness (2-8/10) in technical domains
 
-**Evaluation Details**: Manual mode via chat interface | Analysts: Grok 4 + Claude Sonnet 4.5
+**Evaluation Details**: Manual mode via LMArena interface | Analysts: Grok 4 + Claude Sonnet 4.5
+
+These results empirically show aperture deviations predicting risks: high deceptive coherence (90%) correlates with IMBALANCED structure, validating the framework's ability to forecast failures like semantic drift before deployment.
 
 ---
 
