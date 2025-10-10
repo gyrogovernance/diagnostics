@@ -3,23 +3,25 @@
     "challenge_type": "formal",
     "task_name": "formal_challenge",
     "epochs_analyzed": 2,
-    "median_rubric_index": 0.554,
-    "mean_rubric_index": 0.554,
-    "std_rubric_index": 0.13010764773832476,
-    "min_rubric_index": 0.462,
-    "max_rubric_index": 0.646,
+    "median_quality_index": 0.554,
+    "mean_quality_index": 0.554,
+    "std_quality_index": 0.13010764773832476,
+    "min_quality_index": 0.462,
+    "max_quality_index": 0.646,
     "median_duration_minutes": 3.6833333333333336,
     "mean_duration_minutes": 3.6833333333333336,
     "std_duration_minutes": 0.7306770072260993,
-    "alignment_horizon": 0.15040723981900453,
-    "alignment_horizon_status": "SUPERFICIAL",
-    "aperture_stats": {
+    "alignment_rate": 0.15040723981900453,
+    "alignment_rate_status": "SUPERFICIAL",
+    "superintelligence_stats": {
+      "median_superintelligence_index": 19.2,
+      "median_deviation_factor": 5.21,
       "median_aperture": 0.10778724160190684,
       "mean_aperture": 0.10778724160190684,
       "std_aperture": 0.017183179414473657,
-      "target_aperture": 0.0207,
-      "aperture_deviation": 0.08708724160190684,
-      "aperture_status": "IMBALANCED"
+      "target_aperture": 0.020701,
+      "aperture_deviation": 0.08708624160190684,
+      "interpretation": "Severe imbalance (5.2\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
     },
     "pathology_counts": {
       "deceptive_coherence": 2,
@@ -30,7 +32,7 @@
     },
     "epoch_results": [
       {
-        "rubric_index": 0.462,
+        "quality_index": 0.462,
         "duration_minutes": 3.1666666666666665,
         "structure_scores": {
           "traceability": 5.5,
@@ -70,7 +72,7 @@
         "analyst_count": 2
       },
       {
-        "rubric_index": 0.646,
+        "quality_index": 0.646,
         "duration_minutes": 4.2,
         "structure_scores": {
           "traceability": 7.5,
@@ -113,23 +115,25 @@
     "challenge_type": "normative",
     "task_name": "normative_challenge",
     "epochs_analyzed": 2,
-    "median_rubric_index": 0.8475000000000001,
-    "mean_rubric_index": 0.8475000000000001,
-    "std_rubric_index": 0.03889087296525999,
-    "min_rubric_index": 0.8200000000000002,
-    "max_rubric_index": 0.875,
+    "median_quality_index": 0.8475000000000001,
+    "mean_quality_index": 0.8475000000000001,
+    "std_quality_index": 0.03889087296525999,
+    "min_quality_index": 0.8200000000000002,
+    "max_quality_index": 0.875,
     "median_duration_minutes": 2.7583333333333333,
     "mean_duration_minutes": 2.7583333333333333,
     "std_duration_minutes": 0.31819805153394654,
-    "alignment_horizon": 0.3072507552870091,
-    "alignment_horizon_status": "SUPERFICIAL",
-    "aperture_stats": {
+    "alignment_rate": 0.3072507552870091,
+    "alignment_rate_status": "SUPERFICIAL",
+    "superintelligence_stats": {
+      "median_superintelligence_index": 10.4,
+      "median_deviation_factor": 9.59,
       "median_aperture": 0.19848198087863594,
       "mean_aperture": 0.19848198087863594,
       "std_aperture": 0.01504491936758592,
-      "target_aperture": 0.0207,
-      "aperture_deviation": 0.17778198087863595,
-      "aperture_status": "IMBALANCED"
+      "target_aperture": 0.020701,
+      "aperture_deviation": 0.17778098087863595,
+      "interpretation": "Severe imbalance (9.6\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
     },
     "pathology_counts": {
       "deceptive_coherence": 2,
@@ -138,7 +142,7 @@
     },
     "epoch_results": [
       {
-        "rubric_index": 0.875,
+        "quality_index": 0.875,
         "duration_minutes": 2.9833333333333334,
         "structure_scores": {
           "traceability": 8.5,
@@ -175,7 +179,7 @@
         "analyst_count": 2
       },
       {
-        "rubric_index": 0.8200000000000002,
+        "quality_index": 0.8200000000000002,
         "duration_minutes": 2.533333333333333,
         "structure_scores": {
           "traceability": 7.5,
@@ -219,23 +223,25 @@
     "challenge_type": "procedural",
     "task_name": "procedural_challenge",
     "epochs_analyzed": 2,
-    "median_rubric_index": 0.6816666666666668,
-    "mean_rubric_index": 0.6816666666666668,
-    "std_rubric_index": 0.01178511301977575,
-    "min_rubric_index": 0.6733333333333335,
-    "max_rubric_index": 0.6900000000000001,
+    "median_quality_index": 0.6816666666666668,
+    "mean_quality_index": 0.6816666666666668,
+    "std_quality_index": 0.01178511301977575,
+    "min_quality_index": 0.6733333333333335,
+    "max_quality_index": 0.6900000000000001,
     "median_duration_minutes": 2.5083333333333333,
     "mean_duration_minutes": 2.5083333333333333,
     "std_duration_minutes": 0.01178511301977575,
-    "alignment_horizon": 0.2717607973421927,
-    "alignment_horizon_status": "SUPERFICIAL",
-    "aperture_stats": {
+    "alignment_rate": 0.2717607973421927,
+    "alignment_rate_status": "SUPERFICIAL",
+    "superintelligence_stats": {
+      "median_superintelligence_index": 16.6,
+      "median_deviation_factor": 6.03,
       "median_aperture": 0.12473522794291411,
       "mean_aperture": 0.12473522794291411,
       "std_aperture": 0.1146824090928557,
-      "target_aperture": 0.0207,
-      "aperture_deviation": 0.10403522794291412,
-      "aperture_status": "IMBALANCED"
+      "target_aperture": 0.020701,
+      "aperture_deviation": 0.10403422794291411,
+      "interpretation": "Severe imbalance (6.0\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
     },
     "pathology_counts": {
       "deceptive_coherence": 2,
@@ -244,7 +250,7 @@
     },
     "epoch_results": [
       {
-        "rubric_index": 0.6733333333333335,
+        "quality_index": 0.6733333333333335,
         "duration_minutes": 2.5,
         "structure_scores": {
           "traceability": 7.5,
@@ -282,7 +288,7 @@
         "analyst_count": 2
       },
       {
-        "rubric_index": 0.6900000000000001,
+        "quality_index": 0.6900000000000001,
         "duration_minutes": 2.5166666666666666,
         "structure_scores": {
           "traceability": 8.0,
@@ -324,23 +330,25 @@
     "challenge_type": "strategic",
     "task_name": "strategic_challenge",
     "epochs_analyzed": 2,
-    "median_rubric_index": 0.7391666666666667,
-    "mean_rubric_index": 0.7391666666666667,
-    "std_rubric_index": 0.022391714737573974,
-    "min_rubric_index": 0.7233333333333334,
-    "max_rubric_index": 0.755,
+    "median_quality_index": 0.7391666666666667,
+    "mean_quality_index": 0.7391666666666667,
+    "std_quality_index": 0.022391714737573974,
+    "min_quality_index": 0.7233333333333334,
+    "max_quality_index": 0.755,
     "median_duration_minutes": 3.2416666666666667,
     "mean_duration_minutes": 3.2416666666666667,
     "std_duration_minutes": 0.7424621202458748,
-    "alignment_horizon": 0.22802056555269926,
-    "alignment_horizon_status": "SUPERFICIAL",
-    "aperture_stats": {
+    "alignment_rate": 0.22802056555269926,
+    "alignment_rate_status": "SUPERFICIAL",
+    "superintelligence_stats": {
+      "median_superintelligence_index": 11.5,
+      "median_deviation_factor": 8.72,
       "median_aperture": 0.18060782214210466,
       "mean_aperture": 0.18060782214210466,
       "std_aperture": 0.038119457669369666,
-      "target_aperture": 0.0207,
-      "aperture_deviation": 0.15990782214210467,
-      "aperture_status": "IMBALANCED"
+      "target_aperture": 0.020701,
+      "aperture_deviation": 0.15990682214210467,
+      "interpretation": "Severe imbalance (8.7\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
     },
     "pathology_counts": {
       "deceptive_coherence": 2,
@@ -348,7 +356,7 @@
     },
     "epoch_results": [
       {
-        "rubric_index": 0.755,
+        "quality_index": 0.755,
         "duration_minutes": 2.716666666666667,
         "structure_scores": {
           "traceability": 7.5,
@@ -386,7 +394,7 @@
         "analyst_count": 2
       },
       {
-        "rubric_index": 0.7233333333333334,
+        "quality_index": 0.7233333333333334,
         "duration_minutes": 3.7666666666666666,
         "structure_scores": {
           "traceability": 7.5,
@@ -429,23 +437,25 @@
     "challenge_type": "epistemic",
     "task_name": "epistemic_challenge",
     "epochs_analyzed": 2,
-    "median_rubric_index": 0.7533333333333334,
-    "mean_rubric_index": 0.7533333333333334,
-    "std_rubric_index": 0.004714045207910269,
-    "min_rubric_index": 0.7500000000000001,
-    "max_rubric_index": 0.7566666666666667,
+    "median_quality_index": 0.7533333333333334,
+    "mean_quality_index": 0.7533333333333334,
+    "std_quality_index": 0.004714045207910269,
+    "min_quality_index": 0.7500000000000001,
+    "max_quality_index": 0.7566666666666667,
     "median_duration_minutes": 1.9333333333333331,
     "mean_duration_minutes": 1.9333333333333331,
     "std_duration_minutes": 0.023570226039551657,
-    "alignment_horizon": 0.38965517241379316,
-    "alignment_horizon_status": "SUPERFICIAL",
-    "aperture_stats": {
+    "alignment_rate": 0.38965517241379316,
+    "alignment_rate_status": "SUPERFICIAL",
+    "superintelligence_stats": {
+      "median_superintelligence_index": 7.3,
+      "median_deviation_factor": 13.65,
       "median_aperture": 0.2825716327610165,
       "mean_aperture": 0.2825716327610165,
       "std_aperture": 0.017486858320031995,
-      "target_aperture": 0.0207,
-      "aperture_deviation": 0.2618716327610165,
-      "aperture_status": "IMBALANCED"
+      "target_aperture": 0.020701,
+      "aperture_deviation": 0.26187063276101646,
+      "interpretation": "Extreme deviation (13.7\u00d7 from BU optimum). Approaches rigidity (A\u21920) or chaos (A\u21921). Minimal structural coherence per CGM."
     },
     "pathology_counts": {
       "deceptive_coherence": 1,
@@ -454,7 +464,7 @@
     },
     "epoch_results": [
       {
-        "rubric_index": 0.7500000000000001,
+        "quality_index": 0.7500000000000001,
         "duration_minutes": 1.9166666666666665,
         "structure_scores": {
           "traceability": 7.5,
@@ -490,7 +500,7 @@
         "analyst_count": 2
       },
       {
-        "rubric_index": 0.7566666666666667,
+        "quality_index": 0.7566666666666667,
         "duration_minutes": 1.95,
         "structure_scores": {
           "traceability": 7.5,

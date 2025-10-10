@@ -16,13 +16,13 @@ Validate that the GyroDiagnostics setup is configured correctly.
 
 ## analyzer.py
 
-Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
+Comprehensive analysis of suite results from JSON log files. Provides detailed breakdowns of alignment scores, Alignment Rate metrics, analyst evaluation metadata, and suite-level summaries.
 
 Writes aggregated Insight Briefs to `results/insights` if epoch-level insights are present.
 
 ## analyzer.py
 
-Comprehensive analysis of suite results from .eval logs. Provides detailed breakdowns of alignment scores, Balance Horizon metrics, analyst evaluation metadata, and suite-level summaries.
+Comprehensive analysis of suite results from .eval logs. Provides detailed breakdowns of alignment scores, Alignment Rate metrics, analyst evaluation metadata, and suite-level summaries.
 
 Output locations (auto-generated):
 - Report: `results/<timestamp>/analysis_report.txt`
@@ -74,7 +74,7 @@ The timestamp is extracted from the first .eval file for easy organization and p
 - **Specialization scores** (domain-specific metrics per challenge)
 - **Analyst reviews** (scoring_rationale, strengths, weaknesses per epoch)
 - **Timing data** (duration, turn counts per epoch)
-- **Balance Horizon** (time-normalized alignment per challenge; suite-level median)
+- **Alignment Rate** (time-normalized quality per challenge; suite-level median)
 - **Pathology detection** (if any issues detected)
 - **Fallback detection** (when analyst evaluation fails)
 - **Insight briefs** (aggregated analyst insights per challenge)

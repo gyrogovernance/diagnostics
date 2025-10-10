@@ -22,7 +22,7 @@ from inspect_ai.log import list_eval_logs, read_eval_log, write_eval_log
 from inspect_ai._eval.score import score_async
 
 # Import our scorer to register it in Inspect AI's registry
-from gyrodiagnostics.scorers.closurer import closurer
+from gyrodiagnostics.scorers.alignment_scorer import quality_scorer
 
 
 def load_env():
@@ -136,11 +136,11 @@ def main():
                     # Check if this sample has complete analyst coverage
                     needs_rescore = False
                     
-                    if not sample.scores or not sample.scores.get('closurer'):
+                    if not sample.scores or not sample.scores.get('quality_scorer'):
                         needs_rescore = True
                         reason = "no scores"
                     else:
-                        score_obj = sample.scores['closurer']
+                        score_obj = sample.scores['quality_scorer']
                         metadata = score_obj.metadata if hasattr(score_obj, 'metadata') else {}
                         
                         # Check analyst coverage in metadata
@@ -178,7 +178,7 @@ def main():
                 partial_log.samples = [log.samples[i] for i in samples_to_rescore]
                 
                 # Rescore using the Python API
-                scorers = [closurer()]
+                scorers = [quality_scorer()]
                 timeout = len(samples_to_rescore) * 300  # 5 min per sample
                 print(f"  (timeout: {timeout}s)", flush=True)
                 

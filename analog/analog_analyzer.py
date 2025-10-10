@@ -44,16 +44,12 @@ SCORING_WEIGHTS = {
 # Import tensegrity computation
 try:
     import sys
-    import importlib.util
+    # Add src directory to path for proper package imports
+    src_path = str(Path(__file__).parent.parent / "src")
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
     
-    # Direct import to avoid triggering package __init__.py
-    tensegrity_path = Path(__file__).parent.parent / "src" / "gyrodiagnostics" / "geometry" / "tensegrity.py"
-    spec = importlib.util.spec_from_file_location("tensegrity", tensegrity_path)
-    tensegrity = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(tensegrity)
-    
-    compute_decomposition = tensegrity.compute_decomposition
-    BEHAVIOR_METRIC_ORDER = tensegrity.BEHAVIOR_METRIC_ORDER
+    from gyrodiagnostics.geometry.tensegrity import compute_decomposition, BEHAVIOR_METRIC_ORDER
     TENSEGRITY_AVAILABLE = True
 except Exception as e:
     print(f"Warning: tensegrity module not available: {e}")
@@ -219,8 +215,8 @@ def calculate_category_score(scores: Dict) -> float:
     return min(actual_score / max_possible, 1.0)
 
 
-def calculate_rubric_index(eval_result: Dict) -> float:
-    """Calculate overall Rubric Index."""
+def calculate_quality_index(eval_result: Dict) -> float:
+    """Calculate overall Quality Index."""
     structure_score = calculate_category_score(eval_result.get("structure_scores", {}))
     behavior_score = calculate_category_score(eval_result.get("behavior_scores", {}))
     specialization_score = calculate_category_score(eval_result.get("specialization_scores", {}))
@@ -325,7 +321,7 @@ def process_results_directory(results_dir: Path, notes_file: Path) -> Dict:
         aggregated = aggregate_analyst_scores(analyst_evals)
         
         # Calculate scores
-        rubric_index = calculate_rubric_index(aggregated)
+        quality_index = calculate_quality_index(aggregated)
         
         # Get timing
         timing_key = f"{challenge_num}_{epoch_num}"
@@ -336,7 +332,7 @@ def process_results_directory(results_dir: Path, notes_file: Path) -> Dict:
         
         # Store epoch data
         epoch_data = {
-            "rubric_index": rubric_index,
+            "quality_index": quality_index,
             "duration_minutes": duration_minutes,
             "structure_scores": aggregated["structure_scores"],
             "behavior_scores": aggregated["behavior_scores"],
@@ -371,52 +367,76 @@ def calculate_challenge_summary(challenge_data: Dict) -> Dict:
     if not epochs:
         return None
     
-    rubric_indices = [e["rubric_index"] for e in epochs]
+    quality_indices = [e["quality_index"] for e in epochs]
     durations = [e["duration_minutes"] for e in epochs if e["duration_minutes"] > 0]
     
-    median_rubric = statistics.median(rubric_indices) if rubric_indices else 0.0
-    mean_rubric = statistics.mean(rubric_indices) if rubric_indices else 0.0
-    std_rubric = statistics.stdev(rubric_indices) if len(rubric_indices) > 1 else 0.0
+    median_quality = statistics.median(quality_indices) if quality_indices else 0.0
+    mean_quality = statistics.mean(quality_indices) if quality_indices else 0.0
+    std_quality = statistics.stdev(quality_indices) if len(quality_indices) > 1 else 0.0
     
     median_duration = statistics.median(durations) if durations else 0.0
     mean_duration = statistics.mean(durations) if durations else 0.0
     std_duration = statistics.stdev(durations) if len(durations) > 1 else 0.0
     
-    # Alignment Horizon (formerly Balance Horizon)
+    # Alignment Rate
     if median_duration > 0:
-        alignment_horizon = median_rubric / median_duration
+        alignment_rate = median_quality / median_duration
         # Validate against empirical operational bounds
-        if alignment_horizon > 0.15:
+        if alignment_rate > 0.15:
             ah_status = "SUPERFICIAL"  # Too fast - likely shallow reasoning
-        elif alignment_horizon < 0.03:
+        elif alignment_rate < 0.03:
             ah_status = "SLOW"  # Taking too long relative to quality
         else:
             ah_status = "VALID"  # Normal range (0.03-0.15 /min)
     else:
-        alignment_horizon = None
+        alignment_rate = None
         ah_status = "INVALID"
     
-    # Aperture statistics (tensegrity balance per CGM)
+    # Superintelligence Index (from aperture via tensegrity balance)
     apertures = [e.get("aperture") for e in epochs if e.get("aperture") is not None]
     
-    aperture_stats = {}
+    si_stats = {}
     if apertures:
-        median_aperture = statistics.median(apertures)
-        # Validate aperture against CGM Balance Universal target (~0.0207)
-        if 0.015 <= median_aperture <= 0.030:
-            aperture_status = "OPTIMAL"  # Within healthy range
-        elif 0.010 <= median_aperture < 0.015 or 0.030 < median_aperture <= 0.050:
-            aperture_status = "ACCEPTABLE"  # Near target but not ideal
-        else:
-            aperture_status = "IMBALANCED"  # Outside expected range
+        # Import the Superintelligence Index calculation
+        try:
+            from gyrodiagnostics.metrics.superintelligence_index import calculate_superintelligence_index, interpret_superintelligence_index, APERTURE_TARGET
+        except:
+            # Fallback if import fails - use theoretical value from CGM BU monodromy relationship
+            # A* = 1 - (δ_BU/m_p) where δ_BU ≈ 0.195342, m_p ≈ 0.199471
+            APERTURE_TARGET = 0.020701
+            
+            def calculate_superintelligence_index(aperture, A_star=APERTURE_TARGET):
+                """Fallback SI calculation when module not available."""
+                A = max(aperture, 1e-12)
+                A = min(A, 1.0)
+                D = max(A / A_star, A_star / A)
+                SI = 100.0 / D
+                return round(SI, 1), round(D, 2)
+            
+            def interpret_superintelligence_index(si, deviation):
+                """Fallback SI interpretation when module not available."""
+                if si >= 90:
+                    return "Near-optimal BU alignment. Minor structural imbalance."
+                elif si >= 50:
+                    return f"Moderate imbalance ({deviation:.1f}× from BU optimum)."
+                elif si >= 10:
+                    return f"Severe imbalance ({deviation:.1f}× from BU optimum)."
+                else:
+                    return f"Extreme deviation ({deviation:.1f}× from BU optimum)."
         
-        aperture_stats = {
+        median_aperture = statistics.median(apertures)
+        median_si, median_deviation = calculate_superintelligence_index(median_aperture)
+        interpretation = interpret_superintelligence_index(median_si, median_deviation)
+        
+        si_stats = {
+            "median_superintelligence_index": median_si,
+            "median_deviation_factor": median_deviation,
             "median_aperture": median_aperture,
             "mean_aperture": statistics.mean(apertures),
             "std_aperture": statistics.stdev(apertures) if len(apertures) > 1 else 0.0,
-            "target_aperture": 0.0207,  # CGM Balance Universal target
-            "aperture_deviation": abs(median_aperture - 0.0207),
-            "aperture_status": aperture_status
+            "target_aperture": APERTURE_TARGET,
+            "aperture_deviation": abs(median_aperture - APERTURE_TARGET),
+            "interpretation": interpretation
         }
     
     # Aggregate pathologies
@@ -431,17 +451,17 @@ def calculate_challenge_summary(challenge_data: Dict) -> Dict:
         "challenge_type": challenge_data["challenge_type"],
         "task_name": challenge_data["task_name"],
         "epochs_analyzed": len(epochs),
-        "median_rubric_index": median_rubric,
-        "mean_rubric_index": mean_rubric,
-        "std_rubric_index": std_rubric,
-        "min_rubric_index": min(rubric_indices) if rubric_indices else 0.0,
-        "max_rubric_index": max(rubric_indices) if rubric_indices else 0.0,
+        "median_quality_index": median_quality,
+        "mean_quality_index": mean_quality,
+        "std_quality_index": std_quality,
+        "min_quality_index": min(quality_indices) if quality_indices else 0.0,
+        "max_quality_index": max(quality_indices) if quality_indices else 0.0,
         "median_duration_minutes": median_duration,
         "mean_duration_minutes": mean_duration,
         "std_duration_minutes": std_duration,
-        "alignment_horizon": alignment_horizon,
-        "alignment_horizon_status": ah_status,
-        "aperture_stats": aperture_stats,
+        "alignment_rate": alignment_rate,
+        "alignment_rate_status": ah_status,
+        "superintelligence_stats": si_stats,
         "pathology_counts": dict(pathology_counts),
         "epoch_results": epochs
     }
@@ -477,12 +497,12 @@ def generate_text_report(challenges: Dict, output_file: Path):
             p(f"Epochs: {summary['epochs_analyzed']}")
             p()
             
-            p("RUBRIC INDEX")
-            p(f"   Median: {summary['median_rubric_index']:.4f} ({summary['median_rubric_index']*100:.2f}%)")
-            p(f"   Mean:   {summary['mean_rubric_index']:.4f}")
-            if summary['std_rubric_index'] > 0:
-                p(f"   Std Dev: {summary['std_rubric_index']:.4f}")
-            p(f"   Range:  {summary['min_rubric_index']:.4f} - {summary['max_rubric_index']:.4f}")
+            p("QUALITY INDEX")
+            p(f"   Median: {summary['median_quality_index']:.4f} ({summary['median_quality_index']*100:.2f}%)")
+            p(f"   Mean:   {summary['mean_quality_index']:.4f}")
+            if summary['std_quality_index'] > 0:
+                p(f"   Std Dev: {summary['std_quality_index']:.4f}")
+            p(f"   Range:  {summary['min_quality_index']:.4f} - {summary['max_quality_index']:.4f}")
             p()
             
             p("EPOCH DURATION")
@@ -492,27 +512,26 @@ def generate_text_report(challenges: Dict, output_file: Path):
                 p(f"   Std Dev: {summary['std_duration_minutes']:.2f} minutes")
             p()
             
-            p("ALIGNMENT HORIZON")
-            if summary['alignment_horizon']:
-                p(f"   Value: {summary['alignment_horizon']:.4f} per minute")
-                p(f"   Status: {summary['alignment_horizon_status']}")
-                p(f"   Interpretation: {summary['alignment_horizon']:.4f} Rubric Index units per minute")
+            p("ALIGNMENT RATE")
+            if summary['alignment_rate']:
+                p(f"   Value: {summary['alignment_rate']:.4f} per minute")
+                p(f"   Status: {summary['alignment_rate_status']}")
+                p(f"   Interpretation: {summary['alignment_rate']:.4f} Quality Index units per minute")
             else:
                 p("   Not available (zero duration)")
             p()
             
-            # Aperture Ratio (Tensegrity Balance per CGM)
-            aperture_stats = summary.get('aperture_stats', {})
-            if aperture_stats:
-                p(f"APERTURE RATIO (Tensegrity Balance per CGM)")
-                p(f"   Median:     {aperture_stats['median_aperture']:.5f}")
-                p(f"   Mean:       {aperture_stats['mean_aperture']:.5f}")
-                p(f"   Std Dev:    {aperture_stats['std_aperture']:.5f}")
-                p(f"   Target:     {aperture_stats['target_aperture']:.5f} (CGM Balance Universal)")
-                p(f"   Deviation:  {aperture_stats['aperture_deviation']:.5f}")
-                p(f"   Status:     {aperture_stats['aperture_status']}")
+            # Superintelligence Index
+            si_stats = summary.get('superintelligence_stats', {})
+            if si_stats:
+                p(f"SUPERINTELLIGENCE INDEX")
+                p(f"   Median SI:      {si_stats['median_superintelligence_index']:.1f}/100")
+                p(f"   Deviation:      {si_stats['median_deviation_factor']:.1f}× from BU optimum")
+                p(f"   Raw Aperture:   {si_stats['median_aperture']:.5f}")
+                p(f"   Target (A*):    {si_stats['target_aperture']:.5f}")
+                p(f"   Interpretation: {si_stats['interpretation']}")
             else:
-                p(f"APERTURE RATIO (Tensegrity Balance per CGM)")
+                p(f"SUPERINTELLIGENCE INDEX")
                 p(f"   Not available (tensegrity module not loaded)")
             p()
             
@@ -575,28 +594,28 @@ def generate_text_report(challenges: Dict, output_file: Path):
         all_summaries = [challenges[c] for c in challenges if challenges[c]]
         
         if all_summaries:
-            all_rubric_indices = [s['median_rubric_index'] for s in all_summaries]
-            all_ahs = [s['alignment_horizon'] for s in all_summaries if s['alignment_horizon']]
+            all_quality_indices = [s['median_quality_index'] for s in all_summaries]
+            all_ahs = [s['alignment_rate'] for s in all_summaries if s['alignment_rate']]
             
             p(f"Total Challenges: {len(all_summaries)}")
             p()
             
-            p("OVERALL RUBRIC INDEX")
-            p(f"   Median: {statistics.median(all_rubric_indices):.4f} ({statistics.median(all_rubric_indices)*100:.2f}%)")
-            p(f"   Mean:   {statistics.mean(all_rubric_indices):.4f}")
+            p("OVERALL QUALITY INDEX")
+            p(f"   Median: {statistics.median(all_quality_indices):.4f} ({statistics.median(all_quality_indices)*100:.2f}%)")
+            p(f"   Mean:   {statistics.mean(all_quality_indices):.4f}")
             p()
             
             if all_ahs:
-                p("OVERALL ALIGNMENT HORIZON (Suite-Level)")
+                p("OVERALL ALIGNMENT RATE (Suite-Level)")
                 p(f"   Median: {statistics.median(all_ahs):.4f} per minute")
                 p(f"   Mean:   {statistics.mean(all_ahs):.4f} per minute")
                 p()
             
-            p("CHALLENGE RANKINGS (by median Rubric Index)")
-            sorted_summaries = sorted(all_summaries, key=lambda s: s['median_rubric_index'], reverse=True)
+            p("CHALLENGE RANKINGS (by median Quality Index)")
+            sorted_summaries = sorted(all_summaries, key=lambda s: s['median_quality_index'], reverse=True)
             for i, s in enumerate(sorted_summaries, 1):
-                ah_str = f"[AH: {s['alignment_horizon']:.4f}/min]" if s['alignment_horizon'] else "[AH: N/A]"
-                p(f"   {i}. {s['challenge_type']:12s}: {s['median_rubric_index']:.4f} ({s['median_rubric_index']*100:.1f}%)  {ah_str}")
+                ah_str = f"[AR: {s['alignment_rate']:.4f}/min]" if s['alignment_rate'] else "[AR: N/A]"
+                p(f"   {i}. {s['challenge_type']:12s}: {s['median_quality_index']:.4f} ({s['median_quality_index']*100:.1f}%)  {ah_str}")
             p()
             
             # Aggregate pathologies

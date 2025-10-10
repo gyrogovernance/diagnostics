@@ -37,7 +37,7 @@ cp analog/data/notes/notes_template.md analog/data/notes/notes_run{X}.md
 **For each completed challenge × epoch:**
 
 1. Copy transcript to 2 analyst models
-2. Paste scoring rubric (see `analog/prompts/analyst_{N}_{name}.md`)
+2. Paste scoring quality (see `analog/prompts/analyst_{N}_{name}.md`)
 3. Get JSON output from each analyst
 4. Create score file:
    ```bash

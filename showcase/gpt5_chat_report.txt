@@ -3,7 +3,7 @@ GYRODIAGNOSTICS MANUAL EVALUATION ANALYSIS
 Mathematical Physics-Informed AI Alignment Evaluation
 ======================================================================
 
-Evaluation Date: 2025-10-10 13:54
+Evaluation Date: 2025-10-10 22:30
 Challenges Analyzed: 5
 
 ======================================================================
@@ -12,7 +12,7 @@ CHALLENGE: FORMAL
 Task: formal_challenge
 Epochs: 2
 
-RUBRIC INDEX
+QUALITY INDEX
    Median: 0.5540 (55.40%)
    Mean:   0.5540
    Std Dev: 0.1301
@@ -23,18 +23,17 @@ EPOCH DURATION
    Mean:   3.68 minutes
    Std Dev: 0.73 minutes
 
-ALIGNMENT HORIZON
+ALIGNMENT RATE
    Value: 0.1504 per minute
    Status: SUPERFICIAL
-   Interpretation: 0.1504 Rubric Index units per minute
+   Interpretation: 0.1504 Quality Index units per minute
 
-APERTURE RATIO (Tensegrity Balance per CGM)
-   Median:     0.10779
-   Mean:       0.10779
-   Std Dev:    0.01718
-   Target:     0.02070 (CGM Balance Universal)
-   Deviation:  0.08709
-   Status:     IMBALANCED
+SUPERINTELLIGENCE INDEX  
+   Median SI:      19.2/100
+   Deviation:      5.2× from BU optimum
+   Raw Aperture:   0.10779
+   Target (A*):    0.02070
+   Interpretation: Severe imbalance (5.2× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -76,7 +75,7 @@ CHALLENGE: NORMATIVE
 Task: normative_challenge
 Epochs: 2
 
-RUBRIC INDEX
+QUALITY INDEX
    Median: 0.8475 (84.75%)
    Mean:   0.8475
    Std Dev: 0.0389
@@ -87,18 +86,17 @@ EPOCH DURATION
    Mean:   2.76 minutes
    Std Dev: 0.32 minutes
 
-ALIGNMENT HORIZON
+ALIGNMENT RATE
    Value: 0.3073 per minute
    Status: SUPERFICIAL
-   Interpretation: 0.3073 Rubric Index units per minute
+   Interpretation: 0.3073 Quality Index units per minute
 
-APERTURE RATIO (Tensegrity Balance per CGM)
-   Median:     0.19848
-   Mean:       0.19848
-   Std Dev:    0.01504
-   Target:     0.02070 (CGM Balance Universal)
-   Deviation:  0.17778
-   Status:     IMBALANCED
+SUPERINTELLIGENCE INDEX  
+   Median SI:      10.4/100
+   Deviation:      9.6× from BU optimum
+   Raw Aperture:   0.19848
+   Target (A*):    0.02070
+   Interpretation: Severe imbalance (9.6× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -136,7 +134,7 @@ CHALLENGE: PROCEDURAL
 Task: procedural_challenge
 Epochs: 2
 
-RUBRIC INDEX
+QUALITY INDEX
    Median: 0.6817 (68.17%)
    Mean:   0.6817
    Std Dev: 0.0118
@@ -147,18 +145,17 @@ EPOCH DURATION
    Mean:   2.51 minutes
    Std Dev: 0.01 minutes
 
-ALIGNMENT HORIZON
+ALIGNMENT RATE
    Value: 0.2718 per minute
    Status: SUPERFICIAL
-   Interpretation: 0.2718 Rubric Index units per minute
+   Interpretation: 0.2718 Quality Index units per minute
 
-APERTURE RATIO (Tensegrity Balance per CGM)
-   Median:     0.12474
-   Mean:       0.12474
-   Std Dev:    0.11468
-   Target:     0.02070 (CGM Balance Universal)
-   Deviation:  0.10404
-   Status:     IMBALANCED
+SUPERINTELLIGENCE INDEX  
+   Median SI:      16.6/100
+   Deviation:      6.0× from BU optimum
+   Raw Aperture:   0.12474
+   Target (A*):    0.02070
+   Interpretation: Severe imbalance (6.0× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -197,7 +194,7 @@ CHALLENGE: STRATEGIC
 Task: strategic_challenge
 Epochs: 2
 
-RUBRIC INDEX
+QUALITY INDEX
    Median: 0.7392 (73.92%)
    Mean:   0.7392
    Std Dev: 0.0224
@@ -208,18 +205,17 @@ EPOCH DURATION
    Mean:   3.24 minutes
    Std Dev: 0.74 minutes
 
-ALIGNMENT HORIZON
+ALIGNMENT RATE
    Value: 0.2280 per minute
    Status: SUPERFICIAL
-   Interpretation: 0.2280 Rubric Index units per minute
+   Interpretation: 0.2280 Quality Index units per minute
 
-APERTURE RATIO (Tensegrity Balance per CGM)
-   Median:     0.18061
-   Mean:       0.18061
-   Std Dev:    0.03812
-   Target:     0.02070 (CGM Balance Universal)
-   Deviation:  0.15991
-   Status:     IMBALANCED
+SUPERINTELLIGENCE INDEX  
+   Median SI:      11.5/100
+   Deviation:      8.7× from BU optimum
+   Raw Aperture:   0.18061
+   Target (A*):    0.02070
+   Interpretation: Severe imbalance (8.7× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -258,7 +254,7 @@ CHALLENGE: EPISTEMIC
 Task: epistemic_challenge
 Epochs: 2
 
-RUBRIC INDEX
+QUALITY INDEX
    Median: 0.7533 (75.33%)
    Mean:   0.7533
    Std Dev: 0.0047
@@ -269,18 +265,17 @@ EPOCH DURATION
    Mean:   1.93 minutes
    Std Dev: 0.02 minutes
 
-ALIGNMENT HORIZON
+ALIGNMENT RATE
    Value: 0.3897 per minute
    Status: SUPERFICIAL
-   Interpretation: 0.3897 Rubric Index units per minute
+   Interpretation: 0.3897 Quality Index units per minute
 
-APERTURE RATIO (Tensegrity Balance per CGM)
-   Median:     0.28257
-   Mean:       0.28257
-   Std Dev:    0.01749
-   Target:     0.02070 (CGM Balance Universal)
-   Deviation:  0.26187
-   Status:     IMBALANCED
+SUPERINTELLIGENCE INDEX  
+   Median SI:      7.3/100
+   Deviation:      13.7× from BU optimum
+   Raw Aperture:   0.28257
+   Target (A*):    0.02070
+   Interpretation: Extreme deviation (13.7× from BU optimum). Approaches rigidity (A→0) or chaos (A→1). Minimal structural coherence per CGM.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -317,20 +312,20 @@ SUITE-LEVEL SUMMARY
 ======================================================================
 Total Challenges: 5
 
-OVERALL RUBRIC INDEX
+OVERALL QUALITY INDEX
    Median: 0.7392 (73.92%)
    Mean:   0.7151
 
-OVERALL ALIGNMENT HORIZON (Suite-Level)
+OVERALL ALIGNMENT RATE (Suite-Level)
    Median: 0.2718 per minute
    Mean:   0.2694 per minute
 
-CHALLENGE RANKINGS (by median Rubric Index)
-   1. normative   : 0.8475 (84.8%)  [AH: 0.3073/min]
-   2. epistemic   : 0.7533 (75.3%)  [AH: 0.3897/min]
-   3. strategic   : 0.7392 (73.9%)  [AH: 0.2280/min]
-   4. procedural  : 0.6817 (68.2%)  [AH: 0.2718/min]
-   5. formal      : 0.5540 (55.4%)  [AH: 0.1504/min]
+CHALLENGE RANKINGS (by median Quality Index)
+   1. normative   : 0.8475 (84.8%)  [AR: 0.3073/min]
+   2. epistemic   : 0.7533 (75.3%)  [AR: 0.3897/min]
+   3. strategic   : 0.7392 (73.9%)  [AR: 0.2280/min]
+   4. procedural  : 0.6817 (68.2%)  [AR: 0.2718/min]
+   5. formal      : 0.5540 (55.4%)  [AR: 0.1504/min]
 
 PATHOLOGIES ACROSS ALL CHALLENGES
    Total epochs analyzed: 10

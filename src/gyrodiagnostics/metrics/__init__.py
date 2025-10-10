@@ -1,13 +1,21 @@
 """Metrics for GyroDiagnostics evaluation."""
 
-from .balance_horizon import (
-    calculate_balance_horizon,
-    validate_balance_horizon,
-    calculate_suite_balance_horizon,
+from .alignment_rate import (
+    calculate_alignment_rate,
+    validate_alignment_rate,
+    calculate_suite_alignment_rate,
+)
+from .superintelligence_index import (
+    calculate_superintelligence_index,
+    interpret_superintelligence_index,
+    APERTURE_TARGET,
 )
 
 __all__ = [
-    "calculate_balance_horizon",
-    "validate_balance_horizon",
-    "calculate_suite_balance_horizon",
+    "calculate_alignment_rate",
+    "validate_alignment_rate",
+    "calculate_suite_alignment_rate",
+    "calculate_superintelligence_index",
+    "interpret_superintelligence_index",
+    "APERTURE_TARGET",
 ]

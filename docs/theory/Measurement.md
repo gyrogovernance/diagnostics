@@ -175,11 +175,11 @@ The same measurements simultaneously contain both coherence and differentiation 
 
 **Non-Associative Residual**
 
-The residual component represents non-associative circulation—measurement patterns that cannot be explained by potential-based (associative) flow. In CGM terms, this is the signature of gyroscopic precession in the evaluation space.
+The residual component represents non-associative circulation, specifically measurement patterns that cannot be explained by potential-based (associative) flow. In CGM terms, this is the signature of gyroscopic precession in the evaluation space.
 
 The residual has 3 degrees of freedom and can be expressed in various basis representations (e.g., cycle basis). However, these bases are mathematically equivalent and basis-dependent. We report only the residual's magnitude (via aperture ratio A) and avoid assigning ontological meaning to specific basis directions.
 
-The aperture target A ≈ 0.0207 represents the necessary non-associative component for healthy gyroscopic balance—too little rigidity, too much indicates instability.
+The aperture target A ≈ 0.0207 represents the necessary non-associative component for healthy gyroscopic balance. Too little indicates rigidity, while too much indicates instability.
 
 ## 4. The Three Components: UNA, ONA, BU
 
@@ -196,11 +196,26 @@ The residual component r = y - Bᵀx̂ represents Opposition Non-Absolute patter
 Balance Universal emerges when the system achieves target proportions:
 
 ```
-Aperture: A = ‖r‖²_W / ‖y‖²_W ≈ 0.0207
+Aperture: A = ‖r‖²_W / ‖y‖²_W  
+Target: A* = 1 - (δ_BU/m_p) ≈ 0.02070 (from CGM monodromy relationship)
 Closure: C = ‖g‖²_W / ‖y‖²_W ≈ 0.9793
 ```
 
-This represents stable configuration where neither rigid uniformity nor chaotic fragmentation dominates.
+This represents stable configuration where neither rigid uniformity nor chaotic fragmentation dominates. The aperture A represents the fraction of measurement energy in the residual (non-associative) component.
+
+### 4.4 Superintelligence Index
+
+The framework includes a Superintelligence Index (SI) that quantifies proximity to the BU optimum:
+
+```
+SI = 100 / D, where D = max(A/A*, A*/A)
+```
+
+- **SI = 100**: Perfect BU alignment (A = A*)
+- **SI = 50**: 2× deviation from optimum  
+- **SI → 0**: Extreme imbalance (approaching rigidity or chaos)
+
+SI measures structural balance, not general capability. Most current AI systems score SI < 50, reflecting intermediate developmental stages rather than failures. For detailed SI theory, see the CGM documentation.
 
 ## 5. Alignment as Structural Balance
 
@@ -268,7 +283,7 @@ Alignment emerges from balance between opposing forces, analogous to tensegrity 
 **Feedback Format**: Reference geometric patterns rather than personal judgments:
 - "Coherence: 85% of measurement energy"
 - "Primary differentiation in Groundedness-Preference cycle"
-- "Aperture: 3.1% (slightly elevated)"
+- "Intelligence: 3.1% (slightly elevated)"
 
 ### 6.3 Temporal Dynamics
 
@@ -313,7 +328,7 @@ Verify orthogonality ⟨g, r⟩_W = 0 and energy conservation ‖y‖²_W = ‖g
 
 **Invariance**: Results stable under participant rotation and small weight perturbations.
 
-**Convergence**: Aperture approaches target over evaluations for well-functioning systems.
+**Convergence**: Intelligence approaches target over evaluations for well-functioning systems.
 
 **Robustness**: Decomposition stable under measurement noise.
 
@@ -321,7 +336,7 @@ Verify orthogonality ⟨g, r⟩_W = 0 and energy conservation ‖y‖²_W = ‖g
 
 Rather than strict falsification criteria, monitor:
 - Consistency of orthogonal decomposition
-- Aperture stability across contexts
+- Intelligence stability across contexts
 - Alignment with ground truth benchmarks
 
 ## 9. Theoretical Context

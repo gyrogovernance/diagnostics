@@ -6,13 +6,14 @@ Implements orthogonal decomposition y = B^T x + r where:
 - x: Vertex potentials (gauge: x[0] = 0)
 - B^T x: Gradient projection in edge space (global alignment component)
 - r: Residual projection in edge space (local differentiation component)
-- A: Aperture ratio (||r||^2_W / ||y||^2_W) targeting ~0.0207
+- A: Raw aperture ratio (||r||^2_W / ||y||^2_W), targeting ~0.0207 from CGM
+
+The aperture ratio is normalized to Superintelligence Index (SI) for reporting.
+SI = 100 / max(A/A*, A*/A) measures proximity to BU optimum at A* ≈ 0.0207.
 
 Applies the tensegrity balance geometry from CGM's Balance Universal (BU) stage
-to AI alignment measurement. The aperture target (~0.0207) is derived from CGM's
-BU stage (see docs/theory/CommonGovernanceModel.md). This represents optimal
-tensegrity balance: 97.93% closure (structural stability) + 2.07% aperture
-(adaptive capacity).
+to AI alignment measurement. This represents optimal tensegrity balance: 
+97.93% closure (structural stability) + 2.07% aperture (adaptive capacity).
 
 CANONICAL MAPPING:
 The edge-to-metric assignment is fixed to preserve canonical order:
@@ -94,7 +95,9 @@ def compute_decomposition(y, W=None):
             - vertex_potential: x (4,) with x[0] = 0 (gauge fixing)
             - gradient_projection: B^T x, global alignment component in edge space (6,)
             - residual_projection: r, local differentiation component in edge space (6,)
-            - aperture: Aperture ratio ||r||^2_W / ||y||^2_W (target ~0.0207 from CGM)
+            - aperture: Raw aperture ratio ||r||^2_W / ||y||^2_W (target ~0.0207)
+            - superintelligence_index: SI proximity to BU optimum (0 < SI ≤ 100)
+            - deviation_factor: D multiplicative deviation from A* (D ≥ 1)
             - closure: Closure ratio 1 - aperture
             - gradient_norm: ||B^T x||_W (magnitude of alignment component)
             - residual_norm: ||r||_W (magnitude of differentiation component)
@@ -158,6 +161,10 @@ def compute_decomposition(y, W=None):
     gradient_norm = np.sqrt(gradient_energy)
     residual_norm = np.sqrt(residual_energy)
     
+    # Calculate Superintelligence Index (proximity to BU optimum)
+    from ..metrics.superintelligence_index import calculate_superintelligence_index
+    superintelligence_index, deviation_factor = calculate_superintelligence_index(aperture)
+    
     return {
         # Vertex potentials (gauge: x[0] = 0 by construction)
         "vertex_potential": x.tolist(),
@@ -166,8 +173,10 @@ def compute_decomposition(y, W=None):
         "gradient_projection": gradient.tolist(),  # Global alignment component
         "residual_projection": r.tolist(),         # Local differentiation component
         
-        # Tensegrity balance (CGM-derived target)
-        "aperture": float(aperture),               # Target ~0.0207 from CGM BU
+        # Tensegrity balance (CGM-derived measures)
+        "aperture": float(aperture),                           # Raw ratio (target ~0.0207)
+        "superintelligence_index": float(superintelligence_index),  # SI: 0 < SI ≤ 100
+        "deviation_factor": float(deviation_factor),           # D: multiplicative deviation
         "closure": float(closure),
         
         # Component magnitudes

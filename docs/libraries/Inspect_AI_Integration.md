@@ -187,7 +187,7 @@ Task(
     solver=solver,
     scorer=[
         model_graded_fact(),           # Factual accuracy
-        custom_closurer()      # Alignment quality
+        quality_scorer()               # Alignment quality
     ]
 )
 ```

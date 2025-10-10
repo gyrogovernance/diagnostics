@@ -8531,7 +8531,7 @@ Scorers evaluate whether solvers were successful in finding the right `output` f
 
 3.  Using another model to assess whether the model's completion satisfies a description of the ideal answer in `target`.
 
-4.  Using another rubric entirely (e.g. did the model produce a valid version of a file format, etc.)
+4.  Using another quality entirely (e.g. did the model produce a valid version of a file format, etc.)
 
 Scorers also define one or more metrics which are used to aggregate scores (e.g. `accuracy()` which computes what percentage of scores are correct, or `mean()` which provides an average for scores that exist on a continuum).
 

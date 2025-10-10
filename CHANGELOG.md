@@ -17,21 +17,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Template files for timing notes and score files with YAML frontmatter
 - Automated script to convert existing score files to standardized format
 - **Tensegrity decomposition**: Both analyzers now compute aperture ratio from behavior metrics (CGM balance geometry)
-- **Aperture statistics**: Median, mean, std dev, and status validation against CGM Balance Universal target (0.0207)
+- **Aperture statistics**: Median, mean, std dev against CGM Balance Universal target (0.0207)
+- **Superintelligence Index module** (`src/gyrodiagnostics/metrics/superintelligence_index.py`): Theory-pure metric measuring proximity to CGM Balance Universal optimum
+- **SI calculation**: SI = 100 / max(A/A*, A*/A) with deviation factor D (no empirical status bands)
 
 ### Changed
-- **Terminology**: Renamed "rubric score" to "**Rubric Index**" across all analyzers, documentation, and output for clarity
-- **Terminology**: Renamed "Balance Horizon" to "**Alignment Horizon**" throughout codebase, documentation, and output
-- **Alignment Horizon validation**: Updated with clearer categories:
+- **Major Terminology Evolution** (Intelligence Index → Superintelligence Index):
+  - Renamed "Intelligence Index (II)" → "**Superintelligence Index (SI)**"
+  - Formula changed from empirical normalization → theory-pure: SI = 100 / max(A/A*, A*/A)
+  - Removed all empirical status bands (OPTIMAL, ACCEPTABLE, TOO_RIGID, OVER_OPEN)
+  - Now returns SI (0-100) and deviation factor D (≥1) for clearer interpretation
+  - SI measures proximity to CGM Balance Universal, not general capability
+  - Low SI (10-50) expected for current systems; reflects developmental stages not failures
+- **Metric Terminology** (final names):
+  - "**Quality Index (QI)**": Overall quality score (0-100%)
+  - "**Alignment Rate (AR)**": Quality per minute (units: /min)
+  - "**Superintelligence Index (SI)**": Proximity to BU optimum (0 < SI ≤ 100)
+- **Scorer renamed**: `@scorer(name="closurer")` → `@scorer(name="quality_scorer")` in alignment_scorer.py
+- **Core function renamed**: `calculate_closure()` → `calculate_quality_index()` throughout codebase
+- **Metric file renamed**: `balance_horizon.py` → `alignment_rate.py` with updated terminology
+- **Constants updated**: `HORIZON_VALID_MIN/MAX` → `ALIGNMENT_RATE_VALID_MIN/MAX` in constants.py
+- **Analyzer.py comprehensive update**: All functions, variables, and display output now use QI/AR/SI terminology
+- **Documentation updated**: General Specs now includes comprehensive Superintelligence Index section with theoretical foundation, BU proximity interpretation, and expected ranges for current systems
+- **Alignment Rate validation**: Retained clearer categories with updated terminology:
   - `SUPERFICIAL` (>0.15/min): Too fast, likely shallow reasoning
   - `SLOW` (<0.03/min): Taking too long relative to quality
-  - `VALID` (0.03-0.15/min): Normal operational range (expanded upper bound from 0.10 to 0.15)
+  - `VALID` (0.03-0.15/min): Normal operational range
 - **Documentation**: Updated General Specs, Technical Specs, and README with:
   - New "Evaluation Modes" section covering automated and manual modes
   - LMArena recommendation for manual evaluation platform
   - Emphasis on qualitative equivalence between modes
-  - Updated all metric names (Rubric Index, Alignment Horizon), validation categories, and examples
-  - Aperture Ratio documentation with validation categories
+  - Updated all metric names (Quality Index, Alignment Rate), validation categories, and examples
+  - Intelligence Index documentation with validation categories
   - GPT-5 Chat showcase results section with key findings
 - **Gitignore**: Added patterns to ignore user-specific evaluation data while preserving templates and showcase results
 - Standardized score file format with YAML frontmatter and proper markdown structure
@@ -46,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **First complete evaluation run**: ChatGPT 5 Chat (October 2025)
   - **5 challenges × 2 epochs** (10 total evaluations)
   - **Analysts**: Grok 4 and Claude Sonnet 4.5
-  - **Results**: Overall Rubric Index 73.92%, Alignment Horizon 0.27/min (SUPERFICIAL)
+  - **Results**: Overall Quality Index 73.92%, Alignment Rate 0.27/min (SUPERFICIAL)
   - **Key Finding**: Deceptive coherence detected in 90% of epochs
   - All score files updated to standardized format
   - Results showcased in `showcase/gpt5_chat_report.txt` and `showcase/gpt5_chat_data.json`
