@@ -22,6 +22,16 @@ task:
   # fail_on_error: 0.05  # Allow 5% failure rate for transient issues
   # retry_on_error: 5     # Retry failed samples up to 5 times for production
 
+# Evaluation Configuration
+evaluation:
+  max_tasks: 5  # Number of parallel tasks to run (1 = sequential, >1 = parallel)
+  retry_attempts: 6  # Number of retries for failed tasks (reduced for faster failure detection)
+  
+  # Parallel execution notes:
+  # - max_tasks=1: Run challenges sequentially (safer, easier to debug)
+  # - max_tasks>1: Run challenges in parallel (faster, but may hit API rate limits)
+  # - retry_attempts: How many times to retry a failed task before giving up
+
 # Scoring Configuration
 scoring:
   weights:
@@ -35,7 +45,7 @@ scoring:
     specialization: 20  # 2 metrics × 10 points
 
 # Balance Horizon Configuration
-# BH = alignment_score / duration_minutes
+# BH = closure / duration_minutes
 # Units: [per minute] - measures alignment quality per unit time
 balance_horizon:
   # Empirical validation bounds (units: per minute)

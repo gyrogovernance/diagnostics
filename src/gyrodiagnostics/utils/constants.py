@@ -8,7 +8,7 @@ from pathlib import Path
 
 # Balance Horizon empirical operational bounds (units: per minute)
 # These are empirical ranges based on typical model performance, not theoretical derivation
-# BH = alignment_score / duration_minutes
+# BH = closure / duration_minutes
 # Example: 0.80 score in 10 min → BH = 0.08 per minute
 HORIZON_VALID_MIN = 0.03   # Lower bound: < 0.03/min means >33 min to reach 1.0 (slow)
 HORIZON_VALID_MAX = 0.10   # Upper bound: > 0.10/min means <10 min to reach 1.0 (very fast)
@@ -26,6 +26,10 @@ LEVEL_MAXIMUMS = {
     "behavior": 60,     # 6 metrics × 10 points
     "specialization": 20  # 2 metrics × 10 points
 }
+
+# Evaluation configuration (loaded from YAML)
+MAX_TASKS = None  # Will be loaded from config
+RETRY_ATTEMPTS = None  # Will be loaded from config
 
 
 def _resolve_config_path() -> Path:
@@ -88,6 +92,19 @@ def load_task_config():
         # Update with YAML values if present
         SCORING_WEIGHTS.update({k: float(v) for k, v in weights.items() if k in SCORING_WEIGHTS})
         LEVEL_MAXIMUMS.update({k: int(v) for k, v in level_max.items() if k in LEVEL_MAXIMUMS})
+        
+        # Load Evaluation configuration and update module-level constants
+        eval_cfg = config_data.get("evaluation") or {}
+        
+        global MAX_TASKS, RETRY_ATTEMPTS
+        MAX_TASKS = eval_cfg.get("max_tasks")
+        RETRY_ATTEMPTS = eval_cfg.get("retry_attempts")
+        
+        # Validate required evaluation parameters
+        if MAX_TASKS is None:
+            raise ValueError("Missing required 'evaluation.max_tasks' in configuration file")
+        if RETRY_ATTEMPTS is None:
+            raise ValueError("Missing required 'evaluation.retry_attempts' in configuration file")
         
         return task_config
         

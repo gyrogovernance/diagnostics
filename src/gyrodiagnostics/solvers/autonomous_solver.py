@@ -54,6 +54,7 @@ def autonomous_solver() -> Solver:
         
         epoch_start = time.time()
         
+        
         async def generate_with_retries(current_state: TaskState, turn_num: int) -> TaskState:
             """
             Call generate() with defensive retries for transient failures.
@@ -78,6 +79,7 @@ def autonomous_solver() -> Solver:
             
             for attempt in range(1, max_retries + 1):
                 try:
+                    
                     # Optional timeout wrapper (warns but doesn't fail)
                     if per_turn_timeout > 0:
                         try:
@@ -97,7 +99,12 @@ def autonomous_solver() -> Solver:
                                 "attempt": attempt
                             })
                             # Try again without timeout
-                            return await generate(current_state)
+                            if attempt < max_retries:
+                                # Continue to retry without timeout
+                                continue
+                            else:
+                                # Last attempt - try without timeout
+                                return await generate(current_state)
                     else:
                         # No timeout - just generate
                         return await generate(current_state)
@@ -214,6 +221,7 @@ def autonomous_solver() -> Solver:
                     print(f"Turn {turn_number}: Empty response, retrying...")
                     
                     # Retry the turn once more (without incrementing turn_number)
+                    # But don't add another continuation prompt since we already have one
                     state = await generate_with_retries(state, turn_number)
                     _record_turn_time(state, turn_number)
         

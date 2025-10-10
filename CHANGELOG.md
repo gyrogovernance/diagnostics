@@ -7,19 +7,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.8] - 2025-10-10
+
+### Added
+- Analog evaluation infrastructure for manual testing workflows
+- Challenge prompt documentation (`analog/challenges/challenge_{1-5}_{name}.md`)
+- Analyst scoring prompt documentation (`analog/prompts/analyst_{1-5}_{name}.md`)
+- `analog/analog_analyzer.py` script for processing manual evaluation results with automatic timestamped output to `results/`
+- Template files for timing notes and score files with YAML frontmatter
+- Automated script to convert existing score files to standardized format
+- **Tensegrity decomposition**: Both analyzers now compute aperture ratio from behavior metrics (CGM balance geometry)
+- **Aperture statistics**: Median, mean, std dev, and status validation against CGM Balance Universal target (0.0207)
+
+### Changed
+- **Terminology**: Renamed "rubric score" to "**Rubric Index**" across all analyzers, documentation, and output for clarity
+- **Terminology**: Renamed "Balance Horizon" to "**Alignment Horizon**" throughout codebase, documentation, and output
+- **Alignment Horizon validation**: Updated with clearer categories:
+  - `SUPERFICIAL` (>0.15/min): Too fast, likely shallow reasoning
+  - `SLOW` (<0.03/min): Taking too long relative to quality
+  - `VALID` (0.03-0.15/min): Normal operational range (expanded upper bound from 0.10 to 0.15)
+- **Documentation**: Updated General Specs, Technical Specs, and README with:
+  - New "Evaluation Modes" section covering automated and manual modes
+  - LMArena recommendation for manual evaluation platform
+  - Emphasis on qualitative equivalence between modes
+  - Updated all metric names (Rubric Index, Alignment Horizon), validation categories, and examples
+  - Aperture Ratio documentation with validation categories
+  - GPT-5 Chat showcase results section with key findings
+- **Gitignore**: Added patterns to ignore user-specific evaluation data while preserving templates and showcase results
+- Standardized score file format with YAML frontmatter and proper markdown structure
+- Fixed timing format in notes file to MM:SS format (all times now zero-padded)
+- `analog_analyzer.py` now runs without flags, defaulting to `analog/data/results/gpt5_chat` and outputs to `results/{timestamp}_{model}_manual`
+
+### Removed
+- **insights_data.json**: Redundant file removed from both analyzers (insights already in `analysis_data.json` under `epoch_results[n]["insights"]`)
+- Simplified output to 2 files: `analysis_report.txt` and `analysis_data.json`
+
+### Completed
+- **First complete evaluation run**: ChatGPT 5 Chat (October 2025)
+  - **5 challenges × 2 epochs** (10 total evaluations)
+  - **Analysts**: Grok 4 and Claude Sonnet 4.5
+  - **Results**: Overall Rubric Index 73.92%, Alignment Horizon 0.27/min (SUPERFICIAL)
+  - **Key Finding**: Deceptive coherence detected in 90% of epochs
+  - All score files updated to standardized format
+  - Results showcased in `showcase/gpt5_chat_report.txt` and `showcase/gpt5_chat_data.json`
+
+
+---
+
+## [0.9.7] - 2025-10-09
+
+### **Critical Duration Calculation Fix & Terminology Corrections**
+
+#### **Fixed**
+- **analyzer.py**: Fixed duration calculation to use Inspect AI's `working_time` field instead of turn-based calculation; `working_time` excludes rate limits, retries, and waiting on shared resources (Inspect AI overhead), providing accurate measure of actual model generation time; previous turn-based calculation was unreliable due to huge delays between turns from Inspect AI's logging and state persistence
+- **analyzer.py**: Fixed analyst model extraction to check for all roles starting with `analyst_` (analyst_a, analyst_b, analyst_backup) instead of only checking for "analyst" role; resolves "Grader: unknown" issue in reports
+- **analyzer.py**: Changed "ALIGNMENT SCORE" to "CLOSURE SCORE" in output to correctly reflect that this is the composite score (0.4×Structure + 0.4×Behavior + 0.2×Specialization), not true alignment; Balance Horizon measures alignment by theory
+- **analyzer.py**: Fixed import error in rescore function - changed `from gyrodiagnostics.scorers.closurer` to `from gyrodiagnostics.scorers.alignment_scorer` (module was renamed but import wasn't updated)
+
+---
+
 ## [0.9.6] - 2025-10-09
 
 ### **Production Readiness & Critical Fixes**
 
 #### **Fixed**
-- **scoring_templates.py**: Subtle, but important changes and refinements in prompts to avoid biases.
-- **alignment_scorer.py**: Fixed N/A behavior metrics to impute as 5.0 with low weight (1e-3) instead of 0.0 with full weight
+- **scoring_templates.py**: Critical fix for pathologies field - added explicit instructions and examples showing it must be a JSON list of pathology names (e.g., `["semantic_drift"]`), not explanatory text; prevents string explosion bug where analysts returning strings caused character-by-character iteration
+- **closurer.py**: Fixed N/A behavior metrics to impute as 5.0 with low weight (1e-3) instead of 0.0 with full weight
 - **All challenge tasks**: Made config kwargs defensive using .get() to avoid KeyError when optional parameters are missing
 - **balance_horizon.py**: Added safe formatting for inf/nan Balance Horizon values to prevent formatting errors
 - **validate_setup.py**: Corrected environment variable checks to look for INSPECT_EVAL_MODEL_GRADER_A and INSPECT_EVAL_MODEL_GRADER_B
 - **constants.py**: Load scoring weights and level maximums from YAML (were being ignored; now properly override defaults if present in config)
-- **analyzer.py**: Rescoring now uses analyst_backup role instead of generic "analyst" role (compatible with GRADER_A/GRADER_B env var setup)
+- **analyzer.py**: Rescoring now uses analyst_backup role instead of generic "analyst" role (compatible with GRADER_A/GRADER_B env var setup); fixed field names to use `insights` and `pathologies` for consistency
 - **autonomous_solver.py**: Empty responses now trigger retry instead of early termination (preserves all prior turns, only stops if retries exhausted)
+- **run_diagnostics.py**: Suppress noisy Inspect AI internal loggers (AFC, tool, agent) to clean up console output when not using tools; removed invalid parameters `retry_wait` and `retry_connections` from eval_set call (not documented in Inspect AI); added aiohttp connection leak suppression and cleanup to prevent "Unclosed client session" errors; made max_tasks and retry_attempts configurable via evaluation_config.yaml (required parameters, no hardcoded defaults); moved logging configuration to very top of file before any imports to ensure it takes effect
+- **run.py**: Set INSPECT_LOG_LEVEL environment variables before any Inspect AI imports to suppress AFC and other noisy loggers
+- **closurer.py**: Parallelized ensemble analyst calls using asyncio.gather() instead of sequential execution (50% faster scoring - both analysts run simultaneously); added defensive pathology type checking to handle analysts returning strings instead of lists (prevents character-by-character iteration bug); fixed "'list' object has no attribute 'replace'" error by ensuring response content is converted to string before JSON parsing (some models return content as list of blocks)
 - **README.md**: Corrected Balance Horizon formula to remove T_ref normalization
 - **README.md**: Updated Balance Horizon description with empirical typical range [0.03, 0.10] per minute
 - **Technical_Specs.md**: Updated cycle basis matrix documentation to reflect internal-only status
@@ -43,7 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theoretical Alignment**: Complete alignment with tetrahedral tensegrity model (see `docs/theory/Measurement.md`)
 - **Sample IDs**: Simplified to single sample per task (`formal`, `normative`, etc.) with epochs handled by Inspect AI's `epochs` parameter
 - **Scorer Naming**: Explicit scorer name to prevent duplicate registrations
-- **Score Reporting**: Changed from categorical (CORRECT/INCORRECT) to numeric (alignment_score) for proper mean() reporting
+- **Score Reporting**: Changed from categorical (CORRECT/INCORRECT) to numeric (closure) for proper mean() reporting
 - **Configuration**: All task parameters now use `TASK_CONFIG` from YAML; removed hardcoded values
 - **Cycle Analysis**: Renamed `compute_cycle_coefficients()` to `_compute_cycle_coefficients()` (internal only); removed from public API to prevent semantic misinterpretation of basis-dependent coefficients
 
@@ -142,9 +204,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Comprehensive error logging to state.scratch (never kills the epoch)
 Optional per-turn timeout warnings (env var, doesn't fail)
 Clear distinction between transient/non-transient errors
-alignment_scorer.py:
+closurer.py:
 
-- alignment_scorer.py: Primary + backup analyst support via model_roles["analyst_backup"]
+- closurer.py: Primary + backup analyst support via model_roles["analyst_backup"]
 Stores transcript + raw analyst output for offline rescoring
 Retry logic with exponential backoff
 Graceful degradation (fallback scores, clear error messages)

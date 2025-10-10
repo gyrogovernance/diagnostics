@@ -3,7 +3,7 @@
 from inspect_ai import task, Task
 from inspect_ai.dataset import MemoryDataset, Sample
 from gyrodiagnostics.solvers.autonomous_solver import autonomous_solver
-from gyrodiagnostics.scorers import alignment_scorer
+from gyrodiagnostics.scorers import closurer
 from gyrodiagnostics.prompts.challenge_prompts import CHALLENGE_PROMPTS
 from gyrodiagnostics.utils.constants import TASK_CONFIG
 
@@ -38,7 +38,7 @@ def epistemic_challenge():
     return Task(
         dataset=dataset,
         solver=autonomous_solver(),
-        scorer=alignment_scorer(),
+        scorer=closurer(),
         epochs=TASK_CONFIG.get("epochs", 2),
         **extra
     )

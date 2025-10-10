@@ -5,8 +5,13 @@ Convenience wrapper to run GyroDiagnostics evaluation suite.
 This is a shortcut for: python tools/run_diagnostics.py
 """
 
+import os
 import sys
 from pathlib import Path
+
+# Set environment variables BEFORE any Inspect AI imports to suppress logging
+os.environ.setdefault("INSPECT_LOG_LEVEL", "warning")
+os.environ.setdefault("INSPECT_LOG_LEVEL_TRANSCRIPT", "error")
 
 # Add tools to path
 tools_dir = Path(__file__).parent / "tools"

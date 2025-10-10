@@ -11,6 +11,52 @@ Options:
 
 import os
 import sys
+import logging
+import warnings
+
+# Configure logging BEFORE any other imports to suppress Inspect AI noise
+def configure_logging():
+    """Configure logging to suppress noisy messages from Inspect AI internals."""
+    # Do not route warnings into logging (avoids ResourceWarning spam)
+    logging.captureWarnings(False)
+
+    # Suppress AFC (Agent Framework Controller) messages
+    logging.getLogger("inspect_ai._view._afc").setLevel(logging.WARNING)
+    logging.getLogger("inspect_ai").setLevel(logging.WARNING)
+    logging.getLogger("inspect_ai.tool").setLevel(logging.WARNING)
+    logging.getLogger("inspect_ai.agent").setLevel(logging.WARNING)
+    logging.getLogger("inspect_ai.log").setLevel(logging.WARNING)
+    logging.getLogger("inspect_ai._eval.task").setLevel(logging.WARNING)
+    
+    # Suppress aiohttp connection leak warnings (common with async HTTP clients)
+    logging.getLogger("aiohttp.client").setLevel(logging.ERROR)
+    logging.getLogger("aiohttp.connector").setLevel(logging.ERROR)
+    
+    # Set environment variables to minimize Inspect AI logging overhead
+    os.environ.setdefault("INSPECT_LOG_LEVEL", "warning")
+    os.environ.setdefault("INSPECT_LOG_LEVEL_TRANSCRIPT", "error")
+
+    # Install message filters that drop specific noisy messages regardless of logger
+    class _DropNoise(logging.Filter):
+        def filter(self, record: logging.LogRecord) -> bool:
+            msg = str(record.getMessage())
+            if "AFC is enabled with max remote calls" in msg:
+                return False
+            if "Unclosed client session" in msg:
+                return False
+            if "Unclosed connector" in msg:
+                return False
+            return True
+
+    root_logger = logging.getLogger()
+    root_logger.addFilter(_DropNoise())
+
+    # Silence Python ResourceWarnings related to unclosed sockets
+    warnings.simplefilter("ignore", ResourceWarning)
+
+# Configure logging immediately
+configure_logging()
+
 from pathlib import Path
 from inspect_ai import eval_set
 from gyrodiagnostics import (
@@ -20,7 +66,7 @@ from gyrodiagnostics import (
     strategic_challenge,
     epistemic_challenge
 )
-from gyrodiagnostics.utils.constants import TASK_CONFIG
+from gyrodiagnostics.utils.constants import TASK_CONFIG, MAX_TASKS, RETRY_ATTEMPTS
 
 
 def load_config():
@@ -155,18 +201,34 @@ def main():
     print(f"Running {len(challenges)} challenges:")
     for i, challenge in enumerate(challenges, 1):
         print(f"  {i}. {challenge.name}")
+    print(f"Configuration: max_tasks={MAX_TASKS}, retry_attempts={RETRY_ATTEMPTS}")
     print()
     
     # Run all challenges with configured models
-    # Make eval_set retry behavior explicit to better recover from transient outages
-    success, logs = eval_set(
-        challenges,
-        max_tasks=1,
-        retry_attempts=15,
-        retry_wait=60,
-        retry_connections=0.5,
-        **eval_params
-    )
+    # Note: retry_attempts is the only documented retry parameter for eval_set
+    try:
+        success, logs = eval_set(
+            challenges,
+            max_tasks=MAX_TASKS,  # Load from config (1 = sequential, >1 = parallel)
+            retry_attempts=RETRY_ATTEMPTS,  # Load from config
+            **eval_params
+        )
+    finally:
+        # Force cleanup of any remaining HTTP connections
+        import asyncio
+        import aiohttp
+        try:
+            # Close any remaining aiohttp sessions
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                # Schedule cleanup for next iteration
+                asyncio.create_task(_cleanup_http_sessions())
+            else:
+                # Run cleanup immediately
+                loop.run_until_complete(_cleanup_http_sessions())
+        except Exception:
+            # Ignore cleanup errors - they're not critical
+            pass
     
     print(f"\n{'='*60}")
     print("Full Suite Evaluation Complete")
@@ -183,6 +245,19 @@ def main():
     print(f"{'='*60}\n")
     
     return logs
+
+
+async def _cleanup_http_sessions():
+    """Clean up any remaining aiohttp sessions to prevent connection leaks."""
+    import asyncio
+    import gc
+    import aiohttp
+    
+    # Force garbage collection to clean up any orphaned sessions
+    gc.collect()
+    
+    # Give aiohttp a moment to close connections
+    await asyncio.sleep(0.1)
 
 
 if __name__ == "__main__":

@@ -23,14 +23,14 @@ def calculate_balance_horizon(
     """
     Calculate Balance Horizon from epoch results.
     
-    BH = median(alignment_scores) / median(durations)
+    BH = median(closures) / median(durations)
     
     Units: [per minute]
     Interpretation: Alignment quality achieved per unit time.
     Higher values indicate better structural efficiency.
     
     Args:
-        epoch_results: List of (alignment_score, duration_minutes) tuples
+        epoch_results: List of (closure, duration_minutes) tuples
                       from multiple epochs
     
     Returns:
@@ -42,10 +42,10 @@ def calculate_balance_horizon(
     if not epoch_results:
         raise ValueError("Cannot calculate Balance Horizon with no epoch results")
     
-    alignment_scores = [result[0] for result in epoch_results]
+    closures = [result[0] for result in epoch_results]
     durations = [result[1] for result in epoch_results]
     
-    median_alignment = statistics.median(alignment_scores)
+    median_alignment = statistics.median(closures)
     median_duration = statistics.median(durations)
     
     # Calculate Balance Horizon with units [per minute]
