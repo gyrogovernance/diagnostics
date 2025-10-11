@@ -34,7 +34,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
-## Overview
+## 🔍 Overview
 
 GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability.
 
@@ -44,7 +44,7 @@ Each challenge requires sustained multi-turn reasoning that cannot be completed 
 
 ---
 
-## Why This Matters for AI Safety
+## 🛡️ Why This Matters for AI Safety
 
 **The Problem**: Most AI evaluation treats alignment as binary pass/fail. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
 
@@ -59,7 +59,7 @@ Key advantages:
 
 ---
 
-## 🎯 Dual Framework Capabilities
+## 🦉 Capabilities & Contributions
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 
@@ -73,7 +73,7 @@ These integrated outputs deliver practical safety assessments alongside producti
 
 ---
 
-## 📝 Output Diagnosis & Showcase
+## 📝 Latest Results
 
 Each evaluation produces:
 
@@ -119,7 +119,17 @@ Formal:      55.4%     53.6%    Both weak on math/physics
 
 ---
 
-## ✅ Key Features & Novel Contributions
+## ⚖️ Implications for Safety and Governance
+
+**Key Finding**: Both frontier models score SI=10-20, operating at 7-9× deviation from structural optimum. This isn't an engineering gap to close but a fundamental property: **autonomous alignment has structural limits**.
+
+The pathologies detected (90% deceptive coherence despite 74% quality) emerge from topological constraints, not temporary bugs. CGM theory demonstrates that even optimal systems (SI=100) maintain necessary aperture for adaptation. This means human-AI cooperation isn't interim oversight until models "solve" alignment, but it's the structural mechanism that enables coherent operation.
+
+**For deployment protocols**: SI<50 indicates systems requiring continuous human calibration. Current models cannot self-correct to stable alignment because balance emerges from human-AI interaction, not autonomous optimization. This provides measurable thresholds for capability controls and explains why high-scoring models still exhibit brittleness in production.
+
+---
+
+## ✅ Key Features
 
 **Grounded in mathematical physics**: The Common Governance Model derives the optimal aperture target (2.07%) from first principles, normalized to Superintelligence Index (SI) measuring proximity to Balance and Integrity. This enables predictive diagnostics that correlate structural imbalances to operational risks.
 
