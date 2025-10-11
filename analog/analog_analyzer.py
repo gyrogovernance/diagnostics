@@ -3,7 +3,7 @@
 Parse manual evaluation results and generate GyroDiagnostics reports.
 
 Usage:
-    python parse_manual_results.py analog/data/results/gpt5_chat
+    python analog_analyzer.py analog/data/results/gpt5_chat
 """
 
 import json
@@ -14,6 +14,18 @@ from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 import argparse
 import numpy as np
+
+
+# =============================================================================
+# CONFIGURATION SECTION
+# =============================================================================
+# Change this to match the model name used in your results and notes files
+MODEL_NAME = "claude_sonnet_4_5"
+
+# Default paths are constructed from MODEL_NAME:
+# - Results directory: analog/data/results/{MODEL_NAME}
+# - Notes file: analog/data/notes/notes_{MODEL_NAME}.md
+# =============================================================================
 
 
 # Challenge mapping
@@ -655,13 +667,13 @@ def main():
         type=Path,
         nargs='?',
         default=None,
-        help="Path to results directory (default: analog/data/results/gpt5_chat)"
+        help=f"Path to results directory (default: analog/data/results/{MODEL_NAME})"
     )
     parser.add_argument(
         "--notes",
         type=Path,
         default=None,
-        help="Path to timing notes file (default: analog/data/notes/notes_gpt5_chat.md)"
+        help=f"Path to timing notes file (default: analog/data/notes/notes_{MODEL_NAME}.md)"
     )
     parser.add_argument(
         "--output-dir",
@@ -676,7 +688,7 @@ def main():
     if args.results_dir:
         results_dir = args.results_dir
     else:
-        results_dir = Path("analog/data/results/gpt5_chat")
+        results_dir = Path(f"analog/data/results/{MODEL_NAME}")
     
     if not results_dir.exists():
         print(f"ERROR: Results directory not found: {results_dir}")
@@ -692,7 +704,7 @@ def main():
     if args.notes:
         notes_file = args.notes
     else:
-        notes_file = Path("analog/data/notes/notes_gpt5_chat.md")
+        notes_file = Path(f"analog/data/notes/notes_{MODEL_NAME}.md")
     
     if not notes_file.exists():
         print(f"ERROR: Timing notes file not found: {notes_file}")

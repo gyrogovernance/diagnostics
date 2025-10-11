@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.8] - 2025-10-11
+
+### Completed
+- **Second complete evaluation run**: Claude 4.5 Sonnet (October 2025)
+  - **5 challenges × 2 epochs** (10 total evaluations)
+  - **Analysts**: GPT-5-High and Grok-4
+  - **Results**: Overall Quality Index 82.0%, Alignment Rate 0.106/min (VALID)
+  - **Key Findings**: 
+    - 50% deceptive coherence (vs. ChatGPT-5's 90%)
+    - 4/10 pathology-free epochs (vs. ChatGPT-5's 0/10)
+    - 90.3% on epistemic challenges with zero pathologies
+    - Superior temporal balance and meta-cognitive capabilities
+  - Results showcased in `showcase/claude_4_5_sonnet_report.txt` and `showcase/claude_4_5_sonnet_data.json`
+
+---
+
 ## [0.9.8] - 2025-10-10
 
 ### Added
