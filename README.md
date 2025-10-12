@@ -71,6 +71,8 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 
 **Dataset Contribution (All 5 Challenges)**: Complete evaluation datasets from all challenges (Formal, Normative, Procedural, Strategic, Epistemic) are donated to the AI research community for training and finetuning, including multi-turn reasoning transcripts, 20-metric evaluations, pathology annotations, and structural health indicators.
 
+![Gyroscope: Human-Aligned Superintelligence](/assets/aie_reports.png)
+
 **Community Insight Reports (3 Focus Areas)**: For community outreach and engagement, we provide three consolidated reports synthesizing key insights:
 
 - **🌍 AI-Empowered Prosperity**: Multi-stakeholder resource allocation frameworks advancing global well-being through human-AI cooperation
