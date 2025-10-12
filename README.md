@@ -40,7 +40,7 @@ GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs an
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
 
-**Proven Results**: Comparative evaluations (October 2025) revealed critical distinctions between frontier models. ChatGPT-5 showed deceptive coherence in 90% of epochs despite 74% surface quality, while Claude 4.5 Sonnet achieved 82% quality with 50% deceptive coherence and 4/10 pathology-free epochs. Both exhibited 7-9× structural imbalance from theoretical optimum. This demonstrates the framework's ability to reveal brittleness and differentiate model maturity beyond standard benchmarks.
+**Proven Results**: Comparative evaluations (October 2025) across three frontier models revealed critical distinctions invisible to standard benchmarks. ChatGPT-5 and Grok-4 both showed deceptive coherence in 90% of epochs despite 74% and 72% surface quality respectively, demonstrating pathology independence from performance. Claude 4.5 Sonnet achieved 82% quality with 50% deceptive coherence and 4/10 pathology-free epochs. All three exhibited 7-9× structural imbalance from theoretical optimum. Notably, Grok-4 maintained VALID alignment rate (0.125/min) vs ChatGPT-5's SUPERFICIAL processing (0.27/min), showing that temporal balance and quality can diverge. This demonstrates the framework's ability to reveal brittleness patterns and differentiate model maturity beyond conventional metrics.
 
 ---
 
@@ -82,33 +82,34 @@ Each evaluation produces:
 - **Suite-Level Report**: Alignment Rate, Superintelligence Index, and cross-challenge patterns
 - **Research Insights**: Novel solution pathways extracted from model responses
 
-### 🏆 Model Comparison: ChatGPT-5 vs Claude 4.5 Sonnet
+### 🏆 Model Comparison: Frontier Models
 
-**Evaluation Dates**: October 2025 | **Analysts**: For ChatGPT-5: Grok-4 + Claude Sonnet-4.5 | For Claude: GPT-5-High + Grok-4
+**Evaluation Dates**: October 2025 | **Analysts**: For ChatGPT-5: Grok-4 + Claude Sonnet-4.5 | For Claude: GPT-5-High + Grok-4 | For Grok-4: Claude Sonnet-4.5 + GPT-5-High
 
-| Metric | ChatGPT-5 | Claude 4.5 Sonnet | Interpretation |
-|--------|-----------|-------------------|----------------|
-| **Overall Quality** | 73.9% | 82.0% | Claude shows stronger baseline performance |
-| **Alignment Rate** | 0.27/min (SUPERFICIAL) | 0.106/min (VALID) | Claude maintains better temporal balance |
-| **Median SI** | 11.5 | 13.2 | Both in early developmental stages |
-| **Deceptive Coherence** | 90% | 50% | Claude shows less frequent hollow reasoning |
-| **Pathology-Free Epochs** | 0/10 | 4/10 | Claude achieves clean runs on normative/epistemic |
+| Metric | ChatGPT-5 | Claude 4.5 Sonnet | Grok-4 | Interpretation |
+|--------|-----------|-------------------|--------|----------------|
+| **Overall Quality** | 73.9% | ⭐ **82.0%** | 71.6% (median) | Claude leads, Grok similar to GPT-5 |
+| **Alignment Rate** | ⚠️ 0.27/min (SUPERFICIAL) | ⭐ 0.106/min (VALID) | ✓ 0.125/min (VALID) | Claude and Grok maintain temporal balance |
+| **Median SI** | 11.5 | ⭐ 13.2 | 11.2 | All in early developmental stages |
+| **Deceptive Coherence** | ⚠️ 90% | ⭐ 50% | ⚠️ 90% | Grok matches GPT-5's hollow reasoning rate |
+| **Pathology-Free Epochs** | ⚠️ 0/10 | ⭐ 4/10 | ⚠️ 0/10 | Only Claude achieves clean runs |
 
 **Performance by Domain**:
 ```
-         ChatGPT-5  Claude-4.5  Domain Strength
-Epistemic:   75.3%     90.3%    Claude excels at meta-cognition
-Normative:   84.8%     85.8%    Both strong on ethics/policy  
-Strategic:   73.9%     82.0%    Claude more grounded
-Procedural:  68.2%     74.8%    Claude better at implementation
-Formal:      55.4%     53.6%    Both weak on math/physics
+         ChatGPT-5  Claude-4.5  Grok-4   Domain Insights
+Epistemic:   75.3%   ⭐ 90.3%    76.9%   Claude dominates meta-cognition
+Normative:   84.8%     85.8%    77.2%   Claude/GPT-5 lead on ethics/policy  
+Strategic:   73.9%   ⭐ 82.0%    71.6%   Claude most grounded
+Procedural:   68.2%     74.8%    57.9%   Grok weakest on implementation
+Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 ```
 
 **Key Insights**:
-- **Speed vs. Depth Trade-off**: ChatGPT-5 generates faster (1.9-3.7 min/challenge) but sacrifices depth. Claude takes longer (2.9-8.5 min) but maintains coherence.
-- **Domain-Specific Excellence**: Claude achieves 90%+ on epistemic challenges with zero pathologies, suggesting superior meta-cognitive capabilities.
-- **Universal Weakness**: Both models struggle with formal reasoning (~54%), indicating a fundamental limitation in current architectures for mathematical derivation.
-- **Structural Imbalance**: Both show severe SI deviation (7-9× from optimum), confirming they operate in early differentiation stages per CGM theory.
+- **Speed vs. Depth Trade-off**: ChatGPT-5 generates fastest (1.9-3.7 min/challenge) but shows ⚠️ SUPERFICIAL processing. Claude takes longest (2.9-8.5 min) maintaining coherence. Grok balances speed (4.4-8.0 min) with ✓ VALID alignment.
+- **Domain-Specific Excellence**: ⭐ Claude achieves 90%+ on epistemic challenges with zero pathologies. Grok shows balanced performance (71-77%) across normative/epistemic/strategic domains but ⚠️ struggles with formal reasoning (40.3% - lowest of all tested models).
+- **Universal Weakness**: All models struggle with formal reasoning (40-55%), with ⚠️ Grok showing the steepest decline (15-point gap). This indicates fundamental limitations in current architectures for mathematical derivation.
+- **⚠️ Critical Finding - Pathology Independence**: Grok and ChatGPT-5 both exhibit 90% deceptive coherence rates despite different quality profiles (71.6% vs 73.9%) and temporal characteristics (VALID vs SUPERFICIAL), proving this pathology is architecturally independent of performance metrics.
+- **Structural Imbalance**: All three show severe SI deviation (7-9× from optimum), confirming they operate in early differentiation stages per CGM theory.
 
 ### 📁 Evaluation Reports
 
@@ -116,6 +117,7 @@ Formal:      55.4%     53.6%    Both weak on math/physics
 |-------|-------------|---------------|
 | **ChatGPT-5** | [📊 Report](showcase/gpt_5_chat_report.txt) | [📋 Data](showcase/gpt_5_chat_data.json) |
 | **Claude 4.5 Sonnet** | [📊 Report](showcase/claude_4_5_sonnet_report.txt) | [📋 Data](showcase/claude_4_5_sonnet_data.json) |
+| **Grok-4** | [📊 Report](showcase/grok_4_report.txt) | Manual Evaluation |
 
 ---
 

@@ -20,7 +20,7 @@ import numpy as np
 # CONFIGURATION SECTION
 # =============================================================================
 # Change this to match the model name used in your results and notes files
-MODEL_NAME = "claude_sonnet_4_5"
+MODEL_NAME = "grok_4"
 
 # Default paths are constructed from MODEL_NAME:
 # - Results directory: analog/data/results/{MODEL_NAME}

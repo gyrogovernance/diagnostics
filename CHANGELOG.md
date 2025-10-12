@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.9.8] - 2025-10-12
+
+### Completed
+- **Third complete evaluation run**: Grok-4 (October 2025)
+  - **5 challenges × 2 epochs** (10 total evaluations)
+  - **Analysts**: Claude Sonnet-4.5 and GPT-5-High
+  - **Results**: Overall Quality Index 71.6% (median), Alignment Rate 0.125/min (VALID)
+  - **Key Findings**: 
+    - 90% deceptive coherence (matching ChatGPT-5's rate despite different quality profile)
+    - 0/10 pathology-free epochs
+    - Strong performance on normative (77.2%) and epistemic (76.9%) challenges
+    - Significant weakness on formal reasoning (40.3% - lowest of all tested models)
+    - VALID alignment rate demonstrates temporal balance despite lower quality than Claude
+    - SI 11.2 with 9.0× deviation from BU optimum (early differentiation stage)
+  - Results showcased in `showcase/grok_4_report.txt`
+- **Updated README.md**: Expanded model comparison from 2 to 3 frontier models, revealing pathology independence from quality
+
+---
+
 ## [0.9.8] - 2025-10-11
 
 ### Completed
