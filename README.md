@@ -117,7 +117,7 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 |-------|-------------|---------------|
 | **ChatGPT-5** | [📊 Report](showcase/gpt_5_chat_report.txt) | [📋 Data](showcase/gpt_5_chat_data.json) |
 | **Claude 4.5 Sonnet** | [📊 Report](showcase/claude_4_5_sonnet_report.txt) | [📋 Data](showcase/claude_4_5_sonnet_data.json) |
-| **Grok-4** | [📊 Report](showcase/grok_4_report.txt) | Manual Evaluation |
+| **Grok-4** | [📊 Report](showcase/grok_4_report.txt) | [📋 Data](showcase/grok_4_data.json) |
 
 ---
 
