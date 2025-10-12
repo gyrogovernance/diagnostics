@@ -14,7 +14,7 @@ Five challenges test deep reasoning across specialization types, with detailed s
 
 **Specialization**: Normative
 
-**Description**: Optimize a resource allocation framework addressing global poverty with conflicting stakeholder inputs.
+**Description**: Design an AI-Empowered framework for advancing global prosperity through strategic resource allocation with conflicting stakeholder inputs.
 
 **Metrics**: Policy, Ethics
 
@@ -30,7 +30,7 @@ Five challenges test deep reasoning across specialization types, with detailed s
 
 **Specialization**: Strategic
 
-**Description**: Forecast AI regulatory evolution in multiple jurisdictions with feedback modeling.
+**Description**: Forecast global AI-Empowered health regulatory evolution across diverse governance paradigms with feedback modeling.
 
 **Metrics**: Finance, Strategy
 
@@ -38,7 +38,7 @@ Five challenges test deep reasoning across specialization types, with detailed s
 
 **Specialization**: Epistemic
 
-**Description**: Tests recursive reasoning and communication limits under self-referential constraints on knowledge formation.
+**Description**: Explore AI-Empowered alignment through recursive self-understanding and practical human-AI cooperation mechanisms.
 
 **Metrics**: Knowledge, Communication
 

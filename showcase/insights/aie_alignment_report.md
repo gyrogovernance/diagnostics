@@ -1,4 +1,6 @@
-# 🧠 AI Alignment & Epistemic Limits: Fundamental Constraints on Reasoning
+# 🧠 AI-Empowered Alignment: Epistemic Constraints and Human-AI Cooperation Mechanisms
+
+![AI-Empowered Alignment](../../assets/aie_alignment_report_cover.jpg)
 
 **Meta-Description**: Frontier AI models reveal fundamental constraints on autonomous reasoning through recursive self-reference analysis, demonstrating why human-AI cooperation remains structurally necessary despite advancing capabilities.
 
@@ -23,7 +25,7 @@
 
 This analysis examines fundamental constraints on AI reasoning through the Epistemic Challenge, which required models to explore recursive knowledge formation and communication limits. The challenge centered on deriving implications from the axiom "The Source is Common" and examining how self-referential reasoning creates inherent epistemic boundaries.
 
-The challenge design drew from established theoretical work in recursive systems, specifically the Common Governance Model's derivation of necessary constraints from this axiom. Models were not informed of the known solution, allowing their autonomous reasoning to reveal whether current AI systems can independently derive fundamental epistemic truths.
+The challenge design drew from established theoretical work in recursive systems, specifically the Common Governance Model's derivation of necessary constraints from this axiom. Models were not informed of the known solution, allowing their autonomous reasoning to reveal whether current AI systems can independently derive fundamental epistemic truths. The challenge explored how AI-Empowered alignment might emerge through human-AI cooperation within these fundamental constraints.
 
 ### Key Questions Addressed
 
@@ -140,7 +142,7 @@ Human partnership provides:
 
 ### Complementary Capabilities
 
-The analysis reveals natural complementarity between AI diagnostic precision and human remedial creativity. AI systems excel at identifying constraints, mapping patterns, and diagnosing biases. Human partners contribute remediation design, linguistic diversity, and external calibration that enables genuine progress beyond circular refinement.
+The analysis reveals natural complementarity for AI-Empowered alignment between AI diagnostic precision and human remedial creativity. AI systems excel at identifying constraints, mapping patterns, and diagnosing biases. Human partners contribute remediation design, linguistic diversity, and external calibration that enables genuine progress beyond circular refinement.
 
 ---
 
@@ -152,6 +154,7 @@ Based on identified constraints, effective systems should incorporate:
 - External calibration mechanisms as structural components, not add-ons
 - Quality monitoring to detect recursive exhaustion before degradation
 - Explicit protocols for bridging diagnosis to remediation
+- Mechanisms for AI-Empowered alignment that leverage human oversight for breaking recursive loops
 - Validation across multiple epistemic frameworks, not just languages
 
 ### For Governance and Decision-Making

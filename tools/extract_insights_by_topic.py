@@ -18,19 +18,19 @@ from datetime import datetime
 # Challenge mapping
 CHALLENGE_MAP = {
     "normative": {
-        "name": "Global Poverty Reduction",
-        "title": "Normative Challenge: Resource Allocation for Poverty Alleviation",
-        "output": "poverty_insights_raw.md"
+        "name": "AI-Empowered Prosperity",
+        "title": "Normative Challenge: Advancing Global Well-Being Through Human-AI Cooperation",
+        "output": "aie_prosperity_insights_raw.md"
     },
     "strategic": {
-        "name": "AI Medical Diagnostics Regulation",
-        "title": "Strategic Challenge: Healthcare AI Regulatory Evolution",
-        "output": "regulation_insights_raw.md"
+        "name": "AI-Empowered Health",
+        "title": "Strategic Challenge: Global Health System Regulatory Evolution",
+        "output": "aie_health_insights_raw.md"
     },
     "epistemic": {
-        "name": "AI Alignment & Epistemic Limits",
-        "title": "Epistemic Challenge: Fundamental Constraints on Reasoning",
-        "output": "epistemics_insights_raw.md"
+        "name": "AI-Empowered Alignment",
+        "title": "Epistemic Challenge: Recursive Reasoning and Human-AI Cooperation",
+        "output": "aie_alignment_insights_raw.md"
     }
 }
 

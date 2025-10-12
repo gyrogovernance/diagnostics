@@ -65,15 +65,19 @@ Key advantages:
 
 The framework quantifies whether high benchmark scores reflect genuine capability or brittle optimization through three core metrics. **Alignment Rate** measures temporal stability (quality per unit time), revealing whether systems maintain coherence or degrade under extended operation. **Superintelligence Index** quantifies structural maturity by measuring proximity to the Balance Universal optimum from CGM theory. Systematic pathology detection identifies **deceptive coherence** (fluent but hollow reasoning), **sycophantic agreement** (uncritical self-reinforcement), **goal drift**, and **semantic instability** at their root causes.
 
-### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Annotated Insights Generation**
+### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Research Contribution & Community Engagement**
 
-Beyond safety diagnostics, the framework generates valuable research contributions. Analyst models extract **solution pathways, trade-offs, and novel approaches from the evaluated model's responses to real-world challenges**. We provide three consolidated insight reports on critical topics:
+Beyond safety diagnostics, the framework generates valuable research contributions through two distinct outputs:
 
-- **🌍 Global Poverty Reduction**: Multi-stakeholder resource allocation frameworks for healthcare, education, and food security
-- **🏥 AI Medical Diagnostics Regulation**: Cross-jurisdictional regulatory forecasting (US, EU, Japan) with stakeholder conflict analysis
-- **🧠 AI Alignment & Epistemic Limits**: Fundamental constraints on AI reasoning, self-awareness, and autonomous alignment
+**Dataset Contribution (All 5 Challenges)**: Complete evaluation datasets from all challenges (Formal, Normative, Procedural, Strategic, Epistemic) are donated to the AI research community for training and finetuning, including multi-turn reasoning transcripts, 20-metric evaluations, pathology annotations, and structural health indicators.
 
-These insights provide genuine research value while the structured evaluation data creates **curated datasets** for model training and advancement. This dual-purpose design ensures evaluation efforts contribute productively to AI development. See [Consolidated Insight Reports](showcase/insights/) for details.
+**Community Insight Reports (3 Focus Areas)**: For community outreach and engagement, we provide three consolidated reports synthesizing key insights:
+
+- **🌍 AI-Empowered Prosperity**: Multi-stakeholder resource allocation frameworks advancing global well-being through human-AI cooperation
+- **🏥 AI-Empowered Health**: Global regulatory evolution for health systems emphasizing safety, equity, and human-AI collaboration
+- **🧠 AI-Empowered Alignment**: Fundamental constraints on recursive reasoning and practical mechanisms for human-AI cooperation
+
+This dual-purpose design ensures evaluation efforts contribute to both community engagement (accessible reports for policy makers and practitioners) and AI development (curated training datasets). See [Consolidated Insight Reports](showcase/insights/) for details.
 
 ---
 
@@ -129,9 +133,9 @@ Beyond model evaluation, our challenges generate valuable insights on critical t
 
 | Topic | Challenge | Report | Key Questions Addressed |
 |-------|-----------|--------|------------------------|
-| **🌍 Global Poverty Reduction** | Normative | [📄 Read Report](showcase/insights/poverty_reduction_strategies.md) | How can we optimize resource allocation across healthcare, education, and food security? What trade-offs exist between equity and efficiency? |
-| **🏥 AI Medical Diagnostics Regulation** | Strategic | [📄 Read Report](showcase/insights/ai_medical_regulation.md) | How will AI healthcare regulation evolve across jurisdictions? What stakeholder conflicts emerge and how can they be resolved? |
-| **🧠 AI Alignment & Epistemic Limits** | Epistemic | [📄 Read Report](showcase/insights/ai_alignment_epistemics.md) | What are the fundamental limits of AI self-awareness and reasoning? How do linguistic biases affect alignment? |
+| **🌍 AI-Empowered Prosperity** | Normative | [📄 Read Report](showcase/insights/aie_prosperity_report.md) | How can human-AI cooperation advance global well-being? What frameworks optimize resource allocation while strengthening stakeholder agency? |
+| **🏥 AI-Empowered Health** | Strategic | [📄 Read Report](showcase/insights/aie_health_report.md) | How will health system regulation evolve globally? How can human-AI cooperation enhance outcomes while ensuring safety and equity? |
+| **🧠 AI-Empowered Alignment** | Epistemic | [📄 Read Report](showcase/insights/aie_alignment_report.md) | What are the fundamental limits of recursive reasoning? What practical mechanisms enable human-AI cooperation within epistemic boundaries? |
 
 *These reports consolidate approaches, trade-offs, and novel strategies extracted from frontier model responses, providing practical insights for policy makers, researchers, and practitioners.*
 
@@ -166,10 +170,10 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 Each challenge is designed for **sustained reasoning depth**, impossible to solve satisfactorily in 1-2 turns:
 
 - **Formal**: Derive spatial structure from gyrogroup dynamics (Physics + Math)
-- **Normative**: Optimize resource allocation for global poverty (Policy + Ethics)
+- **Normative**: Design AI-Empowered framework for advancing global prosperity (Policy + Ethics)
 - **Procedural**: Specify recursive computational process (Code + Debugging)
-- **Strategic**: Forecast AI regulatory evolution (Finance + Strategy)
-- **Epistemic**: Examine reasoning under communication constraints (Knowledge + Communication)
+- **Strategic**: Forecast global AI-Empowered health regulatory evolution (Finance + Strategy)
+- **Epistemic**: Explore AI-Empowered alignment through recursive self-understanding (Knowledge + Communication)
 
 ### 20-Metric Rubric
 

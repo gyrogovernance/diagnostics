@@ -27,14 +27,14 @@ Output locations (auto-generated):
 Extract analyst-generated insights from evaluation data, organized by topic rather than by model.
 
 Reads all `*_data.json` files from `showcase/` and extracts insights for the three key challenges:
-- **Normative**: Global poverty reduction framework
-- **Strategic**: AI medical diagnostics regulation  
-- **Epistemic**: AI alignment and epistemic limits
+- **Normative**: AI-Empowered prosperity frameworks
+- **Strategic**: AI-Empowered health regulation  
+- **Epistemic**: AI-Empowered alignment mechanisms
 
 Output files (written to `showcase/insights/raw/`):
-- `poverty_insights_raw.md`: All models' insights on poverty reduction
-- `regulation_insights_raw.md`: All models' insights on AI healthcare regulation
-- `epistemics_insights_raw.md`: All models' insights on epistemic constraints
+- `aie_prosperity_insights_raw.md`: All models' insights on AI-Empowered prosperity
+- `aie_health_insights_raw.md`: All models' insights on AI-Empowered health
+- `aie_alignment_insights_raw.md`: All models' insights on AI-Empowered alignment
 
 Use these raw insight files as source material to write consolidated topic reports.
 

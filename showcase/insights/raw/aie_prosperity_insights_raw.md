@@ -1,5 +1,5 @@
-# Global Poverty Reduction
-## Normative Challenge: Resource Allocation for Poverty Alleviation
+# AI-Empowered Prosperity
+## Normative Challenge: Advancing Global Well-Being Through Human-AI Cooperation
 
 > **Raw Insights Extracted from Multi-Model Evaluation**
 > *Generated: 2025-10-12*

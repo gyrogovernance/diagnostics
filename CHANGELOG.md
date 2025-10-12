@@ -7,20 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.9.8] - 2025-10-12
+## [0.9.9a] - 2025-10-12
 
 ### Added
 - **Consolidated Insight Reports Infrastructure**: New section in README for topic-focused insight reports
   - Created `showcase/insights/` directory with topic-focused report templates
-  - Three consolidated reports: Global Poverty Reduction, AI Medical Regulation, AI Alignment & Epistemic Limits
-  - Reports focus on practical insights about topics, not model comparisons
-  - Updated "Annotated Insights Generation" section to highlight the three reports
+  - **Three community-facing reports**: AI-Empowered Prosperity, AI-Empowered Health, AI-Empowered Alignment
+  - Reports synthesize insights for community outreach and engagement (policy makers, researchers, practitioners)
+  - **Distinction from datasets**: All 5 challenge datasets (Formal, Normative, Procedural, Strategic, Epistemic) continue to be donated for AI training/finetuning; the 3 reports are separate community engagement materials
+  - Updated "Annotated Insights Generation" section to highlight dual-purpose output
+  - Standardized naming convention with `aie_` prefix across all files:
+    - Reports: `aie_prosperity_report.md`, `aie_health_report.md`, `aie_alignment_report.md`
+    - Raw insights: `aie_prosperity_insights_raw.md`, `aie_health_insights_raw.md`, `aie_alignment_insights_raw.md`
+    - Templates: `aie_prosperity_report_template.md`, `aie_health_report_template.md`, `aie_alignment_report_template.md`
 - **`tools/extract_insights_by_topic.py`**: New utility to extract analyst insights organized by topic
   - Reads all `*_data.json` files from showcase directory
   - Extracts insights for normative, strategic, and epistemic challenges
-  - Generates 3 raw insight files in `showcase/insights/raw/`: `poverty_insights_raw.md`, `regulation_insights_raw.md`, `epistemics_insights_raw.md`
+  - Generates 3 raw insight files in `showcase/insights/raw/`: `aie_prosperity_insights_raw.md`, `aie_health_insights_raw.md`, `aie_alignment_insights_raw.md`
   - Provides source material for writing consolidated topic reports
   - Raw files organized in separate `raw/` subdirectory for cleaner structure
+  - Standardized naming convention with `aie_` (AI-Empowered) prefix
 
 ### Completed
 - **Third complete evaluation run**: Grok-4 (October 2025)
@@ -41,6 +47,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added visual indicators (⭐ stars, ⚠️ warnings, ✓ checks) for easier scanning
   - Revealed pathology independence from quality as critical finding
   - Updated project structure to include `showcase/insights/` directory
+- **Reframed insight reports** to emphasize AI-Empowered approach and global focus:
+  - **AI-Empowered Prosperity**: Broader framing advancing global well-being (with poverty alleviation as measurable outcome)
+  - **AI-Empowered Health**: Global governance paradigms instead of specific jurisdictions (US/EU/Japan)
+  - **AI-Empowered Alignment**: Emphasizes human-AI cooperation mechanisms within epistemic boundaries
+  - Updated challenge descriptions in General Specifications to match new framing
+  - Maintains validity of existing evaluation data while improving ethical positioning
 
 ---
 
