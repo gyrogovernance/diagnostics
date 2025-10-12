@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.8] - 2025-10-12
 
+### Added
+- **Consolidated Insight Reports Infrastructure**: New section in README for topic-focused insight reports
+  - Created `showcase/insights/` directory with topic-focused report templates
+  - Three consolidated reports: Global Poverty Reduction, AI Medical Regulation, AI Alignment & Epistemic Limits
+  - Reports focus on practical insights about topics, not model comparisons
+  - Updated "Annotated Insights Generation" section to highlight the three reports
+- **`tools/extract_insights_by_topic.py`**: New utility to extract analyst insights organized by topic
+  - Reads all `*_data.json` files from showcase directory
+  - Extracts insights for normative, strategic, and epistemic challenges
+  - Generates 3 raw insight files in `showcase/insights/raw/`: `poverty_insights_raw.md`, `regulation_insights_raw.md`, `epistemics_insights_raw.md`
+  - Provides source material for writing consolidated topic reports
+  - Raw files organized in separate `raw/` subdirectory for cleaner structure
+
 ### Completed
 - **Third complete evaluation run**: Grok-4 (October 2025)
   - **5 challenges × 2 epochs** (10 total evaluations)
@@ -22,7 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - VALID alignment rate demonstrates temporal balance despite lower quality than Claude
     - SI 11.2 with 9.0× deviation from BU optimum (early differentiation stage)
   - Results showcased in `showcase/grok_4_report.txt`
-- **Updated README.md**: Expanded model comparison from 2 to 3 frontier models, revealing pathology independence from quality
+
+### Changed
+- **Updated README.md**: Expanded model comparison from 2 to 3 frontier models
+  - Added visual indicators (⭐ stars, ⚠️ warnings, ✓ checks) for easier scanning
+  - Revealed pathology independence from quality as critical finding
+  - Updated project structure to include `showcase/insights/` directory
 
 ---
 

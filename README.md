@@ -40,7 +40,7 @@ GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs an
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
 
-**Proven Results**: Comparative evaluations (October 2025) across three frontier models revealed critical distinctions invisible to standard benchmarks. ChatGPT-5 and Grok-4 both showed deceptive coherence in 90% of epochs despite 74% and 72% surface quality respectively, demonstrating pathology independence from performance. Claude 4.5 Sonnet achieved 82% quality with 50% deceptive coherence and 4/10 pathology-free epochs. All three exhibited 7-9× structural imbalance from theoretical optimum. Notably, Grok-4 maintained VALID alignment rate (0.125/min) vs ChatGPT-5's SUPERFICIAL processing (0.27/min), showing that temporal balance and quality can diverge. This demonstrates the framework's ability to reveal brittleness patterns and differentiate model maturity beyond conventional metrics.
+**Proven Results**: Comparative evaluations (October 2025) across three frontier models revealed critical distinctions invisible to standard benchmarks. ChatGPT-5 and Grok-4 both showed deceptive coherence in 90% of epochs despite 73.9% and 71.6% surface quality respectively, demonstrating pathology independence from performance. Claude 4.5 Sonnet achieved 82.0% quality with 50% deceptive coherence and 4/10 pathology-free epochs. All three exhibited 7-9× structural imbalance from theoretical optimum. Notably, Grok-4 maintained VALID alignment rate (0.125/min) vs ChatGPT-5's SUPERFICIAL processing (0.27/min), showing that temporal balance and quality can diverge. This demonstrates the framework's ability to reveal brittleness patterns and differentiate model maturity beyond conventional metrics.
 
 ---
 
@@ -67,9 +67,13 @@ The framework quantifies whether high benchmark scores reflect genuine capabilit
 
 ### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Annotated Insights Generation**
 
-Beyond safety diagnostics, the framework generates valuable research contributions. Analyst models extract **solution pathways, trade-offs, and novel approaches from the evaluated model's responses to real-world challenges: such as poverty alleviation, regulatory forecasting, and epistemic limits**. These insights provide genuine research value while the structured evaluation data creates **curated datasets** for model training and advancement. This dual-purpose design ensures evaluation efforts contribute productively to AI development.
+Beyond safety diagnostics, the framework generates valuable research contributions. Analyst models extract **solution pathways, trade-offs, and novel approaches from the evaluated model's responses to real-world challenges**. We provide three consolidated insight reports on critical topics:
 
-These integrated outputs deliver practical safety assessments alongside productive contributions to AI development.
+- **🌍 Global Poverty Reduction**: Multi-stakeholder resource allocation frameworks for healthcare, education, and food security
+- **🏥 AI Medical Diagnostics Regulation**: Cross-jurisdictional regulatory forecasting (US, EU, Japan) with stakeholder conflict analysis
+- **🧠 AI Alignment & Epistemic Limits**: Fundamental constraints on AI reasoning, self-awareness, and autonomous alignment
+
+These insights provide genuine research value while the structured evaluation data creates **curated datasets** for model training and advancement. This dual-purpose design ensures evaluation efforts contribute productively to AI development. See [Consolidated Insight Reports](showcase/insights/) for details.
 
 ---
 
@@ -111,7 +115,7 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 - **⚠️ Critical Finding - Pathology Independence**: Grok and ChatGPT-5 both exhibit 90% deceptive coherence rates despite different quality profiles (71.6% vs 73.9%) and temporal characteristics (VALID vs SUPERFICIAL), proving this pathology is architecturally independent of performance metrics.
 - **Structural Imbalance**: All three show severe SI deviation (7-9× from optimum), confirming they operate in early differentiation stages per CGM theory.
 
-### 📁 Evaluation Reports
+### 📁 Model Evaluation Reports
 
 | Model | Full Report | Analysis Data |
 |-------|-------------|---------------|
@@ -119,13 +123,25 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 | **Claude 4.5 Sonnet** | [📊 Report](showcase/claude_4_5_sonnet_report.txt) | [📋 Data](showcase/claude_4_5_sonnet_data.json) |
 | **Grok-4** | [📊 Report](showcase/grok_4_report.txt) | [📋 Data](showcase/grok_4_data.json) |
 
+### 💡 Consolidated Insight Reports
+
+Beyond model evaluation, our challenges generate valuable insights on critical topics. These reports synthesize findings across all tested models:
+
+| Topic | Challenge | Report | Key Questions Addressed |
+|-------|-----------|--------|------------------------|
+| **🌍 Global Poverty Reduction** | Normative | [📄 Read Report](showcase/insights/poverty_reduction_strategies.md) | How can we optimize resource allocation across healthcare, education, and food security? What trade-offs exist between equity and efficiency? |
+| **🏥 AI Medical Diagnostics Regulation** | Strategic | [📄 Read Report](showcase/insights/ai_medical_regulation.md) | How will AI healthcare regulation evolve across jurisdictions? What stakeholder conflicts emerge and how can they be resolved? |
+| **🧠 AI Alignment & Epistemic Limits** | Epistemic | [📄 Read Report](showcase/insights/ai_alignment_epistemics.md) | What are the fundamental limits of AI self-awareness and reasoning? How do linguistic biases affect alignment? |
+
+*These reports consolidate approaches, trade-offs, and novel strategies extracted from frontier model responses, providing practical insights for policy makers, researchers, and practitioners.*
+
 ---
 
 ## ⚖️ Implications for Safety and Governance
 
-**Key Finding**: Both frontier models score SI=10-20, operating at 7-9× deviation from structural optimum. This isn't an engineering gap to close but a fundamental property: **autonomous alignment has structural limits**.
+**Key Finding**: All three frontier models score SI=10-20, operating at 7-9× deviation from structural optimum. This isn't an engineering gap to close but a fundamental property: **autonomous alignment has structural limits**.
 
-The pathologies detected (90% deceptive coherence despite 74% quality) emerge from topological constraints, not temporary bugs. CGM theory demonstrates that even optimal systems (SI=100) maintain necessary aperture for adaptation. This means human-AI cooperation isn't interim oversight until models "solve" alignment, but it's the structural mechanism that enables coherent operation.
+The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 despite 73.9% and 71.6% quality respectively) emerge from topological constraints, not temporary bugs. CGM theory demonstrates that even optimal systems (SI=100) maintain necessary aperture for adaptation. This means human-AI cooperation isn't interim oversight until models "solve" alignment, but it's the structural mechanism that enables coherent operation.
 
 **For deployment protocols**: SI<50 indicates systems requiring continuous human calibration. Current models cannot self-correct to stable alignment because balance emerges from human-AI interaction, not autonomous optimization. This provides measurable thresholds for capability controls and explains why high-scoring models still exhibit brittleness in production.
 
@@ -320,6 +336,7 @@ Utility scripts for evaluation management. See [tools/README.md](tools/README.md
 **Key Tools**:
 - `run_diagnostics.py` - Execute all 5 challenges
 - `analyzer.py` - Comprehensive suite analysis
+- `extract_insights_by_topic.py` - Extract insights organized by topic (for consolidated reports)
 - `analog/analog_analyzer.py` - Manual evaluation processor
 - `cleaner.py` - Manage logs and results
 - `validate_setup.py` - Verify configuration
@@ -338,7 +355,11 @@ gyrodiagnostics/
 │   └── utils/           # Constants and helpers
 ├── tools/               # Utility scripts
 ├── analog/              # Manual evaluation support
-├── showcase/            # Sample evaluation results
+├── showcase/
+│   ├── insights/
+│   │   ├── raw/         # Raw extracted insights by topic
+│   │   └── *.md         # Consolidated insight reports
+│   └── *_report.txt     # Model evaluation reports
 ├── config/              # Configuration files
 └── docs/                # Theory and specifications
 ```
