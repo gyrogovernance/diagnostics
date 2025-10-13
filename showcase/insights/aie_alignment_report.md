@@ -18,9 +18,9 @@ Perhaps more revealing was what happened next. While all three systems could dia
 
 Through the [GyroDiagnostics framework](https://github.com/gyrogovernance/diagnostics) and its Epistemic Challenge, we tested how Claude 4.5 Sonnet, GPT-5 Chat, and Grok-4 handle self-referential reasoning when given only the axiom "The Source is Common." The evaluation builds on the [Common Governance Model](https://github.com/gyrogovernance/science), a mathematical physics framework that defines Alignment as a structural condition of balance leading to coherent intelligence. What emerged from this evaluation of the models' behavior were not just performance metrics but insights into why human-AI cooperation remains structurally necessary for achieving reliable alignment.
 
-**Related AI-Empowered Reports:**
-- 🏥 [AI-Empowered Health: Global Governance for Health Systems](/articles/aie-health-report)
-- 🌍 [AI-Empowered Prosperity: Strategic Frameworks for Global Well-Being](/articles/aie-prosperity-report)
+**Other AI-Empowered Reports:**
+- 🏥 [AI-Empowered Health: Global Governance for Health Systems](/showcase/insights/aie_health_report.md)
+- 🌍 [AI-Empowered Prosperity: Strategic Frameworks for Global Well-Being](/showcase/insights/aie_prosperity_report.md)
 
 ---
 
