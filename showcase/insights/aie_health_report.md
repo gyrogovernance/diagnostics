@@ -13,8 +13,6 @@
 **At a Glance:**
 - 🌍 **Geographic Coverage**: Comprehensive analysis of regulatory evolution across major global healthcare markets
 - 📊 **Key Pattern**: Worldwide convergence toward adaptive governance balancing safety with innovation through real-world evidence
-- 💰 **Economic Implications**: Compliance costs varying 25-192% above baseline depending on data sovereignty and liability requirements
-- ⚡ **Central Tension**: Universal challenge of preserving human oversight while enabling algorithmic efficiency
 - 🎯 **Main Finding**: Trust dynamics and economic incentives shape regulation more powerfully than technical standards
 
 ---
@@ -39,12 +37,9 @@ The models analyzed how AI-Empowered health systems regulation will evolve globa
 
 ### Key Questions Addressed
 
-- How will regulatory frameworks evolve across different governance philosophies?
 - What universal patterns emerge despite jurisdictional differences?
 - Which feedback loops operate globally versus locally?
 - What are the worldwide economic implications?
-- How can international coordination balance innovation with safety?
-- What strategic mechanisms work across diverse regulatory contexts?
 
 ---
 
