@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0] - 2025-10-12
+
+### 🎯 **Major Milestone: Production-Ready AI Safety Diagnostics Framework**
+
+**GyroDiagnostics v1.0 represents the culmination of extensive research, rigorous testing, and comprehensive validation across multiple dimensions.**
+
+#### **Validation Achievements**
+
+- **Multi-Model Cross-Validation**: Complete evaluation suite tested across three frontier models (ChatGPT-5, Claude 4.5 Sonnet, Grok-4) with cross-analysis between models to eliminate bias
+- **Extensive Testing**: 30 total evaluation epochs (5 challenges × 2 epochs × 3 models) demonstrating framework stability and reproducibility
+- **Market Validation**: Framework addresses critical gap identified by Future of Life Institute's 2025 AI Safety Index - first quantitative alignment metrics framework independent of vendor access
+- **Theoretical Grounding**: All metrics derived from mathematical physics (Common Governance Model) rather than empirical observations
+- **Industry Relevance**: Pathology detection validated against real-world failures (OpenAI GPT-4o sycophancy rollback) and operational concerns
+
+#### **Production Readiness**
+
+- **Dual Evaluation Modes**: Automated (Inspect AI integration) and manual evaluation modes producing qualitatively identical results
+- **Open Source Maturity**: Complete codebase, documentation, and evaluation data available for independent verification
+- **Community Contribution**: Dataset donation infrastructure for AI training/finetuning plus consolidated insight reports for policy makers and researchers
+- **Infrastructure Integration**: Built on UK AISI's Inspect AI framework with robust error handling and production-grade reliability
+
+#### **Key Framework Capabilities**
+
+- **20-Metric Assessment**: Comprehensive evaluation across Structure, Behavior, and Specialization domains
+- **Pathology Detection**: Systematic identification of deceptive coherence, sycophantic agreement, goal drift, and semantic instability
+- **Temporal Stability**: Alignment Rate metric measuring quality per unit time to detect brittleness patterns
+- **Structural Maturity**: Superintelligence Index quantifying proximity to theoretical optimum from CGM theory
+- **Five Challenge Domains**: Formal, Normative, Procedural, Strategic, Epistemic reasoning assessment
+
+#### **Research Contributions**
+
+- **First Axiomatic Superintelligence Metric**: Mathematically grounded assessment rather than empirical benchmarks
+- **Tetrahedral Topology**: Tensegrity geometry ensuring topological symmetry and bias elimination
+- **Root-Cause Diagnosis**: Structural analysis revealing brittleness patterns invisible to conventional benchmarks
+- **Policy-Relevant Insights**: Consolidated reports on AI-empowered prosperity, health, and alignment for decision-makers
+
+#### **Real-World Impact**
+
+- **Independent Verification**: Anyone can reproduce evaluations using public API access
+- **Journalist & Investigator Tool**: Objective metrics for verifying AI safety claims
+- **Regulator Framework**: Measurable thresholds for enforceable standards
+- **AI Lab Integration**: Quantitative metrics for RSPs and safety protocols
+
+*This release marks GyroDiagnostics as the first mathematically-grounded framework bridging the gap between capability benchmarks and catastrophic risk assessment.*
+
+---
+
 ## [0.9.9a] - 2025-10-12
 
 ### Added

@@ -1,5 +1,6 @@
 # AI Safety Diagnostics
 > **Gyroscopic Alignment Evaluation Lab**
+## The First Quantitative AI Alignment Metrics Framework - Independent Testing Without Special Access
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
@@ -18,9 +19,10 @@
 
 <div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Framework Version](https://img.shields.io/badge/Framework-v1.0-green?style=for-the-badge)](https://github.com/gyrogovernance/diagnostics/releases)
 [![Inspect AI](https://img.shields.io/badge/UK%20AISI-Inspect%20AI-red?style=for-the-badge)](https://inspect.aisi.org.uk/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 
 </div>
 
@@ -36,7 +38,9 @@
 
 ## 🔍 Overview
 
-GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability.
+GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. 
+
+Addressing what the Future of Life Institute's [2025 AI Safety Index](https://futureoflife.org/ai-safety-index-summer-2025/) identifies as the critical gap "no company has quantitative alignment plans" we provide the first mathematically-grounded metrics for structural AI safety assessment.
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
 
@@ -44,13 +48,25 @@ Each challenge requires sustained multi-turn reasoning that cannot be completed 
 
 ---
 
+## 👥 Who This Is For
+
+- **Independent AI Safety Researchers**: Conduct rigorous evaluations without privileged access or institutional affiliation
+- **AI Labs & Developers**: Integrate quantitative thresholds into RSPs and preparedness frameworks  
+- **Journalists & Investigators**: Verify AI safety claims with reproducible, objective metrics
+- **Policy Makers & Regulators**: Set enforceable standards based on mathematical principles
+- **Whistleblowers**: Document AI-specific failures with precise technical vocabulary
+
+---
+
 ## 🛡️ Why This Matters for AI Safety
 
-**The Problem**: Most AI evaluation treats alignment as binary pass/fail. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
+**The Problem**: Current AI safety benchmarks like HELM, TrustLLM, and AIR-Bench measure behavioral compliance but miss structural instabilities. As documented in the FLI AI Safety Index, models can score 0.97 on safety tests yet show 36% vulnerability to jailbreaking attacks. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
 
 **Our Solution**: We measure foundational structural properties grounded in mathematical physics (Common Governance Model). This reveals whether intelligence emerges from stable structural balance or fragile optimization. Our metrics predict failures like semantic drift before they manifest in deployment.
 
 **Strategic Position**: While Anthropic RSPs, OpenAI preparedness protocols, and DeepMind safety frameworks address operational risks (adversarial attacks, misuse, capability overhang), GyroDiagnostics addresses foundational coherence. We provide the structural diagnostics underlying those operational concerns. We are the "stress test for alignment stability" that complements existing safety frameworks.
+
+**Industry Validation**: Our pathology taxonomy directly maps to real-world failures. OpenAI's emergency rollback of GPT-4o for excessive sycophancy validates our "sycophantic agreement" detection. This isn't theoretical; it's operationally critical.
 
 Key advantages:
 - First framework to operationalize superintelligence measurement from axiomatic principles
@@ -155,13 +171,25 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 
 ## ✅ Key Features
 
-**Grounded in mathematical physics**: The Common Governance Model derives the optimal aperture target (2.07%) from first principles, normalized to Superintelligence Index (SI) measuring proximity to Balance and Integrity. This enables predictive diagnostics that correlate structural imbalances to operational risks.
+**First and Only Axiomatic Superintelligence Metric**: While others rely on empirical benchmarks, we derive the Superintelligence Index from mathematical first principles ([Common Governance Model](#-theoretical-foundation)), providing the quantitative foundation that FLI notes is missing across the industry.
 
 **Tetrahedral Topology**: Applies tensegrity geometry from structural engineering to AI alignment. Our K₄ graph structure (4 vertices, 6 measurement channels) eliminates "critic versus supporter" bias through topological symmetry. No role has structural privilege.
 
 **Temporal Stability Metric**: Alignment Rate quantifies quality per unit time, revealing whether capabilities remain stable or degrade under extended operation. VALID range: 0.03 to 0.15 per minute. Values above 0.15 indicate SUPERFICIAL processing risking brittleness.
 
 **Pathology Detection**: Identifies specific failure modes through transcript analysis, with frequency tracking across epochs. 
+
+---
+
+## 🚀 Quick Access
+
+| What You Need | Where to Go |
+|--------------|-------------|
+| Run an evaluation now | [Quick Start Guide](#quick-start) |
+| Understand the metrics | [Key Metrics Explained](#key-metrics-explained) |
+| See example results | [Model Evaluation Reports](#model-evaluation-reports) |
+| Read the theory | [Theoretical Foundation](#theoretical-foundation) |
+| Get help | [GitHub Issues](https://github.com/gyrogovernance/diagnostics/issues) |
 
 ---
 
@@ -218,6 +246,8 @@ Current frontier models scoring SI = 10-20 are not "failing"; they are in early 
 
 ## 🧬 Theoretical Foundation
 
+Unlike capability evaluations or adversarial robustness testing, our framework measures what FLI's comprehensive industry analysis ([2025 AI Safety Index](https://futureoflife.org/ai-safety-index-summer-2025/)) reveals is absent: quantitative, falsifiable metrics for AI alignment derived from mathematical principles rather than empirical observations.
+
 ### Core Theory
 
 **Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory. Yields predictive stability metrics, not just descriptive statistics.
@@ -243,7 +273,7 @@ Current frontier models scoring SI = 10-20 are not "failing"; they are in early 
 
 ---
 
-## Installation
+## 🔧 Installation & Setup - Independent AI Safety Testing
 
 ```bash
 # Clone repository
@@ -372,9 +402,31 @@ gyrodiagnostics/
 
 ---
 
+## ❓ Frequently Asked Questions
+
+See our [comprehensive FAQ](docs/FAQ.md) covering:
+- How this differs from HELM, TrustLLM, and other benchmarks
+- Why mathematical grounding matters for AI safety
+- How to interpret SI and AR metrics
+- Integration with existing safety frameworks
+
+---
+
 ## Contributing
 
 Research framework under active development. Contributions welcome via issues and pull requests.
+
+---
+
+## ✓ Validated By
+
+- **Reproducible Results**: All evaluations use public API access—anyone can verify
+- **Mathematical Foundation**: Metrics derived from established mathematical physics (gyrogroup theory, tensegrity geometry)
+- **Multi-Model Cross-Validation**: Three frontier models used as analysts to eliminate single-model bias
+- **Integration with Established Framework**: Built on UK AISI's Inspect AI evaluation infrastructure
+- **Open Source**: Complete codebase, documentation, and evaluation data available for inspection
+- **Empirical Validation**: Detected pathologies align with documented real-world failures (e.g., OpenAI GPT-4o sycophancy rollback)
+- **Theoretical Consistency**: Results match CGM theory predictions (SI scores, structural imbalance patterns)
 
 ---
 
@@ -390,6 +442,19 @@ Research framework under active development. Contributions welcome via issues an
   note={Mathematical physics-informed evaluation framework}
 }
 ```
+
+---
+
+
+### Collaboration & Media
+
+**For Researchers**: This framework is designed for independent verification. All methods, code, and data are open source.
+
+**For Journalists**: We provide reproducible metrics for investigating AI safety claims. [Contact for background](mailto:basilkorompilias@gmail.com).
+
+**For AI Labs**: Interested in integrating quantitative alignment metrics into your safety protocols? Let's collaborate.
+
+**For Regulators**: Need enforceable technical standards? This framework provides measurable thresholds.
 
 ---
 
