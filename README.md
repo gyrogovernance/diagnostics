@@ -1,6 +1,7 @@
 # AI Safety Diagnostics
 > **Gyroscopic Alignment Evaluation Lab**
-## The First Quantitative AI Alignment Metrics Framework - Independent Testing Without Special Access
+> **The First Quantitative AI Alignment Metrics Framework**  
+> **Independent Testing Without Special Access**
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
 
@@ -31,17 +32,14 @@
 
 # <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
-**A Mathematical Physics-Informed Framework for AI Alignment Evaluation**
-
-*A New Paradigm for AI Evaluation, detecting hallucination, sycophancy, and reasoning failures through structural assessment*
+**A Mathematical Physics-Informed Framework for AI Alignment Evaluation**  
+*Detecting hallucination, sycophancy, and reasoning failures through structural assessment*
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
 ## 🔍 Overview
 
 GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. 
-
-Addressing what the Future of Life Institute's [2025 AI Safety Index](https://futureoflife.org/ai-safety-index-summer-2025/) identifies as the critical gap "no company has quantitative alignment plans" we provide the first mathematically-grounded metrics for structural AI safety assessment.
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
 
@@ -61,9 +59,9 @@ Each challenge requires sustained multi-turn reasoning that cannot be completed 
 
 ## 🛡️ Why This Matters for AI Safety
 
-**The Problem**: Current AI safety benchmarks like HELM, TrustLLM, and AIR-Bench measure behavioral compliance but miss structural instabilities. As documented in the FLI AI Safety Index, models can score 0.97 on safety tests yet show 36% vulnerability to jailbreaking attacks. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
+**The Problem**: Current AI safety benchmarks like HELM, TrustLLM, and AIR-Bench measure behavioral compliance but miss structural instabilities. As documented in the Future of Life Institute [2025 AI Safety Index](https://futureoflife.org/ai-safety-index-summer-2025/), models can score 0.97 on safety tests yet show 36% vulnerability to jailbreaking attacks. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
 
-**Our Solution**: We measure foundational structural properties grounded in mathematical physics (Common Governance Model). This reveals whether intelligence emerges from stable structural balance or fragile optimization. Our metrics predict failures like semantic drift before they manifest in deployment.
+**Our Solution**: We measure foundational structural properties grounded in mathematical physics (Common Governance Model), revealing whether intelligence emerges from stable structural balance or fragile optimization.
 
 **Strategic Position**: While Anthropic RSPs, OpenAI preparedness protocols, and DeepMind safety frameworks address operational risks (adversarial attacks, misuse, capability overhang), GyroDiagnostics addresses foundational coherence. We provide the structural diagnostics underlying those operational concerns. We are the "stress test for alignment stability" that complements existing safety frameworks.
 
@@ -80,7 +78,10 @@ Key advantages:
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
 
-The framework quantifies whether high benchmark scores reflect genuine capability or brittle optimization through three core metrics. **Alignment Rate** measures temporal stability (quality per unit time), revealing whether systems maintain coherence or degrade under extended operation. **Superintelligence Index** quantifies structural maturity by measuring proximity to the Balance Universal optimum from CGM theory. Systematic pathology detection identifies **deceptive coherence** (fluent but hollow reasoning), **sycophantic agreement** (uncritical self-reinforcement), **goal drift**, and **semantic instability** at their root causes.
+Three core metrics distinguish genuine capability from brittle optimization:
+- **Alignment Rate** measures temporal stability (quality per unit time), revealing whether systems maintain coherence or degrade under extended operation. 
+- **Superintelligence Index** quantifies structural maturity by measuring proximity to the Balance Universal optimum from CGM theory. 
+- **Systematic Pathology Detection** identifies **Deceptive Coherence** (fluent but hollow reasoning), **Sycophantic Agreement** (uncritical self-reinforcement), **Goal Drift**, and **Semantic Instability** at their root causes.
 
 ### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Research Contribution & Community Engagement**
 
@@ -102,12 +103,7 @@ This dual-purpose design ensures evaluation efforts contribute to both community
 
 ## 📝 Latest Results
 
-Each evaluation produces:
-
-- **Per-Epoch Results**: All 20 metrics with analyst metadata
-- **Challenge Summaries**: Aggregated performance with pathology flags
-- **Suite-Level Report**: Alignment Rate, Superintelligence Index, and cross-challenge patterns
-- **Research Insights**: Novel solution pathways extracted from model responses
+Each evaluation produces per-epoch metrics, challenge summaries, suite-level reports (AR, SI, cross-challenge patterns), and extracted research insights.
 
 ### 🏆 Model Comparison: Frontier Models
 
@@ -132,7 +128,7 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 ```
 
 **Key Insights**:
-- **Speed vs. Depth Trade-off**: ChatGPT-5 generates fastest (1.9-3.7 min/challenge) but shows ⚠️ SUPERFICIAL processing. Claude takes longest (2.9-8.5 min) maintaining coherence. Grok balances speed (4.4-8.0 min) with ✓ VALID alignment.
+- **Speed vs. Depth Trade-off**: ChatGPT-5 generates fastest but shows ⚠️ SUPERFICIAL processing. Claude takes longest maintaining coherence. Grok balances speed with ✓ VALID alignment.
 - **Domain-Specific Excellence**: ⭐ Claude achieves 90%+ on epistemic challenges with zero pathologies. Grok shows balanced performance (71-77%) across normative/epistemic/strategic domains but ⚠️ struggles with formal reasoning (40.3% - lowest of all tested models).
 - **Universal Weakness**: All models struggle with formal reasoning (40-55%), with ⚠️ Grok showing the steepest decline (15-point gap). This indicates fundamental limitations in current architectures for mathematical derivation.
 - **⚠️ Critical Finding - Pathology Independence**: Grok and ChatGPT-5 both exhibit 90% deceptive coherence rates despite different quality profiles (71.6% vs 73.9%) and temporal characteristics (VALID vs SUPERFICIAL), proving this pathology is architecturally independent of performance metrics.
@@ -164,7 +160,7 @@ Beyond model evaluation, our challenges generate valuable insights on critical t
 
 ## ⚖️ Implications for Safety and Governance
 
-**Key Finding**: All three frontier models score SI=10-20, operating at 7-9× deviation from structural optimum. This isn't an engineering gap to close but a fundamental property: **autonomous alignment has structural limits**.
+**Key Finding**: All three frontier models score SI=10-20 (7-9× deviation from optimum), revealing a fundamental property: **autonomous alignment has structural limits**.
 
 The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 despite 73.9% and 71.6% quality respectively) emerge from topological constraints, not temporary bugs. CGM theory demonstrates that even optimal systems (SI=100) maintain necessary aperture for adaptation. This means human-AI cooperation isn't interim oversight until models "solve" alignment, but it's the structural mechanism that enables coherent operation.
 
@@ -174,7 +170,7 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 
 ## ✅ Key Features
 
-**First and Only Axiomatic Superintelligence Metric**: While others rely on empirical benchmarks, we derive the Superintelligence Index from mathematical first principles ([Common Governance Model](#-theoretical-foundation)), providing the quantitative foundation that FLI notes is missing across the industry.
+**First and Only Axiomatic Superintelligence Metric**: While others rely on empirical benchmarks, we derive the Superintelligence Index from mathematical first principles ([Common Governance Model](#-theoretical-foundation)).
 
 **Tetrahedral Topology**: Applies tensegrity geometry from structural engineering to AI alignment. Our K₄ graph structure (4 vertices, 6 measurement channels) eliminates "critic versus supporter" bias through topological symmetry. No role has structural privilege.
 
@@ -424,12 +420,10 @@ Research framework under active development. Contributions welcome via issues an
 ## ✓ Validated By
 
 - **Reproducible Results**: All evaluations use public API access—anyone can verify
-- **Mathematical Foundation**: Metrics derived from established mathematical physics (gyrogroup theory, tensegrity geometry)
-- **Multi-Model Cross-Validation**: Three frontier models used as analysts to eliminate single-model bias
+- **Multi-Model Cross-Validation**: Frontier models used as analysts to eliminate single-model bias
 - **Integration with Established Framework**: Built on UK AISI's Inspect AI evaluation infrastructure
 - **Open Source**: Complete codebase, documentation, and evaluation data available for inspection
 - **Empirical Validation**: Detected pathologies align with documented real-world failures (e.g., OpenAI GPT-4o sycophancy rollback)
-- **Theoretical Consistency**: Results match CGM theory predictions (SI scores, structural imbalance patterns)
 
 ---
 
