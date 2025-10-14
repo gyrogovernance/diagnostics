@@ -1,5 +1,6 @@
 # AI Safety Diagnostics
 > **Gyroscopic Alignment Evaluation Lab**
+
 > **The First Quantitative AI Alignment Metrics Framework**  
 > **Independent Testing Without Special Access**
 
