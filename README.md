@@ -403,16 +403,6 @@ gyrodiagnostics/
 
 ---
 
-## ❓ Frequently Asked Questions
-
-See our [comprehensive FAQ](docs/FAQ.md) covering:
-- How this differs from HELM, TrustLLM, and other benchmarks
-- Why mathematical grounding matters for AI safety
-- How to interpret SI and AR metrics
-- Integration with existing safety frameworks
-
----
-
 ## Contributing
 
 Research framework under active development. Contributions welcome via issues and pull requests.
