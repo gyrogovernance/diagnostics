@@ -75,6 +75,10 @@ Key advantages:
 
 ---
 
+> Note for Advanced AI Safety Scientists: For a full understanding of the methodology and our theoretical foundations, don't forget to read our [General Specifications & Measurement Theory](#-theoretical-foundation).
+
+---
+
 ## 🦉 Capabilities & Contributions
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
