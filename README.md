@@ -30,7 +30,7 @@
 
 **A Mathematical Physics-Informed Framework for AI Alignment Evaluation**
 
-*Detecting hallucination, sycophancy, and reasoning failures through structural assessment*
+*A New Paradigm for AI Evaluation, detecting hallucination, sycophancy, and reasoning failures through structural assessment*
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
 
@@ -69,7 +69,7 @@ The framework quantifies whether high benchmark scores reflect genuine capabilit
 
 Beyond safety diagnostics, the framework generates valuable research contributions through two distinct outputs:
 
-**Dataset Contribution (All 5 Challenges)**: Complete evaluation datasets from all challenges (Formal, Normative, Procedural, Strategic, Epistemic) are donated to the AI research community for training and finetuning, including multi-turn reasoning transcripts, 20-metric evaluations, pathology annotations, and structural health indicators.
+**Dataset Contribution (All 5 Challenges)**: Complete evaluation datasets from all challenges (Formal, Normative, Procedural, Strategic, Epistemic) are donated to the AI research community for training and finetuning. To avoid training "poisoning" from incorrect model behaviors, our datasets intentionally exclude full transcripts. Instead, they provide analyst-curated content including: detailed reasoning pathway analysis, pathology annotations identifying failure modes, 20-metric structural evaluations, and precise examples of high-quality reasoning patterns. This curation ensures training signal focuses on structural coherence rather than surface-level pattern matching. 
 
 ![Gyroscope: Human-Aligned Superintelligence](/assets/aie_reports.png)
 
