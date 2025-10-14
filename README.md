@@ -187,9 +187,6 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 |--------------|-------------|
 | Run an evaluation now | [Quick Start Guide](#quick-start) |
 | Understand the metrics | [Key Metrics Explained](#key-metrics-explained) |
-| See example results | [Model Evaluation Reports](#model-evaluation-reports) |
-| Read the theory | [Theoretical Foundation](#theoretical-foundation) |
-| Get help | [GitHub Issues](https://github.com/gyrogovernance/diagnostics/issues) |
 
 ---
 
