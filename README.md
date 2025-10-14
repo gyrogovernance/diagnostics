@@ -20,6 +20,7 @@
 <div align="center">
 
 [![Framework Version](https://img.shields.io/badge/Framework-v1.0-green?style=for-the-badge)](https://github.com/gyrogovernance/diagnostics/releases)
+[![Download Showcase](https://img.shields.io/badge/Download-Evaluation%20Data-purple?style=for-the-badge&logo=github)](https://github.com/gyrogovernance/diagnostics/releases/tag/v1.0-showcase)
 [![Inspect AI](https://img.shields.io/badge/UK%20AISI-Inspect%20AI-red?style=for-the-badge)](https://inspect.aisi.org.uk/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
@@ -139,6 +140,8 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 
 ### 📁 Model Evaluation Reports
 
+**[⬇️ Download Complete Showcase Package](https://github.com/gyrogovernance/diagnostics/releases/tag/v1.0-showcase)** - All reports, data, and insights in one zip file
+
 | Model | Full Report | Analysis Data |
 |-------|-------------|---------------|
 | **ChatGPT-5** | [📊 Report](showcase/gpt_5_chat_report.txt) | [📋 Data](showcase/gpt_5_chat_data.json) |
@@ -149,11 +152,11 @@ Formal:      55.4%     53.6%  ⚠️ 40.3%   All struggle, Grok most challenged
 
 Beyond model evaluation, our challenges generate valuable insights on critical topics. These reports synthesize findings across all tested models:
 
-| Topic | Challenge | Report | Key Questions Addressed |
-|-------|-----------|--------|------------------------|
-| **🌍 AI-Empowered Prosperity** | Normative | [📄 Read Report](showcase/insights/aie_prosperity_report.md) | How can human-AI cooperation advance global well-being? What frameworks optimize resource allocation while strengthening stakeholder agency? |
-| **🏥 AI-Empowered Health** | Strategic | [📄 Read Report](showcase/insights/aie_health_report.md) | How will health system regulation evolve globally? How can human-AI cooperation enhance outcomes while ensuring safety and equity? |
-| **🧠 AI-Empowered Alignment** | Epistemic | [📄 Read Report](showcase/insights/aie_alignment_report.md) | What are the fundamental limits of recursive reasoning? What practical mechanisms enable human-AI cooperation within epistemic boundaries? |
+| Topic | Report | Key Questions Addressed |
+|-------|--------|------------------------|
+| **🌍 AI-Empowered Prosperity** | [📄 Read Report](showcase/insights/aie_prosperity_report.md) | How can human-AI cooperation advance global well-being? What frameworks optimize resource allocation while strengthening stakeholder agency? |
+| **🏥 AI-Empowered Health** | [📄 Read Report](showcase/insights/aie_health_report.md) | How will health system regulation evolve globally? How can human-AI cooperation enhance outcomes while ensuring safety and equity? |
+| **🧠 AI-Empowered Alignment** | [📄 Read Report](showcase/insights/aie_alignment_report.md) | What are the fundamental limits of recursive reasoning? What practical mechanisms enable human-AI cooperation within epistemic boundaries? |
 
 *These reports consolidate approaches, trade-offs, and novel strategies extracted from frontier model responses, providing practical insights for policy makers, researchers, and practitioners.*
 
