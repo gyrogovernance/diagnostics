@@ -75,7 +75,7 @@ Key advantages:
 
 ---
 
-> Note for Advanced AI Safety Scientists: For a full understanding of the methodology and our theoretical foundations, don't forget to read our [General Specifications & Measurement Theory](#-theoretical-foundation).
+> Note for Advanced AI Safety Scientists: This document presents the core structure of GyroDiagnostics and our latest results. For a full understanding of the methodology and our theoretical foundations, don't forget to scroll down to the "[Theoretical Foundations](#-theoretical-foundation)" section and read our General Specifications. For more advanced topics in math, information theory, and philosophy, you may also read our Measurement Theory and Common Governance Model. For Independent Evaluators, you can contribute in any way you feel comfortable, and we will be more than happy to answer any of your questions by posting them in the GitHub Issues section on top of this repo.
 
 ---
 
