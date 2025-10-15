@@ -4,7 +4,7 @@
 > **The First Quantitative AI Alignment Metrics Framework**  
 > **Independent Testing Without Special Access**
 
-![Gyroscope: Human-Aligned Superintelligence](/assets/diagnostics_cover.png)
+![GyroDiagnostics](/assets/diagnostics_cover.png)
 
 
 <div align="center">
