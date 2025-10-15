@@ -81,20 +81,18 @@ Key advantages:
 
 <div align="center">
 
-## 🚀 **COMING SOON: AI-Empowered Governance Lab**
+## 🚀 **COMING UP NEXT: AI-Empowered Governance Apps**
 
 **From AI Evaluation → Community Empowerment**
 
-The same framework that evaluated frontier models  
+The same framework that evaluates frontier models  
 now empowers communities to address the UN Sustainable Development Goals
 
 🏥 Health  •  🌍 Climate  •  ⚖️ Justice  •  🏙️ Cities
 
-**Browser Extension MVP** | **Interactive Notebook** | **Public Knowledge Base**
+>**Browser Extension Prototype Ready ✅**
 
-Transform collective intelligence into validated insights with the same 20-metric rigor that assessed GPT-5, Claude, and Grok.
-
-**[📖 Read the Full Vision →](docs/coming_up_next.md)**
+**[Check it out](https://github.com/gyrogovernance/apps)**
 
 </div>
 
@@ -485,4 +483,3 @@ MIT License. See [LICENSE](LICENSE) for details.
   <p><strong>Acknowledgements:</strong><br>
   This project benefited from AI language model services accessed through LMArena, Cursor IDE, OpenAI (ChatGPT), Anthropic (Claude), XAI (Grok), Deepseek, and Google (Gemini).</p>
 </div>
-<meta name="google-site-verification" content="pMPUHwVKnY5GfOyjsdqd3pgT9pVBsMFeJZHGjA77H8w" />
