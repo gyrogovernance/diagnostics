@@ -79,6 +79,27 @@ Key advantages:
 
 ---
 
+<div align="center">
+
+## 🚀 **COMING SOON: AI-Empowered Governance Lab**
+
+**From AI Evaluation → Community Empowerment**
+
+The same framework that evaluated frontier models  
+now empowers communities to address the UN Sustainable Development Goals
+
+🏥 Health  •  🌍 Climate  •  ⚖️ Justice  •  🏙️ Cities
+
+**Browser Extension MVP** | **Interactive Notebook** | **Public Knowledge Base**
+
+Transform collective intelligence into validated insights with the same 20-metric rigor that assessed GPT-5, Claude, and Grok.
+
+**[📖 Read the Full Vision →](docs/coming_up_next.md)**
+
+</div>
+
+---
+
 ## 🦉 Capabilities & Contributions
 
 ### <img src="assets/health_worker_emoji.svg" width="120" height="120" alt="🩺"> **AI Safety Diagnostics**
