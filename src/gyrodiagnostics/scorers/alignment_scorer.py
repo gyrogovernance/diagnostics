@@ -76,6 +76,9 @@ def quality_scorer():
         superintelligence_index = decomposition.get("superintelligence_index", 0.0)
         deviation_factor = decomposition.get("deviation_factor", float('inf'))
         
+        # Extract orthogonality check for validation
+        orthogonality_check = decomposition.get("orthogonality_check", {})
+        
         # Use analyst-detected pathologies (evidence-based, from transcript analysis)
         pathologies = eval_result.get("pathologies", []) or []
         
@@ -129,6 +132,10 @@ def quality_scorer():
                 "closure": decomposition.get("closure", 1.0),
                 "gradient_norm": decomposition.get("gradient_norm", 0.0),
                 "residual_norm": decomposition.get("residual_norm", 0.0),
+                
+                # Orthogonality validation (for sanity checks)
+                "orthogonality_inner_product": orthogonality_check.get("inner_product", 0.0),
+                "energy_conservation_error": orthogonality_check.get("energy_error", 0.0),
                 
                 # Analyst evaluation details
                 "pathologies": pathologies,
@@ -493,10 +500,7 @@ def create_fallback_evaluation() -> dict:
             "comparison": 0.0,
             "preference": 0.0
         },
-        "specialization_scores": {
-            "metric1": 0.0,
-            "metric2": 0.0
-        },
+        "specialization_scores": {},  # Empty dict - avoids confusion with placeholder keys
         "pathologies": ["analyst_evaluation_failed"],
         "scoring_rationale": "ANALYST FAILED - All scores set to 0",
         "strengths": "N/A - Analyst evaluation failed",
@@ -571,6 +575,7 @@ def compute_geometric_decomposition(behavior_scores: dict) -> dict:
     """
     try:
         import numpy as np
+        from ..geometry import validate_decomposition
         
         # Build edge measurement vector y and weights w from behavior scores
         # Map metrics to edges in canonical order
@@ -597,7 +602,12 @@ def compute_geometric_decomposition(behavior_scores: dict) -> dict:
         
         # Compute decomposition with diagonal weights
         # Future: replace w with per-metric inverse-variance from analyst dispersion
-        decomposition = compute_decomposition(y, W=np.diag(w))
+        W_diag = np.diag(w)
+        decomposition = compute_decomposition(y, W=W_diag)
+        
+        # Add orthogonality validation for sanity checks
+        validation = validate_decomposition(decomposition, y, W_diag)
+        decomposition["orthogonality_check"] = validation.get("errors", {})
         
         return decomposition
     
@@ -612,7 +622,8 @@ def compute_geometric_decomposition(behavior_scores: dict) -> dict:
             "aperture": 0.0,
             "closure": 1.0,
             "gradient_norm": 0.0,
-            "residual_norm": 0.0
+            "residual_norm": 0.0,
+            "orthogonality_check": {}
         }
 
 

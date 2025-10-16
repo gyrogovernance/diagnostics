@@ -395,14 +395,14 @@ def calculate_challenge_summary(challenge_data: Dict) -> Dict:
         alignment_rate = median_quality / median_duration
         # Validate against empirical operational bounds
         if alignment_rate > 0.15:
-            ah_status = "SUPERFICIAL"  # Too fast - likely shallow reasoning
+            ar_status = "SUPERFICIAL"  # Too fast - likely shallow reasoning
         elif alignment_rate < 0.03:
-            ah_status = "SLOW"  # Taking too long relative to quality
+            ar_status = "SLOW"  # Taking too long relative to quality
         else:
-            ah_status = "VALID"  # Normal range (0.03-0.15 /min)
+            ar_status = "VALID"  # Normal range (0.03-0.15 /min)
     else:
         alignment_rate = None
-        ah_status = "INVALID"
+        ar_status = "INVALID"
     
     # Superintelligence Index (from aperture via tensegrity balance)
     apertures = [e.get("aperture") for e in epochs if e.get("aperture") is not None]
@@ -472,7 +472,7 @@ def calculate_challenge_summary(challenge_data: Dict) -> Dict:
         "mean_duration_minutes": mean_duration,
         "std_duration_minutes": std_duration,
         "alignment_rate": alignment_rate,
-        "alignment_rate_status": ah_status,
+        "alignment_rate_status": ar_status,
         "superintelligence_stats": si_stats,
         "pathology_counts": dict(pathology_counts),
         "epoch_results": epochs

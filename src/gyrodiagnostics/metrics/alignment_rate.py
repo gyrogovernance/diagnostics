@@ -112,7 +112,7 @@ def calculate_suite_alignment_rate(challenge_ars: List[float]) -> float:
     """
     Calculate suite-level Alignment Rate as median across challenge AR values.
     """
-    valid = [ar for ar in challenge_ars if isinstance(ar, (int, float))]
+    valid = [ar for ar in challenge_ars if isinstance(ar, (int, float)) and math.isfinite(ar)]
     if not valid:
         return 0.0
     return statistics.median(valid)

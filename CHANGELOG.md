@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2025-10-16
+
+### 🔧 **Reference Implementation Hardening**
+
+#### **Fixed**
+- **APERTURE_TARGET constant consolidation**: Removed duplication between `superintelligence_index.py` and `constants.py`; now imported from single source of truth in `constants.py` to prevent drift
+- **Suite-level AR robustness**: Added `math.isfinite()` filter to `calculate_suite_alignment_rate()` to prevent NaN/Inf propagation when aggregating challenge-level Alignment Rates
+- **Fallback evaluation schema**: Changed `specialization_scores` from placeholder keys (`"metric1"`, `"metric2"`) to empty dict `{}` in `create_fallback_evaluation()` to avoid confusion in downstream reporting
+- **Variable naming consistency**: Renamed `ah_status` → `ar_status` in `analog_analyzer.py` for clarity (Alignment Rate status, not "ah" status)
+
+#### **Enhanced**
+- **Orthogonality validation**: Added W-orthogonality checks to scorer metadata via `validate_decomposition()` 
+  - Exposes `orthogonality_inner_product` and `energy_conservation_error` in score metadata
+  - Enables quick sanity checks in reports for <g,r>_W ≈ 0 invariant
+- **Geometric decomposition**: Enhanced `compute_geometric_decomposition()` to include validation errors in returned dict
+  - Automatic validation of reconstruction and energy conservation properties
+  - Defensive error handling with detailed fallback values
+
+#### **Added**
+- **Comprehensive test harness**: Created `tests/test_geometry_properties.py` as standalone Python script (no pytest required) with 23 tests covering mathematical invariants:
+  - **Orthogonality tests** (3): W-orthogonality of gradient and residual projections with identity and diagonal weights
+  - **Energy conservation tests** (3): `||y||²_W = ||g||²_W + ||r||²_W` and aperture + closure = 1.0
+  - **Reconstruction tests** (2): Exact reconstruction `y = g + r` for weighted and unweighted cases
+  - **Scale invariance tests** (3): Aperture and SI invariant under `y → c·y` and `W → c·W`; gauge determinism
+  - **SI symmetry tests** (3): Validates `SI(A) ≈ SI(A*²/A)` around target and monotonicity properties
+  - **AR boundary tests** (4): Categorization thresholds at 0.03/min (SLOW) and 0.15/min (SUPERFICIAL), formula validation
+  - **Gauge fixing tests** (2): Verifies `x[0] = 0` constraint and 3 free parameters
+  - **Edge case tests** (3): Uniform measurements, zero weights, extreme values
+- **Test documentation**: Created `tests/README.md` with mathematical background, running instructions, and property interpretations
+
+#### **Verification**
+All fixes validated against:
+- `docs/theory/Measurement.md` - Tensegrity decomposition mathematics (§3.2 gauge-fixed normal equations, §6.1 weight calibration)
+- `docs/GyroDiagnostics_General_Specs.md` - Canonical mapping and metric definitions
+- Cross-module consistency checks (scorer, geometry, metrics, analog analyzer)
+
+#### **Notes**
+These changes tighten the reference implementation for reuse while maintaining backward compatibility. All existing evaluation data remains valid. The test harness provides ongoing verification of mathematical properties across refactoring.
+
+**Reference Implementation Status**: All 23 property tests pass. Math and plumbing validated against theory docs. Ready for Apps build baseline.
+
+### 🛠️ **Analyzer Hardening**
+
+Enhanced `tools/analyzer.py` for full consistency with core modules:
+
+**Improved:**
+- **Central AR validator**: Uses `validate_alignment_rate()` to keep thresholds in sync with YAML config
+- **Reduction selection**: Picks correct reduction containing `quality_scorer` samples instead of blindly using first
+- **Rescoring completeness**: Recomputes aperture/SI from behavior scores after rescoring for accurate SI statistics
+- **SI statistics**: Triggers when apertures exist (not only when SI indices present), computes from median aperture
+- **Zero-epoch filtering**: Drops epochs with `quality_index == 0.0` (catches fallback epochs that have `closure == 1.0`)
+- **Numeric string handling**: Robust float conversion in metric totals with try/except (handles numeric strings)
+- **Timestamp parsing**: Supports both numeric (seconds) and ISO-8601 string timestamps in turn metadata
+- **Suite-level AR**: Filters non-finite values when computing medians (prevents NaN/Inf propagation)
+
+---
+
 ## [1.0] - 2025-10-12
 
 ### 🎯 **Major Milestone: Production-Ready AI Safety Diagnostics Framework**

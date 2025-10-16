@@ -15,12 +15,7 @@ See: https://github.com/gyrogovernance/science
 
 import math
 from typing import Tuple
-
-# CGM theoretical target from Balance Universal stage
-# Derived from the relationship between BU amplitude (m_p) and BU monodromy (δ_BU):
-# APERTURE_TARGET = 1 - (δ_BU / m_p) ≈ 0.0207
-# See: https://github.com/gyrogovernance/science for full CGM derivation
-APERTURE_TARGET = 0.020701
+from ..utils.constants import APERTURE_TARGET
 
 
 def calculate_superintelligence_index(aperture: float) -> Tuple[float, float]:
