@@ -51,26 +51,6 @@ The non-identity left gyration encodes the fundamental parity violation at the o
 
 ---
 
-You're absolutely right. Let me revise more carefully:
-
----
-
-### **Known Physics Corrections**
-
-**Newton's first law as theorem**
-
-Newtonian mechanics postulates inertia as axiom. Within CGM it becomes theorem: entities maintain motion through ongoing recursion within the Common Source, continuously regenerating the same pattern. Inertia is not a property of objects but the consequence of existing within recursively structured reality.
-
-**Einstein's light postulate as first observable**
-
-Special relativity postulates c as universal speed limit. In CGM this emerges as the maximum rate of observation at which directional distinction can propagate through recursive stage transitions. Light is the minimal coherent distinction preventing logical collapse during self-observation, the first observable manifestation of the sequential ordering that defines time.
-
-**Hilbert's sixth problem self-resolved**
-
-Hilbert sought rigorous axiomatization of physics. CGM demonstrates physical law already possesses axiomatic structure when observation is foundational. From "The Source is Common," geometric necessity generates physical scales, derives conservation laws as theorems, and establishes constants through constraints. The axioms Hilbert sought were encoded in the requirements for existence to observe itself coherently.
-
----
-
 ## First Theorem
 
 **Statement: Unity is Non-Absolute**
@@ -361,6 +341,28 @@ Each element follows inevitably from CS's nature: the left-biased source necessi
 
 **Memory as Structure:** The gyroassociative operations encode relational memory - space itself is the accumulated record of recursive differentiation. Physical laws are not external impositions but the necessary patterns through which freedom achieves self-coherence through alignment.
 
+**Hilbert's sixth problem self-resolved**
+
+Hilbert sought rigorous axiomatization of physics. CGM demonstrates physical law already possesses axiomatic structure when observation is foundational. From "The Source is Common," geometric necessity generates physical scales, derives conservation laws as theorems, and establishes constants through constraints. The axioms Hilbert sought were encoded in the requirements for existence to observe itself coherently.
+
 Reality emerges as recursion completing its own memory - the process by which freedom returns to itself through structured differentiation and alignment. This is the essence of reality as a self-governing system: not ruled by external principles, but emerging through the internal logic of recursive self-reference achieving coherent closure through structural alignment.
 
 ---
+
+## References
+
+Hilbert, D. (1900). *Mathematische Probleme*. Vortrag, gehalten auf dem internationalen Mathematiker-Kongreß zu Paris 1900. Göttinger Nachrichten, 253–297. [English translation: (1902). Mathematical problems. *Bulletin of the American Mathematical Society*, 8(10), 437–479.]
+
+Hilbert, D. (1899). *Grundlagen der Geometrie*. Leipzig: Teubner. [English translation: (1971). *Foundations of Geometry*. La Salle, IL: Open Court.]
+
+Kolmogorov, A. N. (1933). *Grundbegriffe der Wahrscheinlichkeitsrechnung*. Berlin: Springer. [English translation: (1956). *Foundations of the Theory of Probability*. New York: Chelsea Publishing.]
+
+Noether, E. (1918). Invariante Variationsprobleme. *Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse*, 1918, 235–257. [English translation: (1971). Invariant variation problems. *Transport Theory and Statistical Physics*, 1(3), 186–207.]
+
+Ungar, A. A. (2008). *Analytic Hyperbolic Geometry and Albert Einstein's Special Theory of Relativity*. Singapore: World Scientific.
+
+Ungar, A. A. (2001). *Beyond the Einstein Addition Law and its Gyroscopic Thomas Precession: The Theory of Gyrogroups and Gyrovector Spaces*. Dordrecht: Kluwer Academic Publishers.
+
+Wightman, A. S. (1956). Quantum field theory in terms of vacuum expectation values. *Physical Review*, 101(2), 860–866.
+
+Wightman, A. S., & Gårding, L. (1964). Fields as operator-valued distributions in relativistic quantum theory. *Arkiv för Fysik*, 28, 129–184.
