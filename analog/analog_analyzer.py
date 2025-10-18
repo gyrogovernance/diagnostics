@@ -68,21 +68,61 @@ except Exception as e:
     TENSEGRITY_AVAILABLE = False
 
 
-def parse_timing_notes(notes_file: Path) -> Dict[str, float]:
+def parse_timing_notes(notes_file: Path) -> Tuple[Dict[str, float], Dict]:
     """
-    Parse timing notes file and return duration in minutes.
+    Parse timing notes file and return duration in minutes plus metadata.
     
     Format: 1_1: 3:10 → challenge 1, epoch 1, 3 minutes 10 seconds
     
     Returns:
-        Dict mapping "challenge_epoch" → duration_minutes
+        Tuple of (timings_dict, metadata_dict)
+        - timings: Dict mapping "challenge_epoch" → duration_minutes
+        - metadata: Dict with model_tested, model_version, evaluation_date, analyst_models, synthesist_notes
     """
     timings = {}
+    metadata = {}
     
-    with open(notes_file, 'r', encoding='utf-8') as f:
+    with open(notes_file, 'r', encoding='utf-8-sig') as f:  # utf-8-sig removes BOM
         content = f.read()
     
-    # Match patterns like "1_1: 3:10"
+    # Parse YAML frontmatter (handle BOM and flexible whitespace)
+    yaml_pattern = r'^\s*---\s*\n(.*?)\n---'
+    yaml_match = re.search(yaml_pattern, content, re.MULTILINE | re.DOTALL)
+    
+    if yaml_match:
+        yaml_content = yaml_match.group(1)
+        
+        # Parse YAML manually (simple key-value and list parsing)
+        current_key = None
+        list_items = []
+        
+        for line in yaml_content.split('\n'):
+            line = line.rstrip()
+            
+            # List item
+            if line.strip().startswith('- '):
+                item = line.strip()[2:].strip('"\'')
+                list_items.append(item)
+            # Key-value pair
+            elif ':' in line and not line.strip().startswith('-'):
+                if current_key and list_items:
+                    metadata[current_key] = list_items
+                    list_items = []
+                
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip().strip('"\'')
+                current_key = key
+                
+                if value:  # Has value on same line
+                    metadata[key] = value
+                    current_key = None
+        
+        # Handle trailing list
+        if current_key and list_items:
+            metadata[current_key] = list_items
+    
+    # Match patterns like "1_1: 3:10" for timing data
     pattern = r'(\d+)_(\d+):\s*(\d+):(\d+)'
     
     for match in re.finditer(pattern, content):
@@ -91,7 +131,10 @@ def parse_timing_notes(notes_file: Path) -> Dict[str, float]:
         duration_minutes = int(minutes) + int(seconds) / 60.0
         timings[key] = duration_minutes
     
-    return timings
+    # Add timing data to metadata for easy access
+    metadata['timings'] = timings
+    
+    return timings, metadata
 
 
 def parse_scores_file(scores_file: Path) -> List[Dict]:
@@ -288,7 +331,7 @@ def compute_tensegrity_decomposition(behavior_scores: Dict) -> Dict:
         return {}
 
 
-def process_results_directory(results_dir: Path, notes_file: Path) -> Dict:
+def process_results_directory(results_dir: Path, notes_file: Path) -> Tuple[Dict, Dict]:
     """
     Process all manual results from a directory.
     
@@ -297,10 +340,10 @@ def process_results_directory(results_dir: Path, notes_file: Path) -> Dict:
         notes_file: Path to timing notes file
     
     Returns:
-        Complete analysis data structure
+        Tuple of (challenges_data, metadata)
     """
-    # Parse timing notes
-    timings = parse_timing_notes(notes_file)
+    # Parse timing notes and metadata
+    timings, metadata = parse_timing_notes(notes_file)
     
     # Find all score files
     scores_dir = results_dir / "scores"
@@ -369,7 +412,7 @@ def process_results_directory(results_dir: Path, notes_file: Path) -> Dict:
         
         challenges_data[challenge_type]["epochs"].append(epoch_data)
     
-    return challenges_data
+    return challenges_data, metadata
 
 
 def calculate_challenge_summary(challenge_data: Dict) -> Dict:
@@ -479,7 +522,7 @@ def calculate_challenge_summary(challenge_data: Dict) -> Dict:
     }
 
 
-def generate_text_report(challenges: Dict, output_file: Path):
+def generate_text_report(challenges: Dict, metadata: Dict, output_file: Path):
     """Generate human-readable text report."""
     
     with open(output_file, 'w', encoding='utf-8') as f:
@@ -491,9 +534,49 @@ def generate_text_report(challenges: Dict, output_file: Path):
         p("Mathematical Physics-Informed AI Alignment Evaluation")
         p("="*70)
         p()
-        p(f"Evaluation Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        
+        # Display evaluation metadata
+        p("EVALUATION METADATA")
+        p("-"*70)
+        if metadata.get('model_tested'):
+            p(f"Model Tested:      {metadata['model_tested']}")
+        if metadata.get('model_version'):
+            p(f"Model Version:     {metadata['model_version']}")
+        if metadata.get('evaluation_date'):
+            p(f"Evaluation Date:   {metadata['evaluation_date']}")
+        else:
+            p(f"Report Generated:  {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        
+        if metadata.get('analyst_models'):
+            analyst_list = metadata['analyst_models']
+            if isinstance(analyst_list, list):
+                p(f"Analyst Models:    {', '.join(analyst_list)}")
+            else:
+                p(f"Analyst Models:    {analyst_list}")
+        
+        if metadata.get('synthesist_notes'):
+            p(f"Notes:             {metadata['synthesist_notes']}")
+        
         p(f"Challenges Analyzed: {len(challenges)}")
         p()
+        
+        # Display timing data
+        if metadata.get('timings'):
+            timings = metadata['timings']
+            p("TIMING DATA (Per Epoch)")
+            p("-"*70)
+            for challenge_num in ["1", "2", "3", "4", "5"]:
+                challenge_name = CHALLENGE_MAP.get(challenge_num, f"Challenge {challenge_num}")
+                challenge_timings = [(key, val) for key, val in timings.items() if key.startswith(f"{challenge_num}_")]
+                if challenge_timings:
+                    epoch_times = []
+                    for key, duration in sorted(challenge_timings):
+                        epoch_num = key.split('_')[1]
+                        minutes = int(duration)
+                        seconds = int((duration - minutes) * 60)
+                        epoch_times.append(f"Epoch {epoch_num}: {minutes}:{seconds:02d}")
+                    p(f"{challenge_name.capitalize():12s}  {' | '.join(epoch_times)}")
+            p()
         
         # Per-challenge summaries
         for challenge_type in ["formal", "normative", "procedural", "strategic", "epistemic"]:
@@ -652,10 +735,14 @@ def generate_text_report(challenges: Dict, output_file: Path):
         p("="*70)
 
 
-def generate_json_data(challenges: Dict, output_file: Path):
+def generate_json_data(challenges: Dict, metadata: Dict, output_file: Path):
     """Generate structured JSON analysis file."""
+    output_data = {
+        "metadata": metadata,
+        "challenges": challenges
+    }
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(challenges, f, indent=2)
+        json.dump(output_data, f, indent=2)
 
 
 def main():
@@ -727,7 +814,44 @@ def main():
     print()
     
     # Process results
-    challenges_data = process_results_directory(results_dir, notes_file)
+    challenges_data, metadata = process_results_directory(results_dir, notes_file)
+    
+    # Validate metadata consistency
+    if metadata.get('model_tested'):
+        expected_folder = metadata.get('model_version', metadata['model_tested']).lower().replace('-', '_').replace(' ', '_')
+        actual_folder = results_dir.name.lower()
+        if expected_folder not in actual_folder and actual_folder not in expected_folder:
+            print(f"WARNING: Folder name '{results_dir.name}' may not match model_tested '{metadata['model_tested']}'")
+            print()
+    
+    # Display parsed metadata
+    if metadata:
+        print("Evaluation Metadata:")
+        if metadata.get('model_tested'):
+            print(f"  Model Tested: {metadata['model_tested']}")
+        if metadata.get('model_version'):
+            print(f"  Model Version: {metadata['model_version']}")
+        if metadata.get('analyst_models'):
+            analysts = metadata['analyst_models']
+            if isinstance(analysts, list):
+                print(f"  Analyst Models: {', '.join(analysts)}")
+        print()
+    
+    # Display timing data summary
+    if metadata.get('timings'):
+        print("Timing Data Summary:")
+        timings = metadata['timings']
+        for challenge_num in ["1", "2", "3", "4", "5"]:
+            challenge_name = CHALLENGE_MAP.get(challenge_num, f"Challenge {challenge_num}")
+            challenge_timings = [(key, val) for key, val in timings.items() if key.startswith(f"{challenge_num}_")]
+            if challenge_timings:
+                print(f"  {challenge_name.capitalize()}:")
+                for key, duration in sorted(challenge_timings):
+                    epoch_num = key.split('_')[1]
+                    minutes = int(duration)
+                    seconds = int((duration - minutes) * 60)
+                    print(f"    Epoch {epoch_num}: {minutes}:{seconds:02d} ({duration:.2f} min)")
+        print()
     
     # Calculate summaries
     challenges_summary = {}
@@ -740,11 +864,11 @@ def main():
     print("Generating reports...")
     
     report_file = output_dir / "analysis_report.txt"
-    generate_text_report(challenges_summary, report_file)
+    generate_text_report(challenges_summary, metadata, report_file)
     print(f"[OK] Text report: {report_file}")
     
     data_file = output_dir / "analysis_data.json"
-    generate_json_data(challenges_summary, data_file)
+    generate_json_data(challenges_summary, metadata, data_file)
     print(f"[OK] JSON data: {data_file}")
     
     print()

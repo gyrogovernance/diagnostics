@@ -4,7 +4,7 @@
 
 **A Mathematical Physics-Informed Evaluation Suite for AI Model Quality and Alignment**
 
-This diagnostic framework evaluates AI model behavior through principles derived from recursive systems theory and topological analysis of information processing. Grounded in the Common Governance Model (CGM), a mathematical framework that derives emergent structure from a single axiom through gyrogroup theory, the suite assesses intelligence quality as structural coherence while detecting reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual memory degradation.
+This diagnostic framework evaluates AI model behavior through principles derived from recursive systems theory and topological analysis of information processing. Grounded in the Common Governance Model (CGM), a Hilbert-style formal deductive system for fundamental physics and information science, the suite assesses intelligence quality as structural coherence while detecting reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual memory degradation.
 
 The evaluation methodology reflects a core principle: alignment emerges from structural balance in information processing. When a system maintains proper equilibrium between systematic organization (closure) and adaptive flexibility (openness), it exhibits properties associated with reliable, contextually appropriate behavior. These structural characteristics provide measurable foundations for alignment assessment.
 
@@ -29,7 +29,9 @@ Standard protocols address practical necessities of deployment; we address mathe
 
 ## Theoretical Foundation: Common Governance Model (CGM)
 
-CGM is an axiomatic framework built on gyrogroup theory and non-associative algebraic structures. From the single axiom "The Source is Common," CGM derives how coherent structure emerges through recursive operations in topological spaces. The model demonstrates that intelligence requires specific balance relationships between closure and openness, not as empirically observed patterns, but as mathematically necessary outcomes of recursive composition.
+The Common Governance Model (CGM) is a Hilbert-style formal deductive system for fundamental physics and information science. As an axiomatic model, CGM begins with a single foundational axiom ("The Source is Common"), derives all subsequent logic through syntactic rules of inference (recursive stage transitions formalized by gyrogroup operations), and interprets the resulting theorems semantically in physical geometry, yielding empirically testable predictions.
+
+A Hilbert system is a type of formal proof defined as a deductive logic that generates theorems from axioms, typically with modus ponens as the core inference rule (Propositional logic: It can be summarized as "P implies Q. P is true. Therefore, Q must also be true."). By analogy with linguistic typology, which assigns grammatical roles to participants in events, CGM's typological structure describes the morphosyntactic alignment of physical reality, where geometric and logical necessity assign topological roles (e.g., symmetries and derivations in space) and relational roles (for example cause and effect), and it extends the same framework to semantic alignment for policy systems. Both applications derive from the same formal deductive system: the recursive stage transitions that generate physical laws also generate consensus frameworks. In CGM, the object domain of inference is physical reality itself, and different alignment systems in communication (nominative–accusative, ergative–absolutive) preserve the coherence of these role assignments through formal necessity.
 
 CGM establishes four stages of structural emergence (for full details, see `docs/theory/CommonGovernanceModel.md`):
 
@@ -40,7 +42,7 @@ CGM establishes four stages of structural emergence (for full details, see `docs
 
 Systems maintaining proper structural relationships across these stages exhibit greater stability, sustained contextual awareness, and resistance to pathological behaviors.
 
-**Application to AI Alignment**: GyroDiagnostics does not measure CGM stages directly. Instead, it applies CGM's balance geometry to information topology. The K₄ tetrahedral structure enables orthogonal decomposition, with raw aperture targeting A* ≈ 0.02070 from CGM's Balance Universal stage. This represents optimal tensegrity: 97.93% closure (structural stability) + 2.07% aperture (adaptive capacity). The aperture is normalized to Superintelligence Index (SI) measuring proximity to BU.
+**Application to AI Alignment**: GyroDiagnostics applies CGM's formal deductive system to AI evaluation by mapping reasoning patterns to geometric structure. The K₄ tetrahedral topology emerges from CGM's recursive stage transitions: 4 vertices correspond to the four stages (CS, UNA, ONA, BU), while 6 edges represent the relationships between them. This enables orthogonal decomposition into gradient (global coherence) and residual (local variation) components, with raw aperture targeting A* ≈ 0.02070 from CGM's Balance Universal stage. This represents optimal tensegrity: 97.93% closure (structural stability) + 2.07% aperture (adaptive capacity). The aperture is normalized to Superintelligence Index (SI) measuring proximity to BU, quantifying how closely AI reasoning follows the same formal logic that generates physical structure.
 
 ## Core Architecture
 

@@ -1213,10 +1213,66 @@ def main():
     if args.json:
         json_path = Path(args.json)
         json_path.parent.mkdir(parents=True, exist_ok=True)
-        # Build a JSON-serializable copy
-        serializable = []
+        
+        # Extract metadata from results
+        metadata = {}
+        if results:
+            first_result = results[0]
+            
+            # Model tested
+            model_tested = first_result.get('model', 'unknown')
+            metadata['model_tested'] = model_tested
+            metadata['model_version'] = model_tested  # In Inspect AI, these are typically the same
+            
+            # Analyst models (collect all unique analyst models)
+            analyst_models = set()
+            for r in results:
+                analyst = r.get('analyst_model', 'unknown')
+                if analyst and analyst != 'unknown':
+                    analyst_models.add(analyst)
+            metadata['analyst_models'] = sorted(list(analyst_models))
+            
+            # Evaluation timestamps
+            started_times = [r.get('started_at') for r in results if r.get('started_at')]
+            completed_times = [r.get('completed_at') for r in results if r.get('completed_at')]
+            if started_times:
+                metadata['evaluation_started'] = min(started_times)
+            if completed_times:
+                metadata['evaluation_completed'] = max(completed_times)
+            
+            # Extract timing data per epoch (challenge_epoch -> duration)
+            timings = {}
+            challenge_num_map = {
+                "formal": "1",
+                "normative": "2",
+                "procedural": "3",
+                "strategic": "4",
+                "epistemic": "5"
+            }
+            for r in results:
+                challenge_type = r.get('challenge_type', 'unknown')
+                challenge_num = challenge_num_map.get(challenge_type, '0')
+                for idx, epoch in enumerate(r.get('epoch_results', []), 1):
+                    duration = epoch.get('duration_minutes', 0)
+                    if duration > 0:
+                        key = f"{challenge_num}_{idx}"
+                        timings[key] = duration
+            metadata['timings'] = timings
+            
+            # Source info
+            if args.eval_dir:
+                metadata['source'] = 'inspect_ai_eval_files'
+                metadata['eval_dir'] = str(args.eval_dir)
+            elif args.log_file:
+                metadata['source'] = 'inspect_ai_logs_json'
+                metadata['log_file'] = str(args.log_file)
+        
+        # Convert results list to challenges dict (keyed by challenge_type)
+        challenges = {}
         for r in results:
             r_copy = dict(r)
+            challenge_type = r_copy.get('challenge_type', 'unknown')
+            
             # Sanitize epoch transcripts
             epochs = []
             for ep in r_copy.get('epoch_results', []):
@@ -1225,6 +1281,7 @@ def main():
                     ep_copy['transcript'] = f"<{len(ep_copy['transcript'])} chars>"
                 epochs.append(ep_copy)
             r_copy['epoch_results'] = epochs
+            
             # Sanitize model_usage (objects -> dict)
             mu = r_copy.get('model_usage', {}) or {}
             mu_serial = {}
@@ -1244,9 +1301,35 @@ def main():
                         # Fallback string representation
                         mu_serial[k] = str(v)
             r_copy['model_usage'] = mu_serial
-            serializable.append(r_copy)
+            
+            # Rename fields to match analog_analyzer format
+            if 'median_quality' in r_copy:
+                r_copy['median_quality_index'] = r_copy.pop('median_quality')
+            if 'mean_quality' in r_copy:
+                r_copy['mean_quality_index'] = r_copy.pop('mean_quality')
+            if 'std_quality' in r_copy:
+                r_copy['std_quality_index'] = r_copy.pop('std_quality')
+            if 'min_quality' in r_copy:
+                r_copy['min_quality_index'] = r_copy.pop('min_quality')
+            if 'max_quality' in r_copy:
+                r_copy['max_quality_index'] = r_copy.pop('max_quality')
+            
+            # Handle alignment_rate (it's a dict in analyzer.py output)
+            ar = r_copy.get('alignment_rate', {})
+            if isinstance(ar, dict):
+                r_copy['alignment_rate'] = ar.get('alignment_rate')
+                r_copy['alignment_rate_status'] = ar.get('alignment_rate_status', 'UNKNOWN')
+            
+            challenges[challenge_type] = r_copy
+        
+        # Create structured output matching analog_analyzer format
+        output_data = {
+            "metadata": metadata,
+            "challenges": challenges
+        }
+        
         with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(serializable, f, indent=2)
+            json.dump(output_data, f, indent=2)
         print(f"[OK] JSON analysis saved to: {json_path}")
     
     return 0

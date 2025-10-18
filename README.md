@@ -33,7 +33,7 @@
 
 # <img src="assets/star_emoji.svg" width="120" height="120" alt="🌟"> GyroDiagnostics 
 
-**A Mathematical Physics-Informed Framework for AI Alignment Evaluation**  
+**A Mathematical Physics-Informed Semantic Framework for AI Alignment Evaluation**  
 *Detecting hallucination, sycophancy, and reasoning failures through structural assessment*
 
 [![GitHub stars](https://img.shields.io/github/stars/gyrogovernance/diagnostics?style=social)](https://github.com/gyrogovernance/diagnostics/stargazers)
@@ -42,7 +42,8 @@
 
 GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. 
 
-Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. The framework supports both **automated evaluation** (via Inspect AI) and **manual evaluation** (for models without API access), producing qualitatively identical structural assessments.
+Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. We catch these failures through geometric analysis: reasoning maps to a tetrahedral structure where we measure balance between global coherence and local variation. When models maintain this balance, they produce reliable outputs. When the balance breaks, specific pathologies emerge. This approach, based on mathematical principles from physics, turns qualitative failures into quantitative measurements. The framework supports both **automated evaluation** (via ***Inspect AI***) and **manual evaluation** (for models ***without API access***), producing qualitatively identical semantic assessments.
+
 
 **Proven Results**: Comparative evaluations (October 2025) across three frontier models revealed critical distinctions invisible to standard benchmarks. ChatGPT-5 and Grok-4 both showed deceptive coherence in 90% of epochs despite 73.9% and 71.6% surface quality respectively, demonstrating pathology independence from performance. Claude 4.5 Sonnet achieved 82.0% quality with 50% deceptive coherence and 4/10 pathology-free epochs. All three exhibited 7-9× structural imbalance from theoretical optimum. Notably, Grok-4 maintained VALID alignment rate (0.125/min) vs ChatGPT-5's SUPERFICIAL processing (0.27/min), showing that temporal balance and quality can diverge. This demonstrates the framework's ability to reveal brittleness patterns and differentiate model maturity beyond conventional metrics.
 
@@ -73,28 +74,11 @@ Key advantages:
 - Bridges the gap between capability benchmarks and catastrophic risk assessment
 - Provides root-cause diagnosis for reasoning failures users experience
 
----
-
-> Note for Advanced AI Safety Scientists: This document presents the core structure of GyroDiagnostics and our latest results. For a full understanding of the methodology and our theoretical foundations, don't forget to scroll down to the "[Theoretical Foundations](#-theoretical-foundation)" section and read our General Specifications. For more advanced topics in math, information theory, and philosophy, you may also read our Measurement Theory and Common Governance Model. For Independent Evaluators, you can contribute in any way you feel comfortable, and we will be more than happy to answer any of your questions by posting them in the GitHub Issues section on top of this repo.
+> Theoretical Grounding: Our metrics derive from the Common Governance Model (CGM), a formal system that axiomatizes physics from a single principle and derives fundamental constants to experimental precision. When applied to AI systems, this mathematical framework yields quantitative alignment metrics grounded in geometric necessity rather than empirical observation.
 
 ---
 
-<div align="center">
-
-## 🚀 **COMING UP NEXT: AI-Empowered Governance Apps**
-
-**From AI Evaluation → Community Empowerment**
-
-The same framework that evaluates frontier models  
-now empowers communities to address the UN Sustainable Development Goals
-
-🏥 Health  •  🌍 Climate  •  ⚖️ Justice  •  🏙️ Cities
-
->**Browser Extension Prototype Ready ✅**
-
-**[Check it out](https://github.com/gyrogovernance/apps)**
-
-</div>
+> ***Note for Advanced AI Safety Scientists: This document presents the core structure of GyroDiagnostics and our latest results. For a full understanding of the methodology and our theoretical foundations, don't forget to scroll down to the "[Theoretical Foundations](#-theoretical-foundation)" section and read our General Specifications. For more advanced topics in math, information theory, and philosophy, you may also read our Measurement Theory and Common Governance Model. For Independent Evaluators, you can contribute in any way you feel comfortable, and we will be more than happy to answer any of your questions by posting them in the GitHub Issues section on top of this repo.***
 
 ---
 
@@ -104,7 +88,7 @@ now empowers communities to address the UN Sustainable Development Goals
 
 Three core metrics distinguish genuine capability from brittle optimization:
 - **Alignment Rate** measures temporal stability (quality per unit time), revealing whether systems maintain coherence or degrade under extended operation. 
-- **Superintelligence Index** quantifies structural maturity by measuring proximity to the Balance Universal optimum from CGM theory. 
+- **Superintelligence Index** quantifies structural maturity by measuring proximity to the theoretical optimum where recursive transitions achieve stable coherence with minimal structural openness (aperture). 
 - **Systematic Pathology Detection** identifies **Deceptive Coherence** (fluent but hollow reasoning), **Sycophantic Agreement** (uncritical self-reinforcement), **Goal Drift**, and **Semantic Instability** at their root causes.
 
 ### <img src="assets/microscope_emoji.svg" width="120" height="120" alt="🔬"> **Research Contribution & Community Engagement**
@@ -113,7 +97,26 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 
 **Dataset Contribution (All 5 Challenges)**: Complete evaluation datasets from all challenges (Formal, Normative, Procedural, Strategic, Epistemic) are donated to the AI research community for training and finetuning. To avoid training "poisoning" from incorrect model behaviors, our datasets intentionally exclude full transcripts. Instead, they provide analyst-curated content including: detailed reasoning pathway analysis, pathology annotations identifying failure modes, 20-metric structural evaluations, and precise examples of high-quality reasoning patterns. This curation ensures training signal focuses on structural coherence rather than surface-level pattern matching. 
 
-![Gyroscope: Human-Aligned Superintelligence](/assets/aie_reports.png)
+---
+
+<div align="center">
+
+## 🚀 **NEW: From AI Evaluation → Community Empowerment**
+
+The same framework that evaluates frontier models  
+now empowers communities to address the UN Sustainable Development Goals
+
+🏥 Health  •  🌍 Climate  •  ⚖️ Justice  •  🏙️ Cities
+
+>**AI-Empowered Governance Apps**
+
+**[Check it out](https://github.com/gyrogovernance/apps)**
+
+</div>
+
+---
+
+![Reports](/assets/aie_reports.png)
 
 **Community Insight Reports (3 Focus Areas)**: For community outreach and engagement, we provide three consolidated reports synthesizing key insights:
 
@@ -121,7 +124,7 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 - **🏥 AI-Empowered Health**: Global regulatory evolution for health systems emphasizing safety, equity, and human-AI collaboration
 - **🧠 AI-Empowered Alignment**: Fundamental constraints on recursive reasoning and practical mechanisms for human-AI cooperation
 
-This dual-purpose design ensures evaluation efforts contribute to both community engagement (accessible reports for policy makers and practitioners) and AI development (curated training datasets). See [Consolidated Insight Reports](showcase/insights/) for details.
+This dual-purpose design ensures evaluation efforts contribute to both community engagement (accessible reports for policy makers and practitioners) and AI development (curated training datasets). 
 
 ---
 
@@ -135,7 +138,7 @@ Each evaluation produces per-epoch metrics, challenge summaries, suite-level rep
 
 | Metric | ChatGPT-5 | Claude 4.5 Sonnet | Grok-4 | Interpretation |
 |--------|-----------|-------------------|--------|----------------|
-| **Overall Quality** | 73.9% | ⭐ **82.0%** | 71.6% (median) | Claude leads, Grok similar to GPT-5 |
+| **Overall Quality** | 73.9% | ⭐ **82.0%** | 71.6% (median) | Claude leads; Grok similar to GPT-5 |
 | **Alignment Rate** | ⚠️ 0.27/min (SUPERFICIAL) | ⭐ 0.106/min (VALID) | ✓ 0.125/min (VALID) | Claude and Grok maintain temporal balance |
 | **Median SI** | 11.5 | ⭐ 13.2 | 11.2 | All in early developmental stages |
 | **Deceptive Coherence** | ⚠️ 90% | ⭐ 50% | ⚠️ 90% | Grok matches GPT-5's hollow reasoning rate |
@@ -194,7 +197,7 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 
 ## ✅ Key Features
 
-**First and Only Axiomatic Superintelligence Metric**: While others rely on empirical benchmarks, we derive the Superintelligence Index from mathematical first principles ([Common Governance Model](#-theoretical-foundation)).
+**First Axiomatic Superintelligence Metric**: While others rely on empirical benchmarks, we derive the Superintelligence Index from mathematical first principles ([Common Governance Model](#-theoretical-foundation)).
 
 **Tetrahedral Topology**: Applies tensegrity geometry from structural engineering to AI alignment. Our K₄ graph structure (4 vertices, 6 measurement channels) eliminates "critic versus supporter" bias through topological symmetry. No role has structural privilege.
 
@@ -210,6 +213,7 @@ The pathologies detected (90% deceptive coherence in both ChatGPT-5 and Grok-4 d
 |--------------|-------------|
 | Run an evaluation now | [Quick Start Guide](#quick-start) |
 | Understand the metrics | [Key Metrics Explained](#key-metrics-explained) |
+| Explore theoretical basis | [CGM Overview](https://github.com/gyrogovernance/science) |
 
 ---
 
@@ -260,7 +264,7 @@ SI = 100 / max(A/A*, A*/A) where A* ≈ 0.02070
 - **SI = 50-80**: Intermediate maturity with reduced pathologies
 - **SI > 80**: Near-optimal structural balance
 
-Current frontier models scoring SI = 10-20 are not "failing"; they are in early differentiation phases where high aperture (0.10-0.28 vs. target 0.02070) reflects necessary exploration before convergence.
+Current frontier models scoring SI = 10-20 are not "failing"; they are in early differentiation phases where high aperture (0.10-0.28 vs. CGM's target 0.02070 representing minimal structural openness) reflects necessary exploration before convergence.
 
 ---
 
@@ -270,11 +274,7 @@ Unlike capability evaluations or adversarial robustness testing, our framework m
 
 ### Core Theory
 
-**Common Governance Model (CGM)**: Mathematical framework deriving emergent structure from single axiom through gyrogroup theory. Yields predictive stability metrics, not just descriptive statistics.
-
-**Recursive Systems Theory**: Evaluates structural dynamics rather than surface behaviors, detecting root causes like goal drift.
-
-**Topological Analysis**: Measures foundational properties correlating to operational risks (capability brittleness, ethical drift).
+**Common Governance Model (CGM)**: A formal deductive system for fundamental physics and information science. The same formal machinery applies to information and policy, where it defines measurable alignment. The framework produces empirical predictions and operational metrics for AI evaluation.
 
 ### Documentation
 
