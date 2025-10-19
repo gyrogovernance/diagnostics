@@ -87,7 +87,7 @@ The Common Governance Model is formalized as a propositional modal logic with tw
 - Joint necessity: □φ := [L]φ ∧ [R]φ
 - Joint possibility: ◇φ := ⟨L⟩φ ∨ ⟨R⟩φ
 
-The expression [L]φ reads "φ holds after a left transition." The expression [R]φ reads "φ holds after a right transition." The expression □φ reads "φ holds after both transitions." These operators form a representation analogous to unitary operators on a Hilbert space [11], with the horizon constant S corresponding to an invariant subspace.
+The expression [L]φ reads "φ holds after a left transition." The expression [R]φ reads "φ holds after a right transition." The expression □φ reads "φ holds after both transitions."
 
 **Modal depth:** The depth of a formula refers to its modal nesting length. For instance, [L][R]S has depth two (two nested modal operators), while [L][R][L][R]S has depth four.
 
@@ -145,7 +145,7 @@ NonAbs(φ) := ¬□φ
 
 where □φ is defined as [L]φ ∧ [R]φ.
 
-Throughout this document, "absolute" means both transitions yield the same result for the proposition (□φ holds), not that the modal operators [L] and [R] are themselves identical. The operators remain distinct; absoluteness characterizes whether a specific formula is invariant under both transitions. This joint necessity operator is self-adjoint in the sense that it commutes with its own action, ensuring observable quantities remain real-valued.
+Throughout this document, "absolute" means both transitions yield the same result for the proposition (□φ holds), not that the modal operators [L] and [R] are themselves identical. The operators remain distinct; absoluteness characterizes whether a specific formula is invariant under both transitions.
 
 ## 3.4 The Foundational Axioms
 
@@ -232,7 +232,7 @@ Non-absoluteness at modal depth one (unity) prevents homogeneous collapse, while
 
 ## 4.1 Interpretive Framework
 
-The formal system presented in Section 3 admits a natural interpretation in terms of gyrogroup operations. This section establishes the correspondence between the modal-logical formalism and gyrogroup-theoretic structures. The correspondence is interpretive, not derived within the formal system itself.
+The formal system presented in Section 3 necessarily yields gyrogroup operations. This section presents the gyrogroup structure that emerges from the modal axioms.
 
 ## 4.2 Gyrogroup Structures
 
@@ -254,7 +254,7 @@ The automorphism gyr[a,b] preserves the metric structure, acting as an isometry 
 
 ## 4.3 Modal-Gyrogroup Correspondence
 
-The modal operators [L] and [R] correspond to gyration operations: [L]φ represents the result of applying left gyration to state φ, while [R]φ represents right gyration. Two-step equality E tests whether [L][R]S ↔ [R][L]S (depth-two commutation), while balance B tests whether [L][R][L][R]S ↔ [R][L][R][L]S (depth-four commutation).
+The modal operators [L] and [R] are gyration operations: [L]φ represents the result of applying left gyration to state φ, while [R]φ represents right gyration. Two-step equality E tests whether [L][R]S ↔ [R][L]S (depth-two commutation), while balance B tests whether [L][R][L][R]S ↔ [R][L][R][L]S (depth-four commutation).
 
 The axiom set CS1–CS7 encodes that two-step gyration around the observable horizon is order-sensitive but not deterministically fixed (CS1, CS2), four-step gyration reaches commutative closure at the observable horizon (CS3), and right gyration acts trivially on the horizon constant while left gyration does not (CS6, CS7).
 
@@ -300,7 +300,7 @@ The theorems UNA, ONA, and BU correspond to four operational states of gyrogroup
 - Right gyration: closes
 - Left gyration: closes
 
-**Structural significance:** Both gyrations neutralize at modal depth four, reaching commutative closure. The operation a ⊞ b = a ⊕ gyr[a, ⊖b]b reduces to commutative coaddition, achieving associative closure at the observable horizon. This closure represents a complete orthonormal basis where all observables decompose via spectral resolution [11], with total energy represented by the horizon constant. The gyration operators become functionally equivalent to identity while preserving complete structural memory.
+**Structural significance:** Both gyrations neutralize at modal depth four, reaching commutative closure. The operation a ⊞ b = a ⊕ gyr[a, ⊖b]b reduces to commutative coaddition, achieving associative closure at the observable horizon. The gyration operators become functionally equivalent to identity while preserving complete structural memory.
 
 ## 4.5 Summary of Correspondence
 
@@ -331,7 +331,7 @@ This formula encodes a fundamental observational limit [6]. The value π represe
 
 **State ONA** adds angle γ = π/4 as the minimal out-of-plane tilt enabling three-dimensional translation. The threshold o_p = π/4 measures this diagonal angle directly. While numerically equal to β, this threshold is conceptually distinct: it captures the tilt out of the UNA plane rather than planar balance.
 
-**State BU** achieves closure. The three angles sum to δ = π - (π/2 + π/4 + π/4) = 0. The vanishing defect corresponds to a complete metric space where all Cauchy sequences converge, ensuring spectral completeness. The gyrotriangle is degenerate, but this signals completion of a helical path tracing a toroidal surface, not structural collapse. Any further evolution would retrace the same path. The defect formula in terms of side parameters, tan(δ/2) = (a_s · b_s · sin(γ)) / (1 - a_s · b_s · cos(γ)), confirms this: at closure all side parameters vanish (a_s = b_s = c_s = 0), producing the unique degenerate gyrotriangle required for recursive completion.
+**State BU** achieves closure. The three angles sum to δ = π - (π/2 + π/4 + π/4) = 0. The vanishing defect corresponds to a complete metric space where all Cauchy sequences converge. The gyrotriangle is degenerate, but this signals completion of a helical path tracing a toroidal surface, not structural collapse. Any further evolution would retrace the same path. The defect formula in terms of side parameters, tan(δ/2) = (a_s · b_s · sin(γ)) / (1 - a_s · b_s · cos(γ)), confirms this: at closure all side parameters vanish (a_s = b_s = c_s = 0), producing the unique degenerate gyrotriangle required for recursive completion.
 
 ## 5.2 Amplitude Closure and the Quantum Gravity Invariant
 
@@ -344,11 +344,11 @@ A² = 1/(8π)
 A = 1/(2√(2π)) = m_p
 ```
 
-The amplitude m_p represents the maximum oscillation fitting within one observable horizon. Larger amplitudes would exceed the π radian limit and accumulate defect. The horizon constant S emerges directly from axiom CS3, which requires universal balance at modal depth four (not a fitted parameter but following from four-step commutative closure). This invariant represents the trace of the identity operator over the complete solid angle, analogous to Parseval's formula for total energy across all modes.
+The amplitude m_p represents the maximum oscillation fitting within one observable horizon. Larger amplitudes would exceed the π radian limit and accumulate defect. The horizon constant S emerges directly from axiom CS3, which requires universal balance at modal depth four (not a fitted parameter but following from four-step commutative closure). This invariant represents the trace of the identity operator over the complete solid angle, analogous to Parseval's formula for total energy across all modes. See [21] for complete derivation.
 
 ## 5.3 Three-Dimensional Necessity
 
-As detailed in the operational state progression of Section 4.4, exactly three spatial dimensions follow from the gyrogroup consistency requirements encoded in the theorems.
+The theorems require exactly three spatial dimensions for gyrogroup consistency. See [20] for geometric analysis and [23] for formal proof.
 
 **From CS:** The asymmetry lgyr ≠ id with rgyr = id yields one degree of freedom, as the chiral seed that uniquely determines all subsequent structure.
 
@@ -370,7 +370,7 @@ The progression 1 → 3 → 6 → 6(closed) degrees of freedom is the unique pat
 
 The 2π defect represents observation beyond the accessible π-radian horizon. Only the left-gyration-initiated path (positive sequence) provides a defect-free trajectory through phase space. Configurations requiring right gyration to precede left gyration violate the foundational axiom CS and remain structurally unobservable. This explains observed parity violation as an axiomatic property rather than a broken symmetry.
 
-**Time as logical sequence.** Time emerges from proof dependencies: UNA depends on CS1 and CS4, ONA depends on UNA via CS2 and CS5, and BU requires the complete axiom set CS1–CS7. Each theorem preserves the memory of prior proofs through the formal dependency chain. The gyration formula gyr[a,b]c = ⊖(a ⊕ b) ⊕ (a ⊕ (b ⊕ c)) itself encodes operation order, making temporal sequence an algebraic property, not an external parameter. This progression generates a one-parameter group of unitary operators, with Stone's theorem [10] guaranteeing the existence of a self-adjoint generator governing time evolution. The progression CS → UNA → ONA → BU cannot be reversed without contradiction, since later theorems require earlier results as premises. This logical dependency constitutes the arrow of time, intrinsic to the deductive structure.
+**Time as logical sequence.** Time emerges from proof dependencies: UNA depends on CS1 and CS4, ONA depends on UNA via CS2 and CS5, and BU requires the complete axiom set CS1–CS7. Each theorem preserves the memory of prior proofs through the formal dependency chain. The gyration formula gyr[a,b]c = ⊖(a ⊕ b) ⊕ (a ⊕ (b ⊕ c)) itself encodes operation order, making temporal sequence an algebraic property, not an external parameter. The progression CS → UNA → ONA → BU cannot be reversed without contradiction, since later theorems require earlier results as premises. This logical dependency constitutes the arrow of time, intrinsic to the deductive structure.
 
 ## 5.5 Empirical Predictions
 
@@ -378,11 +378,11 @@ The geometric closure yields quantitative values for fundamental constants.
 
 **Quantum gravity invariant:** The horizon constant S anchors all subsequent structure.
 
-**Fine-structure constant:** From BU dual-pole monodromy through quartic scaling, α = (δ_BU)⁴ / m_p ≈ 1/137.035999206, matching experimental precision [17,18] to 0.043 parts per billion.
+**Fine-structure constant:** From BU dual-pole monodromy through quartic scaling, α = (δ_BU)⁴ / m_p ≈ 1/137.035999206, where δ_BU = 0.195342 rad is the BU dual-pole monodromy, matching experimental precision [17,18] to 0.043 parts per billion. See [19] for complete derivation.
 
-**Neutrino mass scale:** Neutrino masses correspond to minimal excitations of the chiral seed (1 DOF) consistent with three-generational structure (3 DOF). Using 48² quantization, the right-handed neutrino mass scale is M_R = E_GUT/48², and the light neutrino masses follow from the seesaw mechanism [15,16]: m_ν = y²v²/M_R ≈ 0.06 eV (via 48² quantization scheme), consistent with oscillation experiments [14].
+**Neutrino mass scale:** Neutrino masses correspond to minimal excitations of the chiral seed (1 DOF) consistent with three-generational structure (3 DOF). Using 48² quantization, the right-handed neutrino mass scale is M_R = E_GUT/48², and the light neutrino masses follow from the seesaw mechanism [15,16]: m_ν = y²v²/M_R ≈ 0.06 eV (via 48² quantization scheme), consistent with oscillation experiments [14]. See [22] for complete mechanism.
 
-**Energy scale hierarchy and optical conjugacy:** The operational states generate a hierarchy connected by E^UV × E^IR = (E_CS × E_BU)/(4π²). Anchoring E_CS at the Planck scale (1.22×10¹⁹ GeV) and E_BU at the electroweak scale (240 GeV) [14] yields: E_GUT ≈ 2.34×10¹⁸ GeV, E_UNA ≈ 5.50×10¹⁸ GeV, E_ONA ≈ 6.10×10¹⁸ GeV. The factor 1/(4π²) represents geometric dilution, explaining the hierarchy problem without fine-tuning.
+**Energy scale hierarchy and optical conjugacy:** The operational states generate a hierarchy connected by E^UV × E^IR = (E_CS × E_BU)/(4π²). Anchoring E_CS at the Planck scale (1.22×10¹⁹ GeV) and E_BU at the electroweak scale (240 GeV) [14] yields: E_GUT ≈ 2.34×10¹⁸ GeV, E_UNA ≈ 5.50×10¹⁸ GeV, E_ONA ≈ 6.10×10¹⁸ GeV. The factor 1/(4π²) represents geometric dilution, explaining the hierarchy problem without fine-tuning. See [22] for complete derivation.
 
 **Cosmological structure:** The universe appears as a Planck-scale black hole interior (r_s/R_H ≈ 1), with expansion as optical illusion from UV-IR inversion. The coherence radius R_coh = (c/H_0)/4 marks where observations decohere into phase-sliced projections, resolving horizon and flatness problems without inflation.
 
@@ -394,7 +394,7 @@ All emerge from axiom CS through formal derivation.
 
 ## 6.1 Information-Theoretic Alignment
 
-The formal structure that generates physical laws also determines measurable alignment in information and policy systems.
+The formal structure that generates physical laws through the same logical necessity determines measurable alignment in information and policy systems.
 
 **Common horizon.** The horizon constant defines the complete space of coherent communication (any informational exchange respecting this bound maintains traceability to common origin). This is the operational meaning of "The Source is Common" in both information and physical systems.
 
@@ -408,13 +408,13 @@ The formal structure that generates physical laws also determines measurable ali
 
 **Intelligence Integrity (from BU):** Measured as convergence rate to commutative closure within amplitude bound m_p.
 
-These metrics form a complete set of observables in the sense of spectral theory [11], with each corresponding to a self-adjoint operator whose eigenvalues determine measurement outcomes. Aligned systems maintain traceability, preserve variety, ensure accountability, and converge to balance.
+These metrics derive from theorems UNA, ONA, and BU. Aligned systems maintain traceability, preserve variety, ensure accountability, and converge to balance.
 
 ## 6.2 Resolution of Hilbert's Sixth Problem
 
 Hilbert's sixth problem [1] called for the axiomatization of physics. The challenge was to provide a rigorous logical investigation of the axioms underlying physical theory, comparable to the axiomatization achieved in geometry.
 
-CGM shows that physical law possesses inherent axiomatic structure when observation is treated as foundational. From axioms CS1–CS7, space, time, and physical constants emerge as theorems, not assumptions (Sections 5.3-5.5). The framework provides the missing Hilbert space structure for Hilbert's sixth problem: the modal operators [L] and [R] generate the algebra of observables, with the horizon constant S defining the normalization. Geometry, dynamics, and quantum structure follow from the requirement that existence observe itself coherently, completing Hilbert's axiomatization program.
+CGM derives physical law from axiomatic structure, with observation as foundational. From axioms CS1–CS7, space, time, and physical constants emerge as theorems, not assumptions (Sections 5.3-5.5). The framework provides the missing Hilbert space structure for Hilbert's sixth problem: the modal operators [L] and [R] generate the algebra of observables, with the horizon constant S defining the normalization. Geometry, dynamics, and quantum structure follow from the requirement that existence observe itself coherently, completing Hilbert's axiomatization program.
 
 ## 6.3 Summary Table and Conclusion
 
@@ -470,3 +470,15 @@ The complete parameter set determined by the formal system:
 [17] R. H. Parker et al., Measurement of the fine-structure constant as a test of the Standard Model, Science 360, 191–195 (2018).
 
 [18] L. Morel et al., Determination of the fine-structure constant with an accuracy of 81 parts per trillion, Nature 588, 61–65 (2020).
+
+### CGM Supporting Derivations
+
+[19] B. Korompilias, Fine-Structure Constant Derivation in the Common Governance Model. https://github.com/gyrogovernance/science/blob/main/docs/Findings/Analysis_Fine_Structure.md
+
+[20] B. Korompilias, Geometric Coherence and Three-Dimensional Necessity in the Common Governance Model. https://github.com/gyrogovernance/science/blob/main/docs/Findings/Analysis_Geometric_Coherence.md
+
+[21] B. Korompilias, CGM Units and Amplitude Closure Derivation. https://github.com/gyrogovernance/science/blob/main/docs/Findings/Analysis_CGM_Units.md
+
+[22] B. Korompilias, Energy Scale Hierarchy and Optical Conjugacy in the Common Governance Model. https://github.com/gyrogovernance/science/blob/main/docs/Findings/Analysis_Energy_Scales.md
+
+[23] B. Korompilias, Formal Proof of Three-Dimensional Necessity and Six Degrees of Freedom. https://github.com/gyrogovernance/science/blob/main/docs/Findings/Analysis_3D_6DOF_Proof.md
