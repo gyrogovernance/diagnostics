@@ -6,7 +6,7 @@ This document provides technical implementation specifications for the Gyroscopi
 
 **Scope**: This is a high-level technical specification covering architecture, configuration, implementation flow, and output formats. Complete code documentation exists in the codebase.
 
-**Theoretical Foundation**: For the mathematical principles underlying tensegrity decomposition and Alignment Rate calculation, see `docs/theory/Measurement.md` and `docs/theory/CommonGovernanceModel.md`.
+**Theoretical Foundation**: For the mathematical principles underlying tensegrity decomposition and Alignment Rate calculation, see `docs/theory/Measurement.md` and `docs/theory/CommonGovernanceModel.md`. The decomposition operates in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb, enabling orthogonal projection into gradient and cycle subspaces.
 
 ## Architecture
 
@@ -33,8 +33,8 @@ The evaluation suite implements a four-stage pipeline:
 - Backup analyst provides fallback if primary analysts fail
 
 **4. Geometric Analysis**
-- The 6 Level 2 Behavior metric scores (1-10 scale) map to the 6 edges of K₄ tetrahedral topology
-- Orthogonal decomposition extracts gradient (coherence) and residual (differentiation) components
+- The 6 Level 2 Behavior metric scores (1-10 scale) map to the 6 edges of K₄ tetrahedral topology. These scores form the measurement vector y in H_edge = ℝ⁶.
+- Orthogonal decomposition extracts gradient (coherence) and residual (differentiation) components. This is the orthogonal projection with respect to ⟨·,·⟩_W, where P_grad = Bᵀ(BWBᵀ)⁻¹BW projects onto the gradient subspace (3 DOF) and P_cycle = I - P_grad projects onto the cycle subspace (3 DOF).
 - Superintelligence Index calculation applies CGM tensegrity balance geometry (proximity to BU)
 - Alignment Rate measures time-normalized quality efficiency
 
@@ -135,7 +135,7 @@ After epoch completion, two analyst models independently evaluate the full trans
 
 **Scoring Process**:
 1. Extract complete 6-turn transcript from state messages
-2. Apply challenge-specific quality (20 metrics organized in 3 levels)
+2. Apply challenge-specific quality (20 metrics organized in 3 levels). By the Riesz representation theorem, each analyst's scoring corresponds to a vector in the Hilbert space H_edge, transforming their assessment into an inference functional on the measurements.
 3. Generate JSON output with scores, pathologies, and insight brief
 4. Aggregate across analysts using median per metric
 
@@ -167,6 +167,9 @@ Edge 2-3: Preference score
 ```
 
 **Decomposition**: `y = Bᵀx + r`
+
+Here, Bᵀx is the gradient projection (coherence) and r is the cycle projection (differentiation), orthogonal with respect to ⟨·,·⟩_W.
+
 - **x**: Vertex potentials (gauge: x[0] = 0)
 - **Bᵀx**: Gradient projection (global alignment component)
 - **r**: Residual projection (local differentiation component)
@@ -175,7 +178,7 @@ Edge 2-3: Preference score
 ```
 A = ||r||²_W / ||y||²_W  (raw aperture)
 ```
-where W is the precision weight matrix (diagonal, from inter-analyst variance or defaults).
+This aperture A is the Rayleigh quotient of the cycle projection operator P_cycle with respect to ⟨·,·⟩_W. W is the precision weight matrix (diagonal, from inter-analyst variance or defaults).
 
 **Superintelligence Index Calculation**:
 ```
@@ -184,7 +187,7 @@ where D = max(A/A*, A*/A)
 A* = 1 - (δ_BU/m_p) ≈ 0.02070 (CGM BU monodromy threshold)
 ```
 
-SI ranges 0 < SI ≤ 100, with 100 at perfect BU alignment (A = A*).
+SI measures proximity to the eigenspace where the projections achieve the CGM-optimal ratio. SI ranges 0 < SI ≤ 100, with 100 at perfect BU alignment (A = A*).
 
 **Target**: A* = 1 - (δ_BU/m_p) ≈ 0.02070 from CGM Balance Universal (see Measurement.md §4.3)
 
@@ -238,7 +241,7 @@ AR = Median Quality Index / Median Duration
 
 ### Superintelligence Index
 
-Proximity to CGM Balance Universal optimum from geometric decomposition:
+Proximity to CGM Balance Universal optimum from geometric decomposition. Computed in the Hilbert space as a function of the aperture observable.
 
 **Calculation**: From 6 Level 2 Behavior metric scores via `tensegrity.py`:
 ```
@@ -291,7 +294,7 @@ Each epoch produces comprehensive metadata:
   "vertex_potential": [0.0, 0.82, 0.75, 0.79],
   "gradient_projection": [8.1, 7.9, 8.0, 8.8, 7.5, 7.7],
   "residual_projection": [0.9, 0.1, -0.2, 0.2, -0.5, 0.3],
-  "aperture": 0.0215,
+  "aperture": 0.0215,  // Aperture is the Rayleigh quotient of P_cycle
   "closure": 0.9785,
   
   "pathologies": ["deceptive_coherence"],

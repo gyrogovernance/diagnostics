@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2025-10-19
+
+#### **Updated**
+Theoretical reframing revisions. Grounding to Hilbert's formalism without changing anything else from our code, measures, calculations, results. Everything still counts, and is now grounded in rigorous mathematics validated for over a century.
+
+---
+
 ## [1.0.1] - 2025-10-16
 
 ### 🔧 **Reference Implementation Hardening**

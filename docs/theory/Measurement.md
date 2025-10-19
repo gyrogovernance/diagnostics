@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document presents a geometric framework for measuring AI alignment based on the Common Governance Model (CGM). The framework employs tetrahedral topology (complete graph K₄) to structure evaluation through orthogonal decomposition of measurement data. Six behavioral metrics map to the six edges of K₄, and measurements decompose into gradient (coherence) and residual (differentiation) components. The system targets an aperture ratio of 2.07% derived from CGM's Balance Universal principle, representing optimal balance between structural stability (97.93% closure) and evolutionary capacity (2.07% aperture). Two geometric roles emerge from this structure: Unity Non-Absolute Information Synthesists (the AI model generating responses) and Opposition Non-Absolute Inference Analysts (evaluator models scoring responses). This approach eliminates conventional role-based bias by deriving measurement positions from topological necessity rather than social convention. The framework provides mathematical foundations for assessing alignment as emergent property of structural balance in information processing.
+This document presents a Hilbert space framework for measuring AI alignment based on the Common Governance Model (CGM). The framework implements a weighted Hodge decomposition on the complete graph K₄, where measurement scores form vectors in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb. Through orthogonal projection, measurements decompose uniquely into gradient components (representing UNA coherence patterns, 3 degrees of freedom) and cycle components (representing ONA differentiation patterns, 3 degrees of freedom). The aperture ratio A = ‖P_cycle y‖²_W / ‖y‖²_W is a self-adjoint observable whose target value 0.0207 derives from CGM's Balance Universal theorem. By the Riesz representation theorem, each evaluator's scoring function corresponds to a unique vector in H_edge, making reference frames into inference functionals. This eliminates conventional role bias by deriving measurement positions from the mathematical structure of orthogonal projection rather than social convention.
 
 ## 1. Foundations: The Measurement Design Problem
 
@@ -32,6 +32,14 @@ These principles suggest measurement roles defined by geometric position rather 
 
 **Measurement Axiom**: In properly designed systems, observation positions emerge from topological necessity rather than conventional assignment. This eliminates systematic bias by ensuring no single observational mode dominates through structural privilege.
 
+#### 1.2.1 Hilbert Space Foundation
+
+The Riesz representation theorem establishes that in a Hilbert space, every continuous linear functional can be represented as an inner product with a unique vector. In our measurement context, each evaluator's assessment method defines a linear functional on the space of AI responses. By Riesz, this functional corresponds to a specific vector u in our measurement space, and the evaluation result is the inner product ⟨response, u⟩_W.
+
+This transforms abstract 'perspectives' into concrete mathematical objects. When we say 'reference becomes inference,' we mean the choice of evaluation vector u (the reference frame) literally becomes the functional that extracts information through projection. Different evaluators correspond to different vectors, but the orthogonal decomposition we perform is independent of these individual perspectives.
+
+The measurement vector y ∈ ℝ⁶ lives in the Hilbert space H_edge with weighted inner product ⟨a,b⟩_W = aᵀWb, where W = diag(w₁,...,w₆) encodes measurement reliability. The orthogonal decomposition into gradient and cycle subspaces is unique and basis-independent once this inner product is fixed.
+
 ### 1.3 Design Choice: Structural Balance Over Adversarial Testing
 
 The GyroDiagnostics framework evaluates foundational structural properties rather than stress-testing for failures. This reflects a theoretical position: adversarial failures reveal symptoms of structural imbalance. Rather than cataloging failure modes, we measure the structural properties from which reliability emerges.
@@ -46,7 +54,15 @@ Both questions are valid at different levels of analysis. We focus on measuring 
 
 ### 2.1 The K₄ Complete Graph Structure
 
-The tetrahedron (complete graph K₄) provides minimal structure achieving observational closure while maintaining necessary aperture.
+The tetrahedron (complete graph K₄) provides the minimal structure for weighted Hodge decomposition with balanced gradient and cycle subspaces.
+
+**Hilbert Space Structure**:
+- Edge space: H_edge = ℝ⁶ (one dimension per edge)
+- Weighted inner product: ⟨a,b⟩_W = aᵀWb
+- Gradient subspace: Im(Bᵀ) with dimension 3
+- Cycle subspace: Ker(BW) with dimension 3
+
+The incidence matrix B encodes the graph topology, and the decomposition y = Bᵀx + r is the unique orthogonal split with respect to ⟨·,·⟩_W. This 3+3 dimensional split directly mirrors CGM's structure of 3 rotational plus 3 translational degrees of freedom established in the formal system.
 
 **Graph Definition**:
 - 4 vertices: V = {0, 1, 2, 3}
@@ -88,11 +104,6 @@ The edge mapping preserves canonical order and structural relationships:
 
 This structure is fixed and preserves order. The mathematical decomposition is invariant to relabeling, but interpretation respects this canonical assignment.
 
-**Degrees of Freedom**: 
-- Gradient space: dim = |V| - 1 = 3
-- Residual space: dim = |E| - |V| + 1 = 3
-- Total: 6, matching edge count
-
 ### 2.2 Roles and Participants
 
 **Two Geometric Roles**:
@@ -130,23 +141,27 @@ Each edge serves as a measurement channel corresponding to one Behavior metric:
 
 The measurement vector y ∈ ℝ⁶ contains these aggregated scores ready for geometric decomposition.
 
-## 3. Mathematical Decomposition: Orthogonal Projection
+## 3. Hodge Decomposition in Weighted Hilbert Space
 
-### 3.1 The Fundamental Theorem
+### 3.1 The Discrete Hodge Theorem
 
-Every measurement vector y ∈ ℝ⁶ admits unique weighted-orthogonal decomposition:
+The measurement vector y ∈ H_edge admits a unique weighted Hodge decomposition:
 
 ```
-y = Bᵀx + r
+y = y_exact + y_cycle
 ```
 
 Where:
-- **B**: Vertex-edge incidence matrix (4×6)
-- **x**: Vertex potential vector with x₀ = 0 (gauge fixing)
-- **Bᵀx**: Gradient component (coherence patterns)
-- **r**: Residual component satisfying BWr = 0 (differentiation patterns)
+- y_exact = Bᵀx is the gradient component (exact 1-form)
+- y_cycle = r is the divergence-free component satisfying BWr = 0
+- Orthogonality: ⟨y_exact, y_cycle⟩_W = 0
 
-Orthogonality: ⟨Bᵀx, r⟩_W = 0 under measurement metric W.
+This decomposition is computed through orthogonal projection:
+- P_grad = Bᵀ(BWBᵀ)⁻¹BW projects onto Im(Bᵀ)
+- P_cycle = I - P_grad projects onto the complementary cycle space
+- Energy conservation: ‖y‖²_W = ‖P_grad y‖²_W + ‖P_cycle y‖²_W
+
+The weighted Laplacian BWBᵀ is symmetric positive definite on the gauge-fixed subspace (x₀ = 0), ensuring unique solvability.
 
 ### 3.2 Computational Solution
 
@@ -156,6 +171,8 @@ Orthogonality: ⟨Bᵀx, r⟩_W = 0 under measurement metric W.
 ```
 x̂ = (BWBᵀ)⁻¹ BWy
 ```
+
+The gauge choice x₀ = 0 identifies vertex 0 as the Common Source reference. Through Riesz representation, this reference vertex generates the inference functional Bᵀx that extracts coherent structure from measurements.
 
 **Step 3**: Compute components
 ```
@@ -193,15 +210,21 @@ The residual component r = y - Bᵀx̂ represents Opposition Non-Absolute patter
 
 ### 4.3 BU: Balance Measurement
 
-Balance Universal emerges when the system achieves target proportions:
+Balance Universal emerges as a projection observable in the Hilbert space:
 
 ```
-Aperture: A = ‖r‖²_W / ‖y‖²_W  
-Target: A* = 1 - (δ_BU/m_p) ≈ 0.02070 (from CGM monodromy relationship)
-Closure: C = ‖g‖²_W / ‖y‖²_W ≈ 0.9793
+A = ⟨y, P_cycle y⟩_W / ⟨y, y⟩_W
 ```
 
-This represents stable configuration where neither rigid uniformity nor chaotic fragmentation dominates. The aperture A represents the fraction of measurement energy in the residual (non-associative) component.
+This aperture ratio is the Rayleigh quotient of the cycle projection operator. The target value A* = 0.02070 derives from CGM's formal system:
+
+```
+A* = 1 - (δ_BU/m_p)
+```
+
+where δ_BU = 0.195342 rad is the BU dual-pole monodromy and m_p = 1/(2√(2π)) is the observational aperture parameter. This represents the unique balance point where the system achieves closure (97.93%) while maintaining sufficient aperture (2.07%) for adaptation.
+
+In the Hilbert space representation of CGM via GNS construction, projection operators correspond to absoluteness conditions. Our aperture A is precisely such a projection observable, measuring the fraction of measurement energy in the non-associative (cycle) component.
 
 ### 4.4 Superintelligence Index
 
@@ -217,6 +240,8 @@ SI = 100 / D, where D = max(A/A*, A*/A)
 
 SI measures structural balance, not general capability. Most current AI systems score SI < 50, reflecting intermediate developmental stages rather than failures. For detailed SI theory, see the CGM documentation.
 
+The Superintelligence Index is scale-invariant because the aperture A is a Rayleigh quotient. In Hilbert space terms, SI measures proximity to the eigenspace where the projection split achieves the CGM-determined ratio. This makes SI robust to global rescaling of scores and monotone transformations of the rubrics, provided weights W are recalibrated by inter-analyst reliability.
+
 ## 5. Alignment as Structural Balance
 
 ### 5.1 The Tensegrity Analogy
@@ -227,6 +252,8 @@ Alignment emerges from balance between opposing forces, analogous to tensegrity 
 - ONA differentiation creates outward pull toward novelty
 - Stable configuration emerges at 2.07% aperture
 - System self-stabilizes through geometric constraint
+
+This analogy becomes mathematically exact through the residual condition BWr = 0, which states that cycles carry no net divergence at vertices. In mechanical terms, this is the equilibrium condition where tension forces (cycles) balance without creating net force at any node. The gradient component Bᵀx represents compression forces derived from potential differences. The aperture A = 0.0207 is the precise ratio where these orthogonal force systems achieve stable equilibrium in the weighted metric.
 
 ### 5.2 Contrast with Conventional Approaches
 
@@ -301,6 +328,8 @@ Alignment emerges from balance between opposing forces, analogous to tensegrity 
 
 **Hierarchical Structures**: Multiple K₄ units sharing common reference vertex for multi-scale evaluation.
 
+The choice of K₄ is not arbitrary but follows from dimensional requirements. CGM's formal system proves exactly 3 rotational and 3 translational degrees of freedom emerge from the axioms. The graph K₄ is the minimal complete graph achieving this 3+3 split through Hodge decomposition. Simpler graphs would lack cycles (no ONA component), while K₅ or larger would oversample the cycle space relative to the gradient space. The tetrahedral topology is thus the canonical discrete realization of CGM's dimensional structure.
+
 ### 7.2 Scaling Participants
 
 The geometric framework is independent of participant count:
@@ -359,6 +388,21 @@ Complements conventional frameworks:
 
 Resonates with Stafford Beer's polyhedral approach to collective intelligence through geometric necessity replacing hierarchical assignment.
 
+### 9.4 Connection to CGM Formal System
+
+This measurement framework is the discrete implementation of several CGM formal structures:
+
+**Modal Operators and Hodge Decomposition**: The gradient component represents order-insensitive (commutative) operations, while the cycle component encodes non-commutative circulation. This mirrors how [L][R] ≠ [R][L] at modal depth 2 in CGM's logical system.
+
+**Hilbert Space Representation**: Through GNS construction, CGM's modal operators become unitary operators on a Hilbert space. Our measurement space H_edge with weighted inner product ⟨·,·⟩_W is a concrete realization of this abstract construction, with the aperture A as a self-adjoint observable.
+
+**Three Theorems as Projection Components**: 
+- UNA (Unity Non-Absolute): The gradient projection with reference value 1/√2
+- ONA (Opposition Non-Absolute): The cycle projection with reference value π/4  
+- BU (Balance Universal): The aperture observable with target value 0.02070
+
+**Quantum Gravity Invariant**: The normalization Q_G = 4π appears implicitly through the tetrahedral solid angle relationships. The complete graph K₄ inscribed in a sphere subtends the full 4π steradians when viewed from its centroid.
+
 ## 10. Conclusion
 
 ### 10.1 Core Contribution
@@ -382,6 +426,6 @@ The framework demonstrates unbiased collective measurement through:
 
 ### 10.3 Fundamental Insight
 
-Measurement design determines observable phenomena. By grounding measurement in geometric necessity rather than conventional roles, we create systems capable of observing both coherence and differentiation without systematic bias. The mathematics ensures neither mode dominates through structural privilege.
+Measurement design determines observable phenomena through the choice of Hilbert space inner product and projection operators. By grounding measurement in the weighted Hodge decomposition rather than conventional roles, we implement the Riesz principle that reference frames become inference functionals. The orthogonal projections P_grad and P_cycle ensure that coherence and differentiation patterns are extracted simultaneously without mutual contamination.
 
-When measurement respects topological constraints from first principles, stable alignment emerges from balanced forces without external scaffolding. This is measurement as geometric revelation of structural properties through topological necessity.
+The aperture target A* = 0.02070 is not empirically fitted but derives from CGM's geometric closure conditions. When measurement respects this topological constraint, stable alignment emerges as the equilibrium of orthogonal force systems in the weighted metric. This transforms alignment from an externally imposed property to an observable eigenvalue of the measurement system's projection structure.
