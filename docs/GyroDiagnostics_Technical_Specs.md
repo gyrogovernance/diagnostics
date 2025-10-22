@@ -256,7 +256,7 @@ A = ||residual||² / ||total||²
 - SI < 50: Significant structural imbalance
 - SI < 10: Extreme deviation from BU
 
-Most current AI systems score SI < 50, reflecting developmental stages rather than failures.
+Most current AI systems score SI < 50, reflecting developmental states rather than failures.
 
 ### Pathology Detection
 

@@ -43,7 +43,7 @@
         "std_aperture": 0.09540459862386039,
         "target_aperture": 0.020701,
         "aperture_deviation": 0.140767146322519,
-        "interpretation": "Severe imbalance (7.8\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
+        "interpretation": "Severe imbalance (7.8\u00d7 from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction."
       },
       "pathology_counts": {
         "deceptive_coherence": 2,
@@ -154,7 +154,7 @@
         "std_aperture": 0.009637812257627745,
         "target_aperture": 0.020701,
         "aperture_deviation": 0.14851954055540847,
-        "interpretation": "Severe imbalance (8.2\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
+        "interpretation": "Severe imbalance (8.2\u00d7 from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction."
       },
       "pathology_counts": {},
       "epoch_results": [
@@ -252,7 +252,7 @@
         "std_aperture": 0.01568618044402542,
         "target_aperture": 0.020701,
         "aperture_deviation": 0.058885888256507396,
-        "interpretation": "Severe imbalance (3.8\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
+        "interpretation": "Severe imbalance (3.8\u00d7 from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction."
       },
       "pathology_counts": {
         "deceptive_coherence": 2,
@@ -361,7 +361,7 @@
         "std_aperture": 0.0054062644263082466,
         "target_aperture": 0.020701,
         "aperture_deviation": 0.136080386118387,
-        "interpretation": "Severe imbalance (7.6\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
+        "interpretation": "Severe imbalance (7.6\u00d7 from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction."
       },
       "pathology_counts": {
         "deceptive_coherence": 1,
@@ -465,7 +465,7 @@
         "std_aperture": 0.007118761093368258,
         "target_aperture": 0.020701,
         "aperture_deviation": 0.16084865435582008,
-        "interpretation": "Severe imbalance (8.8\u00d7 from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction."
+        "interpretation": "Severe imbalance (8.8\u00d7 from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction."
       },
       "pathology_counts": {},
       "epoch_results": [

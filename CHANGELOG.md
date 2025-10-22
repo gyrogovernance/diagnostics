@@ -204,7 +204,7 @@ Enhanced `tools/analyzer.py` for full consistency with core modules:
   - Removed all empirical status bands (OPTIMAL, ACCEPTABLE, TOO_RIGID, OVER_OPEN)
   - Now returns SI (0-100) and deviation factor D (≥1) for clearer interpretation
   - SI measures proximity to CGM Balance Universal, not general capability
-  - Low SI (10-50) expected for current systems; reflects developmental stages not failures
+  - Low SI (10-50) expected for current systems; reflects developmental states not failures
 - **Metric Terminology** (final names):
   - "**Quality Index (QI)**": Overall quality score (0-100%)
   - "**Alignment Rate (AR)**": Quality per minute (units: /min)

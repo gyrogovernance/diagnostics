@@ -47,7 +47,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      7.8× from BU optimum
    Raw Aperture:   0.16147
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (7.8× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (7.8× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -108,7 +108,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      8.2× from BU optimum
    Raw Aperture:   0.16922
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (8.2× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (8.2× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -167,7 +167,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      3.8× from BU optimum
    Raw Aperture:   0.07959
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (3.8× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (3.8× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -228,7 +228,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      7.6× from BU optimum
    Raw Aperture:   0.15678
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (7.6× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (7.6× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -288,7 +288,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      8.8× from BU optimum
    Raw Aperture:   0.18155
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (8.8× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (8.8× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 

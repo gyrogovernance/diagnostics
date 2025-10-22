@@ -47,7 +47,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      5.2× from BU optimum
    Raw Aperture:   0.10779
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (5.2× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (5.2× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -110,7 +110,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      9.6× from BU optimum
    Raw Aperture:   0.19848
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (9.6× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (9.6× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -169,7 +169,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      6.0× from BU optimum
    Raw Aperture:   0.12474
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (6.0× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (6.0× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 
@@ -229,7 +229,7 @@ SUPERINTELLIGENCE INDEX
    Deviation:      8.7× from BU optimum
    Raw Aperture:   0.18061
    Target (A*):    0.02070
-   Interpretation: Severe imbalance (8.7× from BU optimum). System in early differentiation stages (UNA/ONA). High pathology rates, requires external correction.
+   Interpretation: Severe imbalance (8.7× from BU optimum). System in early differentiation states (UNA/ONA). High pathology rates, requires external correction.
 
 METRIC BREAKDOWN (Epoch 1 of 2)
 

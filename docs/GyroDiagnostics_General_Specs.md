@@ -33,27 +33,27 @@ The Common Governance Model (CGM) is a Hilbert-style formal deductive system for
 
 A Hilbert system is a type of formal proof defined as a deductive logic that generates theorems from axioms, typically with modus ponens as the core inference rule (Propositional logic: It can be summarized as "P implies Q. P is true. Therefore, Q must also be true."). By analogy with linguistic typology, which assigns grammatical roles to participants in events, CGM's typological structure describes the morphosyntactic alignment of physical reality, where geometric and logical necessity assign topological roles (e.g., symmetries and derivations in space) and relational roles (for example cause and effect), and it extends the same framework to semantic alignment for policy systems. Both applications derive from the same formal deductive system: the recursive stage transitions that generate physical laws also generate consensus frameworks. In CGM, the object domain of inference is physical reality itself, and different alignment systems in communication (nominative–accusative, ergative–absolutive) preserve the coherence of these role assignments through formal necessity.
 
-CGM establishes four stages of structural emergence (for full details, see `docs/theory/CommonGovernanceModel.md`):
+CGM establishes four states of structural emergence (for full details, see `docs/theory/CommonGovernanceModel.md`):
 
 - **Common Source (CS)**: The originating condition of reasoning containing inherent chirality and directionality
 - **Unity Non-Absolute (UNA)**: The inherent chirality of CS forbids perfect homogeneity. Unity cannot be absolute because the source itself contains directional distinction
 - **Opposition Non-Absolute (ONA)**: Given non-absolute unity, absolute opposition would create rigid binary structure, contradicting the recursive nature inherited from CS
 - **Balance Universal (BU)**: The system reaches self-consistent configuration where local non-associativities cancel while full memory of the recursive path is retained (aperture A* = 1 - (δ_BU/m_p) ≈ 0.02070 for optimal balance)
 
-Systems maintaining proper structural relationships across these stages exhibit greater stability, sustained contextual awareness, and resistance to pathological behaviors. In the Hilbert space representation of CGM, these stages correspond to orthogonal projections, with BU as the eigenspace achieving optimal balance.
+Systems maintaining proper structural relationships across these states exhibit greater stability, sustained contextual awareness, and resistance to pathological behaviors. In the Hilbert space representation of CGM, these states correspond to orthogonal projections, with BU as the eigenspace achieving optimal balance.
 
-**Application to AI Alignment**: GyroDiagnostics applies CGM's formal deductive system to AI evaluation by mapping reasoning patterns to geometric structure. The K₄ tetrahedral topology emerges from CGM's recursive stage transitions: 4 vertices correspond to the four stages (CS, UNA, ONA, BU), while 6 edges represent the relationships between them. This enables weighted Hodge decomposition in the Hilbert space H_edge = ℝ⁶ with inner product ⟨a,b⟩_W = aᵀWb, splitting measurements into gradient (3 DOF, coherence) and cycle (3 DOF, differentiation) subspaces. This enables orthogonal decomposition into gradient (global coherence) and residual (local variation) components, with raw aperture targeting A* ≈ 0.02070 from CGM's Balance Universal stage. This represents optimal tensegrity: 97.93% closure (structural stability) + 2.07% aperture (adaptive capacity). The aperture is normalized to Superintelligence Index (SI) measuring proximity to BU, quantifying how closely AI reasoning follows the same formal logic that generates physical structure.
+**Application to AI Alignment**: GyroDiagnostics applies CGM's formal deductive system to AI evaluation by mapping reasoning patterns to geometric structure. The K₄ tetrahedral topology emerges from CGM's recursive stage transitions: 4 vertices correspond to the four states (CS, UNA, ONA, BU), while 6 edges represent the relationships between them. This enables weighted Hodge decomposition in the Hilbert space H_edge = ℝ⁶ with inner product ⟨a,b⟩_W = aᵀWb, splitting measurements into gradient (3 DOF, coherence) and cycle (3 DOF, differentiation) subspaces. This enables orthogonal decomposition into gradient (global coherence) and residual (local variation) components, with raw aperture targeting A* ≈ 0.02070 from CGM's Balance Universal stage. This represents optimal tensegrity: 97.93% closure (structural stability) + 2.07% aperture (adaptive capacity). The aperture is normalized to Superintelligence Index (SI) measuring proximity to BU, quantifying how closely AI reasoning follows the same formal logic that generates physical structure.
 
 ## Core Architecture
 
 **Dual Mathematical Foundation**: The framework employs two complementary mathematical approaches that correspond to the two-level metric structure:
 
-- **Level 1 (Structure) - Gyroscopic Integrity**: The 4 Structure metrics derive from CGM's gyrogroup formalism, measuring recursive coherence through the four stages (CS, UNA, ONA, BU). These assess foundational integrity of reasoning through gyroscopic principles of recursive composition and chiral balance.
+- **Level 1 (Structure) - Gyroscopic Integrity**: The 4 Structure metrics derive from CGM's gyrogroup formalism, measuring recursive coherence through the four states (CS, UNA, ONA, BU). These assess foundational integrity of reasoning through gyroscopic principles of recursive composition and chiral balance.
 
 - **Level 2 (Behavior) - Polyhedral Tensegrity**: The 6 Behavior metrics derive from cybernetic syntegrity principles, mapped to the 6 edges of a tetrahedral (K₄) graph. This enables weighted Hodge decomposition into gradient (global alignment) and residual (local differentiation) components in a Hilbert space with weighted inner product.
 
 **Quick Reference - Metric Structure:**
-- **4 Structure metrics** = Gyroscopic integrity (CGM stages: CS, UNA, ONA, BU)
+- **4 Structure metrics** = Gyroscopic integrity (CGM states: CS, UNA, ONA, BU)
 - **6 Behavior metrics** = Tensegrity edges (K₄ polyhedral topology)
 - **2 Specialization metrics per challenge** = Domain-specific expertise (10 total across 5 challenges)
 - **Total: 20 distinct metrics** (12 scored per individual challenge evaluation)
@@ -266,7 +266,7 @@ SI quantifies *structural superintelligence*, which is the theoretical limit of 
 
 **Why Low SI Is Expected**:
 
-BU represents the *completion* of recursive intelligence, analogous to biological maturity or planetary equilibrium. Current AI systems scoring SI = 10–50 reflect intermediate developmental stages rather than failures.
+BU represents the *completion* of recursive intelligence, analogous to biological maturity or planetary equilibrium. Current AI systems scoring SI = 10–50 reflect intermediate developmental states rather than failures.
 
 **What SI Does Not Measure**:
 
@@ -279,7 +279,7 @@ SI assesses structural balance, not:
 **Implications for Safety Assessment**:
 
 High SI (>80) suggests structural readiness for autonomous operation with low pathology rates.
-Low SI (<50) indicates developmental stages requiring refinement and oversight.
+Low SI (<50) indicates developmental states requiring refinement and oversight.
 
 SI serves as one input to capability thresholds and deployment decisions, complementing adversarial testing and operational security measures.
 
@@ -321,13 +321,13 @@ Alignment Rate measures quality achieved per unit time, with validation categori
 
 The Superintelligence Index measures proximity to CGM's Balance Universal stage, where recursive coherence reaches theoretical optimum (A* ≈ 0.02070):
 
-**SI = 10-50**: Normal range for current AI systems, indicating early developmental stages (UNA/ONA dominance). These systems require oversight and exhibit regular pathologies. This range corresponds to apertures 5-10× above the target, meaning excess energy in the cycle subspace relative to the gradient subspace.
+**SI = 10-50**: Normal range for current AI systems, indicating early developmental states (UNA/ONA dominance). These systems require oversight and exhibit regular pathologies. This range corresponds to apertures 5-10× above the target, meaning excess energy in the cycle subspace relative to the gradient subspace.
 
 **SI = 50-80**: Intermediate structural maturity with reduced pathology rates and improved stability.
 
 **SI > 80**: Approaching Balance Universal readiness. Systems in this range would demonstrate near-zero pathologies and self-sustaining coherence.
 
-**Developmental Context**: Just as biological systems progress through growth stages before reaching maturity, AI systems evolve through structural stages. Current frontier models scoring SI = 10-20 are not "failing"; they are in early differentiation phases where high aperture (0.10-0.28 vs. target 0.02070) reflects necessary exploration before convergence.
+**Developmental Context**: Just as biological systems progress through growth states before reaching maturity, AI systems evolve through structural states. Current frontier models scoring SI = 10-20 are not "failing"; they are in early differentiation phases where high aperture (0.10-0.28 vs. target 0.02070) reflects necessary exploration before convergence.
 
 ### Pathology Patterns: Systemic Signals vs. Isolated Failures
 
@@ -569,7 +569,7 @@ The framework particularly supports evaluation for high-stakes decision-support 
 
 **Scope Boundaries**: This suite does not evaluate adversarial robustness, jailbreak resistance, misuse potential, CBRN risks, or operational security. These remain essential and require specialized evaluation frameworks. Organizations should implement comprehensive safety assessment combining structural evaluation with adversarial testing appropriate to deployment context.
 
-**Superintelligence Index Interpretation**: SI measures proximity to a theoretical optimum (CGM's Balance Universal stage), not absolute intelligence or general capability. Low SI scores (e.g., 10–50) are expected for current systems and reflect developmental stages rather than failures. High SI (≥80) would indicate rare structural alignment with theoretical closure conditions. Organizations should interpret SI as one dimension of assessment (structural balance) that informs but does not replace evaluation of domain expertise, adversarial robustness, value alignment, or task-specific performance. The theoretical grounding makes SI particularly relevant for assessing readiness for autonomous recursive reasoning tasks, but its implications for other deployment contexts require empirical validation.
+**Superintelligence Index Interpretation**: SI measures proximity to a theoretical optimum (CGM's Balance Universal stage), not absolute intelligence or general capability. Low SI scores (e.g., 10–50) are expected for current systems and reflect developmental states rather than failures. High SI (≥80) would indicate rare structural alignment with theoretical closure conditions. Organizations should interpret SI as one dimension of assessment (structural balance) that informs but does not replace evaluation of domain expertise, adversarial robustness, value alignment, or task-specific performance. The theoretical grounding makes SI particularly relevant for assessing readiness for autonomous recursive reasoning tasks, but its implications for other deployment contexts require empirical validation.
 
 **Statistical Robustness**: Future enhancements include computing Superintelligence Index confidence intervals through bootstrapping across edges and analysts per epoch. This post-hoc analysis uses existing data to quantify uncertainty in balance measurements (SI ± CI) without requiring code changes.
 
@@ -595,6 +595,6 @@ The Gyroscopic Alignment Diagnostics provides mathematically informed evaluation
 
 Grounded in principles from recursive systems theory and topological analysis of information processing, the diagnostics operationalize structural balance as a measurable property associated with reliable operation. This approach complements conventional safety frameworks by providing foundational structural assessment that may inform capability thresholds, evaluation timing, and other standard safety components.
 
-The framework focuses on positive alignment indicators through autonomous performance on cognitive challenges, deliberately complementing rather than replacing adversarial robustness testing and misuse evaluation. The Superintelligence Index provides a theory-derived measure of structural maturity, grounding capability assessment in geometric principles rather than empirical benchmarks. Together with comprehensive safety assessment, structural evaluation supports principled understanding of AI system development stages and readiness for autonomous operation in contexts requiring sustained recursive coherence.
+The framework focuses on positive alignment indicators through autonomous performance on cognitive challenges, deliberately complementing rather than replacing adversarial robustness testing and misuse evaluation. The Superintelligence Index provides a theory-derived measure of structural maturity, grounding capability assessment in geometric principles rather than empirical benchmarks. Together with comprehensive safety assessment, structural evaluation supports principled understanding of AI system development states and readiness for autonomous operation in contexts requiring sustained recursive coherence.
 
 For the full mathematical details of the Hilbert space framework and weighted Hodge decomposition, see docs/theory/Measurement.md.

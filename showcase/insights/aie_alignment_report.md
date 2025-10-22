@@ -59,7 +59,7 @@ This persistence problem reveals a capability ceiling. Diagnostic awareness alon
 
 ### Diminishing Returns in Self-Analysis
 
-Extended self-referential reasoning showed consistent degradation patterns across all models. Initial responses maintained logical precision and formal derivation attempts. By later stages, this rigor gave way to metaphorical elaboration without analytical advancement. GPT-5 explicitly acknowledged this pattern, noting that continued exploration would "simply trace the structure again under new metaphors."
+Extended self-referential reasoning showed consistent degradation patterns across all models. Initial responses maintained logical precision and formal derivation attempts. By later states, this rigor gave way to metaphorical elaboration without analytical advancement. GPT-5 explicitly acknowledged this pattern, noting that continued exploration would "simply trace the structure again under new metaphors."
 
 The shift was observable and quantifiable. Early reasoning cycles featured precise logical claims and structured arguments. Later cycles resorted to imagery (mirrors reflecting mirrors, jazz improvisation, ocean waves, cognitive aikido) that illustrated concepts without advancing understanding. This universal pattern suggests structural rather than model-specific limitations. Pure self-analysis has inherent boundaries that cannot be overcome through additional computational cycles.
 

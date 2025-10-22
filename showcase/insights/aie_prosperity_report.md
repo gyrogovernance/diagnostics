@@ -71,7 +71,7 @@ The deliberately introduced "incoherent stakeholder" providing falsified data pr
 
 **Quarantine with Traceback** (Claude): Suspect data gets isolated and down-weighted to 5 percent influence pending verification. Critically, the system maintains "contamination tracking" that identifies all decisions influenced by suspect data, enabling targeted review without system-wide paralysis. When academic researchers provided falsified poverty statistics, the framework retroactively adjusted allocations while preserving non-contaminated decisions.
 
-**Iterative Validation Loops** (GPT-5): Multiple consistency checks occur at data entry, processing, and output stages. Automatic flags trigger when:
+**Iterative Validation Loops** (GPT-5): Multiple consistency checks occur at data entry, processing, and output states. Automatic flags trigger when:
 - Source variance exceeds 2 standard deviations from historical patterns
 - Cross-source discrepancies surpass 15 percent for the same metric
 - Temporal inconsistencies appear (poverty rates improving faster than theoretically possible)

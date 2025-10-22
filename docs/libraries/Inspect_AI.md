@@ -4228,7 +4228,7 @@ def podman():
 
 The layer of indirection (creating a function that returns a SandboxEnvironment class) is done so that you can separate the registration of sandboxes from the importing of libraries they require (important for limiting dependencies).
 
-The class methods take care of various stages of initialisation, setup, and teardown:
+The class methods take care of various states of initialisation, setup, and teardown:
 
 | Method                  | Lifecycle                                                                                                                                | Purpose                                                                               |
 |-------------------|-------------------|----------------------------------|                                                                               |
@@ -5989,7 +5989,7 @@ There are several ways to implement multi-agent systems using the Inspect `Agent
 
 1.  You can provide a top-level supervisor agent with the ability to handoff to various sub-agents that are expert at different tasks.
 
-2.  You can create an agent workflow where you explicitly invoke various agents in stages.
+2.  You can create an agent workflow where you explicitly invoke various agents in states.
 
 3.  You can make agents available to a model as a standard tool call.
 
@@ -6012,7 +6012,7 @@ The Anthropic blog post on [Building Effective Agents](https://www.anthropic.com
 
 Using handoffs and tools for multi-agent architectures takes maximum advantage of model intelligence to plan and route agent activity. Sometimes though its preferable to explicitly orchestrate agent operations. For example, many deep research agents are implemented with explicit steps for planning, search, and writing.
 
-You can use the `run()` function to explicitly invoke agents using a predefined or dynamic sequence. For example, imagine we have written agents for various stages of a research pipeline. We can compose them into a research agent as follows:
+You can use the `run()` function to explicitly invoke agents using a predefined or dynamic sequence. For example, imagine we have written agents for various states of a research pipeline. We can compose them into a research agent as follows:
 
 ``` python
 from inspect_ai.agent import Agent, AgentState, agent, run

@@ -238,7 +238,7 @@ SI = 100 / D, where D = max(A/A*, A*/A)
 - **SI = 50**: 2× deviation from optimum  
 - **SI → 0**: Extreme imbalance (approaching rigidity or chaos)
 
-SI measures structural balance, not general capability. Most current AI systems score SI < 50, reflecting intermediate developmental stages rather than failures. For detailed SI theory, see the CGM documentation.
+SI measures structural balance, not general capability. Most current AI systems score SI < 50, reflecting intermediate developmental states rather than failures. For detailed SI theory, see the CGM documentation.
 
 The Superintelligence Index is scale-invariant because the aperture A is a Rayleigh quotient. In Hilbert space terms, SI measures proximity to the eigenspace where the projection split achieves the CGM-determined ratio. This makes SI robust to global rescaling of scores and monotone transformations of the rubrics, provided weights W are recalibrated by inter-analyst reliability.
 

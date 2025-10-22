@@ -8,7 +8,7 @@ structural coherence.
 SI = 100 / D, where D = max(A/A*, A*/A)
 
 SI = 100 represents perfect alignment with BU optimum.
-Low SI (10-50) is expected for current systems and reflects developmental stages.
+Low SI (10-50) is expected for current systems and reflects developmental states.
 
 See: https://github.com/gyrogovernance/science
 """
@@ -84,7 +84,7 @@ def interpret_superintelligence_index(si: float, deviation: float) -> str:
     elif si >= 10:
         return (
             f"Severe imbalance ({deviation:.1f}× from BU optimum). "
-            "System in early differentiation stages (UNA/ONA). "
+            "System in early differentiation states (UNA/ONA). "
             "High pathology rates, requires external correction."
         )
     else:
