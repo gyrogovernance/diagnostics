@@ -115,6 +115,8 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 
 ---
 
+## AI-Empowered Governance Reports
+
 ![Reports](/assets/aie_reports.png)
 
 **Community Insight Reports (3 Focus Areas)**: For community outreach and engagement, we provide three consolidated reports synthesizing key insights:
