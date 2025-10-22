@@ -103,7 +103,7 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 
 ## 🚀 **NEW: From GyroDiagnostics**
 
-<img src="/assets/ai_inspector_app_top.png" width="300" height="120"> 
+<img src="/assets/ai_inspector_app_top.png" width="300"> 
 
 ### 🔍 AI Inspector - Browser Extension
 
