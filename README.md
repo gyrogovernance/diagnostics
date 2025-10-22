@@ -102,7 +102,9 @@ Beyond safety diagnostics, the framework generates valuable research contributio
 <div align="center">
 
 ## 🚀 **NEW: From GyroDiagnostics**
-![AI Inspector Browser Extension](/assets/ai_inspector_app_top.png)
+
+<img src="/assets/ai_inspector_app_top.png" width="300" height="120"> 
+
 ### 🔍 AI Inspector - Browser Extension
 
 **Inspect AI outputs for truth, alignment, and governance quality.** This browser extension transforms everyday AI conversations into rigorous governance analysis, validating AI-generated solutions for UN Sustainable Development Goals and community challenges using mathematical assessment.
