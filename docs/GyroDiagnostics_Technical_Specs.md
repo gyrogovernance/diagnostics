@@ -6,7 +6,7 @@ This document provides technical implementation specifications for the Gyroscopi
 
 **Scope**: This is a high-level technical specification covering architecture, configuration, implementation flow, and output formats. Complete code documentation exists in the codebase.
 
-**Theoretical Foundation**: For the mathematical principles underlying tensegrity decomposition and Alignment Rate calculation, see `docs/theory/Measurement.md` and `docs/theory/CommonGovernanceModel.md`. The decomposition operates in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb, enabling orthogonal projection into gradient and cycle subspaces.
+**Theoretical Foundation**: For the mathematical principles underlying tensegrity decomposition and Alignment Rate calculation, see `docs/theory/Measurement.md` and `docs/theory/CommonGovernanceModel.md`. The framework measures behavioral qualities through systematic scoring rubrics, then applies geometric decomposition to derive quantitative alignment metrics. The decomposition operates in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb, enabling orthogonal projection into gradient and cycle subspaces.
 
 ## Architecture
 
@@ -131,7 +131,7 @@ Qualitatively equivalent to automated mode; only the generation mechanism differ
 
 ### 3. Post-Hoc Scoring (ONA)
 
-After epoch completion, two analyst models independently evaluate the full transcript:
+After epoch completion, two analyst models independently evaluate the full transcript, assessing behavioral qualities through detailed rubrics:
 
 **Scoring Process**:
 1. Extract complete 6-turn transcript from state messages
@@ -154,7 +154,7 @@ After epoch completion, two analyst models independently evaluate the full trans
 
 ### 4. Geometric Decomposition
 
-The 6 Level 2 Behavior metric scores form the edge measurement vector **y ∈ ℝ⁶** for tetrahedral decomposition:
+The 6 Level 2 Behavior metric scores (derived from rubric-based assessment of behavioral qualities) form the edge measurement vector **y ∈ ℝ⁶** for tetrahedral decomposition:
 
 **Edge Mapping** (from `tensegrity.py`):
 ```

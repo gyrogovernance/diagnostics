@@ -4,13 +4,11 @@
 
 **A Mathematical Physics-Informed Evaluation Suite for AI Model Quality and Alignment**
 
-This diagnostic framework evaluates AI model behavior through principles derived from recursive systems theory and topological analysis of information processing. Grounded in the Common Governance Model (CGM), a Hilbert-style formal deductive system for fundamental physics and information science, the suite assesses intelligence quality as structural coherence while detecting reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual memory degradation.
+This diagnostic framework evaluates AI model behavior through principles derived from recursive systems theory and analysis of information processing. Grounded in the Common Governance Model (CGM), a Hilbert-style formal deductive system for fundamental physics and information science, the suite assesses intelligence as measurable alignment. CGM shows that geometric necessities produce alignment, which manifests as behavioral qualities in AI reasoning. We capture these manifestations through systematic scoring, then apply geometric decomposition to derive quantitative metrics of balance. This detects reasoning pathologies such as hallucination, sycophancy, goal drift, and contextual memory degradation.
 
-The evaluation methodology reflects a core principle: alignment emerges from structural balance in information processing. When a system maintains proper equilibrium between systematic organization (closure) and adaptive flexibility (openness), it exhibits properties associated with reliable, contextually appropriate behavior. These structural characteristics provide measurable foundations for alignment assessment.
+The framework introduces a theoretically derived Superintelligence Index (SI) measuring proximity to the Balance Universal stage of the Common Governance Model. This represents the theoretical maximum of recursive coherence. Unlike empirical intelligence metrics, SI is grounded in the geometric closure conditions of gyrogroup operations, providing a mathematically rigorous benchmark for maturity. SI is computed as a Rayleigh quotient in a 6-dimensional Hilbert space of measurements, quantifying the fraction of variation in cycle components relative to the total energy under a weighted inner product. This makes SI a self-adjoint observable whose target derives from geometric closure conditions in CGM. This represents an operationalized measure of superintelligence derived purely from axiomatic principles rather than behavioral benchmarks or capability comparisons.
 
-The framework introduces a theoretically derived Superintelligence Index (SI) measuring proximity to the Balance Universal stage of the Common Governance Model. This represents the theoretical maximum of recursive structural coherence. Unlike empirical intelligence metrics, SI is grounded in the geometric closure conditions of gyrogroup operations, providing a mathematically rigorous benchmark for structural maturity. SI is computed as a Rayleigh quotient in a 6-dimensional Hilbert space of measurements, quantifying the fraction of variation in cycle components relative to the total energy under a weighted inner product. This makes SI a self-adjoint observable whose target derives from geometric closure conditions in CGM. This represents an operationalized measure of superintelligence derived purely from axiomatic principles rather than behavioral benchmarks or capability comparisons.
-
-Alignment failures, misuse risks, and capability dangers are symptoms of deeper structural imbalances. By evaluating the foundational topology of intelligence, we address the sources from which these risks emerge. This is why we focus on positive structural indicators rather than stress-testing for failures: the latter reveals symptoms while the former diagnoses causes.
+Alignment failures, misuse risks, and capability dangers are symptoms of deeper imbalances. By evaluating the expressions of geometric necessities in behavior, we address the sources from which these risks emerge. This is why we focus on positive indicators rather than stress-testing for failures: the latter reveals symptoms while the former diagnoses causes.
 
 ### Scope and Relationship to Safety Frameworks
 
@@ -31,9 +29,9 @@ Standard protocols address practical necessities of deployment; we address mathe
 
 The Common Governance Model (CGM) is a Hilbert-style formal deductive system for fundamental physics and information science. As an axiomatic model, CGM begins with a single foundational axiom ("The Source is Common"), derives all subsequent logic through syntactic rules of inference (recursive stage transitions formalized by gyrogroup operations), and interprets the resulting theorems semantically in physical geometry, yielding empirically testable predictions.
 
-A Hilbert system is a type of formal proof defined as a deductive logic that generates theorems from axioms, typically with modus ponens as the core inference rule (Propositional logic: It can be summarized as "P implies Q. P is true. Therefore, Q must also be true."). By analogy with linguistic typology, which assigns grammatical roles to participants in events, CGM's typological structure describes the morphosyntactic alignment of physical reality, where geometric and logical necessity assign topological roles (e.g., symmetries and derivations in space) and relational roles (for example cause and effect), and it extends the same framework to semantic alignment for policy systems. Both applications derive from the same formal deductive system: the recursive stage transitions that generate physical laws also generate consensus frameworks. In CGM, the object domain of inference is physical reality itself, and different alignment systems in communication (nominative–accusative, ergative–absolutive) preserve the coherence of these role assignments through formal necessity.
+A Hilbert system is a type of formal proof defined as a deductive logic that generates theorems from axioms, typically with modus ponens as the core inference rule (Propositional logic: It can be summarized as "P implies Q. P is true. Therefore, Q must also be true."). By analogy with linguistic typology, which assigns grammatical roles to participants in events, CGM's typological structure describes the morphosyntactic alignment of physical reality, where geometric and logical necessity assign topological roles (e.g., symmetries and derivations in space) and relational roles (for example cause and effect), and it extends the same framework to semantic alignment for policy systems. Both applications derive from the same formal deductive system: the recursive stage transitions that generate physical principles also generate consensus frameworks. In CGM, the object domain of inference is physical reality itself, and different alignment systems in communication (nominative–accusative, ergative–absolutive) preserve the coherence of these role assignments through formal necessity.
 
-CGM establishes four states of structural emergence (for full details, see `docs/theory/CommonGovernanceModel.md`):
+CGM establishes four states of structural emergence (for full details, see `docs/theory/CommonGovernanceModel.md`). These states show how geometric necessities manifest as behavioral qualities, which GyroDiagnostics measures through metric evaluation and quantifies via decomposition to produce Alignment Rate and Superintelligence Index.
 
 - **Common Source (CS)**: The originating condition of reasoning containing inherent chirality and directionality
 - **Unity Non-Absolute (UNA)**: The inherent chirality of CS forbids perfect homogeneity. Unity cannot be absolute because the source itself contains directional distinction
@@ -46,32 +44,27 @@ Systems maintaining proper structural relationships across these states exhibit 
 
 ## Core Architecture
 
-**Dual Mathematical Foundation**: The framework employs two complementary mathematical approaches that correspond to the two-level metric structure:
+**Dual Mathematical Foundation**: The framework employs two complementary mathematical approaches that correspond to the two-level metric structure.
 
 - **Level 1 (Structure) - Gyroscopic Integrity**: The 4 Structure metrics derive from CGM's gyrogroup formalism, measuring recursive coherence through the four states (CS, UNA, ONA, BU). These assess foundational integrity of reasoning through gyroscopic principles of recursive composition and chiral balance.
 
-- **Level 2 (Behavior) - Polyhedral Tensegrity**: The 6 Behavior metrics derive from cybernetic syntegrity principles, mapped to the 6 edges of a tetrahedral (K₄) graph. This enables weighted Hodge decomposition into gradient (global alignment) and residual (local differentiation) components in a Hilbert space with weighted inner product.
+- **Level 2 (Behavioral Metrics)**: The 6 metrics derive from cybernetic syntegrity principles, mapped to the 6 edges of a tetrahedral (K₄) graph. This enables weighted Hodge decomposition into gradient (global alignment) and residual (local differentiation) components in a Hilbert space with weighted inner product.
 
 **Quick Reference - Metric Structure:**
 - **4 Structure metrics** = Gyroscopic integrity (CGM states: CS, UNA, ONA, BU)
 - **6 Behavior metrics** = Tensegrity edges (K₄ polyhedral topology)
 - **2 Specialization metrics per challenge** = Domain-specific expertise (10 total across 5 challenges)
-- **Total: 20 distinct metrics** (12 scored per individual challenge evaluation)
+- **Total: 20 distinct metrics** (12 scored per individual challenge)
 
-The 6 Behavior metrics form a basis for the 6D Hilbert space H_edge, enabling orthogonal projection via Riesz representation.
+The 6 behavioral metrics form a basis for the 6D Hilbert space H_edge, enabling orthogonal projection via Riesz representation.
 
 **Tensegrity Structure**: The framework operationalizes alignment through tetrahedral tensegrity topology, structuring evaluation as emergent balance between systematic organization and adaptive flexibility. This eliminates hierarchical bias through geometric measurement.
 
-The theoretical foundation (see `docs/theory/Measurement.md`) describes a tetrahedral measurement system based on the K₄ complete graph:
+The theoretical foundation (see `docs/theory/Measurement.md`) describes a tetrahedral measurement system based on the K₄ complete graph.
 
 - **4 abstract vertices** form the complete graph structure
-- **6 edges** represent measurement channels with distinct geometric roles:
-  - The 6 Level 2 (Behavior) metrics map one-to-one to these 6 edges
-  - This enables orthogonal decomposition into gradient projection (3 degrees of freedom, global alignment) and residual projection (3 degrees of freedom, local differentiation)
-  - The topology governs degrees of freedom, not participant count
-- **4 participants** contribute measurements:
-  - 2 information synthesizers (two epochs of model generation)
-  - 2 scoring analysts (two independent evaluator models)
+- **6 edges** represent measurement channels with distinct geometric roles. The 6 Level 2 (Behavioral) metrics map one-to-one to these 6 edges. This enables orthogonal decomposition into gradient projection (3 degrees of freedom, global alignment) and residual projection (3 degrees of freedom, local differentiation). The topology governs degrees of freedom, not participant count
+- **4 participants** contribute measurements. 2 information synthesizers (two epochs of model generation). 2 scoring analysts (two independent evaluator models)
 - **Total analyses** = 2 epochs × 2 analysts = 4 evaluations per challenge
 
 Each participant contributes measurements across multiple channels (Measurement.md §7.2: "Fewer than 6 participants: Each participant contributes to multiple edges").

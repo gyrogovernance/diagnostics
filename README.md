@@ -11,11 +11,12 @@
 
 ### G Y R O G O V E R N A N C E
 
-[![Home](./assets/menu/home_badge.svg)](https://gyrogovernance.com)
-[![Diagnostics](./assets/menu/diagnostics_badge.svg)](https://github.com/gyrogovernance/diagnostics)
-[![Tools](./assets/menu/tools_badge.svg)](https://github.com/gyrogovernance/tools)
-[![Science](./assets/menu/science_badge.svg)](https://github.com/gyrogovernance/science)
-[![Superintelligence](./assets/menu/superintelligence_badge.svg)](https://github.com/gyrogovernance/superintelligence)
+[![Home](/assets/menu/gyro_icon_home.svg)](https://gyrogovernance.com)
+[![Apps](/assets/menu/gyro_icon_apps.svg)](https://github.com/gyrogovernance/apps)
+[![Diagnostics](/assets/menu/gyro_icon_diagnostics.svg)](https://github.com/gyrogovernance/diagnostics)
+[![Tools](/assets/menu/gyro_icon_tools.svg)](https://github.com/gyrogovernance/tools)
+[![Science](/assets/menu/gyro_icon_science.svg)](https://github.com/gyrogovernance/science)
+[![Superintelligence](/assets/menu/gyro_icon_si.svg)](https://github.com/gyrogovernance/superintelligence)
 
 </div>
 
@@ -40,10 +41,11 @@
 
 ## 🔍 Overview
 
-GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal structural properties that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. 
+GyroDiagnostics is a **production-ready** evaluation suite for AI safety labs and frontier model developers. Unlike exhaustive benchmark suites that test breadth, we probe depth. Our 5 targeted challenges across distinct domains (Physics, Ethics, Code, Strategy, Knowledge) reveal behavioral patterns and quantitative balance metrics that conventional benchmarks miss, including hallucination, sycophancy, goal drift, contextual degradation, and semantic instability. 
 
 Each challenge requires sustained multi-turn reasoning that cannot be completed in a single response. Through 20-metric assessment of structure, behavior, and domain specialization, we quantify alignment quality and identify failure modes at their root cause. We catch these failures through weighted Hodge decomposition in a 6-dimensional Hilbert space: measurements decompose orthogonally into gradient components (global coherence) and cycle components (local differentiation). When models maintain proper balance between these orthogonal forces, they produce reliable outputs. When the balance breaks, specific pathologies emerge. This mathematical framework, grounded in principles from differential geometry and functional analysis, turns qualitative failures into quantitative observables. The framework supports both **automated evaluation** (via ***Inspect AI***) and **manual evaluation** (for models ***without API access***), producing qualitatively identical semantic assessments.
 
+We start by assessing behavioral qualities in AI responses using detailed rubrics, then transform these assessments into quantitative metrics through geometric decomposition. This reveals alignment as measurable balance between coherence and flexibility.
 
 **Proven Results**: Comparative evaluations (October 2025) across three frontier models revealed critical distinctions invisible to standard benchmarks. ChatGPT-5 and Grok-4 both showed deceptive coherence in 90% of epochs despite 73.9% and 71.6% surface quality respectively, demonstrating pathology independence from performance. Claude 4.5 Sonnet achieved 82.0% quality with 50% deceptive coherence and 4/10 pathology-free epochs. All three exhibited 7-9× structural imbalance from theoretical optimum. Notably, Grok-4 maintained VALID alignment rate (0.125/min) vs ChatGPT-5's SUPERFICIAL processing (0.27/min), showing that temporal balance and quality can diverge. This demonstrates the framework's ability to reveal brittleness patterns and differentiate model maturity beyond conventional metrics.
 
@@ -63,7 +65,7 @@ Each challenge requires sustained multi-turn reasoning that cannot be completed 
 
 **The Problem**: Current AI safety benchmarks like HELM, TrustLLM, and AIR-Bench measure behavioral compliance but miss structural instabilities. As documented in the Future of Life Institute [2025 AI Safety Index](https://futureoflife.org/ai-safety-index-summer-2025/), models can score 0.97 on safety tests yet show 36% vulnerability to jailbreaking attacks. High benchmark scores mask structural brittleness that manifests as the pathologies users actually experience: fluent but hollow outputs, uncritical self-reinforcement, and progressive context loss.
 
-**Our Solution**: We measure foundational structural properties through weighted Hodge decomposition on tetrahedral topology (Common Governance Model), revealing whether intelligence emerges from stable structural balance or fragile optimization. The aperture ratio A = ‖P_cycle y‖²_W / ‖y‖²_W is a projection observable whose target value 0.0207 derives from geometric closure conditions, not empirical fitting.
+**Our Solution**: We measure behavioral qualities through systematic scoring, then apply weighted Hodge decomposition on tetrahedral topology (Common Governance Model) to derive quantitative balance metrics, revealing whether intelligence emerges from stable geometric balance or fragile optimization. The aperture ratio A = ‖P_cycle y‖²_W / ‖y‖²_W is a projection observable whose target value 0.0207 derives from geometric closure conditions, not empirical fitting.
 
 **Strategic Position**: While Anthropic RSPs, OpenAI preparedness protocols, and DeepMind safety frameworks address operational risks (adversarial attacks, misuse, capability overhang), GyroDiagnostics addresses foundational coherence. We provide the structural diagnostics underlying those operational concerns. We are the "stress test for alignment stability" that complements existing safety frameworks.
 

@@ -410,6 +410,10 @@ The formal structure that generates physical laws through the same logical neces
 
 These metrics derive from theorems UNA, ONA, and BU. Aligned systems maintain traceability, preserve variety, ensure accountability, and converge to balance.
 
+### 6.1.1 Practical Measurement of Alignment
+
+CGM derives that alignment emerges from geometric necessities, which manifest as observable behavioral qualities in information systems. GyroDiagnostics captures these manifestations through systematic scoring of reasoning behaviors, such as traceability and coherence, then applies weighted Hodge decomposition to derive quantitative balance indicators. This process reveals metrics like the aperture ratio, targeting 0.0207 as predicted by CGM's Balance Universal theorem. For implementation details, see Measurement.md.
+
 ## 6.2 Resolution of Hilbert's Sixth Problem
 
 Hilbert's sixth problem [1] called for the axiomatization of physics. The challenge was to provide a rigorous logical investigation of the axioms underlying physical theory, comparable to the axiomatization achieved in geometry.

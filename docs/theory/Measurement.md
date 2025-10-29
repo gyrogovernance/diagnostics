@@ -2,13 +2,13 @@
 
 ## Executive Summary
 
-This document presents a Hilbert space framework for measuring AI alignment based on the Common Governance Model (CGM). The framework implements a weighted Hodge decomposition on the complete graph K₄, where measurement scores form vectors in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb. Through orthogonal projection, measurements decompose uniquely into gradient components (representing UNA coherence patterns, 3 degrees of freedom) and cycle components (representing ONA differentiation patterns, 3 degrees of freedom). The aperture ratio A = ‖P_cycle y‖²_W / ‖y‖²_W is a self-adjoint observable whose target value 0.0207 derives from CGM's Balance Universal theorem. By the Riesz representation theorem, each evaluator's scoring function corresponds to a unique vector in H_edge, making reference frames into inference functionals. This eliminates conventional role bias by deriving measurement positions from the mathematical structure of orthogonal projection rather than social convention.
+This document presents a hybrid framework for evaluating AI alignment, informed by the Common Governance Model (CGM). According to CGM, alignment emerges from geometric necessities similar to physical principles in 3D space, and these necessities express themselves as behavioral qualities in AI reasoning. We capture these expressions through rubric-based assessment across 6 metrics, then apply weighted Hodge decomposition in a 6-dimensional Hilbert space H_edge = ℝ⁶ with weighted inner product ⟨a,b⟩_W = aᵀWb. Through orthogonal projection, measurements decompose uniquely into gradient components (representing UNA coherence patterns, 3 degrees of freedom) and cycle components (representing ONA differentiation patterns, 3 degrees of freedom). The aperture ratio A = ‖P_cycle y‖²_W / ‖y‖²_W is a self-adjoint observable whose target value 0.0207 derives from CGM's Balance Universal theorem. By the Riesz representation theorem, each evaluator's scoring function corresponds to a unique vector in H_edge, making reference frames into inference functionals. This eliminates conventional role bias by deriving measurement positions from the mathematical structure of orthogonal projection rather than social convention.
 
 ## 1. Foundations: The Measurement Design Problem
 
 ### 1.1 Role Assignment and Systematic Bias
 
-Every measurement system embeds assumptions in its structural design. The choice of what to measure and how to assign observational roles determines which phenomena become visible and which remain hidden. Conventional evaluation frameworks assign roles that introduce systematic bias through their structural definition:
+Every measurement system embeds assumptions in its design. The choice of what to measure and how to assign observational roles determines which phenomena become visible and which remain hidden. Conventional evaluation frameworks assign roles that introduce systematic bias through their design. For example, "critic" roles structurally privilege negative deviation detection, "user" roles create subject-object division, "red team" roles institutionalize antagonistic probing as primary safety mechanism, and "judge" roles assume objective assessment exists independent of observer position. These definitions create measurement basis selection bias. When you designate someone as a critic, the observation apparatus becomes preferentially sensitive to negative deviations. The role name encodes what patterns the observer is positioned to detect. Our framework addresses this by first evaluating behavioral qualities through systematic scoring, then quantifying them via geometric decomposition to reveal balance without embedded bias. Informed by CGM, where geometric necessities manifest as reasoning behaviors, this produces quantitative metrics like the aperture ratio.
 
 **Conventional Role Structures:**
 - "Critic" roles structurally privilege negative deviation detection
@@ -55,6 +55,8 @@ Both questions are valid at different levels of analysis. We focus on measuring 
 ### 2.1 The K₄ Complete Graph Structure
 
 The tetrahedron (complete graph K₄) provides the minimal structure for weighted Hodge decomposition with balanced gradient and cycle subspaces.
+
+According to CGM, geometric necessities express themselves as behavioral qualities in AI systems. The K₄ structure enables us to map 6 metrics to these qualities, forming measurement vectors that we decompose to derive balance indicators. This quantifies how well behaviors align with CGM's predicted equilibrium.
 
 **Hilbert Space Structure**:
 - Edge space: H_edge = ℝ⁶ (one dimension per edge)
