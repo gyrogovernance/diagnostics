@@ -4,12 +4,12 @@
 > **The First Quantitative AI Alignment Metrics Framework**  
 > **Independent Testing Without Special Access**
 
-![GyroDiagnostics](/assets/diagnostics_cover.png)
+![GyroDiagnostics](/assets/gyro_cover_diagnostics.png)
 
 
 <div align="center">
 
-### G Y R O G O V E R N A N C E
+**G Y R O  - G O V E R N A N C E** 
 
 [![Home](/assets/menu/gyro_icon_home.svg)](https://gyrogovernance.com)
 [![Apps](/assets/menu/gyro_icon_apps.svg)](https://github.com/gyrogovernance/apps)
